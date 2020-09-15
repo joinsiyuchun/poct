@@ -1,0 +1,1351 @@
+---------------------------------------------------------------
+
+[2020-03-09T11:06:25+08:00] 127.0.0.1 GET operator.com/api/user/setting
+[运行时间：0.094791s] [吞吐率：10.55req/s] [内存消耗：3,199.29kb] [文件加载：69]
+[ info ] [ LANG ] /Applications/MAMP/htdocs/operator/thinkphp/lang/zh-cn.php
+[ info ] [ ROUTE ] array (
+)
+[ info ] [ HEADER ] array (
+  'host' => 'operator.com',
+  'connection' => 'keep-alive',
+  'pragma' => 'no-cache',
+  'cache-control' => 'no-cache',
+  'x-requested-with' => 'XMLHttpRequest',
+  'user-agent' => 'Mozilla/5.0 (iPhone; CPU iPhone OS 10_3_1 like Mac OS X) AppleWebKit/603.1.3 (KHTML, like Gecko) Version/10.0 Mobile/14E304 Safari/602.1 wechatdevtools/1.02.1911180 MicroMessenger/7.0.4 Language/zh_CN webview/',
+  'content-type' => 'json',
+  'accept' => '*/*',
+  'referer' => 'https://servicewechat.com/wxacb61fc94fe0881d/devtools/page-frame.html',
+  'accept-encoding' => 'gzip, deflate',
+  'cookie' => 'PHPSESSID=6632df04838c9d7134ab7640a5bfe8a8;XDEBUG_SESSION=XDEBUG_ECLIPSE',
+)
+[ info ] [ PARAM ] array (
+  '/api/user/setting' => '',
+)
+---------------------------------------------------------------
+
+[2020-03-09T11:37:17+08:00] 127.0.0.1 GET operator.com/api/workorder/itemlist
+[运行时间：0.293648s] [吞吐率：3.41req/s] [内存消耗：5,707.75kb] [文件加载：87]
+[ info ] [ LANG ] /Applications/MAMP/htdocs/operator/thinkphp/lang/zh-cn.php
+[ info ] [ ROUTE ] array (
+)
+[ info ] [ HEADER ] array (
+  'host' => 'operator.com',
+  'connection' => 'keep-alive',
+  'pragma' => 'no-cache',
+  'cache-control' => 'no-cache',
+  'x-requested-with' => 'XMLHttpRequest',
+  'user-agent' => 'Mozilla/5.0 (iPhone; CPU iPhone OS 10_3_1 like Mac OS X) AppleWebKit/603.1.3 (KHTML, like Gecko) Version/10.0 Mobile/14E304 Safari/602.1 wechatdevtools/1.02.1911180 MicroMessenger/7.0.4 Language/zh_CN webview/',
+  'content-type' => 'json',
+  'accept' => '*/*',
+  'referer' => 'https://servicewechat.com/wxacb61fc94fe0881d/devtools/page-frame.html',
+  'accept-encoding' => 'gzip, deflate',
+  'cookie' => 'PHPSESSID=6632df04838c9d7134ab7640a5bfe8a8;XDEBUG_SESSION=XDEBUG_ECLIPSE',
+)
+[ info ] [ PARAM ] array (
+  '/api/workorder/itemlist' => '',
+)
+[ info ] [ DB ] INIT mysql
+[ sql ] [ DB ] CONNECT:[ UseTime:0.011886s ] mysql:host=127.0.0.1;port=3306;dbname=operator;charset=utf8
+[ sql ] [ SQL ] SHOW COLUMNS FROM `think_catagory` [ RunTime:0.033020s ]
+[ sql ] [ SQL ] SELECT `id`,`name` FROM `think_catagory` ORDER BY `sort` ASC [ RunTime:0.004419s ]
+[ sql ] [ SQL ] SHOW COLUMNS FROM `think_item` [ RunTime:0.003034s ]
+[ sql ] [ SQL ] SELECT * FROM `think_item` WHERE  `status` = 1 ORDER BY `id` ASC [ RunTime:0.005969s ]
+[ sql ] [ SQL ] SELECT * FROM `think_catagory` WHERE  `id` = 5 LIMIT 1 [ RunTime:0.001597s ]
+[ sql ] [ SQL ] SELECT * FROM `think_catagory` WHERE  `id` = 1 LIMIT 1 [ RunTime:0.000945s ]
+[ sql ] [ SQL ] SELECT * FROM `think_catagory` WHERE  `id` = 1 LIMIT 1 [ RunTime:0.001217s ]
+[ sql ] [ SQL ] SELECT * FROM `think_catagory` WHERE  `id` = 1 LIMIT 1 [ RunTime:0.000995s ]
+[ sql ] [ SQL ] SELECT * FROM `think_catagory` WHERE  `id` = 2 LIMIT 1 [ RunTime:0.000878s ]
+[ sql ] [ SQL ] SELECT * FROM `think_catagory` WHERE  `id` = 1 LIMIT 1 [ RunTime:0.000857s ]
+[ sql ] [ SQL ] SELECT * FROM `think_catagory` WHERE  `id` = 1 LIMIT 1 [ RunTime:0.000766s ]
+[ sql ] [ SQL ] SELECT * FROM `think_catagory` WHERE  `id` = 1 LIMIT 1 [ RunTime:0.000942s ]
+[ sql ] [ SQL ] SELECT * FROM `think_catagory` WHERE  `id` = 4 LIMIT 1 [ RunTime:0.001033s ]
+[ sql ] [ SQL ] SELECT * FROM `think_catagory` WHERE  `id` = 2 LIMIT 1 [ RunTime:0.000965s ]
+[ sql ] [ SQL ] SELECT * FROM `think_catagory` WHERE  `id` = 3 LIMIT 1 [ RunTime:0.000748s ]
+[ sql ] [ SQL ] SELECT * FROM `think_catagory` WHERE  `id` = 5 LIMIT 1 [ RunTime:0.000745s ]
+[ sql ] [ SQL ] SELECT * FROM `think_catagory` WHERE  `id` = 5 LIMIT 1 [ RunTime:0.001116s ]
+[ sql ] [ SQL ] SELECT * FROM `think_catagory` WHERE  `id` = 5 LIMIT 1 [ RunTime:0.001117s ]
+---------------------------------------------------------------
+
+[2020-03-09T11:37:22+08:00] 127.0.0.1 POST operator.com/api/workorder/createOrder
+[运行时间：0.133796s] [吞吐率：7.47req/s] [内存消耗：5,408.91kb] [文件加载：82]
+[ info ] [ LANG ] /Applications/MAMP/htdocs/operator/thinkphp/lang/zh-cn.php
+[ info ] [ ROUTE ] array (
+)
+[ info ] [ HEADER ] array (
+  'host' => 'operator.com',
+  'connection' => 'keep-alive',
+  'content-length' => '153',
+  'pragma' => 'no-cache',
+  'cache-control' => 'no-cache',
+  'origin' => 'http://127.0.0.1:16392',
+  'x-requested-with' => 'XMLHttpRequest',
+  'user-agent' => 'Mozilla/5.0 (iPhone; CPU iPhone OS 10_3_1 like Mac OS X) AppleWebKit/603.1.3 (KHTML, like Gecko) Version/10.0 Mobile/14E304 Safari/602.1 wechatdevtools/1.02.1911180 MicroMessenger/7.0.4 Language/zh_CN webview/',
+  'content-type' => 'json',
+  'accept' => '*/*',
+  'referer' => 'https://servicewechat.com/wxacb61fc94fe0881d/devtools/page-frame.html',
+  'accept-encoding' => 'gzip, deflate',
+  'cookie' => 'PHPSESSID=6632df04838c9d7134ab7640a5bfe8a8;XDEBUG_SESSION=XDEBUG_ECLIPSE',
+)
+[ info ] [ PARAM ] array (
+  '/api/workorder/createOrder' => '',
+  'order' => 
+  array (
+    57 => 
+    array (
+      'id' => 57,
+      'name' => '附件-B05',
+      'price' => 0,
+      'seriesno' => '6',
+      'number' => 1,
+    ),
+    58 => 
+    array (
+      'id' => 58,
+      'name' => '附件-B04',
+      'price' => 0,
+      'seriesno' => '7',
+      'number' => 1,
+    ),
+  ),
+)
+[ info ] [ DB ] INIT mysql
+[ sql ] [ DB ] CONNECT:[ UseTime:0.000909s ] mysql:host=127.0.0.1;port=3306;dbname=operator;charset=utf8
+[ sql ] [ SQL ] SHOW COLUMNS FROM `think_notification` [ RunTime:0.003093s ]
+[ sql ] [ SQL ] INSERT INTO `think_notification` (`org_id` , `creater_id` , `create_time` , `update_time`) VALUES (2 , 2 , 1583725042 , 1583725042) [ RunTime:0.003592s ]
+[ sql ] [ SQL ] UPDATE `think_notification`  SET `code` = 'A55'  WHERE  `id` = 55 [ RunTime:0.003326s ]
+[ sql ] [ SQL ] SHOW COLUMNS FROM `think_workorder` [ RunTime:0.002389s ]
+[ sql ] [ SQL ] INSERT INTO `think_workorder` (`notification_id` , `item_id` , `org_id` , `status` , `create_time` , `update_time`) VALUES (55 , 57 , 2 , -1 , 1583725042 , 1583725042) [ RunTime:0.001030s ]
+[ sql ] [ SQL ] INSERT INTO `think_notification` (`org_id` , `creater_id` , `create_time` , `update_time`) VALUES (2 , 2 , 1583725042 , 1583725042) [ RunTime:0.000882s ]
+[ sql ] [ SQL ] UPDATE `think_notification`  SET `code` = 'A56'  WHERE  `id` = 56 [ RunTime:0.001116s ]
+[ sql ] [ SQL ] INSERT INTO `think_workorder` (`notification_id` , `item_id` , `org_id` , `status` , `create_time` , `update_time`) VALUES (56 , 58 , 2 , -1 , 1583725042 , 1583725042) [ RunTime:0.000602s ]
+---------------------------------------------------------------
+
+[2020-03-09T11:37:23+08:00] 127.0.0.1 GET operator.com/api/workorder/query?id=56
+[运行时间：0.368560s] [吞吐率：2.71req/s] [内存消耗：5,777.20kb] [文件加载：88]
+[ info ] [ LANG ] /Applications/MAMP/htdocs/operator/thinkphp/lang/zh-cn.php
+[ info ] [ ROUTE ] array (
+)
+[ info ] [ HEADER ] array (
+  'host' => 'operator.com',
+  'connection' => 'keep-alive',
+  'pragma' => 'no-cache',
+  'cache-control' => 'no-cache',
+  'x-requested-with' => 'XMLHttpRequest',
+  'user-agent' => 'Mozilla/5.0 (iPhone; CPU iPhone OS 10_3_1 like Mac OS X) AppleWebKit/603.1.3 (KHTML, like Gecko) Version/10.0 Mobile/14E304 Safari/602.1 wechatdevtools/1.02.1911180 MicroMessenger/7.0.4 Language/zh_CN webview/',
+  'content-type' => 'json',
+  'accept' => '*/*',
+  'referer' => 'https://servicewechat.com/wxacb61fc94fe0881d/devtools/page-frame.html',
+  'accept-encoding' => 'gzip, deflate',
+  'cookie' => 'PHPSESSID=6632df04838c9d7134ab7640a5bfe8a8;XDEBUG_SESSION=XDEBUG_ECLIPSE',
+)
+[ info ] [ PARAM ] array (
+  '/api/workorder/query' => '',
+  'id' => '56',
+)
+[ info ] [ DB ] INIT mysql
+[ sql ] [ DB ] CONNECT:[ UseTime:0.001378s ] mysql:host=127.0.0.1;port=3306;dbname=operator;charset=utf8
+[ sql ] [ SQL ] SHOW COLUMNS FROM `think_workorder` [ RunTime:0.002033s ]
+[ sql ] [ SQL ] SELECT * FROM `think_workorder` WHERE  `notification_id` = 56 [ RunTime:0.001132s ]
+[ sql ] [ SQL ] SHOW COLUMNS FROM `think_item` [ RunTime:0.001379s ]
+[ sql ] [ SQL ] SELECT * FROM `think_item` WHERE  `id` = 58 LIMIT 1 [ RunTime:0.000951s ]
+[ sql ] [ SQL ] SHOW COLUMNS FROM `think_catagory` [ RunTime:0.001329s ]
+[ sql ] [ SQL ] SELECT * FROM `think_catagory` WHERE  `id` = 1 LIMIT 1 [ RunTime:0.000984s ]
+---------------------------------------------------------------
+
+[2020-03-09T11:45:26+08:00] 127.0.0.1 POST operator.com/api/workorder/createOrder
+[运行时间：0.147606s] [吞吐率：6.77req/s] [内存消耗：5,409.01kb] [文件加载：82]
+[ info ] [ LANG ] /Applications/MAMP/htdocs/operator/thinkphp/lang/zh-cn.php
+[ info ] [ ROUTE ] array (
+)
+[ info ] [ HEADER ] array (
+  'host' => 'operator.com',
+  'connection' => 'keep-alive',
+  'content-length' => '153',
+  'pragma' => 'no-cache',
+  'cache-control' => 'no-cache',
+  'origin' => 'http://127.0.0.1:16392',
+  'x-requested-with' => 'XMLHttpRequest',
+  'user-agent' => 'Mozilla/5.0 (iPhone; CPU iPhone OS 10_3_1 like Mac OS X) AppleWebKit/603.1.3 (KHTML, like Gecko) Version/10.0 Mobile/14E304 Safari/602.1 wechatdevtools/1.02.1911180 MicroMessenger/7.0.4 Language/zh_CN webview/',
+  'content-type' => 'json',
+  'accept' => '*/*',
+  'referer' => 'https://servicewechat.com/wxacb61fc94fe0881d/devtools/page-frame.html',
+  'accept-encoding' => 'gzip, deflate',
+  'cookie' => 'PHPSESSID=6632df04838c9d7134ab7640a5bfe8a8;XDEBUG_SESSION=XDEBUG_ECLIPSE',
+)
+[ info ] [ PARAM ] array (
+  '/api/workorder/createOrder' => '',
+  'order' => 
+  array (
+    57 => 
+    array (
+      'id' => 57,
+      'name' => '附件-B05',
+      'price' => 0,
+      'seriesno' => '6',
+      'number' => 1,
+    ),
+    58 => 
+    array (
+      'id' => 58,
+      'name' => '附件-B04',
+      'price' => 0,
+      'seriesno' => '7',
+      'number' => 1,
+    ),
+  ),
+)
+[ info ] [ DB ] INIT mysql
+[ sql ] [ DB ] CONNECT:[ UseTime:0.001642s ] mysql:host=127.0.0.1;port=3306;dbname=operator;charset=utf8
+[ sql ] [ SQL ] SHOW COLUMNS FROM `think_notification` [ RunTime:0.002446s ]
+[ sql ] [ SQL ] INSERT INTO `think_notification` (`org_id` , `creater_id` , `create_time` , `update_time`) VALUES (2 , 2 , 1583725526 , 1583725526) [ RunTime:0.000727s ]
+[ sql ] [ SQL ] UPDATE `think_notification`  SET `code` = 'A57'  WHERE  `id` = 57 [ RunTime:0.000946s ]
+[ sql ] [ SQL ] SHOW COLUMNS FROM `think_workorder` [ RunTime:0.002349s ]
+[ sql ] [ SQL ] INSERT INTO `think_workorder` (`notification_id` , `item_id` , `org_id` , `status` , `create_time` , `update_time`) VALUES (57 , 57 , 2 , -1 , 1583725526 , 1583725526) [ RunTime:0.001003s ]
+[ sql ] [ SQL ] INSERT INTO `think_notification` (`org_id` , `creater_id` , `create_time` , `update_time`) VALUES (2 , 2 , 1583725526 , 1583725526) [ RunTime:0.000616s ]
+[ sql ] [ SQL ] UPDATE `think_notification`  SET `code` = 'A58'  WHERE  `id` = 58 [ RunTime:0.001138s ]
+[ sql ] [ SQL ] INSERT INTO `think_workorder` (`notification_id` , `item_id` , `org_id` , `status` , `create_time` , `update_time`) VALUES (58 , 58 , 2 , -1 , 1583725526 , 1583725526) [ RunTime:0.000798s ]
+---------------------------------------------------------------
+
+[2020-03-09T11:45:27+08:00] 127.0.0.1 GET operator.com/api/workorder/query?id=58
+[运行时间：0.363765s] [吞吐率：2.75req/s] [内存消耗：5,777.20kb] [文件加载：88]
+[ info ] [ LANG ] /Applications/MAMP/htdocs/operator/thinkphp/lang/zh-cn.php
+[ info ] [ ROUTE ] array (
+)
+[ info ] [ HEADER ] array (
+  'host' => 'operator.com',
+  'connection' => 'keep-alive',
+  'pragma' => 'no-cache',
+  'cache-control' => 'no-cache',
+  'x-requested-with' => 'XMLHttpRequest',
+  'user-agent' => 'Mozilla/5.0 (iPhone; CPU iPhone OS 10_3_1 like Mac OS X) AppleWebKit/603.1.3 (KHTML, like Gecko) Version/10.0 Mobile/14E304 Safari/602.1 wechatdevtools/1.02.1911180 MicroMessenger/7.0.4 Language/zh_CN webview/',
+  'content-type' => 'json',
+  'accept' => '*/*',
+  'referer' => 'https://servicewechat.com/wxacb61fc94fe0881d/devtools/page-frame.html',
+  'accept-encoding' => 'gzip, deflate',
+  'cookie' => 'PHPSESSID=6632df04838c9d7134ab7640a5bfe8a8;XDEBUG_SESSION=XDEBUG_ECLIPSE',
+)
+[ info ] [ PARAM ] array (
+  '/api/workorder/query' => '',
+  'id' => '58',
+)
+[ info ] [ DB ] INIT mysql
+[ sql ] [ DB ] CONNECT:[ UseTime:0.000894s ] mysql:host=127.0.0.1;port=3306;dbname=operator;charset=utf8
+[ sql ] [ SQL ] SHOW COLUMNS FROM `think_workorder` [ RunTime:0.002082s ]
+[ sql ] [ SQL ] SELECT * FROM `think_workorder` WHERE  `notification_id` = 58 [ RunTime:0.001398s ]
+[ sql ] [ SQL ] SHOW COLUMNS FROM `think_item` [ RunTime:0.002372s ]
+[ sql ] [ SQL ] SELECT * FROM `think_item` WHERE  `id` = 58 LIMIT 1 [ RunTime:0.001319s ]
+[ sql ] [ SQL ] SHOW COLUMNS FROM `think_catagory` [ RunTime:0.001927s ]
+[ sql ] [ SQL ] SELECT * FROM `think_catagory` WHERE  `id` = 1 LIMIT 1 [ RunTime:0.001551s ]
+---------------------------------------------------------------
+
+[2020-03-09T11:46:17+08:00] 127.0.0.1 GET operator.com/api/workorder/itemlist
+[运行时间：0.564744s] [吞吐率：1.77req/s] [内存消耗：5,707.76kb] [文件加载：87]
+[ info ] [ LANG ] /Applications/MAMP/htdocs/operator/thinkphp/lang/zh-cn.php
+[ info ] [ ROUTE ] array (
+)
+[ info ] [ HEADER ] array (
+  'host' => 'operator.com',
+  'connection' => 'keep-alive',
+  'pragma' => 'no-cache',
+  'cache-control' => 'no-cache',
+  'x-requested-with' => 'XMLHttpRequest',
+  'user-agent' => 'Mozilla/5.0 (iPhone; CPU iPhone OS 10_3_1 like Mac OS X) AppleWebKit/603.1.3 (KHTML, like Gecko) Version/10.0 Mobile/14E304 Safari/602.1 wechatdevtools/1.02.1911180 MicroMessenger/7.0.4 Language/zh_CN webview/',
+  'content-type' => 'json',
+  'accept' => '*/*',
+  'referer' => 'https://servicewechat.com/wxacb61fc94fe0881d/devtools/page-frame.html',
+  'accept-encoding' => 'gzip, deflate',
+  'cookie' => 'PHPSESSID=6632df04838c9d7134ab7640a5bfe8a8;XDEBUG_SESSION=XDEBUG_ECLIPSE',
+)
+[ info ] [ PARAM ] array (
+  '/api/workorder/itemlist' => '',
+)
+[ info ] [ DB ] INIT mysql
+[ sql ] [ DB ] CONNECT:[ UseTime:0.001367s ] mysql:host=127.0.0.1;port=3306;dbname=operator;charset=utf8
+[ sql ] [ SQL ] SHOW COLUMNS FROM `think_catagory` [ RunTime:0.004550s ]
+[ sql ] [ SQL ] SELECT `id`,`name` FROM `think_catagory` ORDER BY `sort` ASC [ RunTime:0.001451s ]
+[ sql ] [ SQL ] SHOW COLUMNS FROM `think_item` [ RunTime:0.001928s ]
+[ sql ] [ SQL ] SELECT * FROM `think_item` WHERE  `status` = 1 ORDER BY `id` ASC [ RunTime:0.002914s ]
+[ sql ] [ SQL ] SELECT * FROM `think_catagory` WHERE  `id` = 5 LIMIT 1 [ RunTime:0.018399s ]
+[ sql ] [ SQL ] SELECT * FROM `think_catagory` WHERE  `id` = 1 LIMIT 1 [ RunTime:0.000931s ]
+[ sql ] [ SQL ] SELECT * FROM `think_catagory` WHERE  `id` = 1 LIMIT 1 [ RunTime:0.002973s ]
+[ sql ] [ SQL ] SELECT * FROM `think_catagory` WHERE  `id` = 1 LIMIT 1 [ RunTime:0.003585s ]
+[ sql ] [ SQL ] SELECT * FROM `think_catagory` WHERE  `id` = 2 LIMIT 1 [ RunTime:0.001608s ]
+[ sql ] [ SQL ] SELECT * FROM `think_catagory` WHERE  `id` = 1 LIMIT 1 [ RunTime:0.002176s ]
+[ sql ] [ SQL ] SELECT * FROM `think_catagory` WHERE  `id` = 1 LIMIT 1 [ RunTime:0.001361s ]
+[ sql ] [ SQL ] SELECT * FROM `think_catagory` WHERE  `id` = 1 LIMIT 1 [ RunTime:0.001015s ]
+[ sql ] [ SQL ] SELECT * FROM `think_catagory` WHERE  `id` = 4 LIMIT 1 [ RunTime:0.001060s ]
+[ sql ] [ SQL ] SELECT * FROM `think_catagory` WHERE  `id` = 2 LIMIT 1 [ RunTime:0.001141s ]
+[ sql ] [ SQL ] SELECT * FROM `think_catagory` WHERE  `id` = 3 LIMIT 1 [ RunTime:0.001049s ]
+[ sql ] [ SQL ] SELECT * FROM `think_catagory` WHERE  `id` = 5 LIMIT 1 [ RunTime:0.004626s ]
+[ sql ] [ SQL ] SELECT * FROM `think_catagory` WHERE  `id` = 5 LIMIT 1 [ RunTime:0.000919s ]
+[ sql ] [ SQL ] SELECT * FROM `think_catagory` WHERE  `id` = 5 LIMIT 1 [ RunTime:0.001245s ]
+---------------------------------------------------------------
+
+[2020-03-09T11:46:21+08:00] 127.0.0.1 POST operator.com/api/workorder/createOrder
+[运行时间：0.236518s] [吞吐率：4.23req/s] [内存消耗：5,416.20kb] [文件加载：82]
+[ info ] [ LANG ] /Applications/MAMP/htdocs/operator/thinkphp/lang/zh-cn.php
+[ info ] [ ROUTE ] array (
+)
+[ info ] [ HEADER ] array (
+  'host' => 'operator.com',
+  'connection' => 'keep-alive',
+  'content-length' => '295',
+  'pragma' => 'no-cache',
+  'cache-control' => 'no-cache',
+  'origin' => 'http://127.0.0.1:16392',
+  'x-requested-with' => 'XMLHttpRequest',
+  'user-agent' => 'Mozilla/5.0 (iPhone; CPU iPhone OS 10_3_1 like Mac OS X) AppleWebKit/603.1.3 (KHTML, like Gecko) Version/10.0 Mobile/14E304 Safari/602.1 wechatdevtools/1.02.1911180 MicroMessenger/7.0.4 Language/zh_CN webview/',
+  'content-type' => 'json',
+  'accept' => '*/*',
+  'referer' => 'https://servicewechat.com/wxacb61fc94fe0881d/devtools/page-frame.html',
+  'accept-encoding' => 'gzip, deflate',
+  'cookie' => 'PHPSESSID=6632df04838c9d7134ab7640a5bfe8a8;XDEBUG_SESSION=XDEBUG_ECLIPSE',
+)
+[ info ] [ PARAM ] array (
+  '/api/workorder/createOrder' => '',
+  'order' => 
+  array (
+    54 => 
+    array (
+      'id' => 54,
+      'name' => '附件-B02',
+      'price' => 0,
+      'seriesno' => '3',
+      'number' => 1,
+    ),
+    55 => 
+    array (
+      'id' => 55,
+      'name' => '附件-B03',
+      'price' => 0,
+      'seriesno' => '4',
+      'number' => 1,
+    ),
+    57 => 
+    array (
+      'id' => 57,
+      'name' => '附件-B05',
+      'price' => 0,
+      'seriesno' => '6',
+      'number' => 1,
+    ),
+    58 => 
+    array (
+      'id' => 58,
+      'name' => '附件-B04',
+      'price' => 0,
+      'seriesno' => '7',
+      'number' => 1,
+    ),
+  ),
+)
+[ info ] [ DB ] INIT mysql
+[ sql ] [ DB ] CONNECT:[ UseTime:0.000788s ] mysql:host=127.0.0.1;port=3306;dbname=operator;charset=utf8
+[ sql ] [ SQL ] SHOW COLUMNS FROM `think_notification` [ RunTime:0.001687s ]
+[ sql ] [ SQL ] INSERT INTO `think_notification` (`org_id` , `creater_id` , `create_time` , `update_time`) VALUES (2 , 2 , 1583725581 , 1583725581) [ RunTime:0.000980s ]
+[ sql ] [ SQL ] UPDATE `think_notification`  SET `code` = 'A59'  WHERE  `id` = 59 [ RunTime:0.001512s ]
+[ sql ] [ SQL ] SHOW COLUMNS FROM `think_workorder` [ RunTime:0.001888s ]
+[ sql ] [ SQL ] INSERT INTO `think_workorder` (`notification_id` , `item_id` , `org_id` , `status` , `create_time` , `update_time`) VALUES (59 , 54 , 2 , -1 , 1583725581 , 1583725581) [ RunTime:0.002052s ]
+[ sql ] [ SQL ] INSERT INTO `think_notification` (`org_id` , `creater_id` , `create_time` , `update_time`) VALUES (2 , 2 , 1583725581 , 1583725581) [ RunTime:0.000872s ]
+[ sql ] [ SQL ] UPDATE `think_notification`  SET `code` = 'A60'  WHERE  `id` = 60 [ RunTime:0.001220s ]
+[ sql ] [ SQL ] INSERT INTO `think_workorder` (`notification_id` , `item_id` , `org_id` , `status` , `create_time` , `update_time`) VALUES (60 , 55 , 2 , -1 , 1583725581 , 1583725581) [ RunTime:0.003126s ]
+[ sql ] [ SQL ] INSERT INTO `think_notification` (`org_id` , `creater_id` , `create_time` , `update_time`) VALUES (2 , 2 , 1583725581 , 1583725581) [ RunTime:0.001055s ]
+[ sql ] [ SQL ] UPDATE `think_notification`  SET `code` = 'A61'  WHERE  `id` = 61 [ RunTime:0.002531s ]
+[ sql ] [ SQL ] INSERT INTO `think_workorder` (`notification_id` , `item_id` , `org_id` , `status` , `create_time` , `update_time`) VALUES (61 , 57 , 2 , -1 , 1583725581 , 1583725581) [ RunTime:0.001118s ]
+[ sql ] [ SQL ] INSERT INTO `think_notification` (`org_id` , `creater_id` , `create_time` , `update_time`) VALUES (2 , 2 , 1583725581 , 1583725581) [ RunTime:0.001138s ]
+[ sql ] [ SQL ] UPDATE `think_notification`  SET `code` = 'A62'  WHERE  `id` = 62 [ RunTime:0.001358s ]
+[ sql ] [ SQL ] INSERT INTO `think_workorder` (`notification_id` , `item_id` , `org_id` , `status` , `create_time` , `update_time`) VALUES (62 , 58 , 2 , -1 , 1583725581 , 1583725581) [ RunTime:0.001117s ]
+---------------------------------------------------------------
+
+[2020-03-09T11:46:22+08:00] 127.0.0.1 GET operator.com/api/workorder/query?id=62
+[运行时间：0.354260s] [吞吐率：2.82req/s] [内存消耗：5,777.20kb] [文件加载：88]
+[ info ] [ LANG ] /Applications/MAMP/htdocs/operator/thinkphp/lang/zh-cn.php
+[ info ] [ ROUTE ] array (
+)
+[ info ] [ HEADER ] array (
+  'host' => 'operator.com',
+  'connection' => 'keep-alive',
+  'pragma' => 'no-cache',
+  'cache-control' => 'no-cache',
+  'x-requested-with' => 'XMLHttpRequest',
+  'user-agent' => 'Mozilla/5.0 (iPhone; CPU iPhone OS 10_3_1 like Mac OS X) AppleWebKit/603.1.3 (KHTML, like Gecko) Version/10.0 Mobile/14E304 Safari/602.1 wechatdevtools/1.02.1911180 MicroMessenger/7.0.4 Language/zh_CN webview/',
+  'content-type' => 'json',
+  'accept' => '*/*',
+  'referer' => 'https://servicewechat.com/wxacb61fc94fe0881d/devtools/page-frame.html',
+  'accept-encoding' => 'gzip, deflate',
+  'cookie' => 'PHPSESSID=6632df04838c9d7134ab7640a5bfe8a8;XDEBUG_SESSION=XDEBUG_ECLIPSE',
+)
+[ info ] [ PARAM ] array (
+  '/api/workorder/query' => '',
+  'id' => '62',
+)
+[ info ] [ DB ] INIT mysql
+[ sql ] [ DB ] CONNECT:[ UseTime:0.001186s ] mysql:host=127.0.0.1;port=3306;dbname=operator;charset=utf8
+[ sql ] [ SQL ] SHOW COLUMNS FROM `think_workorder` [ RunTime:0.001968s ]
+[ sql ] [ SQL ] SELECT * FROM `think_workorder` WHERE  `notification_id` = 62 [ RunTime:0.001403s ]
+[ sql ] [ SQL ] SHOW COLUMNS FROM `think_item` [ RunTime:0.003288s ]
+[ sql ] [ SQL ] SELECT * FROM `think_item` WHERE  `id` = 58 LIMIT 1 [ RunTime:0.004003s ]
+[ sql ] [ SQL ] SHOW COLUMNS FROM `think_catagory` [ RunTime:0.001704s ]
+[ sql ] [ SQL ] SELECT * FROM `think_catagory` WHERE  `id` = 1 LIMIT 1 [ RunTime:0.001222s ]
+---------------------------------------------------------------
+
+[2020-03-09T11:48:38+08:00] 127.0.0.1 GET operator.com/api/workorder/itemlist
+[运行时间：0.590339s] [吞吐率：1.69req/s] [内存消耗：5,707.70kb] [文件加载：87]
+[ info ] [ LANG ] /Applications/MAMP/htdocs/operator/thinkphp/lang/zh-cn.php
+[ info ] [ ROUTE ] array (
+)
+[ info ] [ HEADER ] array (
+  'host' => 'operator.com',
+  'connection' => 'keep-alive',
+  'pragma' => 'no-cache',
+  'cache-control' => 'no-cache',
+  'x-requested-with' => 'XMLHttpRequest',
+  'user-agent' => 'Mozilla/5.0 (iPhone; CPU iPhone OS 10_3_1 like Mac OS X) AppleWebKit/603.1.3 (KHTML, like Gecko) Version/10.0 Mobile/14E304 Safari/602.1 wechatdevtools/1.02.1911180 MicroMessenger/7.0.4 Language/zh_CN webview/',
+  'content-type' => 'json',
+  'accept' => '*/*',
+  'referer' => 'https://servicewechat.com/wxacb61fc94fe0881d/devtools/page-frame.html',
+  'accept-encoding' => 'gzip, deflate',
+  'cookie' => 'PHPSESSID=6632df04838c9d7134ab7640a5bfe8a8;XDEBUG_SESSION=XDEBUG_ECLIPSE',
+)
+[ info ] [ PARAM ] array (
+  '/api/workorder/itemlist' => '',
+)
+[ info ] [ DB ] INIT mysql
+[ sql ] [ DB ] CONNECT:[ UseTime:0.001382s ] mysql:host=127.0.0.1;port=3306;dbname=operator;charset=utf8
+[ sql ] [ SQL ] SHOW COLUMNS FROM `think_catagory` [ RunTime:0.020279s ]
+[ sql ] [ SQL ] SELECT `id`,`name` FROM `think_catagory` ORDER BY `sort` ASC [ RunTime:0.005370s ]
+[ sql ] [ SQL ] SHOW COLUMNS FROM `think_item` [ RunTime:0.002367s ]
+[ sql ] [ SQL ] SELECT * FROM `think_item` WHERE  `status` = 1 ORDER BY `id` ASC [ RunTime:0.001883s ]
+[ sql ] [ SQL ] SELECT * FROM `think_catagory` WHERE  `id` = 5 LIMIT 1 [ RunTime:0.000945s ]
+[ sql ] [ SQL ] SELECT * FROM `think_catagory` WHERE  `id` = 1 LIMIT 1 [ RunTime:0.001050s ]
+[ sql ] [ SQL ] SELECT * FROM `think_catagory` WHERE  `id` = 1 LIMIT 1 [ RunTime:0.002087s ]
+[ sql ] [ SQL ] SELECT * FROM `think_catagory` WHERE  `id` = 1 LIMIT 1 [ RunTime:0.001886s ]
+[ sql ] [ SQL ] SELECT * FROM `think_catagory` WHERE  `id` = 2 LIMIT 1 [ RunTime:0.001270s ]
+[ sql ] [ SQL ] SELECT * FROM `think_catagory` WHERE  `id` = 1 LIMIT 1 [ RunTime:0.000963s ]
+[ sql ] [ SQL ] SELECT * FROM `think_catagory` WHERE  `id` = 1 LIMIT 1 [ RunTime:0.002006s ]
+[ sql ] [ SQL ] SELECT * FROM `think_catagory` WHERE  `id` = 1 LIMIT 1 [ RunTime:0.006503s ]
+[ sql ] [ SQL ] SELECT * FROM `think_catagory` WHERE  `id` = 4 LIMIT 1 [ RunTime:0.001050s ]
+[ sql ] [ SQL ] SELECT * FROM `think_catagory` WHERE  `id` = 2 LIMIT 1 [ RunTime:0.000914s ]
+[ sql ] [ SQL ] SELECT * FROM `think_catagory` WHERE  `id` = 3 LIMIT 1 [ RunTime:0.001291s ]
+[ sql ] [ SQL ] SELECT * FROM `think_catagory` WHERE  `id` = 5 LIMIT 1 [ RunTime:0.001086s ]
+[ sql ] [ SQL ] SELECT * FROM `think_catagory` WHERE  `id` = 5 LIMIT 1 [ RunTime:0.000938s ]
+[ sql ] [ SQL ] SELECT * FROM `think_catagory` WHERE  `id` = 5 LIMIT 1 [ RunTime:0.000681s ]
+---------------------------------------------------------------
+
+[2020-03-09T11:48:42+08:00] 127.0.0.1 POST operator.com/api/workorder/createOrder
+[运行时间：0.121269s] [吞吐率：8.25req/s] [内存消耗：5,412.03kb] [文件加载：82]
+[ info ] [ LANG ] /Applications/MAMP/htdocs/operator/thinkphp/lang/zh-cn.php
+[ info ] [ ROUTE ] array (
+)
+[ info ] [ HEADER ] array (
+  'host' => 'operator.com',
+  'connection' => 'keep-alive',
+  'content-length' => '295',
+  'pragma' => 'no-cache',
+  'cache-control' => 'no-cache',
+  'origin' => 'http://127.0.0.1:16392',
+  'x-requested-with' => 'XMLHttpRequest',
+  'user-agent' => 'Mozilla/5.0 (iPhone; CPU iPhone OS 10_3_1 like Mac OS X) AppleWebKit/603.1.3 (KHTML, like Gecko) Version/10.0 Mobile/14E304 Safari/602.1 wechatdevtools/1.02.1911180 MicroMessenger/7.0.4 Language/zh_CN webview/',
+  'content-type' => 'json',
+  'accept' => '*/*',
+  'referer' => 'https://servicewechat.com/wxacb61fc94fe0881d/devtools/page-frame.html',
+  'accept-encoding' => 'gzip, deflate',
+  'cookie' => 'PHPSESSID=6632df04838c9d7134ab7640a5bfe8a8;XDEBUG_SESSION=XDEBUG_ECLIPSE',
+)
+[ info ] [ PARAM ] array (
+  '/api/workorder/createOrder' => '',
+  'order' => 
+  array (
+    52 => 
+    array (
+      'id' => 52,
+      'name' => '附件-B01',
+      'price' => 0,
+      'seriesno' => '2',
+      'number' => 1,
+    ),
+    54 => 
+    array (
+      'id' => 54,
+      'name' => '附件-B02',
+      'price' => 0,
+      'seriesno' => '3',
+      'number' => 1,
+    ),
+    55 => 
+    array (
+      'id' => 55,
+      'name' => '附件-B03',
+      'price' => 0,
+      'seriesno' => '4',
+      'number' => 1,
+    ),
+    57 => 
+    array (
+      'id' => 57,
+      'name' => '附件-B05',
+      'price' => 0,
+      'seriesno' => '6',
+      'number' => 1,
+    ),
+  ),
+)
+[ info ] [ DB ] INIT mysql
+[ sql ] [ DB ] CONNECT:[ UseTime:0.000650s ] mysql:host=127.0.0.1;port=3306;dbname=operator;charset=utf8
+[ sql ] [ SQL ] SHOW COLUMNS FROM `think_notification` [ RunTime:0.000942s ]
+[ sql ] [ SQL ] INSERT INTO `think_notification` (`org_id` , `creater_id` , `create_time` , `update_time`) VALUES (2 , 2 , 1583725722 , 1583725722) [ RunTime:0.000712s ]
+[ sql ] [ SQL ] UPDATE `think_notification`  SET `code` = 'A63'  WHERE  `id` = 63 [ RunTime:0.001023s ]
+[ sql ] [ SQL ] SHOW COLUMNS FROM `think_workorder` [ RunTime:0.001162s ]
+[ sql ] [ SQL ] INSERT INTO `think_workorder` (`notification_id` , `item_id` , `org_id` , `status` , `create_time` , `update_time`) VALUES (63 , 52 , 2 , -1 , 1583725722 , 1583725722) [ RunTime:0.000745s ]
+[ sql ] [ SQL ] INSERT INTO `think_workorder` (`notification_id` , `item_id` , `org_id` , `status` , `create_time` , `update_time`) VALUES (63 , 54 , 2 , -1 , 1583725722 , 1583725722) [ RunTime:0.000738s ]
+[ sql ] [ SQL ] INSERT INTO `think_workorder` (`notification_id` , `item_id` , `org_id` , `status` , `create_time` , `update_time`) VALUES (63 , 55 , 2 , -1 , 1583725722 , 1583725722) [ RunTime:0.000713s ]
+[ sql ] [ SQL ] INSERT INTO `think_workorder` (`notification_id` , `item_id` , `org_id` , `status` , `create_time` , `update_time`) VALUES (63 , 57 , 2 , -1 , 1583725722 , 1583725722) [ RunTime:0.000876s ]
+---------------------------------------------------------------
+
+[2020-03-09T11:48:43+08:00] 127.0.0.1 GET operator.com/api/workorder/query?id=63
+[运行时间：0.451626s] [吞吐率：2.21req/s] [内存消耗：5,797.27kb] [文件加载：88]
+[ info ] [ LANG ] /Applications/MAMP/htdocs/operator/thinkphp/lang/zh-cn.php
+[ info ] [ ROUTE ] array (
+)
+[ info ] [ HEADER ] array (
+  'host' => 'operator.com',
+  'connection' => 'keep-alive',
+  'pragma' => 'no-cache',
+  'cache-control' => 'no-cache',
+  'x-requested-with' => 'XMLHttpRequest',
+  'user-agent' => 'Mozilla/5.0 (iPhone; CPU iPhone OS 10_3_1 like Mac OS X) AppleWebKit/603.1.3 (KHTML, like Gecko) Version/10.0 Mobile/14E304 Safari/602.1 wechatdevtools/1.02.1911180 MicroMessenger/7.0.4 Language/zh_CN webview/',
+  'content-type' => 'json',
+  'accept' => '*/*',
+  'referer' => 'https://servicewechat.com/wxacb61fc94fe0881d/devtools/page-frame.html',
+  'accept-encoding' => 'gzip, deflate',
+  'cookie' => 'PHPSESSID=6632df04838c9d7134ab7640a5bfe8a8;XDEBUG_SESSION=XDEBUG_ECLIPSE',
+)
+[ info ] [ PARAM ] array (
+  '/api/workorder/query' => '',
+  'id' => '63',
+)
+[ info ] [ DB ] INIT mysql
+[ sql ] [ DB ] CONNECT:[ UseTime:0.000869s ] mysql:host=127.0.0.1;port=3306;dbname=operator;charset=utf8
+[ sql ] [ SQL ] SHOW COLUMNS FROM `think_workorder` [ RunTime:0.001630s ]
+[ sql ] [ SQL ] SELECT * FROM `think_workorder` WHERE  `notification_id` = 63 [ RunTime:0.011433s ]
+[ sql ] [ SQL ] SHOW COLUMNS FROM `think_item` [ RunTime:0.001442s ]
+[ sql ] [ SQL ] SELECT * FROM `think_item` WHERE  `id` = 52 LIMIT 1 [ RunTime:0.001340s ]
+[ sql ] [ SQL ] SHOW COLUMNS FROM `think_catagory` [ RunTime:0.001995s ]
+[ sql ] [ SQL ] SELECT * FROM `think_catagory` WHERE  `id` = 1 LIMIT 1 [ RunTime:0.001225s ]
+[ sql ] [ SQL ] SELECT * FROM `think_item` WHERE  `id` = 54 LIMIT 1 [ RunTime:0.001043s ]
+[ sql ] [ SQL ] SELECT * FROM `think_catagory` WHERE  `id` = 1 LIMIT 1 [ RunTime:0.001075s ]
+[ sql ] [ SQL ] SELECT * FROM `think_item` WHERE  `id` = 55 LIMIT 1 [ RunTime:0.002400s ]
+[ sql ] [ SQL ] SELECT * FROM `think_catagory` WHERE  `id` = 1 LIMIT 1 [ RunTime:0.002145s ]
+[ sql ] [ SQL ] SELECT * FROM `think_item` WHERE  `id` = 57 LIMIT 1 [ RunTime:0.013071s ]
+[ sql ] [ SQL ] SELECT * FROM `think_catagory` WHERE  `id` = 1 LIMIT 1 [ RunTime:0.001123s ]
+---------------------------------------------------------------
+
+[2020-03-09T11:48:55+08:00] 127.0.0.1 POST operator.com/api/workorder/confirmorder
+[运行时间：0.136342s] [吞吐率：7.33req/s] [内存消耗：5,482.98kb] [文件加载：84]
+[ info ] [ LANG ] /Applications/MAMP/htdocs/operator/thinkphp/lang/zh-cn.php
+[ info ] [ ROUTE ] array (
+)
+[ info ] [ HEADER ] array (
+  'host' => 'operator.com',
+  'connection' => 'keep-alive',
+  'content-length' => '24',
+  'pragma' => 'no-cache',
+  'cache-control' => 'no-cache',
+  'origin' => 'http://127.0.0.1:16392',
+  'x-requested-with' => 'XMLHttpRequest',
+  'user-agent' => 'Mozilla/5.0 (iPhone; CPU iPhone OS 10_3_1 like Mac OS X) AppleWebKit/603.1.3 (KHTML, like Gecko) Version/10.0 Mobile/14E304 Safari/602.1 wechatdevtools/1.02.1911180 MicroMessenger/7.0.4 Language/zh_CN webview/',
+  'content-type' => 'json',
+  'accept' => '*/*',
+  'referer' => 'https://servicewechat.com/wxacb61fc94fe0881d/devtools/page-frame.html',
+  'accept-encoding' => 'gzip, deflate',
+  'cookie' => 'PHPSESSID=6632df04838c9d7134ab7640a5bfe8a8;XDEBUG_SESSION=XDEBUG_ECLIPSE',
+)
+[ info ] [ PARAM ] array (
+  '/api/workorder/confirmorder' => '',
+  'id' => '63',
+  'comment' => '',
+)
+[ info ] [ DB ] INIT mysql
+[ sql ] [ DB ] CONNECT:[ UseTime:0.000782s ] mysql:host=127.0.0.1;port=3306;dbname=operator;charset=utf8
+[ sql ] [ SQL ] SHOW COLUMNS FROM `think_workorder` [ RunTime:0.003329s ]
+[ sql ] [ SQL ] SELECT * FROM `think_workorder` WHERE  `notification_id` = 63 [ RunTime:0.000796s ]
+[ sql ] [ SQL ] UPDATE `think_workorder`  SET `status` = 0 , `memo` = '' , `update_time` = 1583725735  WHERE  `id` = 54 [ RunTime:0.000757s ]
+[ sql ] [ SQL ] UPDATE `think_workorder`  SET `status` = 0 , `memo` = '' , `update_time` = 1583725735  WHERE  `id` = 55 [ RunTime:0.000762s ]
+[ sql ] [ SQL ] UPDATE `think_workorder`  SET `status` = 0 , `memo` = '' , `update_time` = 1583725735  WHERE  `id` = 56 [ RunTime:0.000743s ]
+[ sql ] [ SQL ] UPDATE `think_workorder`  SET `status` = 0 , `memo` = '' , `update_time` = 1583725735  WHERE  `id` = 57 [ RunTime:0.000795s ]
+---------------------------------------------------------------
+
+[2020-03-09T11:48:56+08:00] 127.0.0.1 GET operator.com/api/workorder/query?id=63
+[运行时间：0.471507s] [吞吐率：2.12req/s] [内存消耗：5,797.30kb] [文件加载：88]
+[ info ] [ LANG ] /Applications/MAMP/htdocs/operator/thinkphp/lang/zh-cn.php
+[ info ] [ ROUTE ] array (
+)
+[ info ] [ HEADER ] array (
+  'host' => 'operator.com',
+  'connection' => 'keep-alive',
+  'pragma' => 'no-cache',
+  'cache-control' => 'no-cache',
+  'x-requested-with' => 'XMLHttpRequest',
+  'user-agent' => 'Mozilla/5.0 (iPhone; CPU iPhone OS 10_3_1 like Mac OS X) AppleWebKit/603.1.3 (KHTML, like Gecko) Version/10.0 Mobile/14E304 Safari/602.1 wechatdevtools/1.02.1911180 MicroMessenger/7.0.4 Language/zh_CN webview/',
+  'content-type' => 'json',
+  'accept' => '*/*',
+  'referer' => 'https://servicewechat.com/wxacb61fc94fe0881d/devtools/page-frame.html',
+  'accept-encoding' => 'gzip, deflate',
+  'cookie' => 'PHPSESSID=6632df04838c9d7134ab7640a5bfe8a8;XDEBUG_SESSION=XDEBUG_ECLIPSE',
+)
+[ info ] [ PARAM ] array (
+  '/api/workorder/query' => '',
+  'id' => '63',
+)
+[ info ] [ DB ] INIT mysql
+[ sql ] [ DB ] CONNECT:[ UseTime:0.000916s ] mysql:host=127.0.0.1;port=3306;dbname=operator;charset=utf8
+[ sql ] [ SQL ] SHOW COLUMNS FROM `think_workorder` [ RunTime:0.043093s ]
+[ sql ] [ SQL ] SELECT * FROM `think_workorder` WHERE  `notification_id` = 63 [ RunTime:0.001428s ]
+[ sql ] [ SQL ] SHOW COLUMNS FROM `think_item` [ RunTime:0.004741s ]
+[ sql ] [ SQL ] SELECT * FROM `think_item` WHERE  `id` = 52 LIMIT 1 [ RunTime:0.001508s ]
+[ sql ] [ SQL ] SHOW COLUMNS FROM `think_catagory` [ RunTime:0.001760s ]
+[ sql ] [ SQL ] SELECT * FROM `think_catagory` WHERE  `id` = 1 LIMIT 1 [ RunTime:0.001146s ]
+[ sql ] [ SQL ] SELECT * FROM `think_item` WHERE  `id` = 54 LIMIT 1 [ RunTime:0.001188s ]
+[ sql ] [ SQL ] SELECT * FROM `think_catagory` WHERE  `id` = 1 LIMIT 1 [ RunTime:0.009590s ]
+[ sql ] [ SQL ] SELECT * FROM `think_item` WHERE  `id` = 55 LIMIT 1 [ RunTime:0.002699s ]
+[ sql ] [ SQL ] SELECT * FROM `think_catagory` WHERE  `id` = 1 LIMIT 1 [ RunTime:0.000758s ]
+[ sql ] [ SQL ] SELECT * FROM `think_item` WHERE  `id` = 57 LIMIT 1 [ RunTime:0.002813s ]
+[ sql ] [ SQL ] SELECT * FROM `think_catagory` WHERE  `id` = 1 LIMIT 1 [ RunTime:0.000784s ]
+---------------------------------------------------------------
+
+[2020-03-09T11:49:00+08:00] 127.0.0.1 GET operator.com/api/food/orderlist?last_id=0&row=10
+[运行时间：0.220344s] [吞吐率：4.54req/s] [内存消耗：3,098.16kb] [文件加载：67]
+[ info ] [ LANG ] /Applications/MAMP/htdocs/operator/thinkphp/lang/zh-cn.php
+[ info ] [ ROUTE ] array (
+)
+[ info ] [ HEADER ] array (
+  'host' => 'operator.com',
+  'connection' => 'keep-alive',
+  'pragma' => 'no-cache',
+  'cache-control' => 'no-cache',
+  'x-requested-with' => 'XMLHttpRequest',
+  'user-agent' => 'Mozilla/5.0 (iPhone; CPU iPhone OS 10_3_1 like Mac OS X) AppleWebKit/603.1.3 (KHTML, like Gecko) Version/10.0 Mobile/14E304 Safari/602.1 wechatdevtools/1.02.1911180 MicroMessenger/7.0.4 Language/zh_CN webview/',
+  'content-type' => 'json',
+  'accept' => '*/*',
+  'referer' => 'https://servicewechat.com/wxacb61fc94fe0881d/devtools/page-frame.html',
+  'accept-encoding' => 'gzip, deflate',
+  'cookie' => 'PHPSESSID=6632df04838c9d7134ab7640a5bfe8a8;XDEBUG_SESSION=XDEBUG_ECLIPSE',
+)
+[ info ] [ PARAM ] array (
+  '/api/food/orderlist' => '',
+  'last_id' => '0',
+  'row' => '10',
+)
+---------------------------------------------------------------
+
+[2020-03-09T11:51:02+08:00] 127.0.0.1 GET operator.com/api/user/setting
+[运行时间：0.198255s] [吞吐率：5.04req/s] [内存消耗：3,199.05kb] [文件加载：69]
+[ info ] [ LANG ] /Applications/MAMP/htdocs/operator/thinkphp/lang/zh-cn.php
+[ info ] [ ROUTE ] array (
+)
+[ info ] [ HEADER ] array (
+  'host' => 'operator.com',
+  'connection' => 'keep-alive',
+  'pragma' => 'no-cache',
+  'cache-control' => 'no-cache',
+  'x-requested-with' => 'XMLHttpRequest',
+  'user-agent' => 'Mozilla/5.0 (iPhone; CPU iPhone OS 10_3_1 like Mac OS X) AppleWebKit/603.1.3 (KHTML, like Gecko) Version/10.0 Mobile/14E304 Safari/602.1 wechatdevtools/1.02.1911180 MicroMessenger/7.0.4 Language/zh_CN webview/',
+  'content-type' => 'json',
+  'accept' => '*/*',
+  'referer' => 'https://servicewechat.com/wxacb61fc94fe0881d/devtools/page-frame.html',
+  'accept-encoding' => 'gzip, deflate',
+  'cookie' => 'PHPSESSID=6632df04838c9d7134ab7640a5bfe8a8;XDEBUG_SESSION=XDEBUG_ECLIPSE',
+)
+[ info ] [ PARAM ] array (
+  '/api/user/setting' => '',
+)
+---------------------------------------------------------------
+
+[2020-03-09T11:51:09+08:00] 127.0.0.1 GET operator.com/api/workorder/itemlist?last_id=0&row=10
+[运行时间：0.390802s] [吞吐率：2.56req/s] [内存消耗：5,708.46kb] [文件加载：87]
+[ info ] [ LANG ] /Applications/MAMP/htdocs/operator/thinkphp/lang/zh-cn.php
+[ info ] [ ROUTE ] array (
+)
+[ info ] [ HEADER ] array (
+  'host' => 'operator.com',
+  'connection' => 'keep-alive',
+  'pragma' => 'no-cache',
+  'cache-control' => 'no-cache',
+  'x-requested-with' => 'XMLHttpRequest',
+  'user-agent' => 'Mozilla/5.0 (iPhone; CPU iPhone OS 10_3_1 like Mac OS X) AppleWebKit/603.1.3 (KHTML, like Gecko) Version/10.0 Mobile/14E304 Safari/602.1 wechatdevtools/1.02.1911180 MicroMessenger/7.0.4 Language/zh_CN webview/',
+  'content-type' => 'json',
+  'accept' => '*/*',
+  'referer' => 'https://servicewechat.com/wxacb61fc94fe0881d/devtools/page-frame.html',
+  'accept-encoding' => 'gzip, deflate',
+  'cookie' => 'PHPSESSID=6632df04838c9d7134ab7640a5bfe8a8;XDEBUG_SESSION=XDEBUG_ECLIPSE',
+)
+[ info ] [ PARAM ] array (
+  '/api/workorder/itemlist' => '',
+  'last_id' => '0',
+  'row' => '10',
+)
+[ info ] [ DB ] INIT mysql
+[ sql ] [ DB ] CONNECT:[ UseTime:0.002165s ] mysql:host=127.0.0.1;port=3306;dbname=operator;charset=utf8
+[ sql ] [ SQL ] SHOW COLUMNS FROM `think_catagory` [ RunTime:0.002447s ]
+[ sql ] [ SQL ] SELECT `id`,`name` FROM `think_catagory` ORDER BY `sort` ASC [ RunTime:0.004357s ]
+[ sql ] [ SQL ] SHOW COLUMNS FROM `think_item` [ RunTime:0.003201s ]
+[ sql ] [ SQL ] SELECT * FROM `think_item` WHERE  `status` = 1 ORDER BY `id` ASC [ RunTime:0.005009s ]
+[ sql ] [ SQL ] SELECT * FROM `think_catagory` WHERE  `id` = 5 LIMIT 1 [ RunTime:0.001693s ]
+[ sql ] [ SQL ] SELECT * FROM `think_catagory` WHERE  `id` = 1 LIMIT 1 [ RunTime:0.001062s ]
+[ sql ] [ SQL ] SELECT * FROM `think_catagory` WHERE  `id` = 1 LIMIT 1 [ RunTime:0.000766s ]
+[ sql ] [ SQL ] SELECT * FROM `think_catagory` WHERE  `id` = 1 LIMIT 1 [ RunTime:0.000786s ]
+[ sql ] [ SQL ] SELECT * FROM `think_catagory` WHERE  `id` = 2 LIMIT 1 [ RunTime:0.001329s ]
+[ sql ] [ SQL ] SELECT * FROM `think_catagory` WHERE  `id` = 1 LIMIT 1 [ RunTime:0.000754s ]
+[ sql ] [ SQL ] SELECT * FROM `think_catagory` WHERE  `id` = 1 LIMIT 1 [ RunTime:0.000750s ]
+[ sql ] [ SQL ] SELECT * FROM `think_catagory` WHERE  `id` = 1 LIMIT 1 [ RunTime:0.000810s ]
+[ sql ] [ SQL ] SELECT * FROM `think_catagory` WHERE  `id` = 4 LIMIT 1 [ RunTime:0.001073s ]
+[ sql ] [ SQL ] SELECT * FROM `think_catagory` WHERE  `id` = 2 LIMIT 1 [ RunTime:0.000678s ]
+[ sql ] [ SQL ] SELECT * FROM `think_catagory` WHERE  `id` = 3 LIMIT 1 [ RunTime:0.000777s ]
+[ sql ] [ SQL ] SELECT * FROM `think_catagory` WHERE  `id` = 5 LIMIT 1 [ RunTime:0.001853s ]
+[ sql ] [ SQL ] SELECT * FROM `think_catagory` WHERE  `id` = 5 LIMIT 1 [ RunTime:0.001088s ]
+[ sql ] [ SQL ] SELECT * FROM `think_catagory` WHERE  `id` = 5 LIMIT 1 [ RunTime:0.000677s ]
+---------------------------------------------------------------
+
+[2020-03-09T11:54:58+08:00] 127.0.0.1 GET operator.com/api/workorder/query?id=1
+[运行时间：0.511700s] [吞吐率：1.95req/s] [内存消耗：5,777.25kb] [文件加载：88]
+[ info ] [ LANG ] /Applications/MAMP/htdocs/operator/thinkphp/lang/zh-cn.php
+[ info ] [ ROUTE ] array (
+)
+[ info ] [ HEADER ] array (
+  'host' => 'operator.com',
+  'connection' => 'keep-alive',
+  'pragma' => 'no-cache',
+  'cache-control' => 'no-cache',
+  'x-requested-with' => 'XMLHttpRequest',
+  'user-agent' => 'Mozilla/5.0 (iPhone; CPU iPhone OS 10_3_1 like Mac OS X) AppleWebKit/603.1.3 (KHTML, like Gecko) Version/10.0 Mobile/14E304 Safari/602.1 wechatdevtools/1.02.1911180 MicroMessenger/7.0.4 Language/zh_CN webview/',
+  'content-type' => 'json',
+  'accept' => '*/*',
+  'referer' => 'https://servicewechat.com/wxacb61fc94fe0881d/devtools/page-frame.html',
+  'accept-encoding' => 'gzip, deflate',
+  'cookie' => 'PHPSESSID=6632df04838c9d7134ab7640a5bfe8a8;XDEBUG_SESSION=XDEBUG_ECLIPSE',
+)
+[ info ] [ PARAM ] array (
+  '/api/workorder/query' => '',
+  'id' => '1',
+)
+[ info ] [ DB ] INIT mysql
+[ sql ] [ DB ] CONNECT:[ UseTime:0.001408s ] mysql:host=127.0.0.1;port=3306;dbname=operator;charset=utf8
+[ sql ] [ SQL ] SHOW COLUMNS FROM `think_workorder` [ RunTime:0.005133s ]
+[ sql ] [ SQL ] SELECT * FROM `think_workorder` WHERE  `notification_id` = 1 [ RunTime:0.003208s ]
+[ sql ] [ SQL ] SHOW COLUMNS FROM `think_item` [ RunTime:0.001561s ]
+[ sql ] [ SQL ] SELECT * FROM `think_item` WHERE  `id` = 47 LIMIT 1 [ RunTime:0.001076s ]
+[ sql ] [ SQL ] SHOW COLUMNS FROM `think_catagory` [ RunTime:0.001264s ]
+[ sql ] [ SQL ] SELECT * FROM `think_catagory` WHERE  `id` = 5 LIMIT 1 [ RunTime:0.000681s ]
+---------------------------------------------------------------
+
+[2020-03-09T11:55:02+08:00] 127.0.0.1 GET operator.com/api/workorder/itemlist?last_id=0&row=10
+[运行时间：0.358818s] [吞吐率：2.79req/s] [内存消耗：5,708.45kb] [文件加载：87]
+[ info ] [ LANG ] /Applications/MAMP/htdocs/operator/thinkphp/lang/zh-cn.php
+[ info ] [ ROUTE ] array (
+)
+[ info ] [ HEADER ] array (
+  'host' => 'operator.com',
+  'connection' => 'keep-alive',
+  'pragma' => 'no-cache',
+  'cache-control' => 'no-cache',
+  'x-requested-with' => 'XMLHttpRequest',
+  'user-agent' => 'Mozilla/5.0 (iPhone; CPU iPhone OS 10_3_1 like Mac OS X) AppleWebKit/603.1.3 (KHTML, like Gecko) Version/10.0 Mobile/14E304 Safari/602.1 wechatdevtools/1.02.1911180 MicroMessenger/7.0.4 Language/zh_CN webview/',
+  'content-type' => 'json',
+  'accept' => '*/*',
+  'referer' => 'https://servicewechat.com/wxacb61fc94fe0881d/devtools/page-frame.html',
+  'accept-encoding' => 'gzip, deflate',
+  'cookie' => 'PHPSESSID=6632df04838c9d7134ab7640a5bfe8a8;XDEBUG_SESSION=XDEBUG_ECLIPSE',
+)
+[ info ] [ PARAM ] array (
+  '/api/workorder/itemlist' => '',
+  'last_id' => '0',
+  'row' => '10',
+)
+[ info ] [ DB ] INIT mysql
+[ sql ] [ DB ] CONNECT:[ UseTime:0.000914s ] mysql:host=127.0.0.1;port=3306;dbname=operator;charset=utf8
+[ sql ] [ SQL ] SHOW COLUMNS FROM `think_catagory` [ RunTime:0.001880s ]
+[ sql ] [ SQL ] SELECT `id`,`name` FROM `think_catagory` ORDER BY `sort` ASC [ RunTime:0.000765s ]
+[ sql ] [ SQL ] SHOW COLUMNS FROM `think_item` [ RunTime:0.001716s ]
+[ sql ] [ SQL ] SELECT * FROM `think_item` WHERE  `status` = 1 ORDER BY `id` ASC [ RunTime:0.000908s ]
+[ sql ] [ SQL ] SELECT * FROM `think_catagory` WHERE  `id` = 5 LIMIT 1 [ RunTime:0.001257s ]
+[ sql ] [ SQL ] SELECT * FROM `think_catagory` WHERE  `id` = 1 LIMIT 1 [ RunTime:0.001035s ]
+[ sql ] [ SQL ] SELECT * FROM `think_catagory` WHERE  `id` = 1 LIMIT 1 [ RunTime:0.001095s ]
+[ sql ] [ SQL ] SELECT * FROM `think_catagory` WHERE  `id` = 1 LIMIT 1 [ RunTime:0.001407s ]
+[ sql ] [ SQL ] SELECT * FROM `think_catagory` WHERE  `id` = 2 LIMIT 1 [ RunTime:0.001386s ]
+[ sql ] [ SQL ] SELECT * FROM `think_catagory` WHERE  `id` = 1 LIMIT 1 [ RunTime:0.002930s ]
+[ sql ] [ SQL ] SELECT * FROM `think_catagory` WHERE  `id` = 1 LIMIT 1 [ RunTime:0.001269s ]
+[ sql ] [ SQL ] SELECT * FROM `think_catagory` WHERE  `id` = 1 LIMIT 1 [ RunTime:0.001938s ]
+[ sql ] [ SQL ] SELECT * FROM `think_catagory` WHERE  `id` = 4 LIMIT 1 [ RunTime:0.001195s ]
+[ sql ] [ SQL ] SELECT * FROM `think_catagory` WHERE  `id` = 2 LIMIT 1 [ RunTime:0.000931s ]
+[ sql ] [ SQL ] SELECT * FROM `think_catagory` WHERE  `id` = 3 LIMIT 1 [ RunTime:0.000998s ]
+[ sql ] [ SQL ] SELECT * FROM `think_catagory` WHERE  `id` = 5 LIMIT 1 [ RunTime:0.001701s ]
+[ sql ] [ SQL ] SELECT * FROM `think_catagory` WHERE  `id` = 5 LIMIT 1 [ RunTime:0.001388s ]
+[ sql ] [ SQL ] SELECT * FROM `think_catagory` WHERE  `id` = 5 LIMIT 1 [ RunTime:0.000987s ]
+---------------------------------------------------------------
+
+[2020-03-09T12:01:09+08:00] 127.0.0.1 GET operator.com/api/user/setting
+[运行时间：0.157481s] [吞吐率：6.35req/s] [内存消耗：3,199.47kb] [文件加载：69]
+[ info ] [ LANG ] /Applications/MAMP/htdocs/operator/thinkphp/lang/zh-cn.php
+[ info ] [ ROUTE ] array (
+)
+[ info ] [ HEADER ] array (
+  'host' => 'operator.com',
+  'connection' => 'keep-alive',
+  'pragma' => 'no-cache',
+  'cache-control' => 'no-cache',
+  'x-requested-with' => 'XMLHttpRequest',
+  'user-agent' => 'Mozilla/5.0 (iPhone; CPU iPhone OS 10_3_1 like Mac OS X) AppleWebKit/603.1.3 (KHTML, like Gecko) Version/10.0 Mobile/14E304 Safari/602.1 wechatdevtools/1.02.1911180 MicroMessenger/7.0.4 Language/zh_CN webview/',
+  'content-type' => 'json',
+  'accept' => '*/*',
+  'referer' => 'https://servicewechat.com/wxacb61fc94fe0881d/devtools/page-frame.html',
+  'accept-encoding' => 'gzip, deflate',
+  'cookie' => 'PHPSESSID=6632df04838c9d7134ab7640a5bfe8a8;XDEBUG_SESSION=XDEBUG_ECLIPSE',
+)
+[ info ] [ PARAM ] array (
+  '/api/user/setting' => '',
+)
+---------------------------------------------------------------
+
+[2020-03-09T12:01:30+08:00] 127.0.0.1 GET operator.com/api/user/setting
+[运行时间：0.172340s] [吞吐率：5.80req/s] [内存消耗：3,199.05kb] [文件加载：69]
+[ info ] [ LANG ] /Applications/MAMP/htdocs/operator/thinkphp/lang/zh-cn.php
+[ info ] [ ROUTE ] array (
+)
+[ info ] [ HEADER ] array (
+  'host' => 'operator.com',
+  'connection' => 'keep-alive',
+  'pragma' => 'no-cache',
+  'cache-control' => 'no-cache',
+  'x-requested-with' => 'XMLHttpRequest',
+  'user-agent' => 'Mozilla/5.0 (iPhone; CPU iPhone OS 10_3_1 like Mac OS X) AppleWebKit/603.1.3 (KHTML, like Gecko) Version/10.0 Mobile/14E304 Safari/602.1 wechatdevtools/1.02.1911180 MicroMessenger/7.0.4 Language/zh_CN webview/',
+  'content-type' => 'json',
+  'accept' => '*/*',
+  'referer' => 'https://servicewechat.com/wxacb61fc94fe0881d/devtools/page-frame.html',
+  'accept-encoding' => 'gzip, deflate',
+  'cookie' => 'PHPSESSID=6632df04838c9d7134ab7640a5bfe8a8;XDEBUG_SESSION=XDEBUG_ECLIPSE',
+)
+[ info ] [ PARAM ] array (
+  '/api/user/setting' => '',
+)
+---------------------------------------------------------------
+
+[2020-03-09T12:21:43+08:00] 127.0.0.1 GET operator.com/api/user/setting
+[运行时间：0.370049s] [吞吐率：2.70req/s] [内存消耗：3,199.05kb] [文件加载：69]
+[ info ] [ LANG ] /Applications/MAMP/htdocs/operator/thinkphp/lang/zh-cn.php
+[ info ] [ ROUTE ] array (
+)
+[ info ] [ HEADER ] array (
+  'host' => 'operator.com',
+  'connection' => 'keep-alive',
+  'pragma' => 'no-cache',
+  'cache-control' => 'no-cache',
+  'x-requested-with' => 'XMLHttpRequest',
+  'user-agent' => 'Mozilla/5.0 (iPhone; CPU iPhone OS 10_3_1 like Mac OS X) AppleWebKit/603.1.3 (KHTML, like Gecko) Version/10.0 Mobile/14E304 Safari/602.1 wechatdevtools/1.02.1911180 MicroMessenger/7.0.4 Language/zh_CN webview/',
+  'content-type' => 'json',
+  'accept' => '*/*',
+  'referer' => 'https://servicewechat.com/wxacb61fc94fe0881d/devtools/page-frame.html',
+  'accept-encoding' => 'gzip, deflate',
+  'cookie' => 'PHPSESSID=6632df04838c9d7134ab7640a5bfe8a8;XDEBUG_SESSION=XDEBUG_ECLIPSE',
+)
+[ info ] [ PARAM ] array (
+  '/api/user/setting' => '',
+)
+---------------------------------------------------------------
+
+[2020-03-09T12:21:46+08:00] 127.0.0.1 GET operator.com/api/workorder/orderlist?last_id=0&row=10
+[运行时间：0.324987s] [吞吐率：3.08req/s] [内存消耗：5,429.18kb] [文件加载：86]
+[ info ] [ LANG ] /Applications/MAMP/htdocs/operator/thinkphp/lang/zh-cn.php
+[ info ] [ ROUTE ] array (
+)
+[ info ] [ HEADER ] array (
+  'host' => 'operator.com',
+  'connection' => 'keep-alive',
+  'pragma' => 'no-cache',
+  'cache-control' => 'no-cache',
+  'x-requested-with' => 'XMLHttpRequest',
+  'user-agent' => 'Mozilla/5.0 (iPhone; CPU iPhone OS 10_3_1 like Mac OS X) AppleWebKit/603.1.3 (KHTML, like Gecko) Version/10.0 Mobile/14E304 Safari/602.1 wechatdevtools/1.02.1911180 MicroMessenger/7.0.4 Language/zh_CN webview/',
+  'content-type' => 'json',
+  'accept' => '*/*',
+  'referer' => 'https://servicewechat.com/wxacb61fc94fe0881d/devtools/page-frame.html',
+  'accept-encoding' => 'gzip, deflate',
+  'cookie' => 'PHPSESSID=6632df04838c9d7134ab7640a5bfe8a8;XDEBUG_SESSION=XDEBUG_ECLIPSE',
+)
+[ info ] [ PARAM ] array (
+  '/api/workorder/orderlist' => '',
+  'last_id' => '0',
+  'row' => '10',
+)
+[ info ] [ DB ] INIT mysql
+[ sql ] [ DB ] CONNECT:[ UseTime:0.006920s ] mysql:host=127.0.0.1;port=3306;dbname=operator;charset=utf8
+[ sql ] [ SQL ] SHOW COLUMNS FROM `think_notification` [ RunTime:0.009215s ]
+[ error ] [10501]SQLSTATE[42S22]: Column not found: 1054 Unknown column 'user_id' in 'where clause'[/Applications/MAMP/htdocs/operator/thinkphp/library/think/db/Connection.php:687]
+---------------------------------------------------------------
+
+[2020-03-09T12:22:38+08:00] 127.0.0.1 GET operator.com/api/workorder/orderlist?last_id=0&row=10
+[运行时间：0.116769s] [吞吐率：8.56req/s] [内存消耗：5,473.41kb] [文件加载：83]
+[ info ] [ LANG ] /Applications/MAMP/htdocs/operator/thinkphp/lang/zh-cn.php
+[ info ] [ ROUTE ] array (
+)
+[ info ] [ HEADER ] array (
+  'host' => 'operator.com',
+  'connection' => 'keep-alive',
+  'pragma' => 'no-cache',
+  'cache-control' => 'no-cache',
+  'x-requested-with' => 'XMLHttpRequest',
+  'user-agent' => 'Mozilla/5.0 (iPhone; CPU iPhone OS 10_3_1 like Mac OS X) AppleWebKit/603.1.3 (KHTML, like Gecko) Version/10.0 Mobile/14E304 Safari/602.1 wechatdevtools/1.02.1911180 MicroMessenger/7.0.4 Language/zh_CN webview/',
+  'content-type' => 'json',
+  'accept' => '*/*',
+  'referer' => 'https://servicewechat.com/wxacb61fc94fe0881d/devtools/page-frame.html',
+  'accept-encoding' => 'gzip, deflate',
+  'cookie' => 'PHPSESSID=6632df04838c9d7134ab7640a5bfe8a8;XDEBUG_SESSION=XDEBUG_ECLIPSE',
+)
+[ info ] [ PARAM ] array (
+  '/api/workorder/orderlist' => '',
+  'last_id' => '0',
+  'row' => '10',
+)
+[ info ] [ DB ] INIT mysql
+[ sql ] [ DB ] CONNECT:[ UseTime:0.000566s ] mysql:host=127.0.0.1;port=3306;dbname=operator;charset=utf8
+[ sql ] [ SQL ] SHOW COLUMNS FROM `think_notification` [ RunTime:0.003989s ]
+[ sql ] [ SQL ] SELECT * FROM `think_notification` WHERE  `creater_id` = 2  AND `status` = 0 ORDER BY `id` DESC LIMIT 10 [ RunTime:0.001880s ]
+---------------------------------------------------------------
+
+[2020-03-09T12:37:53+08:00] 127.0.0.1 GET operator.com/api/workorder/orderlist?last_id=0&row=10
+[运行时间：76.554056s] [吞吐率：0.01req/s] [内存消耗：5,653.08kb] [文件加载：88]
+[ info ] [ LANG ] /Applications/MAMP/htdocs/operator/thinkphp/lang/zh-cn.php
+[ info ] [ ROUTE ] array (
+)
+[ info ] [ HEADER ] array (
+  'host' => 'operator.com',
+  'connection' => 'keep-alive',
+  'pragma' => 'no-cache',
+  'cache-control' => 'no-cache',
+  'x-requested-with' => 'XMLHttpRequest',
+  'user-agent' => 'Mozilla/5.0 (iPhone; CPU iPhone OS 10_3_1 like Mac OS X) AppleWebKit/603.1.3 (KHTML, like Gecko) Version/10.0 Mobile/14E304 Safari/602.1 wechatdevtools/1.02.1911180 MicroMessenger/7.0.4 Language/zh_CN webview/',
+  'content-type' => 'json',
+  'accept' => '*/*',
+  'referer' => 'https://servicewechat.com/wxacb61fc94fe0881d/devtools/page-frame.html',
+  'accept-encoding' => 'gzip, deflate',
+  'cookie' => 'PHPSESSID=6632df04838c9d7134ab7640a5bfe8a8;XDEBUG_SESSION=XDEBUG_ECLIPSE',
+)
+[ info ] [ PARAM ] array (
+  '/api/workorder/orderlist' => '',
+  'last_id' => '0',
+  'row' => '10',
+)
+[ info ] [ DB ] INIT mysql
+[ error ] [8]Use of undefined constant Cache - assumed 'Cache'[xdebug://debug-eval(1) : eval()'d code:1]
+[ error ] [8]Use of undefined constant Cache - assumed 'Cache'[xdebug://debug-eval(1) : eval()'d code:1]
+[ error ] [8]Use of undefined constant Cache - assumed 'Cache'[xdebug://debug-eval(1) : eval()'d code:1]
+[ error ] [8]Use of undefined constant Cache - assumed 'Cache'[xdebug://debug-eval(1) : eval()'d code:1]
+[ error ] [8]Use of undefined constant Cache - assumed 'Cache'[xdebug://debug-eval(1) : eval()'d code:1]
+[ error ] [8]Use of undefined constant Cache - assumed 'Cache'[xdebug://debug-eval(1) : eval()'d code:1]
+[ error ] [8]Use of undefined constant Cache - assumed 'Cache'[xdebug://debug-eval(1) : eval()'d code:1]
+[ error ] [8]Use of undefined constant Cache - assumed 'Cache'[xdebug://debug-eval(1) : eval()'d code:1]
+[ error ] [8]Use of undefined constant Cache - assumed 'Cache'[xdebug://debug-eval(1) : eval()'d code:1]
+[ error ] [64]Cannot use [] for reading[xdebug://debug-eval(1) : eval()'d code:1]
+[ sql ] [ DB ] CONNECT:[ UseTime:0.001131s ] mysql:host=127.0.0.1;port=3306;dbname=operator;charset=utf8
+[ sql ] [ SQL ] SHOW COLUMNS FROM `think_notification` [ RunTime:0.007889s ]
+[ sql ] [ SQL ] SELECT * FROM `think_notification` WHERE  `creater_id` = 2  AND `status` = 0 ORDER BY `id` DESC LIMIT 10 [ RunTime:0.003784s ]
+---------------------------------------------------------------
+
+[2020-03-09T12:41:12+08:00] 127.0.0.1 GET operator.com/api/workorder/orderlist?last_id=0&row=10
+[运行时间：2.462411s] [吞吐率：0.41req/s] [内存消耗：5,589.35kb] [文件加载：88]
+[ info ] [ LANG ] /Applications/MAMP/htdocs/operator/thinkphp/lang/zh-cn.php
+[ info ] [ ROUTE ] array (
+)
+[ info ] [ HEADER ] array (
+  'host' => 'operator.com',
+  'connection' => 'keep-alive',
+  'pragma' => 'no-cache',
+  'cache-control' => 'no-cache',
+  'x-requested-with' => 'XMLHttpRequest',
+  'user-agent' => 'Mozilla/5.0 (iPhone; CPU iPhone OS 10_3_1 like Mac OS X) AppleWebKit/603.1.3 (KHTML, like Gecko) Version/10.0 Mobile/14E304 Safari/602.1 wechatdevtools/1.02.1911180 MicroMessenger/7.0.4 Language/zh_CN webview/',
+  'content-type' => 'json',
+  'accept' => '*/*',
+  'referer' => 'https://servicewechat.com/wxacb61fc94fe0881d/devtools/page-frame.html',
+  'accept-encoding' => 'gzip, deflate',
+  'cookie' => 'PHPSESSID=6632df04838c9d7134ab7640a5bfe8a8;XDEBUG_SESSION=XDEBUG_ECLIPSE',
+)
+[ info ] [ PARAM ] array (
+  '/api/workorder/orderlist' => '',
+  'last_id' => '0',
+  'row' => '10',
+)
+[ info ] [ DB ] INIT mysql
+[ error ] [8]Use of undefined constant Cache - assumed 'Cache'[xdebug://debug-eval(1) : eval()'d code:1]
+[ error ] [64]Cannot use [] for reading[xdebug://debug-eval(1) : eval()'d code:1]
+[ sql ] [ DB ] CONNECT:[ UseTime:0.002623s ] mysql:host=127.0.0.1;port=3306;dbname=operator;charset=utf8
+[ sql ] [ SQL ] SHOW COLUMNS FROM `think_notification` [ RunTime:0.003980s ]
+[ sql ] [ SQL ] SELECT * FROM `think_notification` WHERE  `creater_id` = 2  AND `status` = 0 ORDER BY `id` DESC LIMIT 10 [ RunTime:0.001140s ]
+---------------------------------------------------------------
+
+[2020-03-09T12:41:21+08:00] 127.0.0.1 GET operator.com/api/workorder/orderlist?last_id=0&row=10
+[运行时间：0.104477s] [吞吐率：9.57req/s] [内存消耗：5,474.88kb] [文件加载：83]
+[ info ] [ LANG ] /Applications/MAMP/htdocs/operator/thinkphp/lang/zh-cn.php
+[ info ] [ ROUTE ] array (
+)
+[ info ] [ HEADER ] array (
+  'host' => 'operator.com',
+  'connection' => 'keep-alive',
+  'pragma' => 'no-cache',
+  'cache-control' => 'no-cache',
+  'x-requested-with' => 'XMLHttpRequest',
+  'user-agent' => 'Mozilla/5.0 (iPhone; CPU iPhone OS 10_3_1 like Mac OS X) AppleWebKit/603.1.3 (KHTML, like Gecko) Version/10.0 Mobile/14E304 Safari/602.1 wechatdevtools/1.02.1911180 MicroMessenger/7.0.4 Language/zh_CN webview/',
+  'content-type' => 'json',
+  'accept' => '*/*',
+  'referer' => 'https://servicewechat.com/wxacb61fc94fe0881d/devtools/page-frame.html',
+  'accept-encoding' => 'gzip, deflate',
+  'cookie' => 'PHPSESSID=6632df04838c9d7134ab7640a5bfe8a8;XDEBUG_SESSION=XDEBUG_ECLIPSE',
+)
+[ info ] [ PARAM ] array (
+  '/api/workorder/orderlist' => '',
+  'last_id' => '0',
+  'row' => '10',
+)
+[ info ] [ DB ] INIT mysql
+[ sql ] [ DB ] CONNECT:[ UseTime:0.001030s ] mysql:host=127.0.0.1;port=3306;dbname=operator;charset=utf8
+[ sql ] [ SQL ] SHOW COLUMNS FROM `think_notification` [ RunTime:0.002010s ]
+[ sql ] [ SQL ] SELECT * FROM `think_notification` WHERE  `creater_id` = 2  AND `status` = 0 ORDER BY `id` DESC LIMIT 10 [ RunTime:0.000792s ]
+---------------------------------------------------------------
+
+[2020-03-09T12:41:25+08:00] 127.0.0.1 GET operator.com/api/workorder/itemlist
+[运行时间：0.561449s] [吞吐率：1.78req/s] [内存消耗：5,719.85kb] [文件加载：87]
+[ info ] [ LANG ] /Applications/MAMP/htdocs/operator/thinkphp/lang/zh-cn.php
+[ info ] [ ROUTE ] array (
+)
+[ info ] [ HEADER ] array (
+  'host' => 'operator.com',
+  'connection' => 'keep-alive',
+  'pragma' => 'no-cache',
+  'cache-control' => 'no-cache',
+  'x-requested-with' => 'XMLHttpRequest',
+  'user-agent' => 'Mozilla/5.0 (iPhone; CPU iPhone OS 10_3_1 like Mac OS X) AppleWebKit/603.1.3 (KHTML, like Gecko) Version/10.0 Mobile/14E304 Safari/602.1 wechatdevtools/1.02.1911180 MicroMessenger/7.0.4 Language/zh_CN webview/',
+  'content-type' => 'json',
+  'accept' => '*/*',
+  'referer' => 'https://servicewechat.com/wxacb61fc94fe0881d/devtools/page-frame.html',
+  'accept-encoding' => 'gzip, deflate',
+  'cookie' => 'PHPSESSID=6632df04838c9d7134ab7640a5bfe8a8;XDEBUG_SESSION=XDEBUG_ECLIPSE',
+)
+[ info ] [ PARAM ] array (
+  '/api/workorder/itemlist' => '',
+)
+[ info ] [ DB ] INIT mysql
+[ sql ] [ DB ] CONNECT:[ UseTime:0.001137s ] mysql:host=127.0.0.1;port=3306;dbname=operator;charset=utf8
+[ sql ] [ SQL ] SHOW COLUMNS FROM `think_catagory` [ RunTime:0.002063s ]
+[ sql ] [ SQL ] SELECT `id`,`name` FROM `think_catagory` ORDER BY `sort` ASC [ RunTime:0.004686s ]
+[ sql ] [ SQL ] SHOW COLUMNS FROM `think_item` [ RunTime:0.002083s ]
+[ sql ] [ SQL ] SELECT * FROM `think_item` WHERE  `status` = 1 ORDER BY `id` ASC [ RunTime:0.001530s ]
+[ sql ] [ SQL ] SELECT * FROM `think_catagory` WHERE  `id` = 5 LIMIT 1 [ RunTime:0.001493s ]
+[ sql ] [ SQL ] SELECT * FROM `think_catagory` WHERE  `id` = 1 LIMIT 1 [ RunTime:0.001189s ]
+[ sql ] [ SQL ] SELECT * FROM `think_catagory` WHERE  `id` = 1 LIMIT 1 [ RunTime:0.015763s ]
+[ sql ] [ SQL ] SELECT * FROM `think_catagory` WHERE  `id` = 1 LIMIT 1 [ RunTime:0.001106s ]
+[ sql ] [ SQL ] SELECT * FROM `think_catagory` WHERE  `id` = 2 LIMIT 1 [ RunTime:0.001146s ]
+[ sql ] [ SQL ] SELECT * FROM `think_catagory` WHERE  `id` = 1 LIMIT 1 [ RunTime:0.001743s ]
+[ sql ] [ SQL ] SELECT * FROM `think_catagory` WHERE  `id` = 1 LIMIT 1 [ RunTime:0.002351s ]
+[ sql ] [ SQL ] SELECT * FROM `think_catagory` WHERE  `id` = 1 LIMIT 1 [ RunTime:0.002704s ]
+[ sql ] [ SQL ] SELECT * FROM `think_catagory` WHERE  `id` = 4 LIMIT 1 [ RunTime:0.038465s ]
+[ sql ] [ SQL ] SELECT * FROM `think_catagory` WHERE  `id` = 2 LIMIT 1 [ RunTime:0.000997s ]
+[ sql ] [ SQL ] SELECT * FROM `think_catagory` WHERE  `id` = 3 LIMIT 1 [ RunTime:0.001170s ]
+[ sql ] [ SQL ] SELECT * FROM `think_catagory` WHERE  `id` = 5 LIMIT 1 [ RunTime:0.001455s ]
+[ sql ] [ SQL ] SELECT * FROM `think_catagory` WHERE  `id` = 5 LIMIT 1 [ RunTime:0.001086s ]
+[ sql ] [ SQL ] SELECT * FROM `think_catagory` WHERE  `id` = 5 LIMIT 1 [ RunTime:0.001212s ]
+---------------------------------------------------------------
+
+[2020-03-09T12:41:29+08:00] 127.0.0.1 POST operator.com/api/workorder/createOrder
+[运行时间：0.122772s] [吞吐率：8.15req/s] [内存消耗：5,429.61kb] [文件加载：86]
+[ info ] [ LANG ] /Applications/MAMP/htdocs/operator/thinkphp/lang/zh-cn.php
+[ info ] [ ROUTE ] array (
+)
+[ info ] [ HEADER ] array (
+  'host' => 'operator.com',
+  'connection' => 'keep-alive',
+  'content-length' => '153',
+  'pragma' => 'no-cache',
+  'cache-control' => 'no-cache',
+  'origin' => 'http://127.0.0.1:16392',
+  'x-requested-with' => 'XMLHttpRequest',
+  'user-agent' => 'Mozilla/5.0 (iPhone; CPU iPhone OS 10_3_1 like Mac OS X) AppleWebKit/603.1.3 (KHTML, like Gecko) Version/10.0 Mobile/14E304 Safari/602.1 wechatdevtools/1.02.1911180 MicroMessenger/7.0.4 Language/zh_CN webview/',
+  'content-type' => 'json',
+  'accept' => '*/*',
+  'referer' => 'https://servicewechat.com/wxacb61fc94fe0881d/devtools/page-frame.html',
+  'accept-encoding' => 'gzip, deflate',
+  'cookie' => 'PHPSESSID=6632df04838c9d7134ab7640a5bfe8a8;XDEBUG_SESSION=XDEBUG_ECLIPSE',
+)
+[ info ] [ PARAM ] array (
+  '/api/workorder/createOrder' => '',
+  'order' => 
+  array (
+    52 => 
+    array (
+      'id' => 52,
+      'name' => '附件-B01',
+      'price' => 0,
+      'seriesno' => '2',
+      'number' => 1,
+    ),
+    54 => 
+    array (
+      'id' => 54,
+      'name' => '附件-B02',
+      'price' => 0,
+      'seriesno' => '3',
+      'number' => 1,
+    ),
+  ),
+)
+[ info ] [ DB ] INIT mysql
+[ sql ] [ DB ] CONNECT:[ UseTime:0.000587s ] mysql:host=127.0.0.1;port=3306;dbname=operator;charset=utf8
+[ sql ] [ SQL ] SHOW COLUMNS FROM `think_notification` [ RunTime:0.001637s ]
+[ error ] [10501]SQLSTATE[22003]: Numeric value out of range: 1264 Out of range value for column 'status' at row 1[/Applications/MAMP/htdocs/operator/thinkphp/library/think/db/Connection.php:764]
+---------------------------------------------------------------
+
+[2020-03-09T12:43:07+08:00] 127.0.0.1 POST operator.com/api/workorder/createOrder
+[运行时间：0.108953s] [吞吐率：9.18req/s] [内存消耗：5,419.05kb] [文件加载：82]
+[ info ] [ LANG ] /Applications/MAMP/htdocs/operator/thinkphp/lang/zh-cn.php
+[ info ] [ ROUTE ] array (
+)
+[ info ] [ HEADER ] array (
+  'host' => 'operator.com',
+  'connection' => 'keep-alive',
+  'content-length' => '153',
+  'pragma' => 'no-cache',
+  'cache-control' => 'no-cache',
+  'origin' => 'http://127.0.0.1:16392',
+  'x-requested-with' => 'XMLHttpRequest',
+  'user-agent' => 'Mozilla/5.0 (iPhone; CPU iPhone OS 10_3_1 like Mac OS X) AppleWebKit/603.1.3 (KHTML, like Gecko) Version/10.0 Mobile/14E304 Safari/602.1 wechatdevtools/1.02.1911180 MicroMessenger/7.0.4 Language/zh_CN webview/',
+  'content-type' => 'json',
+  'accept' => '*/*',
+  'referer' => 'https://servicewechat.com/wxacb61fc94fe0881d/devtools/page-frame.html',
+  'accept-encoding' => 'gzip, deflate',
+  'cookie' => 'PHPSESSID=6632df04838c9d7134ab7640a5bfe8a8;XDEBUG_SESSION=XDEBUG_ECLIPSE',
+)
+[ info ] [ PARAM ] array (
+  '/api/workorder/createOrder' => '',
+  'order' => 
+  array (
+    52 => 
+    array (
+      'id' => 52,
+      'name' => '附件-B01',
+      'price' => 0,
+      'seriesno' => '2',
+      'number' => 1,
+    ),
+    54 => 
+    array (
+      'id' => 54,
+      'name' => '附件-B02',
+      'price' => 0,
+      'seriesno' => '3',
+      'number' => 1,
+    ),
+  ),
+)
+[ info ] [ DB ] INIT mysql
+[ sql ] [ DB ] CONNECT:[ UseTime:0.002342s ] mysql:host=127.0.0.1;port=3306;dbname=operator;charset=utf8
+[ sql ] [ SQL ] SHOW COLUMNS FROM `think_notification` [ RunTime:0.001228s ]
+[ sql ] [ SQL ] INSERT INTO `think_notification` (`org_id` , `creater_id` , `status` , `create_time` , `update_time`) VALUES (2 , 2 , -1 , 1583728987 , 1583728987) [ RunTime:0.001726s ]
+[ sql ] [ SQL ] UPDATE `think_notification`  SET `code` = 'A64'  WHERE  `id` = 64 [ RunTime:0.000940s ]
+[ sql ] [ SQL ] SHOW COLUMNS FROM `think_workorder` [ RunTime:0.001074s ]
+[ sql ] [ SQL ] INSERT INTO `think_workorder` (`notification_id` , `item_id` , `org_id` , `status` , `create_time` , `update_time`) VALUES (64 , 52 , 2 , -1 , 1583728987 , 1583728987) [ RunTime:0.000720s ]
+[ sql ] [ SQL ] INSERT INTO `think_workorder` (`notification_id` , `item_id` , `org_id` , `status` , `create_time` , `update_time`) VALUES (64 , 54 , 2 , -1 , 1583728987 , 1583728987) [ RunTime:0.000760s ]
+---------------------------------------------------------------
+
+[2020-03-09T12:43:08+08:00] 127.0.0.1 GET operator.com/api/workorder/query?id=64
+[运行时间：0.421070s] [吞吐率：2.37req/s] [内存消耗：5,795.97kb] [文件加载：88]
+[ info ] [ LANG ] /Applications/MAMP/htdocs/operator/thinkphp/lang/zh-cn.php
+[ info ] [ ROUTE ] array (
+)
+[ info ] [ HEADER ] array (
+  'host' => 'operator.com',
+  'connection' => 'keep-alive',
+  'pragma' => 'no-cache',
+  'cache-control' => 'no-cache',
+  'x-requested-with' => 'XMLHttpRequest',
+  'user-agent' => 'Mozilla/5.0 (iPhone; CPU iPhone OS 10_3_1 like Mac OS X) AppleWebKit/603.1.3 (KHTML, like Gecko) Version/10.0 Mobile/14E304 Safari/602.1 wechatdevtools/1.02.1911180 MicroMessenger/7.0.4 Language/zh_CN webview/',
+  'content-type' => 'json',
+  'accept' => '*/*',
+  'referer' => 'https://servicewechat.com/wxacb61fc94fe0881d/devtools/page-frame.html',
+  'accept-encoding' => 'gzip, deflate',
+  'cookie' => 'PHPSESSID=6632df04838c9d7134ab7640a5bfe8a8;XDEBUG_SESSION=XDEBUG_ECLIPSE',
+)
+[ info ] [ PARAM ] array (
+  '/api/workorder/query' => '',
+  'id' => '64',
+)
+[ info ] [ DB ] INIT mysql
+[ sql ] [ DB ] CONNECT:[ UseTime:0.000556s ] mysql:host=127.0.0.1;port=3306;dbname=operator;charset=utf8
+[ sql ] [ SQL ] SHOW COLUMNS FROM `think_workorder` [ RunTime:0.001123s ]
+[ sql ] [ SQL ] SELECT * FROM `think_workorder` WHERE  `notification_id` = 64 [ RunTime:0.001300s ]
+[ sql ] [ SQL ] SHOW COLUMNS FROM `think_item` [ RunTime:0.002164s ]
+[ sql ] [ SQL ] SELECT * FROM `think_item` WHERE  `id` = 52 LIMIT 1 [ RunTime:0.000901s ]
+[ sql ] [ SQL ] SHOW COLUMNS FROM `think_catagory` [ RunTime:0.001128s ]
+[ sql ] [ SQL ] SELECT * FROM `think_catagory` WHERE  `id` = 1 LIMIT 1 [ RunTime:0.000811s ]
+[ sql ] [ SQL ] SELECT * FROM `think_item` WHERE  `id` = 54 LIMIT 1 [ RunTime:0.000792s ]
+[ sql ] [ SQL ] SELECT * FROM `think_catagory` WHERE  `id` = 1 LIMIT 1 [ RunTime:0.000714s ]
+---------------------------------------------------------------
+
+[2020-03-09T12:43:12+08:00] 127.0.0.1 POST operator.com/api/workorder/confirmorder
+[运行时间：0.153024s] [吞吐率：6.53req/s] [内存消耗：5,556.89kb] [文件加载：85]
+[ info ] [ LANG ] /Applications/MAMP/htdocs/operator/thinkphp/lang/zh-cn.php
+[ info ] [ ROUTE ] array (
+)
+[ info ] [ HEADER ] array (
+  'host' => 'operator.com',
+  'connection' => 'keep-alive',
+  'content-length' => '24',
+  'pragma' => 'no-cache',
+  'cache-control' => 'no-cache',
+  'origin' => 'http://127.0.0.1:16392',
+  'x-requested-with' => 'XMLHttpRequest',
+  'user-agent' => 'Mozilla/5.0 (iPhone; CPU iPhone OS 10_3_1 like Mac OS X) AppleWebKit/603.1.3 (KHTML, like Gecko) Version/10.0 Mobile/14E304 Safari/602.1 wechatdevtools/1.02.1911180 MicroMessenger/7.0.4 Language/zh_CN webview/',
+  'content-type' => 'json',
+  'accept' => '*/*',
+  'referer' => 'https://servicewechat.com/wxacb61fc94fe0881d/devtools/page-frame.html',
+  'accept-encoding' => 'gzip, deflate',
+  'cookie' => 'PHPSESSID=6632df04838c9d7134ab7640a5bfe8a8;XDEBUG_SESSION=XDEBUG_ECLIPSE',
+)
+[ info ] [ PARAM ] array (
+  '/api/workorder/confirmorder' => '',
+  'id' => '64',
+  'comment' => '',
+)
+[ info ] [ DB ] INIT mysql
+[ sql ] [ DB ] CONNECT:[ UseTime:0.000590s ] mysql:host=127.0.0.1;port=3306;dbname=operator;charset=utf8
+[ sql ] [ SQL ] SHOW COLUMNS FROM `think_notification` [ RunTime:0.005907s ]
+[ sql ] [ SQL ] UPDATE `think_notification`  SET `status` = 0  WHERE  `id` = 64 [ RunTime:0.001922s ]
+[ sql ] [ SQL ] SHOW COLUMNS FROM `think_workorder` [ RunTime:0.000976s ]
+[ sql ] [ SQL ] SELECT * FROM `think_workorder` WHERE  `notification_id` = 64 [ RunTime:0.000925s ]
+[ sql ] [ SQL ] UPDATE `think_workorder`  SET `status` = 0 , `memo` = '' , `update_time` = 1583728992  WHERE  `id` = 58 [ RunTime:0.001650s ]
+[ sql ] [ SQL ] UPDATE `think_workorder`  SET `status` = 0 , `memo` = '' , `update_time` = 1583728992  WHERE  `id` = 59 [ RunTime:0.000855s ]
+---------------------------------------------------------------
+
+[2020-03-09T12:43:13+08:00] 127.0.0.1 GET operator.com/api/workorder/query?id=64
+[运行时间：0.434956s] [吞吐率：2.30req/s] [内存消耗：5,795.94kb] [文件加载：88]
+[ info ] [ LANG ] /Applications/MAMP/htdocs/operator/thinkphp/lang/zh-cn.php
+[ info ] [ ROUTE ] array (
+)
+[ info ] [ HEADER ] array (
+  'host' => 'operator.com',
+  'connection' => 'keep-alive',
+  'pragma' => 'no-cache',
+  'cache-control' => 'no-cache',
+  'x-requested-with' => 'XMLHttpRequest',
+  'user-agent' => 'Mozilla/5.0 (iPhone; CPU iPhone OS 10_3_1 like Mac OS X) AppleWebKit/603.1.3 (KHTML, like Gecko) Version/10.0 Mobile/14E304 Safari/602.1 wechatdevtools/1.02.1911180 MicroMessenger/7.0.4 Language/zh_CN webview/',
+  'content-type' => 'json',
+  'accept' => '*/*',
+  'referer' => 'https://servicewechat.com/wxacb61fc94fe0881d/devtools/page-frame.html',
+  'accept-encoding' => 'gzip, deflate',
+  'cookie' => 'PHPSESSID=6632df04838c9d7134ab7640a5bfe8a8;XDEBUG_SESSION=XDEBUG_ECLIPSE',
+)
+[ info ] [ PARAM ] array (
+  '/api/workorder/query' => '',
+  'id' => '64',
+)
+[ info ] [ DB ] INIT mysql
+[ sql ] [ DB ] CONNECT:[ UseTime:0.001059s ] mysql:host=127.0.0.1;port=3306;dbname=operator;charset=utf8
+[ sql ] [ SQL ] SHOW COLUMNS FROM `think_workorder` [ RunTime:0.001641s ]
+[ sql ] [ SQL ] SELECT * FROM `think_workorder` WHERE  `notification_id` = 64 [ RunTime:0.001355s ]
+[ sql ] [ SQL ] SHOW COLUMNS FROM `think_item` [ RunTime:0.001646s ]
+[ sql ] [ SQL ] SELECT * FROM `think_item` WHERE  `id` = 52 LIMIT 1 [ RunTime:0.026251s ]
+[ sql ] [ SQL ] SHOW COLUMNS FROM `think_catagory` [ RunTime:0.015396s ]
+[ sql ] [ SQL ] SELECT * FROM `think_catagory` WHERE  `id` = 1 LIMIT 1 [ RunTime:0.000982s ]
+[ sql ] [ SQL ] SELECT * FROM `think_item` WHERE  `id` = 54 LIMIT 1 [ RunTime:0.001216s ]
+[ sql ] [ SQL ] SELECT * FROM `think_catagory` WHERE  `id` = 1 LIMIT 1 [ RunTime:0.001060s ]
+---------------------------------------------------------------
+
+[2020-03-09T12:43:17+08:00] 127.0.0.1 GET operator.com/api/workorder/orderlist?last_id=0&row=10
+[运行时间：0.122136s] [吞吐率：8.19req/s] [内存消耗：5,651.16kb] [文件加载：88]
+[ info ] [ LANG ] /Applications/MAMP/htdocs/operator/thinkphp/lang/zh-cn.php
+[ info ] [ ROUTE ] array (
+)
+[ info ] [ HEADER ] array (
+  'host' => 'operator.com',
+  'connection' => 'keep-alive',
+  'pragma' => 'no-cache',
+  'cache-control' => 'no-cache',
+  'x-requested-with' => 'XMLHttpRequest',
+  'user-agent' => 'Mozilla/5.0 (iPhone; CPU iPhone OS 10_3_1 like Mac OS X) AppleWebKit/603.1.3 (KHTML, like Gecko) Version/10.0 Mobile/14E304 Safari/602.1 wechatdevtools/1.02.1911180 MicroMessenger/7.0.4 Language/zh_CN webview/',
+  'content-type' => 'json',
+  'accept' => '*/*',
+  'referer' => 'https://servicewechat.com/wxacb61fc94fe0881d/devtools/page-frame.html',
+  'accept-encoding' => 'gzip, deflate',
+  'cookie' => 'PHPSESSID=6632df04838c9d7134ab7640a5bfe8a8;XDEBUG_SESSION=XDEBUG_ECLIPSE',
+)
+[ info ] [ PARAM ] array (
+  '/api/workorder/orderlist' => '',
+  'last_id' => '0',
+  'row' => '10',
+)
+[ info ] [ DB ] INIT mysql
+[ sql ] [ DB ] CONNECT:[ UseTime:0.000640s ] mysql:host=127.0.0.1;port=3306;dbname=operator;charset=utf8
+[ sql ] [ SQL ] SHOW COLUMNS FROM `think_notification` [ RunTime:0.001431s ]
+[ sql ] [ SQL ] SELECT * FROM `think_notification` WHERE  `creater_id` = 2  AND `status` = 0 ORDER BY `id` DESC LIMIT 10 [ RunTime:0.000898s ]
+[ sql ] [ SQL ] SHOW COLUMNS FROM `think_workorder` [ RunTime:0.001102s ]
+[ sql ] [ SQL ] SELECT `id` FROM `think_workorder` WHERE  `notification_id` = 64 LIMIT 1 [ RunTime:0.000680s ]
+[ error ] [1]Class 'app\api\controller\IncubModel' not found[/Applications/MAMP/htdocs/operator/application/api/controller/Workorder.php:123]
+---------------------------------------------------------------
+
+[2020-03-09T12:44:12+08:00] 127.0.0.1 GET operator.com/api/workorder/orderlist?last_id=0&row=10
+[运行时间：0.200933s] [吞吐率：4.98req/s] [内存消耗：5,635.95kb] [文件加载：89]
+[ info ] [ LANG ] /Applications/MAMP/htdocs/operator/thinkphp/lang/zh-cn.php
+[ info ] [ ROUTE ] array (
+)
+[ info ] [ HEADER ] array (
+  'host' => 'operator.com',
+  'connection' => 'keep-alive',
+  'pragma' => 'no-cache',
+  'cache-control' => 'no-cache',
+  'x-requested-with' => 'XMLHttpRequest',
+  'user-agent' => 'Mozilla/5.0 (iPhone; CPU iPhone OS 10_3_1 like Mac OS X) AppleWebKit/603.1.3 (KHTML, like Gecko) Version/10.0 Mobile/14E304 Safari/602.1 wechatdevtools/1.02.1911180 MicroMessenger/7.0.4 Language/zh_CN webview/',
+  'content-type' => 'json',
+  'accept' => '*/*',
+  'referer' => 'https://servicewechat.com/wxacb61fc94fe0881d/devtools/page-frame.html',
+  'accept-encoding' => 'gzip, deflate',
+  'cookie' => 'PHPSESSID=6632df04838c9d7134ab7640a5bfe8a8;XDEBUG_SESSION=XDEBUG_ECLIPSE',
+)
+[ info ] [ PARAM ] array (
+  '/api/workorder/orderlist' => '',
+  'last_id' => '0',
+  'row' => '10',
+)
+[ info ] [ DB ] INIT mysql
+[ sql ] [ DB ] CONNECT:[ UseTime:0.000650s ] mysql:host=127.0.0.1;port=3306;dbname=operator;charset=utf8
+[ sql ] [ SQL ] SHOW COLUMNS FROM `think_notification` [ RunTime:0.003101s ]
+[ sql ] [ SQL ] SELECT * FROM `think_notification` WHERE  `creater_id` = 2  AND `status` = 0 ORDER BY `id` DESC LIMIT 10 [ RunTime:0.001180s ]
+[ sql ] [ SQL ] SHOW COLUMNS FROM `think_workorder` [ RunTime:0.001149s ]
+[ sql ] [ SQL ] SELECT `id` FROM `think_workorder` WHERE  `notification_id` = 64 LIMIT 1 [ RunTime:0.000763s ]
+[ error ] [10501]SQLSTATE[42S22]: Column not found: 1054 Unknown column 'code' in 'field list'[/Applications/MAMP/htdocs/operator/thinkphp/library/think/db/Connection.php:687]
+---------------------------------------------------------------
+
+[2020-03-09T12:45:13+08:00] 127.0.0.1 GET operator.com/api/workorder/orderlist?last_id=0&row=10
+[运行时间：0.145339s] [吞吐率：6.88req/s] [内存消耗：5,544.86kb] [文件加载：84]
+[ info ] [ LANG ] /Applications/MAMP/htdocs/operator/thinkphp/lang/zh-cn.php
+[ info ] [ ROUTE ] array (
+)
+[ info ] [ HEADER ] array (
+  'host' => 'operator.com',
+  'connection' => 'keep-alive',
+  'pragma' => 'no-cache',
+  'cache-control' => 'no-cache',
+  'x-requested-with' => 'XMLHttpRequest',
+  'user-agent' => 'Mozilla/5.0 (iPhone; CPU iPhone OS 10_3_1 like Mac OS X) AppleWebKit/603.1.3 (KHTML, like Gecko) Version/10.0 Mobile/14E304 Safari/602.1 wechatdevtools/1.02.1911180 MicroMessenger/7.0.4 Language/zh_CN webview/',
+  'content-type' => 'json',
+  'accept' => '*/*',
+  'referer' => 'https://servicewechat.com/wxacb61fc94fe0881d/devtools/page-frame.html',
+  'accept-encoding' => 'gzip, deflate',
+  'cookie' => 'PHPSESSID=6632df04838c9d7134ab7640a5bfe8a8;XDEBUG_SESSION=XDEBUG_ECLIPSE',
+)
+[ info ] [ PARAM ] array (
+  '/api/workorder/orderlist' => '',
+  'last_id' => '0',
+  'row' => '10',
+)
+[ info ] [ DB ] INIT mysql
+[ sql ] [ DB ] CONNECT:[ UseTime:0.000584s ] mysql:host=127.0.0.1;port=3306;dbname=operator;charset=utf8
+[ sql ] [ SQL ] SHOW COLUMNS FROM `think_notification` [ RunTime:0.001056s ]
+[ sql ] [ SQL ] SELECT * FROM `think_notification` WHERE  `creater_id` = 2  AND `status` = 0 ORDER BY `id` DESC LIMIT 10 [ RunTime:0.000787s ]
+[ sql ] [ SQL ] SHOW COLUMNS FROM `think_workorder` [ RunTime:0.001097s ]
+[ sql ] [ SQL ] SELECT `id` FROM `think_workorder` WHERE  `notification_id` = 64 LIMIT 1 [ RunTime:0.000841s ]
+[ sql ] [ SQL ] SELECT `item_id` FROM `think_workorder` WHERE  `id` = 58 LIMIT 1 [ RunTime:0.000689s ]

@@ -1,0 +1,218 @@
+---------------------------------------------------------------
+
+[2020-03-23T22:13:30+08:00] 127.0.0.1 GET operator.com/api/user/setting
+[运行时间：1.552855s] [吞吐率：0.64req/s] [内存消耗：3,199.28kb] [文件加载：69]
+[ info ] [ LANG ] /Applications/MAMP/htdocs/operator/thinkphp/lang/zh-cn.php
+[ info ] [ ROUTE ] array (
+)
+[ info ] [ HEADER ] array (
+  'host' => 'operator.com',
+  'connection' => 'keep-alive',
+  'pragma' => 'no-cache',
+  'cache-control' => 'no-cache',
+  'x-requested-with' => 'XMLHttpRequest',
+  'user-agent' => 'Mozilla/5.0 (iPhone; CPU iPhone OS 11_0 like Mac OS X) AppleWebKit/604.1.38 (KHTML, like Gecko) Version/11.0 Mobile/15A372 Safari/604.1 wechatdevtools/1.02.1911180 MicroMessenger/7.0.4 Language/zh_CN webview/',
+  'content-type' => 'json',
+  'accept' => '*/*',
+  'referer' => 'https://servicewechat.com/wxacb61fc94fe0881d/devtools/page-frame.html',
+  'accept-encoding' => 'gzip, deflate',
+  'cookie' => 'PHPSESSID=2cbaf10eeb1b53bd4e96f598f6db694f;XDEBUG_SESSION=XDEBUG_ECLIPSE',
+)
+[ info ] [ PARAM ] array (
+  '/api/user/setting' => '',
+)
+---------------------------------------------------------------
+
+[2020-03-23T22:14:18+08:00] 127.0.0.1 GET operator.com/api/workorder/querylist?type=1
+[运行时间：0.256097s] [吞吐率：3.90req/s] [内存消耗：5,904.30kb] [文件加载：89]
+[ info ] [ LANG ] /Applications/MAMP/htdocs/operator/thinkphp/lang/zh-cn.php
+[ info ] [ ROUTE ] array (
+)
+[ info ] [ HEADER ] array (
+  'host' => 'operator.com',
+  'connection' => 'keep-alive',
+  'pragma' => 'no-cache',
+  'cache-control' => 'no-cache',
+  'x-requested-with' => 'XMLHttpRequest',
+  'user-agent' => 'Mozilla/5.0 (iPhone; CPU iPhone OS 11_0 like Mac OS X) AppleWebKit/604.1.38 (KHTML, like Gecko) Version/11.0 Mobile/15A372 Safari/604.1 wechatdevtools/1.02.1911180 MicroMessenger/7.0.4 Language/zh_CN webview/',
+  'content-type' => 'json',
+  'accept' => '*/*',
+  'referer' => 'https://servicewechat.com/wxacb61fc94fe0881d/devtools/page-frame.html',
+  'accept-encoding' => 'gzip, deflate',
+  'cookie' => 'PHPSESSID=2cbaf10eeb1b53bd4e96f598f6db694f;XDEBUG_SESSION=XDEBUG_ECLIPSE',
+)
+[ info ] [ PARAM ] array (
+  '/api/workorder/querylist' => '',
+  'type' => '1',
+)
+[ info ] [ DB ] INIT mysql
+[ sql ] [ DB ] CONNECT:[ UseTime:0.003632s ] mysql:host=127.0.0.1;port=3306;dbname=operator;charset=utf8
+[ sql ] [ SQL ] SHOW COLUMNS FROM `think_workorder` [ RunTime:0.017529s ]
+[ sql ] [ SQL ] SELECT * FROM `think_workorder` WHERE  `status` = 1 ORDER BY `create_time` DESC [ RunTime:0.003084s ]
+[ sql ] [ SQL ] SHOW COLUMNS FROM `think_item` [ RunTime:0.003013s ]
+[ sql ] [ SQL ] SELECT * FROM `think_item` WHERE  `id` = 64 LIMIT 1 [ RunTime:0.001062s ]
+[ sql ] [ SQL ] SHOW COLUMNS FROM `think_catagory` [ RunTime:0.003501s ]
+[ sql ] [ SQL ] SELECT * FROM `think_catagory` WHERE  `id` = 5 LIMIT 1 [ RunTime:0.000733s ]
+[ sql ] [ SQL ] SHOW COLUMNS FROM `think_notification` [ RunTime:0.002059s ]
+[ sql ] [ SQL ] SELECT * FROM `think_notification` WHERE  `id` = 10 LIMIT 1 [ RunTime:0.000640s ]
+---------------------------------------------------------------
+
+[2020-03-23T22:19:10+08:00] 127.0.0.1 GET operator.com/api/user/setting
+[运行时间：0.107089s] [吞吐率：9.34req/s] [内存消耗：3,199.29kb] [文件加载：69]
+[ info ] [ LANG ] /Applications/MAMP/htdocs/operator/thinkphp/lang/zh-cn.php
+[ info ] [ ROUTE ] array (
+)
+[ info ] [ HEADER ] array (
+  'host' => 'operator.com',
+  'connection' => 'keep-alive',
+  'pragma' => 'no-cache',
+  'cache-control' => 'no-cache',
+  'x-requested-with' => 'XMLHttpRequest',
+  'user-agent' => 'Mozilla/5.0 (iPhone; CPU iPhone OS 11_0 like Mac OS X) AppleWebKit/604.1.38 (KHTML, like Gecko) Version/11.0 Mobile/15A372 Safari/604.1 wechatdevtools/1.02.1911180 MicroMessenger/7.0.4 Language/zh_CN webview/',
+  'content-type' => 'json',
+  'accept' => '*/*',
+  'referer' => 'https://servicewechat.com/wxacb61fc94fe0881d/devtools/page-frame.html',
+  'accept-encoding' => 'gzip, deflate',
+  'cookie' => 'PHPSESSID=2cbaf10eeb1b53bd4e96f598f6db694f;XDEBUG_SESSION=XDEBUG_ECLIPSE',
+)
+[ info ] [ PARAM ] array (
+  '/api/user/setting' => '',
+)
+---------------------------------------------------------------
+
+[2020-03-23T22:19:38+08:00] 127.0.0.1 GET operator.com/api/user/setting
+[运行时间：0.104461s] [吞吐率：9.57req/s] [内存消耗：3,199.29kb] [文件加载：69]
+[ info ] [ LANG ] /Applications/MAMP/htdocs/operator/thinkphp/lang/zh-cn.php
+[ info ] [ ROUTE ] array (
+)
+[ info ] [ HEADER ] array (
+  'host' => 'operator.com',
+  'connection' => 'keep-alive',
+  'pragma' => 'no-cache',
+  'cache-control' => 'no-cache',
+  'x-requested-with' => 'XMLHttpRequest',
+  'user-agent' => 'Mozilla/5.0 (iPhone; CPU iPhone OS 11_0 like Mac OS X) AppleWebKit/604.1.38 (KHTML, like Gecko) Version/11.0 Mobile/15A372 Safari/604.1 wechatdevtools/1.02.1911180 MicroMessenger/7.0.4 Language/zh_CN webview/',
+  'content-type' => 'json',
+  'accept' => '*/*',
+  'referer' => 'https://servicewechat.com/wxacb61fc94fe0881d/devtools/page-frame.html',
+  'accept-encoding' => 'gzip, deflate',
+  'cookie' => 'PHPSESSID=2cbaf10eeb1b53bd4e96f598f6db694f;XDEBUG_SESSION=XDEBUG_ECLIPSE',
+)
+[ info ] [ PARAM ] array (
+  '/api/user/setting' => '',
+)
+---------------------------------------------------------------
+
+[2020-03-23T22:20:08+08:00] 127.0.0.1 GET operator.com/api/user/setting
+[运行时间：0.118618s] [吞吐率：8.43req/s] [内存消耗：3,199.29kb] [文件加载：69]
+[ info ] [ LANG ] /Applications/MAMP/htdocs/operator/thinkphp/lang/zh-cn.php
+[ info ] [ ROUTE ] array (
+)
+[ info ] [ HEADER ] array (
+  'host' => 'operator.com',
+  'connection' => 'keep-alive',
+  'pragma' => 'no-cache',
+  'cache-control' => 'no-cache',
+  'x-requested-with' => 'XMLHttpRequest',
+  'user-agent' => 'Mozilla/5.0 (iPhone; CPU iPhone OS 11_0 like Mac OS X) AppleWebKit/604.1.38 (KHTML, like Gecko) Version/11.0 Mobile/15A372 Safari/604.1 wechatdevtools/1.02.1911180 MicroMessenger/7.0.4 Language/zh_CN webview/',
+  'content-type' => 'json',
+  'accept' => '*/*',
+  'referer' => 'https://servicewechat.com/wxacb61fc94fe0881d/devtools/page-frame.html',
+  'accept-encoding' => 'gzip, deflate',
+  'cookie' => 'PHPSESSID=2cbaf10eeb1b53bd4e96f598f6db694f;XDEBUG_SESSION=XDEBUG_ECLIPSE',
+)
+[ info ] [ PARAM ] array (
+  '/api/user/setting' => '',
+)
+---------------------------------------------------------------
+
+[2020-03-23T22:20:12+08:00] 127.0.0.1 GET operator.com/api/user/setting
+[运行时间：0.089592s] [吞吐率：11.16req/s] [内存消耗：3,199.22kb] [文件加载：69]
+[ info ] [ LANG ] /Applications/MAMP/htdocs/operator/thinkphp/lang/zh-cn.php
+[ info ] [ ROUTE ] array (
+)
+[ info ] [ HEADER ] array (
+  'host' => 'operator.com',
+  'connection' => 'keep-alive',
+  'pragma' => 'no-cache',
+  'cache-control' => 'no-cache',
+  'x-requested-with' => 'XMLHttpRequest',
+  'user-agent' => 'Mozilla/5.0 (iPhone; CPU iPhone OS 11_0 like Mac OS X) AppleWebKit/604.1.38 (KHTML, like Gecko) Version/11.0 Mobile/15A372 Safari/604.1 wechatdevtools/1.02.1911180 MicroMessenger/7.0.4 Language/zh_CN webview/',
+  'content-type' => 'json',
+  'accept' => '*/*',
+  'referer' => 'https://servicewechat.com/wxacb61fc94fe0881d/devtools/page-frame.html',
+  'accept-encoding' => 'gzip, deflate',
+  'cookie' => 'PHPSESSID=2cbaf10eeb1b53bd4e96f598f6db694f;XDEBUG_SESSION=XDEBUG_ECLIPSE',
+)
+[ info ] [ PARAM ] array (
+  '/api/user/setting' => '',
+)
+---------------------------------------------------------------
+
+[2020-03-23T22:24:25+08:00] 127.0.0.1 GET operator.com/api/user/setting
+[运行时间：0.106703s] [吞吐率：9.37req/s] [内存消耗：3,199.29kb] [文件加载：69]
+[ info ] [ LANG ] /Applications/MAMP/htdocs/operator/thinkphp/lang/zh-cn.php
+[ info ] [ ROUTE ] array (
+)
+[ info ] [ HEADER ] array (
+  'host' => 'operator.com',
+  'connection' => 'keep-alive',
+  'pragma' => 'no-cache',
+  'cache-control' => 'no-cache',
+  'x-requested-with' => 'XMLHttpRequest',
+  'user-agent' => 'Mozilla/5.0 (iPhone; CPU iPhone OS 11_0 like Mac OS X) AppleWebKit/604.1.38 (KHTML, like Gecko) Version/11.0 Mobile/15A372 Safari/604.1 wechatdevtools/1.02.1911180 MicroMessenger/7.0.4 Language/zh_CN webview/',
+  'content-type' => 'json',
+  'accept' => '*/*',
+  'referer' => 'https://servicewechat.com/wxacb61fc94fe0881d/devtools/page-frame.html',
+  'accept-encoding' => 'gzip, deflate',
+  'cookie' => 'PHPSESSID=2cbaf10eeb1b53bd4e96f598f6db694f;XDEBUG_SESSION=XDEBUG_ECLIPSE',
+)
+[ info ] [ PARAM ] array (
+  '/api/user/setting' => '',
+)
+---------------------------------------------------------------
+
+[2020-03-23T22:24:59+08:00] 127.0.0.1 GET operator.com/api/user/setting
+[运行时间：0.096626s] [吞吐率：10.35req/s] [内存消耗：3,199.29kb] [文件加载：69]
+[ info ] [ LANG ] /Applications/MAMP/htdocs/operator/thinkphp/lang/zh-cn.php
+[ info ] [ ROUTE ] array (
+)
+[ info ] [ HEADER ] array (
+  'host' => 'operator.com',
+  'connection' => 'keep-alive',
+  'pragma' => 'no-cache',
+  'cache-control' => 'no-cache',
+  'x-requested-with' => 'XMLHttpRequest',
+  'user-agent' => 'Mozilla/5.0 (iPhone; CPU iPhone OS 11_0 like Mac OS X) AppleWebKit/604.1.38 (KHTML, like Gecko) Version/11.0 Mobile/15A372 Safari/604.1 wechatdevtools/1.02.1911180 MicroMessenger/7.0.4 Language/zh_CN webview/',
+  'content-type' => 'json',
+  'accept' => '*/*',
+  'referer' => 'https://servicewechat.com/wxacb61fc94fe0881d/devtools/page-frame.html',
+  'accept-encoding' => 'gzip, deflate',
+  'cookie' => 'PHPSESSID=2cbaf10eeb1b53bd4e96f598f6db694f;XDEBUG_SESSION=XDEBUG_ECLIPSE',
+)
+[ info ] [ PARAM ] array (
+  '/api/user/setting' => '',
+)
+---------------------------------------------------------------
+
+[2020-03-23T22:25:25+08:00] 127.0.0.1 GET operator.com/api/user/setting
+[运行时间：0.103270s] [吞吐率：9.68req/s] [内存消耗：3,199.29kb] [文件加载：69]
+[ info ] [ LANG ] /Applications/MAMP/htdocs/operator/thinkphp/lang/zh-cn.php
+[ info ] [ ROUTE ] array (
+)
+[ info ] [ HEADER ] array (
+  'host' => 'operator.com',
+  'connection' => 'keep-alive',
+  'pragma' => 'no-cache',
+  'cache-control' => 'no-cache',
+  'x-requested-with' => 'XMLHttpRequest',
+  'user-agent' => 'Mozilla/5.0 (iPhone; CPU iPhone OS 11_0 like Mac OS X) AppleWebKit/604.1.38 (KHTML, like Gecko) Version/11.0 Mobile/15A372 Safari/604.1 wechatdevtools/1.02.1911180 MicroMessenger/7.0.4 Language/zh_CN webview/',
+  'content-type' => 'json',
+  'accept' => '*/*',
+  'referer' => 'https://servicewechat.com/wxacb61fc94fe0881d/devtools/page-frame.html',
+  'accept-encoding' => 'gzip, deflate',
+  'cookie' => 'PHPSESSID=2cbaf10eeb1b53bd4e96f598f6db694f;XDEBUG_SESSION=XDEBUG_ECLIPSE',
+)
+[ info ] [ PARAM ] array (
+  '/api/user/setting' => '',
+)

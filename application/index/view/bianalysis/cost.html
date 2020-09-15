@@ -1,0 +1,36 @@
+{extend name="public:layer_layout"/}
+
+{block name="main"}
+<fieldset class="layui-elem-field layui-field-title" style="margin-top: 50px;">
+    <legend>月成本趋势</legend>
+</fieldset>
+<div id="container" style="height: 350px; margin: 0"></div>
+{/block}
+
+{block name="javascript"}
+
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/echarts/dist/echarts.min.js"></script>
+<script type="text/javascript">
+    var dom = document.getElementById("container");
+    var myChart = echarts.init(dom);
+
+    option = null;
+    option = {
+        xAxis: {
+            type: 'category',
+            data: ['2020-01', '2020-02', '2020-03', '2020-04', '2020-05', '2020-06', '2020-07', '2020-08']
+        },
+        yAxis: {
+            type: 'value'
+        },
+        series: [{
+            data: [563,820, 932, 901, 934, 1290, 1330, 1320],
+            type: 'line'
+        }]
+    };
+    ;
+    if (option && typeof option === "object") {
+        myChart.setOption(option, true);
+    }
+</script>
+{/block}

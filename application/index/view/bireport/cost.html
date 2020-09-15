@@ -1,0 +1,104 @@
+{extend name="public:layer_layout"/}
+
+{block name="main"}
+<fieldset class="layui-elem-field layui-field-title" style="margin-top: 50px;">
+    <legend>月成本趋势</legend>
+</fieldset>
+<div id="container" style="height: 350px; margin: 0"></div>
+<table class="layui-hide" id="dataTable" lay-filter="dataTable"></table>
+<script type="text/html" id="toolbar">
+    <div class="dataToolbar">
+        <div class="layui-inline">
+            <input class="layui-input" name="keywords" id="keywords" value="{:input('keywords')}" autocomplete="on" placeholder="请输入设备ID">
+        </div>
+        <button class="layui-btn search-btn" data-type="reload"><i class="iconfont">&#xe679;</i> 查询</button>
+
+    </div>
+</script>
+{/block}
+
+{block name="javascript"}
+
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/echarts/dist/echarts.min.js"></script>
+<script type="text/javascript">
+    var dom = document.getElementById("container");
+    var myChart = echarts.init(dom);
+
+    option = null;
+    option = {
+        xAxis: {
+            type: 'category',
+            data: ['2020-01', '2020-02', '2020-03', '2020-04', '2020-05', '2020-06', '2020-07', '2020-08']
+        },
+        yAxis: {
+            type: 'value'
+        },
+        series: [{
+            data: [563,820, 932, 901, 934, 1290, 1330, 1320],
+            type: 'line'
+        }]
+    };
+    ;
+    if (option && typeof option === "object") {
+        myChart.setOption(option, true);
+    }
+</script>
+
+
+<script>
+    layui.use(['jquery', 'layer', 'form', 'table'], function () {
+        var $ = layui.$,
+            layer = layui.layer,
+            form = layui.form,
+            table = layui.table;
+
+        // 渲染数据表格
+        table.render({
+            elem : '#dataTable'
+            ,url : '{:url("get_cost")}'
+            ,cellMinWidth: 80
+            ,page: {
+                prev: '上一页',
+                next: '下一页',
+                layout: ['prev', 'page', 'next', 'skip', 'count', 'limit']
+            }
+            // ,toolbar: 'default'  // 开启顶部工具栏（默认模板）
+            ,toolbar: '#toolbar' // 指定顶部工具栏模板
+            // ,even: true  // 隔行背景
+            ,title: '收入信息表'  // 表格标题，用户导出数据文件名
+            ,text: {  // 指定无数据或数据异常时的提示文本
+                none: '暂无相关数据' //默认：无数据。注：该属性为 layui 2.2.5 开始新增
+            }
+            ,id: 'dataTable'
+            ,cols: [[  // 表格列标题及数据
+                {field: 'id', width: 200, title: 'ID', sort: true, align: 'center'}
+                ,{field: 'date', width: 200, title: '统计月份', sort: true,  align: 'center'}
+                ,{field: 'cost', width: 200, title: '成本', sort: true,  align: 'center'}
+
+            ]], done() {
+                // 搜索功能
+                var $ = layui.$, active = {
+                    reload: function(){
+                        var keywords = $('#keywords');
+                        //执行重载
+                        table.reload('dataTable', {
+                            page: {
+                                curr: 1 //重新从第 1 页开始
+                            }
+                            ,where: {
+                                keywords: keywords.val()
+                            }
+                        }, 'data');
+                    }
+                };
+                $('.search-btn').on('click', function(){
+                    var type = $(this).data('type');
+                    active[type] ? active[type].call(this) : '';
+                });
+            }
+        });
+    });
+
+
+</script>
+{/block}

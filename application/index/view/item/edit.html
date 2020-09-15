@@ -1,0 +1,160 @@
+{extend name="public:layer_layout"/}
+
+{block name="main"}
+<form class="layui-form" id="form1">
+    <div class="layui-row layui-col-space10 layui-form-item">
+        <div class="layui-form-item">
+            <label class="layui-form-label">上级物料：</label>
+            <div class="layui-input-block">
+                <input type="text" class="layui-input input-disable" disabled value="{$parentItem}">
+                <input type="hidden" name="pid" value="{$itemInfo.pid}">
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">设备分类</label>
+            <div class="layui-input-block">
+                <select id="catagoryid" name="catagoryid" lay-filter="catagoryFilter">
+                    {{volist name="catagorylist" id="catagory"}}
+                     {if condition="$catagory.id==$itemInfo.catagoryid"} 
+                        <option value="{$catagory.id}" selected>{$catagory.name}</option>
+                     {else /}
+                         <option value="{$catagory.id}">{$catagory.name}</option>
+                     {/if}
+                    {{/volist}}
+                </select>
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">设备编码：</label>
+            <div class="layui-input-block">
+                <input type="text" name="code" class="layui-input" placeholder="请输入设备编码" autocomplete="off" lay-verify="required" lay-reqText="设备编码不能为空" value="{$itemInfo.code}">
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">品牌：</label>
+            <div class="layui-input-block">
+                <input type="text" name="brand" class="layui-input" placeholder="请输入品牌" autocomplete="off" lay-verify="required" lay-reqText="品牌不能为空" value="{$itemInfo.brand}">
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">型号：</label>
+            <div class="layui-input-block">
+                <input type="text" name="model" class="layui-input" placeholder="请输入型号" autocomplete="off" lay-verify="required" lay-reqText="型号不能为空" value="{$itemInfo.model}">
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">序列号：</label>
+            <div class="layui-input-block">
+                <input type="text" name="sn" class="layui-input" placeholder="序列号" autocomplete="off" lay-verify="required" lay-reqText="序列号不能为空" value="{$itemInfo.sn}">
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">生产编号：</label>
+            <div class="layui-input-block">
+                <input type="text" name="pn" class="layui-input" placeholder="生产编号" autocomplete="off" lay-verify="required" lay-reqText="生产编号不能为空" value="{$itemInfo.pn}">
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">采购金额：</label>
+            <div class="layui-input-block">
+                <input type="text" name="purchase_price" class="layui-input" placeholder="请输入采购金额" autocomplete="off" lay-verify="required" lay-reqText="采购金额不能为空" value="{$itemInfo.purchase_price}">
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">启用日期：</label>
+            <div class="layui-input-block">
+
+                <input type="text" name="start_date" class="layui-input" placeholder="请输入启用日期" autocomplete="off" lay-verify="datetime" lay-reqText="启用日期不能为空" value="{$itemInfo.start_date}">
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">位置：</label>
+            <div class="layui-input-block">
+                <input type="text" name="location" class="layui-input" placeholder="请输入位置信息" autocomplete="off" lay-verify="required" lay-reqText="位置信息不能为空" value="{$itemInfo.location}">
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">是否备机：</label>
+            <div class="layui-input-block">
+                <input type="radio" name="is_backup" value="1" title="是" lay-verify="required" {eq name="$itemInfo.is_backup" value="1"}checked{/eq}>
+                <input type="radio" name="is_backup" value="0" title="否" lay-verify="required" {eq name="$itemInfo.is_backup" value="0"}checked{/eq}>
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">存在子组件：</label>
+            <div class="layui-input-block">
+                <input type="radio" name="is_kit" value="2" title="是" lay-verify="required" {eq name="$itemInfo.is_kit" value="2"}checked{/eq}>
+                <input type="radio" name="is_kit" value="1" title="否" lay-verify="required" {eq name="$itemInfo.is_kit" value="1"}checked{/eq}>
+            </div>
+        </div>
+
+        <input type="hidden" name="id" value="{$itemInfo.id}">
+
+        <div class="layui-form-item layui-hide">
+            <div class="layui-input-block">
+                <button type="submit" class="layui-btn" id="submit" lay-submit lay-filter="submit">保存</button>
+                <button type="button" class="layui-btn layui-btn-primary" id="reset">取消</button>
+            </div>
+        </div>
+</form>
+{/block}
+
+{block name="javascript"}
+<script>
+    layui.use(['form', 'jquery'], function () {
+        var form = layui.form,
+            $ = layui.$;
+
+        $('#icon').on('click', function () {
+            var index = layer.open({
+                type: 2,
+                title: '<i class="layui-icon layui-icon-radio"></i> 选择节点图标',
+                area: ['505px', '350px'],
+                content: ['{:url("item/icon")}', 'yes']
+            });
+        });
+
+        form.on('submit(submit)',function(data){
+            // 加载层
+            var loading = layer.msg('处理中，请稍后...', {
+                icon: 16,
+                shade: 0.2
+            });
+            $.ajax({
+                url: '{:url("doEdit")}',
+                type: 'POST',
+                dataType: 'json',
+                data: $('#form1').serialize(),
+                beforeSend: function(){},
+                success: function(data){
+                    layer.close(loading);
+                    if (data.status == 1) {
+                        layer.msg(data.message, {
+                            time: 1500
+                        },function(){
+                            parent.window.location.reload();
+                            var index = parent.layer.getFrameIndex(window.name); //获取窗口索引
+                            parent.layer.close(index);
+                        });
+                    } else if (data.status == 2) {
+                        layer.alert(data.message, {
+                            icon: 0,
+                            skin: 'layer-ext-moon'
+                        }, function() {
+                            window.location.reload();
+                        });
+                    } else if (data.status == 0) {
+                        layer.alert(data.message, {
+                            icon: 2,
+                            skin: 'layer-ext-moon'
+                        },function(){
+                            window.location.reload();
+                        });
+                    }
+                }
+            });
+            return false;
+        });
+    });
+</script>
+{/block}

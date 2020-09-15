@@ -1,0 +1,125 @@
+{extend name="public:layer_layout"/}
+
+{block name="main"}
+<form class="layui-form" id="form1" lay-filter="component-form-element">
+    <div class="layui-row layui-col-space10 layui-form-item">
+        <div class="layui-form-item">
+            <label class="layui-form-label">选择医院</label>
+            <div class="layui-input-block">
+                <select name="org_id" lay-filter="orgFilter" lay-verify="required" lay-reqText="医院不能为空">
+                    <option value="">请选择</option>
+                    {{volist name="orglist" id="org"}}
+                    <option value="{$org.id}">{$org.name}</option>
+                    {{/volist}}
+                </select>
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">选择设备</label>
+            <div class="layui-input-block">
+                <select id="item_id" name="item_id" lay-verify="required" lay-reqText="设备不能为空">
+                    <option value="">请选择</option>
+                </select>
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">设备地点：</label>
+            <div class="layui-input-block">
+                <input type="text" name="location" lay-verify="required" lay-reqText="设备地点不能为空" placeholder="请输入设备地点" autocomplete="off" class="layui-input">
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">备注：</label>
+            <div class="layui-input-block">
+                <textarea name="memo"  placeholder="请输入备注" class="layui-textarea"></textarea>
+
+            </div>
+        </div>
+        <div class="layui-form-item layui-hide">
+            <div class="layui-input-block">
+                <button type="submit" class="layui-btn" id="submit" lay-submit lay-filter="submit">立即提交</button>
+                <button type="reset" class="layui-btn layui-btn-primary" id="reset">重置</button>
+            </div>
+        </div>
+    </div>
+</form>
+{/block}
+
+{block name="javascript"}
+<script>
+    layui.use(['form', 'jquery'], function () {
+        var form = layui.form,
+            $ = layui.$;
+
+        form.on('submit(submit)',function(data){
+            // 加载层
+            var loading = layer.msg('处理中，请稍后...', {
+                icon: 16,
+                shade: 0.2
+            });
+            $.ajax({
+                url: '{:url("doAdd")}',
+                type: 'POST',
+                dataType: 'json',
+                data: $('#form1').serialize(),
+                beforeSend: function(){},
+                success: function(data){
+                    layer.close(loading);
+                    if (data.status == 1) {
+                        layer.msg(data.message, {
+                            time: 1500
+                        },function(){
+                            parent.window.location.reload();
+                            var index = parent.layer.getFrameIndex(window.name); //获取窗口索引
+                            parent.layer.close(index);
+                        });
+                    } else if (data.status == 2) {
+                        layer.alert(data.message, {
+                            icon: 0,
+                            skin: 'layer-ext-moon'
+                        }, function() {
+                            window.location.reload();
+                        });
+                    } else if (data.status == 0) {
+                        layer.alert(data.message, {
+                            icon: 2,
+                            skin: 'layer-ext-moon'
+                        },function(){
+                            window.location.reload();
+                        });
+                    }
+                }
+            });
+            return false;
+        });
+
+        form.on('select(orgFilter)',function(data){
+
+            //发送一个ajax
+            $.ajax({
+                url:'{:url("getItem")}',
+                type:'post',
+                data:{'org_id':data.value},
+                dataType:'json',
+                success:function(data){
+                     // var data=(JSON.parse(data))['data'];
+
+                    //获得数据更新之前先删除之前的旧数据
+                    $('#item_id').html('');
+
+                    //遍历增加option
+                    data.forEach(element => {
+                        $('#item_id').append('<option value ="'+element['id']+'">'+element['name']+'-'+element['code']+'-'+element['sn']+'</option>');
+                    });
+
+                    //表单重新渲染
+                    form.render();
+                }
+            });
+        });
+
+    });
+
+
+</script>
+{/block}

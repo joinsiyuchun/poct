@@ -1,0 +1,246 @@
+---------------------------------------------------------------
+
+[2020-06-27T17:12:37+08:00] 127.0.0.1 GET operator.com/api/user/setting
+[运行时间：0.188470s] [吞吐率：5.31req/s] [内存消耗：3,199.77kb] [文件加载：69]
+[ info ] [ LANG ] /Applications/MAMP/htdocs/operator/thinkphp/lang/zh-cn.php
+[ info ] [ ROUTE ] array (
+)
+[ info ] [ HEADER ] array (
+  'host' => 'operator.com',
+  'connection' => 'keep-alive',
+  'pragma' => 'no-cache',
+  'cache-control' => 'no-cache',
+  'x-requested-with' => 'XMLHttpRequest',
+  'user-agent' => 'Mozilla/5.0 (iPhone; CPU iPhone OS 11_0 like Mac OS X) AppleWebKit/604.1.38 (KHTML, like Gecko) Version/11.0 Mobile/15A372 Safari/604.1 wechatdevtools/1.02.1911180 MicroMessenger/7.0.4 Language/zh_CN webview/',
+  'content-type' => 'json',
+  'accept' => '*/*',
+  'referer' => 'https://servicewechat.com/wxacb61fc94fe0881d/devtools/page-frame.html',
+  'accept-encoding' => 'gzip, deflate',
+  'cookie' => 'PHPSESSID=69436bceab8c3cec7d22ad3e304094e1',
+)
+[ info ] [ PARAM ] array (
+  '/api/user/setting' => '',
+)
+---------------------------------------------------------------
+
+[2020-06-27T17:12:37+08:00] 127.0.0.1 GET operator.com/api/user/company
+[运行时间：0.288243s] [吞吐率：3.47req/s] [内存消耗：5,702.69kb] [文件加载：87]
+[ info ] [ LANG ] /Applications/MAMP/htdocs/operator/thinkphp/lang/zh-cn.php
+[ info ] [ ROUTE ] array (
+)
+[ info ] [ HEADER ] array (
+  'host' => 'operator.com',
+  'connection' => 'keep-alive',
+  'pragma' => 'no-cache',
+  'cache-control' => 'no-cache',
+  'x-requested-with' => 'XMLHttpRequest',
+  'user-agent' => 'Mozilla/5.0 (iPhone; CPU iPhone OS 11_0 like Mac OS X) AppleWebKit/604.1.38 (KHTML, like Gecko) Version/11.0 Mobile/15A372 Safari/604.1 wechatdevtools/1.02.1911180 MicroMessenger/7.0.4 Language/zh_CN webview/',
+  'content-type' => 'json',
+  'accept' => '*/*',
+  'referer' => 'https://servicewechat.com/wxacb61fc94fe0881d/devtools/page-frame.html',
+  'accept-encoding' => 'gzip, deflate',
+  'cookie' => 'PHPSESSID=69436bceab8c3cec7d22ad3e304094e1',
+)
+[ info ] [ PARAM ] array (
+  '/api/user/company' => '',
+)
+[ info ] [ DB ] INIT mysql
+[ sql ] [ DB ] CONNECT:[ UseTime:0.004401s ] mysql:host=127.0.0.1;port=3306;dbname=operator;charset=utf8
+[ sql ] [ SQL ] SHOW COLUMNS FROM `think_user` [ RunTime:0.025057s ]
+[ sql ] [ SQL ] SELECT * FROM `think_user` WHERE  `id` = 2 LIMIT 1 [ RunTime:0.003432s ]
+[ sql ] [ SQL ] SHOW COLUMNS FROM `think_user_org` [ RunTime:0.001947s ]
+[ sql ] [ SQL ] SELECT * FROM `think_user_org` WHERE  `user_id` = 2 [ RunTime:0.000618s ]
+[ sql ] [ SQL ] SHOW COLUMNS FROM `think_org` [ RunTime:0.001948s ]
+[ sql ] [ SQL ] SELECT * FROM `think_org` WHERE  `id` = 2 LIMIT 1 [ RunTime:0.000515s ]
+[ sql ] [ SQL ] SELECT * FROM `think_org` WHERE  `id` = 1 LIMIT 1 [ RunTime:0.000514s ]
+---------------------------------------------------------------
+
+[2020-06-27T17:12:40+08:00] 127.0.0.1 GET operator.com/api/Catagory/catagorylistbyorg
+[运行时间：0.290704s] [吞吐率：3.44req/s] [内存消耗：5,816.51kb] [文件加载：87]
+[ info ] [ LANG ] /Applications/MAMP/htdocs/operator/thinkphp/lang/zh-cn.php
+[ info ] [ ROUTE ] array (
+)
+[ info ] [ HEADER ] array (
+  'host' => 'operator.com',
+  'connection' => 'keep-alive',
+  'pragma' => 'no-cache',
+  'cache-control' => 'no-cache',
+  'x-requested-with' => 'XMLHttpRequest',
+  'user-agent' => 'Mozilla/5.0 (iPhone; CPU iPhone OS 11_0 like Mac OS X) AppleWebKit/604.1.38 (KHTML, like Gecko) Version/11.0 Mobile/15A372 Safari/604.1 wechatdevtools/1.02.1911180 MicroMessenger/7.0.4 Language/zh_CN webview/',
+  'content-type' => 'json',
+  'accept' => '*/*',
+  'referer' => 'https://servicewechat.com/wxacb61fc94fe0881d/devtools/page-frame.html',
+  'accept-encoding' => 'gzip, deflate',
+  'cookie' => 'PHPSESSID=69436bceab8c3cec7d22ad3e304094e1',
+)
+[ info ] [ PARAM ] array (
+  '/api/Catagory/catagorylistbyorg' => '',
+)
+[ info ] [ DB ] INIT mysql
+[ sql ] [ DB ] CONNECT:[ UseTime:0.003981s ] mysql:host=127.0.0.1;port=3306;dbname=operator;charset=utf8
+[ sql ] [ SQL ] SHOW COLUMNS FROM `think_org` [ RunTime:0.001670s ]
+[ sql ] [ SQL ] SELECT * FROM `think_org` WHERE  `pid` = 1  AND `status` = 1 OR `id` = 1 ORDER BY `sort` DESC [ RunTime:0.005037s ]
+[ sql ] [ SQL ] SHOW COLUMNS FROM `think_org_catagory` [ RunTime:0.003159s ]
+[ sql ] [ SQL ] SHOW COLUMNS FROM `think_catagory` [ RunTime:0.002808s ]
+[ sql ] [ SQL ] SELECT `think_catagory`.*,`pivot`.`id` AS `pivot__id`,`pivot`.`org_id` AS `pivot__org_id`,`pivot`.`catagory_id` AS `pivot__catagory_id`,`pivot`.`status` AS `pivot__status`,`pivot`.`create_time` AS `pivot__create_time`,`pivot`.`update_time` AS `pivot__update_time` FROM `think_catagory` INNER JOIN `think_org_catagory` `pivot` ON `pivot`.`catagory_id`=`think_catagory`.`id` WHERE  `pivot`.`org_id` = 10 [ RunTime:0.001449s ]
+[ sql ] [ SQL ] SELECT `think_catagory`.*,`pivot`.`id` AS `pivot__id`,`pivot`.`org_id` AS `pivot__org_id`,`pivot`.`catagory_id` AS `pivot__catagory_id`,`pivot`.`status` AS `pivot__status`,`pivot`.`create_time` AS `pivot__create_time`,`pivot`.`update_time` AS `pivot__update_time` FROM `think_catagory` INNER JOIN `think_org_catagory` `pivot` ON `pivot`.`catagory_id`=`think_catagory`.`id` WHERE  `pivot`.`org_id` = 9 [ RunTime:0.001040s ]
+[ sql ] [ SQL ] SELECT `think_catagory`.*,`pivot`.`id` AS `pivot__id`,`pivot`.`org_id` AS `pivot__org_id`,`pivot`.`catagory_id` AS `pivot__catagory_id`,`pivot`.`status` AS `pivot__status`,`pivot`.`create_time` AS `pivot__create_time`,`pivot`.`update_time` AS `pivot__update_time` FROM `think_catagory` INNER JOIN `think_org_catagory` `pivot` ON `pivot`.`catagory_id`=`think_catagory`.`id` WHERE  `pivot`.`org_id` = 8 [ RunTime:0.002373s ]
+[ sql ] [ SQL ] SELECT `think_catagory`.*,`pivot`.`id` AS `pivot__id`,`pivot`.`org_id` AS `pivot__org_id`,`pivot`.`catagory_id` AS `pivot__catagory_id`,`pivot`.`status` AS `pivot__status`,`pivot`.`create_time` AS `pivot__create_time`,`pivot`.`update_time` AS `pivot__update_time` FROM `think_catagory` INNER JOIN `think_org_catagory` `pivot` ON `pivot`.`catagory_id`=`think_catagory`.`id` WHERE  `pivot`.`org_id` = 1 [ RunTime:0.000808s ]
+[ sql ] [ SQL ] SELECT `think_catagory`.*,`pivot`.`id` AS `pivot__id`,`pivot`.`org_id` AS `pivot__org_id`,`pivot`.`catagory_id` AS `pivot__catagory_id`,`pivot`.`status` AS `pivot__status`,`pivot`.`create_time` AS `pivot__create_time`,`pivot`.`update_time` AS `pivot__update_time` FROM `think_catagory` INNER JOIN `think_org_catagory` `pivot` ON `pivot`.`catagory_id`=`think_catagory`.`id` WHERE  `pivot`.`org_id` = 11 [ RunTime:0.000713s ]
+---------------------------------------------------------------
+
+[2020-06-27T17:12:42+08:00] 127.0.0.1 GET operator.com/api/item/listbycategory?category_id=4&department_id=10
+[运行时间：0.362837s] [吞吐率：2.76req/s] [内存消耗：5,768.59kb] [文件加载：87]
+[ info ] [ LANG ] /Applications/MAMP/htdocs/operator/thinkphp/lang/zh-cn.php
+[ info ] [ ROUTE ] array (
+)
+[ info ] [ HEADER ] array (
+  'host' => 'operator.com',
+  'connection' => 'keep-alive',
+  'pragma' => 'no-cache',
+  'cache-control' => 'no-cache',
+  'x-requested-with' => 'XMLHttpRequest',
+  'user-agent' => 'Mozilla/5.0 (iPhone; CPU iPhone OS 11_0 like Mac OS X) AppleWebKit/604.1.38 (KHTML, like Gecko) Version/11.0 Mobile/15A372 Safari/604.1 wechatdevtools/1.02.1911180 MicroMessenger/7.0.4 Language/zh_CN webview/',
+  'content-type' => 'json',
+  'accept' => '*/*',
+  'referer' => 'https://servicewechat.com/wxacb61fc94fe0881d/devtools/page-frame.html',
+  'accept-encoding' => 'gzip, deflate',
+  'cookie' => 'PHPSESSID=69436bceab8c3cec7d22ad3e304094e1',
+)
+[ info ] [ PARAM ] array (
+  '/api/item/listbycategory' => '',
+  'category_id' => '4',
+  'department_id' => '10',
+)
+[ info ] [ DB ] INIT mysql
+[ sql ] [ DB ] CONNECT:[ UseTime:0.006965s ] mysql:host=127.0.0.1;port=3306;dbname=operator;charset=utf8
+[ sql ] [ SQL ] SHOW COLUMNS FROM `think_item` [ RunTime:0.016525s ]
+[ sql ] [ SQL ] SELECT * FROM `think_item` WHERE  `status` = 1  AND `catagoryid` = 4 [ RunTime:0.014166s ]
+[ sql ] [ SQL ] SHOW COLUMNS FROM `think_catagory` [ RunTime:0.001561s ]
+[ sql ] [ SQL ] SELECT * FROM `think_catagory` WHERE  `id` = 4 LIMIT 1 [ RunTime:0.001045s ]
+---------------------------------------------------------------
+
+[2020-06-27T17:12:43+08:00] 127.0.0.1 GET operator.com/api/item/itempage?id=60
+[运行时间：0.232443s] [吞吐率：4.30req/s] [内存消耗：5,855.35kb] [文件加载：91]
+[ info ] [ LANG ] /Applications/MAMP/htdocs/operator/thinkphp/lang/zh-cn.php
+[ info ] [ ROUTE ] array (
+)
+[ info ] [ HEADER ] array (
+  'host' => 'operator.com',
+  'connection' => 'keep-alive',
+  'pragma' => 'no-cache',
+  'cache-control' => 'no-cache',
+  'x-requested-with' => 'XMLHttpRequest',
+  'user-agent' => 'Mozilla/5.0 (iPhone; CPU iPhone OS 11_0 like Mac OS X) AppleWebKit/604.1.38 (KHTML, like Gecko) Version/11.0 Mobile/15A372 Safari/604.1 wechatdevtools/1.02.1911180 MicroMessenger/7.0.4 Language/zh_CN webview/',
+  'content-type' => 'json',
+  'accept' => '*/*',
+  'referer' => 'https://servicewechat.com/wxacb61fc94fe0881d/devtools/page-frame.html',
+  'accept-encoding' => 'gzip, deflate',
+  'cookie' => 'PHPSESSID=69436bceab8c3cec7d22ad3e304094e1',
+)
+[ info ] [ PARAM ] array (
+  '/api/item/itempage' => '',
+  'id' => '60',
+)
+[ info ] [ DB ] INIT mysql
+[ sql ] [ DB ] CONNECT:[ UseTime:0.002794s ] mysql:host=127.0.0.1;port=3306;dbname=operator;charset=utf8
+[ sql ] [ SQL ] SHOW COLUMNS FROM `think_item` [ RunTime:0.002722s ]
+[ sql ] [ SQL ] SELECT * FROM `think_item` WHERE  `id` = 60 LIMIT 1 [ RunTime:0.005553s ]
+[ sql ] [ SQL ] SHOW COLUMNS FROM `think_catagory` [ RunTime:0.004673s ]
+[ sql ] [ SQL ] SELECT * FROM `think_catagory` WHERE  `id` = 4 LIMIT 1 [ RunTime:0.002985s ]
+[ sql ] [ SQL ] SELECT * FROM `think_item` WHERE  `pid` = 60 [ RunTime:0.002625s ]
+[ error ] [8]未定义变量: itemlist[/Applications/MAMP/htdocs/operator/application/api/controller/Item.php:38]
+---------------------------------------------------------------
+
+[2020-06-27T17:14:39+08:00] 127.0.0.1 GET operator.com/api/item/itempage?id=60
+[运行时间：0.107484s] [吞吐率：9.30req/s] [内存消耗：5,771.52kb] [文件加载：87]
+[ info ] [ LANG ] /Applications/MAMP/htdocs/operator/thinkphp/lang/zh-cn.php
+[ info ] [ ROUTE ] array (
+)
+[ info ] [ HEADER ] array (
+  'host' => 'operator.com',
+  'connection' => 'keep-alive',
+  'pragma' => 'no-cache',
+  'cache-control' => 'no-cache',
+  'x-requested-with' => 'XMLHttpRequest',
+  'user-agent' => 'Mozilla/5.0 (iPhone; CPU iPhone OS 11_0 like Mac OS X) AppleWebKit/604.1.38 (KHTML, like Gecko) Version/11.0 Mobile/15A372 Safari/604.1 wechatdevtools/1.02.1911180 MicroMessenger/7.0.4 Language/zh_CN webview/',
+  'content-type' => 'json',
+  'accept' => '*/*',
+  'referer' => 'https://servicewechat.com/wxacb61fc94fe0881d/devtools/page-frame.html',
+  'accept-encoding' => 'gzip, deflate',
+  'cookie' => 'PHPSESSID=69436bceab8c3cec7d22ad3e304094e1',
+)
+[ info ] [ PARAM ] array (
+  '/api/item/itempage' => '',
+  'id' => '60',
+)
+[ info ] [ DB ] INIT mysql
+[ sql ] [ DB ] CONNECT:[ UseTime:0.000815s ] mysql:host=127.0.0.1;port=3306;dbname=operator;charset=utf8
+[ sql ] [ SQL ] SHOW COLUMNS FROM `think_item` [ RunTime:0.000958s ]
+[ sql ] [ SQL ] SELECT * FROM `think_item` WHERE  `id` = 60 LIMIT 1 [ RunTime:0.000693s ]
+[ sql ] [ SQL ] SHOW COLUMNS FROM `think_catagory` [ RunTime:0.001020s ]
+[ sql ] [ SQL ] SELECT * FROM `think_catagory` WHERE  `id` = 4 LIMIT 1 [ RunTime:0.000595s ]
+[ sql ] [ SQL ] SELECT * FROM `think_item` WHERE  `pid` = 60 [ RunTime:0.000551s ]
+---------------------------------------------------------------
+
+[2020-06-27T17:14:48+08:00] 127.0.0.1 GET operator.com/api/item/listbycategory?category_id=6&department_id=11
+[运行时间：0.200188s] [吞吐率：5.00req/s] [内存消耗：5,769.34kb] [文件加载：87]
+[ info ] [ LANG ] /Applications/MAMP/htdocs/operator/thinkphp/lang/zh-cn.php
+[ info ] [ ROUTE ] array (
+)
+[ info ] [ HEADER ] array (
+  'host' => 'operator.com',
+  'connection' => 'keep-alive',
+  'pragma' => 'no-cache',
+  'cache-control' => 'no-cache',
+  'x-requested-with' => 'XMLHttpRequest',
+  'user-agent' => 'Mozilla/5.0 (iPhone; CPU iPhone OS 11_0 like Mac OS X) AppleWebKit/604.1.38 (KHTML, like Gecko) Version/11.0 Mobile/15A372 Safari/604.1 wechatdevtools/1.02.1911180 MicroMessenger/7.0.4 Language/zh_CN webview/',
+  'content-type' => 'json',
+  'accept' => '*/*',
+  'referer' => 'https://servicewechat.com/wxacb61fc94fe0881d/devtools/page-frame.html',
+  'accept-encoding' => 'gzip, deflate',
+  'cookie' => 'PHPSESSID=69436bceab8c3cec7d22ad3e304094e1',
+)
+[ info ] [ PARAM ] array (
+  '/api/item/listbycategory' => '',
+  'category_id' => '6',
+  'department_id' => '11',
+)
+[ info ] [ DB ] INIT mysql
+[ sql ] [ DB ] CONNECT:[ UseTime:0.000750s ] mysql:host=127.0.0.1;port=3306;dbname=operator;charset=utf8
+[ sql ] [ SQL ] SHOW COLUMNS FROM `think_item` [ RunTime:0.003723s ]
+[ sql ] [ SQL ] SELECT * FROM `think_item` WHERE  `status` = 1  AND `catagoryid` = 6 [ RunTime:0.001128s ]
+[ sql ] [ SQL ] SHOW COLUMNS FROM `think_catagory` [ RunTime:0.001156s ]
+[ sql ] [ SQL ] SELECT * FROM `think_catagory` WHERE  `id` = 6 LIMIT 1 [ RunTime:0.000785s ]
+---------------------------------------------------------------
+
+[2020-06-27T17:14:50+08:00] 127.0.0.1 GET operator.com/api/item/itempage?id=68
+[运行时间：0.229031s] [吞吐率：4.37req/s] [内存消耗：5,770.36kb] [文件加载：87]
+[ info ] [ LANG ] /Applications/MAMP/htdocs/operator/thinkphp/lang/zh-cn.php
+[ info ] [ ROUTE ] array (
+)
+[ info ] [ HEADER ] array (
+  'host' => 'operator.com',
+  'connection' => 'keep-alive',
+  'pragma' => 'no-cache',
+  'cache-control' => 'no-cache',
+  'x-requested-with' => 'XMLHttpRequest',
+  'user-agent' => 'Mozilla/5.0 (iPhone; CPU iPhone OS 11_0 like Mac OS X) AppleWebKit/604.1.38 (KHTML, like Gecko) Version/11.0 Mobile/15A372 Safari/604.1 wechatdevtools/1.02.1911180 MicroMessenger/7.0.4 Language/zh_CN webview/',
+  'content-type' => 'json',
+  'accept' => '*/*',
+  'referer' => 'https://servicewechat.com/wxacb61fc94fe0881d/devtools/page-frame.html',
+  'accept-encoding' => 'gzip, deflate',
+  'cookie' => 'PHPSESSID=69436bceab8c3cec7d22ad3e304094e1',
+)
+[ info ] [ PARAM ] array (
+  '/api/item/itempage' => '',
+  'id' => '68',
+)
+[ info ] [ DB ] INIT mysql
+[ sql ] [ DB ] CONNECT:[ UseTime:0.001830s ] mysql:host=127.0.0.1;port=3306;dbname=operator;charset=utf8
+[ sql ] [ SQL ] SHOW COLUMNS FROM `think_item` [ RunTime:0.002283s ]
+[ sql ] [ SQL ] SELECT * FROM `think_item` WHERE  `id` = 68 LIMIT 1 [ RunTime:0.001576s ]
+[ sql ] [ SQL ] SHOW COLUMNS FROM `think_catagory` [ RunTime:0.002172s ]
+[ sql ] [ SQL ] SELECT * FROM `think_catagory` WHERE  `id` = 6 LIMIT 1 [ RunTime:0.008547s ]
+[ sql ] [ SQL ] SELECT * FROM `think_item` WHERE  `pid` = 68 [ RunTime:0.000841s ]
+[ sql ] [ SQL ] SELECT * FROM `think_catagory` WHERE  `id` = 7 LIMIT 1 [ RunTime:0.001044s ]

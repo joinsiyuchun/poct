@@ -1,0 +1,174 @@
+{extend name="public:layer_layout"/}
+
+{block name="main"}
+<form class="layui-form" id="form1" lay-filter="component-form-element">
+    <div class="layui-row layui-col-space10 layui-form-item">
+
+        <div class="layui-form-item">
+            <label class="layui-form-label">归属医院</label>
+            <div class="layui-input-block">
+                <select name="org_id" lay-filter="orgFilter">
+                    {{volist name="orglist" id="org"}}
+                        {if condition="$org.id==$workorderInfo.org_id"} 
+                            <option value="{$org.id}" selected>{$org.name}</option>
+                         {else /}
+                             <option value="{$org.id}">{$org.name}</option>
+                        {/if}
+                    {{/volist}}
+                </select>
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">设备编码</label>
+            <div class="layui-input-block">
+                <select id="item_id" name="item_id">
+                    <option value="{$workorderInfo.item_id}">{$workorderInfo.items.catagory.name}-{$workorderInfo.items.code}-{$workorderInfo.items.sn}</option>
+                </select>
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">设备地点：</label>
+            <div class="layui-input-block">
+                <input type="text" name="location" lay-verify="required" lay-reqText="产品目录名不能为空" placeholder="请输入设备地点" autocomplete="off" class="layui-input" value="{$workorderInfo.location}">
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">操作</label>
+            <div class="layui-input-block">
+                <select id="status" name="status">
+                    {if condition="$workorderInfo.status==0"} 
+                        <option value="1" selected>接修</option>
+                        <option value="0" >未接修</option>
+
+                    {/if}
+                    {if condition="$workorderInfo.status==1"} 
+                        <option value="2" selected>维修完成</option>
+                         <option value="1" >维修中</option>
+
+                    {/if}
+                    {if condition="$workorderInfo.status==2"} 
+                         <option value="2" selected>已完修</option>
+                    {/if}
+                </select>
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">是否故障停机</label>
+            <div class="layui-input-block">
+                <select id="is_halt" name="is_halt">
+                    {if condition="$workorderInfo.is_halt==0"} 
+                    <option value="0" selected>否</option>
+                    <option value="1">是</option>
+                    {/if}
+                    {if condition="$workorderInfo.is_halt==1"} 
+
+                    <option value="1" selected>是</option>
+                    <option value="0">否</option>
+                    {/if}
+                </select>
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">停机时长(小时)：</label>
+            <div class="layui-input-block">
+                <input type="text" name="halt_time"  placeholder="请输入停机时长" autocomplete="off" class="layui-input" value="{$workorderInfo.halt_time}">
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">维修费用：</label>
+            <div class="layui-input-block">
+                <input type="text" name="cost"  placeholder="请输入维修费用" autocomplete="off" class="layui-input" value="{$workorderInfo.cost}">
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">报修备注：</label>
+            <div class="layui-input-block">
+                <textarea name="memo"  placeholder="请输入备注" class="layui-textarea" >{$workorderInfo.notification.memo}</textarea>
+            </div>
+        </div>
+        <input type="hidden" name="id" value="{$workorderid}">
+        <input type="hidden" name="notification_id" value="{$workorderInfo.notification_id}">
+        <div class="layui-form-item layui-hide">
+            <div class="layui-input-block">
+                <button type="submit" class="layui-btn" id="submit" lay-submit lay-filter="submit">立即提交</button>
+                <button type="reset" class="layui-btn layui-btn-primary" id="reset">重置</button>
+            </div>
+        </div>
+</form>
+{/block}
+
+{block name="javascript"}
+<script>
+    layui.use(['form', 'jquery'], function () {
+        var form = layui.form,
+            $ = layui.$;
+
+        form.on('submit(submit)',function(data){
+            // 加载层
+            var loading = layer.msg('处理中，请稍后...', {
+                icon: 16,
+                shade: 0.2
+            });
+            $.ajax({
+                url: '{:url("doEdit")}',
+                type: 'POST',
+                dataType: 'json',
+                data: $('#form1').serialize(),
+                beforeSend: function(){},
+                success: function(data){
+                    layer.close(loading);
+                    if (data.status == 1) {
+                        layer.msg(data.message, {
+                            time: 1500
+                        },function(){
+                            parent.window.location.reload();
+                            var index = parent.layer.getFrameIndex(window.name); //获取窗口索引
+                            parent.layer.close(index);
+                        });
+                    } else if (data.status == -1) {
+                        layer.alert(data.message, {
+                            icon: 0,
+                            skin: 'layer-ext-moon'
+                        }, function() {
+                            window.location.reload();
+                        });
+                    } else if (data.status == 0) {
+                        layer.alert(data.message, {
+                            icon: 2,
+                            skin: 'layer-ext-moon'
+                        },function(){
+                            window.location.reload();
+                        });
+                    }
+                }
+            });
+            return false;
+        });
+
+        form.on('select(orgFilter)',function(data){
+
+            //发送一个ajax
+            $.ajax({
+                url:'{:url("getItem")}',
+                type:'post',
+                data:{'org_id':data.value},
+                dataType:'json',
+                success:function(data){
+                    // var data=(JSON.parse(data))['data'];
+
+                    //获得数据更新之前先删除之前的旧数据
+                    $('#item_id').html('');
+
+                    //遍历增加option
+                    data.forEach(element => {
+                        $('#item_id').append('<option value ="'+element['id']+'">'+element['name']+'-'+element['code']+'-'+element['sn']+'</option>');
+                    });
+
+                    //表单重新渲染
+                    form.render();
+                }
+            });
+        });
+    });
+</script>
+{/block}
