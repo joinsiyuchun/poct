@@ -1,0 +1,35 @@
+{extend name="public:layout"/}
+
+{block name="main"}
+{// 数据表格}
+<table class="layui-hide" id="dataTable" lay-filter="dataTable"></table>
+{// 顶部工具栏}
+<script type="text/html" id="toolbar">
+    <div class="dataToolbar">
+        <div class="layui-inline">
+            <input class="layui-input" name="keywords" id="keywords" value="{:input('keywords')}" autocomplete="on"
+                   placeholder="请输入设备编码">
+        </div>
+        <button class="layui-btn search-btn" data-type="reload"><i class="iconfont">&#xe679;</i> 查询</button>
+    </div>
+</script>
+
+{// 行内工具栏}
+<form action="{:url('/index/Upload2db/imports')}" method="post" enctype="multipart/form-data">
+    <label>忽略首行:&nbsp;&nbsp;&nbsp; <input type="checkbox" name="ignoreHeader"/></label><br/>
+    <input type="hidden" value="{$type}" name="type"/>
+    <input type="file" name="myfile">
+    <input type="submit" class="layui-btn" id="submit" lay-submit lay-filter="submit" value="导入数据">
+    <br/>
+    <span style="color: #0E0EFF">{$msg}</span>
+</form>
+
+
+{/block}
+
+{block name="layui"}{/block}
+{block name="javascript"}
+
+{/block}
+
+

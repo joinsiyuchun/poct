@@ -23,6 +23,8 @@ define('RUNTIME_PATH', __DIR__ . '/runtime/');
 
 define('APP_DEBUG', true);
 
+define('ROOT_PATH', __DIR__);
+
 // 加载框架引导文件
 
 
