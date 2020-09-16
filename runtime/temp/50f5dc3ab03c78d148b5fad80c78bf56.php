@@ -1,4 +1,4 @@
-<?php /*a:2:{s:79:"/Applications/MAMP/htdocs/operator/application/index/view/bireport/benefit.html";i:1599145194;s:82:"/Applications/MAMP/htdocs/operator/application/index/view/public/layer_layout.html";i:1582010668;}*/ ?>
+<?php /*a:2:{s:79:"/Applications/MAMP/htdocs/operator/application/index/view/bireport/benefit.html";i:1599980493;s:82:"/Applications/MAMP/htdocs/operator/application/index/view/public/layer_layout.html";i:1582010668;}*/ ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -24,10 +24,6 @@
             <div class="layui-card">
                 <div class="layui-card-body">
                     
-<fieldset class="layui-elem-field layui-field-title" style="margin-top: 50px;">
-    <legend>月收入趋势</legend>
-</fieldset>
-<div id="container" style="height: 350px; margin: 0"></div>
 <table class="layui-hide" id="dataTable" lay-filter="dataTable"></table>
 <script type="text/html" id="toolbar">
     <div class="dataToolbar">
@@ -73,31 +69,6 @@
     
     
 
-<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/echarts/dist/echarts.min.js"></script>
-<script type="text/javascript">
-    var dom = document.getElementById("container");
-    var myChart = echarts.init(dom);
-
-    option = null;
-    option = {
-        xAxis: {
-            type: 'category',
-            data: ['2020-01', '2020-02', '2020-03', '2020-04', '2020-05', '2020-06', '2020-07', '2020-08']
-        },
-        yAxis: {
-            type: 'value'
-        },
-        series: [{
-            data: [563,820, 932, 901, 934, 1290, 1330, 1320],
-            type: 'line'
-        }]
-    };
-    ;
-    if (option && typeof option === "object") {
-        myChart.setOption(option, true);
-    }
-</script>
-
 <script>
     layui.use(['jquery', 'layer', 'form', 'table'], function () {
         var $ = layui.$,
@@ -108,7 +79,7 @@
         // 渲染数据表格
         table.render({
             elem : '#dataTable'
-            ,url : '<?php echo url("get_benefit"); ?>'
+            ,url : '<?php echo url("get_benefit"); ?>?id='+'<?php echo htmlentities($item_id); ?>'
             ,cellMinWidth: 80
             ,page: {
                 prev: '上一页',
@@ -125,7 +96,8 @@
             ,id: 'dataTable'
             ,cols: [[  // 表格列标题及数据
                 {field: 'id', width: 200, title: 'ID', sort: true, align: 'center'}
-                ,{field: 'date', width: 200, title: '统计月份', sort: true,  align: 'center'}
+                ,{field: 'year', width: 200, title: '统计年份', sort: true,  align: 'center'}
+                ,{field: 'month', width: 200, title: '统计月份', sort: true,  align: 'center'}
                 ,{field: 'benefit', width: 200, title: '收入', sort: true,  align: 'center'}
 
             ]], done() {

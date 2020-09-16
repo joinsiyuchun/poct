@@ -1,4 +1,4 @@
-<?php /*a:2:{s:74:"/Applications/MAMP/htdocs/operator/application/index/view/bireport/ct.html";i:1598713171;s:76:"/Applications/MAMP/htdocs/operator/application/index/view/public/layout.html";i:1582011447;}*/ ?>
+<?php /*a:2:{s:74:"/Applications/MAMP/htdocs/operator/application/index/view/bireport/ct.html";i:1599791666;s:76:"/Applications/MAMP/htdocs/operator/application/index/view/public/layout.html";i:1582011447;}*/ ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -32,6 +32,11 @@
             <input class="layui-input" name="keywords" id="keywords" value="<?php echo input('keywords'); ?>" autocomplete="on" placeholder="请输入设备编码">
         </div>
         <button class="layui-btn search-btn" data-type="reload"><i class="iconfont">&#xe679;</i> 查询</button>
+
+        <div class="layui-inline">
+            <button class="layui-btn" id="addcost"><i class="iconfont">&#xe692;</i>成本补录</button>
+        </div>
+
     </div>
 </script>
 
@@ -116,6 +121,34 @@
                 $('.search-btn').on('click', function(){
                     var type = $(this).data('type');
                     active[type] ? active[type].call(this) : '';
+                });
+
+                // 补录成本
+                $('#addcost').on('click', function () {
+                    var checkStatus = table.checkStatus('dataTable'); //idTest 即为基础参数 id 对应的值
+                    var checkeddata=checkStatus.data;
+                    var arr = new Array();
+                    for(i=0;i<checkeddata.length;i++){
+                        arr[i]=checkeddata[i]["id"];
+                    }
+                    var str = arr.join("|");
+                    var index = layer.open({
+                        type: 2,
+                        title: '<i class=iconfont>&#xe7c7;</i> 编辑节点',
+                        area: ['600px', '475px'],
+                        content: ['<?php echo url("bireport/addcost"); ?>?id=' + str, 'yes'],
+                        skin: 'layui-layer-molv',
+                        btn: ['保存', '取消'],
+                        btnAlign: 'c',
+                        yes: function(index, layero){
+                            var submit = layero.find('iframe').contents().find("#submit");// #subBtn为页面层提交按钮ID
+                            submit.click();// 触发提交监听
+                            return false;
+                        },
+                        btn2:function (index,layero) {
+                            layer.close(index);
+                        }
+                    });
                 });
             }
         });

@@ -1,93 +1,49 @@
 ---------------------------------------------------------------
 
-[2020-09-14T09:55:55+08:00] 127.0.0.1 GET 127.0.0.1:8899/
-[运行时间：0.073720s] [吞吐率：13.56req/s] [内存消耗：640.70kb] [文件加载：73]
-[ info ] [ LANG ] /var/www/html/operator/thinkphp/lang/zh-cn.php
+[2020-09-14T10:28:05+08:00] 127.0.0.1 GET operator.com/
+[运行时间：0.072194s] [吞吐率：13.85req/s] [内存消耗：3,291.66kb] [文件加载：70]
+[ info ] [ LANG ] /Applications/MAMP/htdocs/operator/thinkphp/lang/zh-cn.php
 [ info ] [ ROUTE ] array (
 )
 [ info ] [ HEADER ] array (
-  'accept-language' => 'en-US,en;q=0.9',
-  'accept-encoding' => 'gzip, deflate, br',
-  'sec-fetch-dest' => 'document',
-  'sec-fetch-user' => '?1',
-  'sec-fetch-mode' => 'navigate',
-  'sec-fetch-site' => 'none',
-  'accept' => 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9',
-  'user-agent' => 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/83.0.4103.116 Safari/537.36',
+  'host' => 'operator.com',
   'upgrade-insecure-requests' => '1',
+  'accept' => 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8',
+  'user-agent' => 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_13_4) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/11.1 Safari/605.1.15',
+  'accept-language' => 'zh-cn',
+  'accept-encoding' => 'gzip, deflate',
   'connection' => 'keep-alive',
-  'host' => '127.0.0.1:8899',
-  'content-type' => '',
-  'content-length' => '',
-)
-[ info ] [ PARAM ] array (
-)
-[ error ] [2]session_start(): open(/tmp/php-sessions/sess_tl96f2vm7m2nrqqthn9uh0km0j, O_RDWR) failed: No such file or directory (2)[/var/www/html/operator/thinkphp/library/think/Session.php:534]
----------------------------------------------------------------
-
-[2020-09-14T09:55:55+08:00] 127.0.0.1 GET 127.0.0.1:8899/favicon.ico
-[运行时间：0.019903s] [吞吐率：50.24req/s] [内存消耗：332.09kb] [文件加载：61]
-[ info ] [ LANG ] /var/www/html/operator/thinkphp/lang/zh-cn.php
----------------------------------------------------------------
-
-[2020-09-14T09:56:22+08:00] 127.0.0.1 GET 127.0.0.1:8899/
-[运行时间：0.022451s] [吞吐率：44.54req/s] [内存消耗：436.51kb] [文件加载：70]
-[ info ] [ LANG ] /var/www/html/operator/thinkphp/lang/zh-cn.php
-[ info ] [ ROUTE ] array (
-)
-[ info ] [ HEADER ] array (
-  'cookie' => 'PHPSESSID=tl96f2vm7m2nrqqthn9uh0km0j; thinkphp_show_page_trace=0|0',
-  'accept-language' => 'en-US,en;q=0.9',
-  'accept-encoding' => 'gzip, deflate, br',
-  'sec-fetch-dest' => 'document',
-  'sec-fetch-user' => '?1',
-  'sec-fetch-mode' => 'navigate',
-  'sec-fetch-site' => 'none',
-  'accept' => 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9',
-  'user-agent' => 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/83.0.4103.116 Safari/537.36',
-  'upgrade-insecure-requests' => '1',
-  'cache-control' => 'max-age=0',
-  'connection' => 'keep-alive',
-  'host' => '127.0.0.1:8899',
-  'content-type' => '',
-  'content-length' => '',
 )
 [ info ] [ PARAM ] array (
 )
 ---------------------------------------------------------------
 
-[2020-09-14T09:56:22+08:00] 127.0.0.1 GET 127.0.0.1:8899/index/login/index.html
-[运行时间：0.010773s] [吞吐率：92.82req/s] [内存消耗：371.20kb] [文件加载：69]
-[ info ] [ LANG ] /var/www/html/operator/thinkphp/lang/zh-cn.php
+[2020-09-14T10:28:05+08:00] 127.0.0.1 GET operator.com/index/login/index.html
+[运行时间：0.049344s] [吞吐率：20.27req/s] [内存消耗：3,256.50kb] [文件加载：69]
+[ info ] [ LANG ] /Applications/MAMP/htdocs/operator/thinkphp/lang/zh-cn.php
 [ info ] [ ROUTE ] array (
 )
 [ info ] [ HEADER ] array (
-  'cookie' => 'PHPSESSID=tl96f2vm7m2nrqqthn9uh0km0j; thinkphp_show_page_trace=0|0',
-  'accept-language' => 'en-US,en;q=0.9',
-  'accept-encoding' => 'gzip, deflate, br',
-  'sec-fetch-dest' => 'document',
-  'sec-fetch-user' => '?1',
-  'sec-fetch-mode' => 'navigate',
-  'sec-fetch-site' => 'none',
-  'accept' => 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9',
-  'user-agent' => 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/83.0.4103.116 Safari/537.36',
+  'host' => 'operator.com',
+  'accept' => 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8',
   'upgrade-insecure-requests' => '1',
-  'cache-control' => 'max-age=0',
+  'cookie' => 'PHPSESSID=34206427ec1abddc308321c266e3cf87',
+  'user-agent' => 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_13_4) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/11.1 Safari/605.1.15',
+  'accept-language' => 'zh-cn',
+  'accept-encoding' => 'gzip, deflate',
   'connection' => 'keep-alive',
-  'host' => '127.0.0.1:8899',
-  'content-type' => '',
-  'content-length' => '',
 )
 [ info ] [ PARAM ] array (
+  '/index/login/index_html' => '',
 )
-[ info ] [ VIEW ] /var/www/html/operator/application/index/view/login/index.html [ array (
+[ info ] [ VIEW ] /Applications/MAMP/htdocs/operator/application/index/view/login/index.html [ array (
   0 => 'title',
 ) ]
 ---------------------------------------------------------------
 
-[2020-09-14T09:56:22+08:00] 127.0.0.1 GET 127.0.0.1:8899/captcha.html
-[运行时间：0.014695s] [吞吐率：68.05req/s] [内存消耗：328.90kb] [文件加载：57]
-[ info ] [ LANG ] /var/www/html/operator/thinkphp/lang/zh-cn.php
+[2020-09-14T10:28:05+08:00] 127.0.0.1 GET operator.com/captcha.html
+[运行时间：0.076615s] [吞吐率：13.05req/s] [内存消耗：2,441.98kb] [文件加载：57]
+[ info ] [ LANG ] /Applications/MAMP/htdocs/operator/thinkphp/lang/zh-cn.php
 [ info ] [ ROUTE ] array (
   'rule' => 'captcha/<id?>',
   'route' => '\\think\\captcha\\CaptchaController@index',
@@ -100,122 +56,105 @@
   ),
 )
 [ info ] [ HEADER ] array (
-  'cookie' => 'PHPSESSID=tl96f2vm7m2nrqqthn9uh0km0j; thinkphp_show_page_trace=0|0',
-  'accept-language' => 'en-US,en;q=0.9',
-  'accept-encoding' => 'gzip, deflate, br',
-  'referer' => 'http://127.0.0.1:8899/index/login/index.html',
-  'sec-fetch-dest' => 'image',
-  'sec-fetch-mode' => 'no-cors',
-  'sec-fetch-site' => 'same-origin',
-  'accept' => 'image/webp,image/apng,image/*,*/*;q=0.8',
-  'user-agent' => 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/83.0.4103.116 Safari/537.36',
+  'host' => 'operator.com',
+  'accept' => 'image/png,image/svg+xml,image/*;q=0.8,video/*;q=0.8,*/*;q=0.5',
   'connection' => 'keep-alive',
-  'host' => '127.0.0.1:8899',
-  'content-type' => '',
-  'content-length' => '',
+  'cookie' => 'PHPSESSID=34206427ec1abddc308321c266e3cf87',
+  'user-agent' => 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_13_4) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/11.1 Safari/605.1.15',
+  'accept-language' => 'zh-cn',
+  'referer' => 'http://operator.com/index/login/index.html',
+  'accept-encoding' => 'gzip, deflate',
 )
 [ info ] [ PARAM ] array (
+  '/captcha_html' => '',
 )
 ---------------------------------------------------------------
 
-[2020-09-14T09:56:34+08:00] 127.0.0.1 POST 127.0.0.1:8899/index/login/checklogin.html
-[运行时间：2.953957s] [吞吐率：0.34req/s] [内存消耗：824.05kb] [文件加载：86]
-[ info ] [ LANG ] /var/www/html/operator/thinkphp/lang/zh-cn.php
+[2020-09-14T10:28:15+08:00] 127.0.0.1 POST operator.com/index/login/checklogin.html
+[运行时间：0.125553s] [吞吐率：7.96req/s] [内存消耗：5,818.77kb] [文件加载：86]
+[ info ] [ LANG ] /Applications/MAMP/htdocs/operator/thinkphp/lang/zh-cn.php
 [ info ] [ ROUTE ] array (
 )
 [ info ] [ HEADER ] array (
-  'cookie' => 'thinkphp_show_page_trace=0|0; PHPSESSID=tl96f2vm7m2nrqqthn9uh0km0j; thinkphp_show_page_trace=0|0',
-  'accept-language' => 'en-US,en;q=0.9',
-  'accept-encoding' => 'gzip, deflate, br',
-  'referer' => 'http://127.0.0.1:8899/index/login/index.html',
-  'sec-fetch-dest' => 'empty',
-  'sec-fetch-mode' => 'cors',
-  'sec-fetch-site' => 'same-origin',
-  'origin' => 'http://127.0.0.1:8899',
-  'content-type' => 'application/x-www-form-urlencoded; charset=UTF-8',
-  'user-agent' => 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/83.0.4103.116 Safari/537.36',
-  'x-requested-with' => 'XMLHttpRequest',
+  'host' => 'operator.com',
   'accept' => 'application/json, text/javascript, */*; q=0.01',
-  'content-length' => '44',
+  'x-requested-with' => 'XMLHttpRequest',
+  'accept-language' => 'zh-cn',
+  'accept-encoding' => 'gzip, deflate',
+  'content-type' => 'application/x-www-form-urlencoded; charset=UTF-8',
+  'origin' => 'http://operator.com',
+  'user-agent' => 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_13_4) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/11.1 Safari/605.1.15',
   'connection' => 'keep-alive',
-  'host' => '127.0.0.1:8899',
+  'referer' => 'http://operator.com/index/login/index.html',
+  'content-length' => '42',
+  'cookie' => 'thinkphp_show_page_trace=0|0; PHPSESSID=34206427ec1abddc308321c266e3cf87',
 )
 [ info ] [ PARAM ] array (
-  'username' => 'wangwu',
-  'password' => '123456',
-  'captcha' => 'LQN6',
+  '/index/login/checklogin_html' => '',
+  'username' => 'admin',
+  'password' => 'admin',
+  'captcha' => 'APQH',
 )
 [ info ] [ DB ] INIT mysql
-[ sql ] [ DB ] CONNECT:[ UseTime:2.656450s ] mysql:host=127.0.0.1;port=3306;dbname=operator;charset=utf8
-[ sql ] [ SQL ] SHOW COLUMNS FROM `think_admin` [ RunTime:0.097140s ]
-[ sql ] [ SQL ] SELECT * FROM `think_admin` WHERE  `username` = 'wangwu' LIMIT 1 [ RunTime:0.007305s ]
-[ sql ] [ SQL ] UPDATE `think_admin`  SET `last_login_time` = 1600048594  WHERE  `id` = 4 [ RunTime:0.040861s ]
-[ sql ] [ SQL ] SHOW COLUMNS FROM `think_login_log` [ RunTime:0.043656s ]
-[ sql ] [ SQL ] INSERT INTO `think_login_log` (`login_username` , `login_status` , `login_time` , `login_ip` , `login_area` , `login_client_os` , `login_client_browser`) VALUES ('wangwu' , 1 , 1600048594 , '127.0.0.1' , '本机地址' , 'Linux' , 'Chrome83.0.4103.116') [ RunTime:0.000873s ]
+[ sql ] [ DB ] CONNECT:[ UseTime:0.002485s ] mysql:host=127.0.0.1;port=3306;dbname=operator;charset=utf8
+[ sql ] [ SQL ] SHOW COLUMNS FROM `think_admin` [ RunTime:0.016331s ]
+[ sql ] [ SQL ] SELECT * FROM `think_admin` WHERE  `username` = 'admin' LIMIT 1 [ RunTime:0.002397s ]
+[ sql ] [ SQL ] UPDATE `think_admin`  SET `last_login_time` = 1600050495  WHERE  `id` = 1 [ RunTime:0.001971s ]
+[ sql ] [ SQL ] SHOW COLUMNS FROM `think_login_log` [ RunTime:0.001896s ]
+[ sql ] [ SQL ] INSERT INTO `think_login_log` (`login_username` , `login_status` , `login_time` , `login_ip` , `login_area` , `login_client_os` , `login_client_browser`) VALUES ('admin' , 1 , 1600050495 , '127.0.0.1' , '本机地址' , 'OS X10_13_4' , 'Safari11.1') [ RunTime:0.000607s ]
 ---------------------------------------------------------------
 
-[2020-09-14T09:56:36+08:00] 127.0.0.1 GET 127.0.0.1:8899/index
-[运行时间：0.090784s] [吞吐率：11.02req/s] [内存消耗：783.48kb] [文件加载：90]
-[ info ] [ LANG ] /var/www/html/operator/thinkphp/lang/zh-cn.php
+[2020-09-14T10:28:17+08:00] 127.0.0.1 GET operator.com/index
+[运行时间：0.093725s] [吞吐率：10.67req/s] [内存消耗：5,701.34kb] [文件加载：89]
+[ info ] [ LANG ] /Applications/MAMP/htdocs/operator/thinkphp/lang/zh-cn.php
 [ info ] [ ROUTE ] array (
 )
 [ info ] [ HEADER ] array (
-  'cookie' => 'PHPSESSID=tl96f2vm7m2nrqqthn9uh0km0j; thinkphp_show_page_trace=0|0',
-  'accept-language' => 'en-US,en;q=0.9',
-  'accept-encoding' => 'gzip, deflate, br',
-  'referer' => 'http://127.0.0.1:8899/index/login/index.html',
-  'sec-fetch-dest' => 'document',
-  'sec-fetch-user' => '?1',
-  'sec-fetch-mode' => 'navigate',
-  'sec-fetch-site' => 'same-origin',
-  'accept' => 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9',
-  'user-agent' => 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/83.0.4103.116 Safari/537.36',
-  'upgrade-insecure-requests' => '1',
+  'host' => 'operator.com',
+  'cookie' => 'PHPSESSID=34206427ec1abddc308321c266e3cf87',
   'connection' => 'keep-alive',
-  'host' => '127.0.0.1:8899',
-  'content-type' => '',
-  'content-length' => '',
+  'upgrade-insecure-requests' => '1',
+  'accept' => 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8',
+  'user-agent' => 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_13_4) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/11.1 Safari/605.1.15',
+  'referer' => 'http://operator.com/index/login/index.html',
+  'accept-language' => 'zh-cn',
+  'accept-encoding' => 'gzip, deflate',
 )
 [ info ] [ PARAM ] array (
+  '/index' => '',
 )
 [ info ] [ DB ] INIT mysql
-[ info ] [ VIEW ] /var/www/html/operator/application/index/view/index/index.html [ array (
+[ info ] [ VIEW ] /Applications/MAMP/htdocs/operator/application/index/view/index/index.html [ array (
   0 => 'admin_id',
   1 => 'admin_username',
   2 => 'title',
   3 => 'menu',
 ) ]
-[ sql ] [ DB ] CONNECT:[ UseTime:0.001623s ] mysql:host=127.0.0.1;port=3306;dbname=operator;charset=utf8
-[ sql ] [ SQL ] SHOW COLUMNS FROM `think_role` [ RunTime:0.019181s ]
-[ sql ] [ SQL ] SELECT * FROM `think_role` WHERE  `id` = 3 LIMIT 1 [ RunTime:0.001188s ]
-[ sql ] [ SQL ] SHOW COLUMNS FROM `think_node` [ RunTime:0.028870s ]
-[ sql ] [ SQL ] SELECT `id`,name as title,`pid`,`path`,`icon` FROM `think_node` WHERE  `id` IN (1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,20,21,41,42,43,44,22,45,46,47,48,23,24,25,26,27,34,35,36,28,37,38,39,40,29,30,31,32,33)  AND `is_menu` = 2 [ RunTime:0.001801s ]
+[ sql ] [ DB ] CONNECT:[ UseTime:0.000569s ] mysql:host=127.0.0.1;port=3306;dbname=operator;charset=utf8
+[ sql ] [ SQL ] SHOW COLUMNS FROM `think_node` [ RunTime:0.001965s ]
+[ sql ] [ SQL ] SELECT `id`,name as title,`pid`,`path`,`icon` FROM `think_node` WHERE  `is_menu` = 2 [ RunTime:0.001143s ]
 ---------------------------------------------------------------
 
-[2020-09-14T09:56:36+08:00] 127.0.0.1 GET 127.0.0.1:8899/index/index/home.html
-[运行时间：0.006384s] [吞吐率：156.64req/s] [内存消耗：373.40kb] [文件加载：72]
-[ info ] [ LANG ] /var/www/html/operator/thinkphp/lang/zh-cn.php
+[2020-09-14T10:28:17+08:00] 127.0.0.1 GET operator.com/index/index/home.html
+[运行时间：0.053010s] [吞吐率：18.86req/s] [内存消耗：3,216.56kb] [文件加载：72]
+[ info ] [ LANG ] /Applications/MAMP/htdocs/operator/thinkphp/lang/zh-cn.php
 [ info ] [ ROUTE ] array (
 )
 [ info ] [ HEADER ] array (
-  'cookie' => 'PHPSESSID=tl96f2vm7m2nrqqthn9uh0km0j; thinkphp_show_page_trace=0|0',
-  'accept-language' => 'en-US,en;q=0.9',
-  'accept-encoding' => 'gzip, deflate, br',
-  'referer' => 'http://127.0.0.1:8899/index',
-  'sec-fetch-dest' => 'iframe',
-  'sec-fetch-mode' => 'navigate',
-  'sec-fetch-site' => 'same-origin',
-  'accept' => 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9',
-  'user-agent' => 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/83.0.4103.116 Safari/537.36',
-  'upgrade-insecure-requests' => '1',
+  'host' => 'operator.com',
+  'cookie' => 'PHPSESSID=34206427ec1abddc308321c266e3cf87',
   'connection' => 'keep-alive',
-  'host' => '127.0.0.1:8899',
-  'content-type' => '',
-  'content-length' => '',
+  'upgrade-insecure-requests' => '1',
+  'accept' => 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8',
+  'user-agent' => 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_13_4) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/11.1 Safari/605.1.15',
+  'referer' => 'http://operator.com/index',
+  'accept-language' => 'zh-cn',
+  'accept-encoding' => 'gzip, deflate',
 )
 [ info ] [ PARAM ] array (
+  '/index/index/home_html' => '',
 )
-[ info ] [ VIEW ] /var/www/html/operator/application/index/view/index/home.html [ array (
+[ info ] [ VIEW ] /Applications/MAMP/htdocs/operator/application/index/view/index/home.html [ array (
   0 => 'admin_id',
   1 => 'admin_username',
   2 => 'title',
@@ -223,857 +162,187 @@
 ) ]
 ---------------------------------------------------------------
 
-[2020-09-14T09:56:39+08:00] 127.0.0.1 GET 127.0.0.1:8899/admin/role/index?mpi=m-p-i-1
-[运行时间：0.049953s] [吞吐率：20.02req/s] [内存消耗：784.91kb] [文件加载：90]
-[ info ] [ LANG ] /var/www/html/operator/thinkphp/lang/zh-cn.php
+[2020-09-14T10:30:14+08:00] 127.0.0.1 GET operator.com/index/bireport/ct?mpi=m-p-i-1
+[运行时间：0.137492s] [吞吐率：7.27req/s] [内存消耗：3,360.73kb] [文件加载：74]
+[ info ] [ LANG ] /Applications/MAMP/htdocs/operator/thinkphp/lang/zh-cn.php
 [ info ] [ ROUTE ] array (
 )
 [ info ] [ HEADER ] array (
-  'cookie' => 'PHPSESSID=tl96f2vm7m2nrqqthn9uh0km0j; thinkphp_show_page_trace=0|0',
-  'accept-language' => 'en-US,en;q=0.9',
-  'accept-encoding' => 'gzip, deflate, br',
-  'referer' => 'http://127.0.0.1:8899/index',
-  'sec-fetch-dest' => 'iframe',
-  'sec-fetch-mode' => 'navigate',
-  'sec-fetch-site' => 'same-origin',
-  'accept' => 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9',
-  'user-agent' => 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/83.0.4103.116 Safari/537.36',
-  'upgrade-insecure-requests' => '1',
+  'host' => 'operator.com',
+  'cookie' => 'thinkphp_show_page_trace=0|0; PHPSESSID=34206427ec1abddc308321c266e3cf87',
   'connection' => 'keep-alive',
-  'host' => '127.0.0.1:8899',
-  'content-type' => '',
-  'content-length' => '',
+  'upgrade-insecure-requests' => '1',
+  'accept' => 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8',
+  'user-agent' => 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_13_4) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/11.1 Safari/605.1.15',
+  'referer' => 'http://operator.com/index',
+  'accept-language' => 'zh-cn',
+  'accept-encoding' => 'gzip, deflate',
 )
 [ info ] [ PARAM ] array (
+  '/index/bireport/ct' => '',
   'mpi' => 'm-p-i-1',
 )
-[ info ] [ DB ] INIT mysql
-[ info ] [ VIEW ] /var/www/html/operator/application/admin/view/role/index.html [ array (
-  0 => 'admin_id',
-  1 => 'admin_username',
-  2 => 'title',
-) ]
-[ sql ] [ DB ] CONNECT:[ UseTime:0.002490s ] mysql:host=127.0.0.1;port=3306;dbname=operator;charset=utf8
-[ sql ] [ SQL ] SHOW COLUMNS FROM `think_role` [ RunTime:0.002459s ]
-[ sql ] [ SQL ] SELECT * FROM `think_role` WHERE  `id` = 3 LIMIT 1 [ RunTime:0.001482s ]
-[ sql ] [ SQL ] SHOW COLUMNS FROM `think_node` [ RunTime:0.002117s ]
-[ sql ] [ SQL ] SELECT * FROM `think_node` WHERE  `id` IN (1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,20,21,41,42,43,44,22,45,46,47,48,23,24,25,26,27,34,35,36,28,37,38,39,40,29,30,31,32,33) [ RunTime:0.002880s ]
----------------------------------------------------------------
-
-[2020-09-14T09:56:39+08:00] 127.0.0.1 GET 127.0.0.1:8899/admin/role/rolelist.html?page=1&limit=10
-[运行时间：0.004527s] [吞吐率：220.89req/s] [内存消耗：706.45kb] [文件加载：86]
-[ info ] [ LANG ] /var/www/html/operator/thinkphp/lang/zh-cn.php
-[ info ] [ ROUTE ] array (
-)
-[ info ] [ HEADER ] array (
-  'cookie' => 'thinkphp_show_page_trace=0|0; PHPSESSID=tl96f2vm7m2nrqqthn9uh0km0j; thinkphp_show_page_trace=0|0',
-  'accept-language' => 'en-US,en;q=0.9',
-  'accept-encoding' => 'gzip, deflate, br',
-  'referer' => 'http://127.0.0.1:8899/admin/role/index?mpi=m-p-i-1',
-  'sec-fetch-dest' => 'empty',
-  'sec-fetch-mode' => 'cors',
-  'sec-fetch-site' => 'same-origin',
-  'x-requested-with' => 'XMLHttpRequest',
-  'user-agent' => 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/83.0.4103.116 Safari/537.36',
-  'accept' => 'application/json, text/javascript, */*; q=0.01',
-  'connection' => 'keep-alive',
-  'host' => '127.0.0.1:8899',
-  'content-type' => '',
-  'content-length' => '',
-)
-[ info ] [ PARAM ] array (
-  'page' => '1',
-  'limit' => '10',
-)
-[ info ] [ DB ] INIT mysql
-[ sql ] [ DB ] CONNECT:[ UseTime:0.000423s ] mysql:host=127.0.0.1;port=3306;dbname=operator;charset=utf8
-[ sql ] [ SQL ] SHOW COLUMNS FROM `think_role` [ RunTime:0.000509s ]
-[ sql ] [ SQL ] SELECT * FROM `think_role` ORDER BY `id` DESC LIMIT 0,10 [ RunTime:0.000353s ]
-[ sql ] [ SQL ] SELECT * FROM `think_role` [ RunTime:0.000268s ]
----------------------------------------------------------------
-
-[2020-09-14T09:56:42+08:00] 127.0.0.1 GET 127.0.0.1:8899/index/qualitylog/index?mpi=m-p-i-1
-[运行时间：0.023913s] [吞吐率：41.82req/s] [内存消耗：473.84kb] [文件加载：82]
-[ info ] [ LANG ] /var/www/html/operator/thinkphp/lang/zh-cn.php
-[ info ] [ ROUTE ] array (
-)
-[ info ] [ HEADER ] array (
-  'cookie' => 'PHPSESSID=tl96f2vm7m2nrqqthn9uh0km0j; thinkphp_show_page_trace=0|0',
-  'accept-language' => 'en-US,en;q=0.9',
-  'accept-encoding' => 'gzip, deflate, br',
-  'referer' => 'http://127.0.0.1:8899/index',
-  'sec-fetch-dest' => 'iframe',
-  'sec-fetch-mode' => 'navigate',
-  'sec-fetch-site' => 'same-origin',
-  'accept' => 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9',
-  'user-agent' => 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/83.0.4103.116 Safari/537.36',
-  'upgrade-insecure-requests' => '1',
-  'connection' => 'keep-alive',
-  'host' => '127.0.0.1:8899',
-  'content-type' => '',
-  'content-length' => '',
-)
-[ info ] [ PARAM ] array (
-  'mpi' => 'm-p-i-1',
-)
-[ info ] [ VIEW ] /var/www/html/operator/application/index/view/qualitylog/index.html [ array (
+[ info ] [ VIEW ] /Applications/MAMP/htdocs/operator/application/index/view/bireport/ct.html [ array (
   0 => 'admin_id',
   1 => 'admin_username',
   2 => 'title',
 ) ]
 ---------------------------------------------------------------
 
-[2020-09-14T09:56:42+08:00] 127.0.0.1 GET 127.0.0.1:8899/index/qualitylog/loglist.html?page=1&limit=10
-[运行时间：0.187693s] [吞吐率：5.33req/s] [内存消耗：900.86kb] [文件加载：94]
-[ info ] [ LANG ] /var/www/html/operator/thinkphp/lang/zh-cn.php
+[2020-09-14T10:30:14+08:00] 127.0.0.1 GET operator.com/index/item/itemlistbyct.html?page=1&limit=10
+[运行时间：0.127381s] [吞吐率：7.85req/s] [内存消耗：5,818.65kb] [文件加载：89]
+[ info ] [ LANG ] /Applications/MAMP/htdocs/operator/thinkphp/lang/zh-cn.php
 [ info ] [ ROUTE ] array (
 )
 [ info ] [ HEADER ] array (
-  'cookie' => 'thinkphp_show_page_trace=0|0; PHPSESSID=tl96f2vm7m2nrqqthn9uh0km0j; thinkphp_show_page_trace=0|0',
-  'accept-language' => 'en-US,en;q=0.9',
-  'accept-encoding' => 'gzip, deflate, br',
-  'referer' => 'http://127.0.0.1:8899/index/qualitylog/index?mpi=m-p-i-1',
-  'sec-fetch-dest' => 'empty',
-  'sec-fetch-mode' => 'cors',
-  'sec-fetch-site' => 'same-origin',
-  'x-requested-with' => 'XMLHttpRequest',
-  'user-agent' => 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/83.0.4103.116 Safari/537.36',
-  'accept' => 'application/json, text/javascript, */*; q=0.01',
+  'host' => 'operator.com',
+  'accept-encoding' => 'gzip, deflate',
+  'cookie' => 'thinkphp_show_page_trace=0|0; PHPSESSID=34206427ec1abddc308321c266e3cf87',
   'connection' => 'keep-alive',
-  'host' => '127.0.0.1:8899',
-  'content-type' => '',
-  'content-length' => '',
+  'accept' => 'application/json, text/javascript, */*; q=0.01',
+  'user-agent' => 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_13_4) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/11.1 Safari/605.1.15',
+  'referer' => 'http://operator.com/index/bireport/ct?mpi=m-p-i-1',
+  'accept-language' => 'zh-cn',
+  'x-requested-with' => 'XMLHttpRequest',
 )
 [ info ] [ PARAM ] array (
+  '/index/item/itemlistbyct_html' => '',
   'page' => '1',
   'limit' => '10',
 )
 [ info ] [ DB ] INIT mysql
-[ sql ] [ DB ] CONNECT:[ UseTime:0.000490s ] mysql:host=127.0.0.1;port=3306;dbname=operator;charset=utf8
-[ sql ] [ SQL ] SHOW COLUMNS FROM `think_quality_log` [ RunTime:0.016286s ]
-[ sql ] [ SQL ] SELECT * FROM `think_quality_log` ORDER BY `id` DESC LIMIT 0,10 [ RunTime:0.000933s ]
-[ sql ] [ SQL ] SHOW COLUMNS FROM `think_user` [ RunTime:0.026040s ]
-[ sql ] [ SQL ] SELECT * FROM `think_user` WHERE  `id` = 2 LIMIT 1 [ RunTime:0.003543s ]
-[ sql ] [ SQL ] SHOW COLUMNS FROM `think_item` [ RunTime:0.044298s ]
-[ sql ] [ SQL ] SELECT * FROM `think_item` WHERE  `id` = 47 LIMIT 1 [ RunTime:0.001949s ]
-[ sql ] [ SQL ] SHOW COLUMNS FROM `think_catagory` [ RunTime:0.019780s ]
-[ sql ] [ SQL ] SELECT * FROM `think_catagory` WHERE  `id` = 5 LIMIT 1 [ RunTime:0.001178s ]
-[ sql ] [ SQL ] SHOW COLUMNS FROM `think_org` [ RunTime:0.013485s ]
-[ sql ] [ SQL ] SELECT * FROM `think_org` WHERE  `id` = 1 LIMIT 1 [ RunTime:0.001703s ]
-[ sql ] [ SQL ] SELECT * FROM `think_user` WHERE  `id` = 2 LIMIT 1 [ RunTime:0.000809s ]
-[ sql ] [ SQL ] SELECT * FROM `think_item` WHERE  `id` = 52 LIMIT 1 [ RunTime:0.001673s ]
-[ sql ] [ SQL ] SELECT * FROM `think_catagory` WHERE  `id` = 1 LIMIT 1 [ RunTime:0.001102s ]
-[ sql ] [ SQL ] SELECT * FROM `think_org` WHERE  `id` = 1 LIMIT 1 [ RunTime:0.000797s ]
-[ sql ] [ SQL ] SELECT * FROM `think_user` WHERE  `id` = 2 LIMIT 1 [ RunTime:0.001761s ]
-[ sql ] [ SQL ] SELECT * FROM `think_item` WHERE  `id` = 47 LIMIT 1 [ RunTime:0.001916s ]
-[ sql ] [ SQL ] SELECT * FROM `think_catagory` WHERE  `id` = 5 LIMIT 1 [ RunTime:0.000954s ]
-[ sql ] [ SQL ] SELECT * FROM `think_org` WHERE  `id` = 1 LIMIT 1 [ RunTime:0.000442s ]
-[ sql ] [ SQL ] SELECT * FROM `think_user` WHERE  `id` = 2 LIMIT 1 [ RunTime:0.000297s ]
-[ sql ] [ SQL ] SELECT * FROM `think_item` WHERE  `id` = 47 LIMIT 1 [ RunTime:0.000399s ]
-[ sql ] [ SQL ] SELECT * FROM `think_catagory` WHERE  `id` = 5 LIMIT 1 [ RunTime:0.000307s ]
-[ sql ] [ SQL ] SELECT * FROM `think_org` WHERE  `id` = 1 LIMIT 1 [ RunTime:0.000375s ]
-[ sql ] [ SQL ] SELECT * FROM `think_user` WHERE  `id` = 2 LIMIT 1 [ RunTime:0.000423s ]
-[ sql ] [ SQL ] SELECT * FROM `think_item` WHERE  `id` = 47 LIMIT 1 [ RunTime:0.000715s ]
-[ sql ] [ SQL ] SELECT * FROM `think_catagory` WHERE  `id` = 5 LIMIT 1 [ RunTime:0.001807s ]
-[ sql ] [ SQL ] SELECT * FROM `think_org` WHERE  `id` = 1 LIMIT 1 [ RunTime:0.000635s ]
-[ sql ] [ SQL ] SELECT * FROM `think_user` WHERE  `id` = 2 LIMIT 1 [ RunTime:0.000896s ]
-[ sql ] [ SQL ] SELECT * FROM `think_item` WHERE  `id` = 52 LIMIT 1 [ RunTime:0.001756s ]
-[ sql ] [ SQL ] SELECT * FROM `think_catagory` WHERE  `id` = 1 LIMIT 1 [ RunTime:0.001788s ]
-[ sql ] [ SQL ] SELECT * FROM `think_org` WHERE  `id` = 1 LIMIT 1 [ RunTime:0.000587s ]
-[ sql ] [ SQL ] SELECT * FROM `think_user` WHERE  `id` = 2 LIMIT 1 [ RunTime:0.000301s ]
-[ sql ] [ SQL ] SELECT * FROM `think_item` WHERE  `id` = 52 LIMIT 1 [ RunTime:0.000310s ]
-[ sql ] [ SQL ] SELECT * FROM `think_catagory` WHERE  `id` = 1 LIMIT 1 [ RunTime:0.000263s ]
-[ sql ] [ SQL ] SELECT * FROM `think_org` WHERE  `id` IS NULL LIMIT 1 [ RunTime:0.000212s ]
-[ sql ] [ SQL ] SELECT * FROM `think_user` WHERE  `id` = 1 LIMIT 1 [ RunTime:0.000219s ]
-[ sql ] [ SQL ] SELECT * FROM `think_item` WHERE  `id` = 52 LIMIT 1 [ RunTime:0.000368s ]
-[ sql ] [ SQL ] SELECT * FROM `think_catagory` WHERE  `id` = 1 LIMIT 1 [ RunTime:0.000339s ]
-[ sql ] [ SQL ] SELECT * FROM `think_org` WHERE  `id` = 1 LIMIT 1 [ RunTime:0.000307s ]
-[ sql ] [ SQL ] SELECT * FROM `think_quality_log` [ RunTime:0.000262s ]
+[ sql ] [ DB ] CONNECT:[ UseTime:0.000749s ] mysql:host=127.0.0.1;port=3306;dbname=operator;charset=utf8
+[ sql ] [ SQL ] SHOW COLUMNS FROM `think_item` [ RunTime:0.001972s ]
+[ sql ] [ SQL ] SELECT `id`,`code`,`location`,`brand`,`model`,`sn`,`pn`,`pid`,`sort`,`purchase_price`,`start_date`,`catagoryid`,`is_kit`,`status`,`create_time`,`update_time`,`is_backup` FROM `think_item` WHERE  `catagoryid` = 6 ORDER BY `sort` ASC [ RunTime:0.000857s ]
+[ sql ] [ SQL ] SHOW COLUMNS FROM `think_catagory` [ RunTime:0.003044s ]
+[ sql ] [ SQL ] SELECT * FROM `think_catagory` WHERE  `id` = 6 LIMIT 1 [ RunTime:0.000722s ]
+[ sql ] [ SQL ] SELECT * FROM `think_catagory` WHERE  `id` = 6 LIMIT 1 [ RunTime:0.000664s ]
+[ sql ] [ SQL ] SELECT * FROM `think_catagory` WHERE  `id` = 6 LIMIT 1 [ RunTime:0.000657s ]
 ---------------------------------------------------------------
 
-[2020-09-14T09:57:17+08:00] 127.0.0.1 GET 127.0.0.1:8899/admin/group/index?mpi=m-p-i-1
-[运行时间：0.034649s] [吞吐率：28.86req/s] [内存消耗：473.82kb] [文件加载：82]
-[ info ] [ LANG ] /var/www/html/operator/thinkphp/lang/zh-cn.php
+[2020-09-14T10:30:31+08:00] 127.0.0.1 GET operator.com/index/cost/index?mpi=m-p-i-1
+[运行时间：0.130889s] [吞吐率：7.64req/s] [内存消耗：3,316.42kb] [文件加载：74]
+[ info ] [ LANG ] /Applications/MAMP/htdocs/operator/thinkphp/lang/zh-cn.php
 [ info ] [ ROUTE ] array (
 )
 [ info ] [ HEADER ] array (
-  'cookie' => 'PHPSESSID=tl96f2vm7m2nrqqthn9uh0km0j; thinkphp_show_page_trace=0|0',
-  'accept-language' => 'en-US,en;q=0.9',
-  'accept-encoding' => 'gzip, deflate, br',
-  'referer' => 'http://127.0.0.1:8899/index',
-  'sec-fetch-dest' => 'iframe',
-  'sec-fetch-mode' => 'navigate',
-  'sec-fetch-site' => 'same-origin',
-  'accept' => 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9',
-  'user-agent' => 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/83.0.4103.116 Safari/537.36',
-  'upgrade-insecure-requests' => '1',
+  'host' => 'operator.com',
+  'cookie' => 'thinkphp_show_page_trace=0|0; PHPSESSID=34206427ec1abddc308321c266e3cf87',
   'connection' => 'keep-alive',
-  'host' => '127.0.0.1:8899',
-  'content-type' => '',
-  'content-length' => '',
+  'upgrade-insecure-requests' => '1',
+  'accept' => 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8',
+  'user-agent' => 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_13_4) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/11.1 Safari/605.1.15',
+  'referer' => 'http://operator.com/index',
+  'accept-language' => 'zh-cn',
+  'accept-encoding' => 'gzip, deflate',
 )
 [ info ] [ PARAM ] array (
+  '/index/cost/index' => '',
   'mpi' => 'm-p-i-1',
 )
-[ info ] [ VIEW ] /var/www/html/operator/application/admin/view/group/index.html [ array (
+[ info ] [ VIEW ] /Applications/MAMP/htdocs/operator/application/index/view/cost/index.html [ array (
   0 => 'admin_id',
   1 => 'admin_username',
   2 => 'title',
 ) ]
 ---------------------------------------------------------------
 
-[2020-09-14T09:57:17+08:00] 127.0.0.1 GET 127.0.0.1:8899/admin/group/grouplist.html?page=1&limit=10
-[运行时间：0.044571s] [吞吐率：22.44req/s] [内存消耗：718.03kb] [文件加载：87]
-[ info ] [ LANG ] /var/www/html/operator/thinkphp/lang/zh-cn.php
+[2020-09-14T10:30:31+08:00] 127.0.0.1 GET operator.com/index/cost/costlist.html?page=1&limit=10
+[运行时间：0.128214s] [吞吐率：7.80req/s] [内存消耗：5,469.02kb] [文件加载：85]
+[ info ] [ LANG ] /Applications/MAMP/htdocs/operator/thinkphp/lang/zh-cn.php
 [ info ] [ ROUTE ] array (
 )
 [ info ] [ HEADER ] array (
-  'cookie' => 'thinkphp_show_page_trace=0|0; PHPSESSID=tl96f2vm7m2nrqqthn9uh0km0j; thinkphp_show_page_trace=0|0',
-  'accept-language' => 'en-US,en;q=0.9',
-  'accept-encoding' => 'gzip, deflate, br',
-  'referer' => 'http://127.0.0.1:8899/admin/group/index?mpi=m-p-i-1',
-  'sec-fetch-dest' => 'empty',
-  'sec-fetch-mode' => 'cors',
-  'sec-fetch-site' => 'same-origin',
-  'x-requested-with' => 'XMLHttpRequest',
-  'user-agent' => 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/83.0.4103.116 Safari/537.36',
-  'accept' => 'application/json, text/javascript, */*; q=0.01',
+  'host' => 'operator.com',
+  'accept-encoding' => 'gzip, deflate',
+  'cookie' => 'thinkphp_show_page_trace=0|0; thinkphp_show_page_trace=0|0; PHPSESSID=34206427ec1abddc308321c266e3cf87',
   'connection' => 'keep-alive',
-  'host' => '127.0.0.1:8899',
-  'content-type' => '',
-  'content-length' => '',
+  'accept' => 'application/json, text/javascript, */*; q=0.01',
+  'user-agent' => 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_13_4) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/11.1 Safari/605.1.15',
+  'referer' => 'http://operator.com/index/cost/index?mpi=m-p-i-1',
+  'accept-language' => 'zh-cn',
+  'x-requested-with' => 'XMLHttpRequest',
 )
 [ info ] [ PARAM ] array (
+  '/index/cost/costlist_html' => '',
   'page' => '1',
   'limit' => '10',
 )
 [ info ] [ DB ] INIT mysql
-[ sql ] [ DB ] CONNECT:[ UseTime:0.000478s ] mysql:host=127.0.0.1;port=3306;dbname=operator;charset=utf8
-[ sql ] [ SQL ] SHOW COLUMNS FROM `think_group` [ RunTime:0.032565s ]
-[ sql ] [ SQL ] SELECT * FROM `think_group` ORDER BY `id` DESC LIMIT 0,10 [ RunTime:0.000374s ]
-[ sql ] [ SQL ] SELECT * FROM `think_group` [ RunTime:0.000440s ]
+[ sql ] [ DB ] CONNECT:[ UseTime:0.000798s ] mysql:host=127.0.0.1;port=3306;dbname=operator;charset=utf8
+[ sql ] [ SQL ] SHOW COLUMNS FROM `think_item_cost` [ RunTime:0.002022s ]
+[ sql ] [ SQL ] SELECT * FROM `think_item_cost` LIMIT 0,10 [ RunTime:0.000675s ]
+[ sql ] [ SQL ] SELECT * FROM `think_item_cost` [ RunTime:0.000703s ]
 ---------------------------------------------------------------
 
-[2020-09-14T10:03:52+08:00] 127.0.0.1 GET 127.0.0.1:8899/admin/node/index?mpi=m-p-i-1
-[运行时间：0.049003s] [吞吐率：20.41req/s] [内存消耗：784.80kb] [文件加载：90]
-[ info ] [ LANG ] /var/www/html/operator/thinkphp/lang/zh-cn.php
+[2020-09-14T11:29:08+08:00] 127.0.0.1 GET operator.com/index
+[运行时间：0.096581s] [吞吐率：10.35req/s] [内存消耗：3,292.86kb] [文件加载：70]
+[ info ] [ LANG ] /Applications/MAMP/htdocs/operator/thinkphp/lang/zh-cn.php
 [ info ] [ ROUTE ] array (
 )
 [ info ] [ HEADER ] array (
-  'cookie' => 'PHPSESSID=tl96f2vm7m2nrqqthn9uh0km0j; thinkphp_show_page_trace=0|0',
-  'accept-language' => 'en-US,en;q=0.9',
-  'accept-encoding' => 'gzip, deflate, br',
-  'referer' => 'http://127.0.0.1:8899/index',
-  'sec-fetch-dest' => 'iframe',
-  'sec-fetch-mode' => 'navigate',
-  'sec-fetch-site' => 'same-origin',
-  'accept' => 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9',
-  'user-agent' => 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/83.0.4103.116 Safari/537.36',
+  'host' => 'operator.com',
+  'connection' => 'keep-alive',
   'upgrade-insecure-requests' => '1',
-  'connection' => 'keep-alive',
-  'host' => '127.0.0.1:8899',
-  'content-type' => '',
-  'content-length' => '',
+  'accept' => 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8',
+  'user-agent' => 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_13_4) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/11.1 Safari/605.1.15',
+  'referer' => 'http://operator.com/index/login/index.html',
+  'accept-language' => 'zh-cn',
+  'accept-encoding' => 'gzip, deflate',
 )
 [ info ] [ PARAM ] array (
-  'mpi' => 'm-p-i-1',
+  '/index' => '',
 )
-[ info ] [ DB ] INIT mysql
-[ info ] [ VIEW ] /var/www/html/operator/application/admin/view/node/index.html [ array (
-  0 => 'admin_id',
-  1 => 'admin_username',
-  2 => 'title',
-) ]
-[ sql ] [ DB ] CONNECT:[ UseTime:0.001306s ] mysql:host=127.0.0.1;port=3306;dbname=operator;charset=utf8
-[ sql ] [ SQL ] SHOW COLUMNS FROM `think_role` [ RunTime:0.001952s ]
-[ sql ] [ SQL ] SELECT * FROM `think_role` WHERE  `id` = 3 LIMIT 1 [ RunTime:0.001460s ]
-[ sql ] [ SQL ] SHOW COLUMNS FROM `think_node` [ RunTime:0.002758s ]
-[ sql ] [ SQL ] SELECT * FROM `think_node` WHERE  `id` IN (1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,20,21,41,42,43,44,22,45,46,47,48,23,24,25,26,27,34,35,36,28,37,38,39,40,29,30,31,32,33) [ RunTime:0.002518s ]
 ---------------------------------------------------------------
 
-[2020-09-14T10:03:52+08:00] 127.0.0.1 POST 127.0.0.1:8899/admin/node/nodelist.html
-[运行时间：0.008855s] [吞吐率：112.93req/s] [内存消耗：740.88kb] [文件加载：87]
-[ info ] [ LANG ] /var/www/html/operator/thinkphp/lang/zh-cn.php
+[2020-09-14T11:29:08+08:00] 127.0.0.1 GET operator.com/index/login/index.html
+[运行时间：0.055696s] [吞吐率：17.95req/s] [内存消耗：3,257.70kb] [文件加载：69]
+[ info ] [ LANG ] /Applications/MAMP/htdocs/operator/thinkphp/lang/zh-cn.php
 [ info ] [ ROUTE ] array (
 )
 [ info ] [ HEADER ] array (
-  'cookie' => 'thinkphp_show_page_trace=0|0; PHPSESSID=tl96f2vm7m2nrqqthn9uh0km0j; thinkphp_show_page_trace=0|0',
-  'accept-language' => 'en-US,en;q=0.9',
-  'accept-encoding' => 'gzip, deflate, br',
-  'referer' => 'http://127.0.0.1:8899/admin/node/index?mpi=m-p-i-1',
-  'sec-fetch-dest' => 'empty',
-  'sec-fetch-mode' => 'cors',
-  'sec-fetch-site' => 'same-origin',
-  'origin' => 'http://127.0.0.1:8899',
-  'content-type' => 'application/x-www-form-urlencoded; charset=UTF-8',
-  'user-agent' => 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/83.0.4103.116 Safari/537.36',
-  'x-requested-with' => 'XMLHttpRequest',
-  'accept' => 'application/json, text/javascript, */*; q=0.01',
-  'content-length' => '46',
+  'host' => 'operator.com',
+  'cookie' => 'PHPSESSID=0ae00551967e0d361b3ca18482ab3186',
   'connection' => 'keep-alive',
-  'host' => '127.0.0.1:8899',
-)
-[ info ] [ PARAM ] array (
-  'page' => '1',
-  'limit' => '10',
-  'filterRules' => '[]',
-  'sort' => '[]',
-)
-[ info ] [ DB ] INIT mysql
-[ sql ] [ DB ] CONNECT:[ UseTime:0.000491s ] mysql:host=127.0.0.1;port=3306;dbname=operator;charset=utf8
-[ sql ] [ SQL ] SHOW COLUMNS FROM `think_node` [ RunTime:0.000822s ]
-[ sql ] [ SQL ] SELECT `id`,name as title,`path`,`pid`,`sort`,`icon`,`is_menu`,`status`,`create_time`,`update_time` FROM `think_node` ORDER BY `sort` ASC [ RunTime:0.000555s ]
----------------------------------------------------------------
-
-[2020-09-14T10:03:53+08:00] 127.0.0.1 GET 127.0.0.1:8899/admin/admin/index?mpi=m-p-i-1
-[运行时间：0.019933s] [吞吐率：50.17req/s] [内存消耗：473.82kb] [文件加载：82]
-[ info ] [ LANG ] /var/www/html/operator/thinkphp/lang/zh-cn.php
-[ info ] [ ROUTE ] array (
-)
-[ info ] [ HEADER ] array (
-  'cookie' => 'PHPSESSID=tl96f2vm7m2nrqqthn9uh0km0j; thinkphp_show_page_trace=0|0',
-  'accept-language' => 'en-US,en;q=0.9',
-  'accept-encoding' => 'gzip, deflate, br',
-  'referer' => 'http://127.0.0.1:8899/index',
-  'sec-fetch-dest' => 'iframe',
-  'sec-fetch-mode' => 'navigate',
-  'sec-fetch-site' => 'same-origin',
-  'accept' => 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9',
-  'user-agent' => 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/83.0.4103.116 Safari/537.36',
   'upgrade-insecure-requests' => '1',
-  'connection' => 'keep-alive',
-  'host' => '127.0.0.1:8899',
-  'content-type' => '',
-  'content-length' => '',
+  'accept' => 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8',
+  'user-agent' => 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_13_4) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/11.1 Safari/605.1.15',
+  'referer' => 'http://operator.com/index/login/index.html',
+  'accept-encoding' => 'gzip, deflate',
+  'accept-language' => 'zh-cn',
 )
 [ info ] [ PARAM ] array (
-  'mpi' => 'm-p-i-1',
+  '/index/login/index_html' => '',
 )
-[ info ] [ VIEW ] /var/www/html/operator/application/admin/view/admin/index.html [ array (
-  0 => 'admin_id',
-  1 => 'admin_username',
-  2 => 'title',
+[ info ] [ VIEW ] /Applications/MAMP/htdocs/operator/application/index/view/login/index.html [ array (
+  0 => 'title',
 ) ]
 ---------------------------------------------------------------
 
-[2020-09-14T10:03:53+08:00] 127.0.0.1 GET 127.0.0.1:8899/admin/admin/adminlist.html?page=1&limit=10
-[运行时间：0.005377s] [吞吐率：185.98req/s] [内存消耗：720.35kb] [文件加载：87]
-[ info ] [ LANG ] /var/www/html/operator/thinkphp/lang/zh-cn.php
+[2020-09-14T11:29:08+08:00] 127.0.0.1 GET operator.com/captcha.html
+[运行时间：0.075729s] [吞吐率：13.20req/s] [内存消耗：2,441.98kb] [文件加载：57]
+[ info ] [ LANG ] /Applications/MAMP/htdocs/operator/thinkphp/lang/zh-cn.php
 [ info ] [ ROUTE ] array (
+  'rule' => 'captcha/<id?>',
+  'route' => '\\think\\captcha\\CaptchaController@index',
+  'option' => 
+  array (
+    'merge_rule_regex' => false,
+  ),
+  'var' => 
+  array (
+  ),
 )
 [ info ] [ HEADER ] array (
-  'cookie' => 'thinkphp_show_page_trace=0|0; PHPSESSID=tl96f2vm7m2nrqqthn9uh0km0j; thinkphp_show_page_trace=0|0',
-  'accept-language' => 'en-US,en;q=0.9',
-  'accept-encoding' => 'gzip, deflate, br',
-  'referer' => 'http://127.0.0.1:8899/admin/admin/index?mpi=m-p-i-1',
-  'sec-fetch-dest' => 'empty',
-  'sec-fetch-mode' => 'cors',
-  'sec-fetch-site' => 'same-origin',
-  'x-requested-with' => 'XMLHttpRequest',
-  'user-agent' => 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/83.0.4103.116 Safari/537.36',
-  'accept' => 'application/json, text/javascript, */*; q=0.01',
+  'host' => 'operator.com',
+  'accept' => 'image/png,image/svg+xml,image/*;q=0.8,video/*;q=0.8,*/*;q=0.5',
   'connection' => 'keep-alive',
-  'host' => '127.0.0.1:8899',
-  'content-type' => '',
-  'content-length' => '',
+  'cookie' => 'PHPSESSID=0ae00551967e0d361b3ca18482ab3186',
+  'user-agent' => 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_13_4) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/11.1 Safari/605.1.15',
+  'accept-language' => 'zh-cn',
+  'referer' => 'http://operator.com/index/login/index.html',
+  'accept-encoding' => 'gzip, deflate',
 )
 [ info ] [ PARAM ] array (
-  'page' => '1',
-  'limit' => '10',
+  '/captcha_html' => '',
 )
-[ info ] [ DB ] INIT mysql
-[ sql ] [ DB ] CONNECT:[ UseTime:0.000407s ] mysql:host=127.0.0.1;port=3306;dbname=operator;charset=utf8
-[ sql ] [ SQL ] SHOW COLUMNS FROM `think_admin` [ RunTime:0.000636s ]
-[ sql ] [ SQL ] SELECT `a`.`id`,`a`.`username`,`a`.`role_id`,`a`.`status`,`a`.`create_time`,`a`.`update_time`,`a`.`last_login_time`,`r`.`name` FROM `think_admin` `a` INNER JOIN `think_role` `r` ON `a`.`role_id`=`r`.`id` ORDER BY `a`.`id` DESC [ RunTime:0.000525s ]
-[ sql ] [ SQL ] SELECT * FROM `think_admin` [ RunTime:0.000337s ]
----------------------------------------------------------------
-
-[2020-09-14T10:03:55+08:00] 127.0.0.1 GET 127.0.0.1:8899/index/catagory/index?mpi=m-p-i-1
-[运行时间：0.022299s] [吞吐率：44.84req/s] [内存消耗：473.84kb] [文件加载：82]
-[ info ] [ LANG ] /var/www/html/operator/thinkphp/lang/zh-cn.php
-[ info ] [ ROUTE ] array (
-)
-[ info ] [ HEADER ] array (
-  'cookie' => 'PHPSESSID=tl96f2vm7m2nrqqthn9uh0km0j; thinkphp_show_page_trace=0|0',
-  'accept-language' => 'en-US,en;q=0.9',
-  'accept-encoding' => 'gzip, deflate, br',
-  'referer' => 'http://127.0.0.1:8899/index',
-  'sec-fetch-dest' => 'iframe',
-  'sec-fetch-mode' => 'navigate',
-  'sec-fetch-site' => 'same-origin',
-  'accept' => 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9',
-  'user-agent' => 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/83.0.4103.116 Safari/537.36',
-  'upgrade-insecure-requests' => '1',
-  'connection' => 'keep-alive',
-  'host' => '127.0.0.1:8899',
-  'content-type' => '',
-  'content-length' => '',
-)
-[ info ] [ PARAM ] array (
-  'mpi' => 'm-p-i-1',
-)
-[ info ] [ VIEW ] /var/www/html/operator/application/index/view/catagory/index.html [ array (
-  0 => 'admin_id',
-  1 => 'admin_username',
-  2 => 'title',
-) ]
----------------------------------------------------------------
-
-[2020-09-14T10:03:55+08:00] 127.0.0.1 GET 127.0.0.1:8899/index/catagory/catagorylist.html?page=1&limit=10
-[运行时间：0.004493s] [吞吐率：222.57req/s] [内存消耗：722.48kb] [文件加载：87]
-[ info ] [ LANG ] /var/www/html/operator/thinkphp/lang/zh-cn.php
-[ info ] [ ROUTE ] array (
-)
-[ info ] [ HEADER ] array (
-  'cookie' => 'thinkphp_show_page_trace=0|0; PHPSESSID=tl96f2vm7m2nrqqthn9uh0km0j; thinkphp_show_page_trace=0|0',
-  'accept-language' => 'en-US,en;q=0.9',
-  'accept-encoding' => 'gzip, deflate, br',
-  'referer' => 'http://127.0.0.1:8899/index/catagory/index?mpi=m-p-i-1',
-  'sec-fetch-dest' => 'empty',
-  'sec-fetch-mode' => 'cors',
-  'sec-fetch-site' => 'same-origin',
-  'x-requested-with' => 'XMLHttpRequest',
-  'user-agent' => 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/83.0.4103.116 Safari/537.36',
-  'accept' => 'application/json, text/javascript, */*; q=0.01',
-  'connection' => 'keep-alive',
-  'host' => '127.0.0.1:8899',
-  'content-type' => '',
-  'content-length' => '',
-)
-[ info ] [ PARAM ] array (
-  'page' => '1',
-  'limit' => '10',
-)
-[ info ] [ DB ] INIT mysql
-[ sql ] [ DB ] CONNECT:[ UseTime:0.000476s ] mysql:host=127.0.0.1;port=3306;dbname=operator;charset=utf8
-[ sql ] [ SQL ] SHOW COLUMNS FROM `think_catagory` [ RunTime:0.000778s ]
-[ sql ] [ SQL ] SELECT * FROM `think_catagory` ORDER BY `id` DESC LIMIT 0,10 [ RunTime:0.000403s ]
-[ sql ] [ SQL ] SELECT * FROM `think_catagory` [ RunTime:0.000279s ]
----------------------------------------------------------------
-
-[2020-09-14T10:03:56+08:00] 127.0.0.1 GET 127.0.0.1:8899/index/item/index?mpi=m-p-i-1
-[运行时间：0.018742s] [吞吐率：53.36req/s] [内存消耗：539.07kb] [文件加载：82]
-[ info ] [ LANG ] /var/www/html/operator/thinkphp/lang/zh-cn.php
-[ info ] [ ROUTE ] array (
-)
-[ info ] [ HEADER ] array (
-  'cookie' => 'PHPSESSID=tl96f2vm7m2nrqqthn9uh0km0j; thinkphp_show_page_trace=0|0',
-  'accept-language' => 'en-US,en;q=0.9',
-  'accept-encoding' => 'gzip, deflate, br',
-  'referer' => 'http://127.0.0.1:8899/index',
-  'sec-fetch-dest' => 'iframe',
-  'sec-fetch-mode' => 'navigate',
-  'sec-fetch-site' => 'same-origin',
-  'accept' => 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9',
-  'user-agent' => 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/83.0.4103.116 Safari/537.36',
-  'upgrade-insecure-requests' => '1',
-  'connection' => 'keep-alive',
-  'host' => '127.0.0.1:8899',
-  'content-type' => '',
-  'content-length' => '',
-)
-[ info ] [ PARAM ] array (
-  'mpi' => 'm-p-i-1',
-)
-[ info ] [ VIEW ] /var/www/html/operator/application/index/view/item/index.html [ array (
-  0 => 'admin_id',
-  1 => 'admin_username',
-  2 => 'title',
-) ]
----------------------------------------------------------------
-
-[2020-09-14T10:03:56+08:00] 127.0.0.1 POST 127.0.0.1:8899/index/item/itemlist.html
-[运行时间：0.046687s] [吞吐率：21.42req/s] [内存消耗：819.87kb] [文件加载：91]
-[ info ] [ LANG ] /var/www/html/operator/thinkphp/lang/zh-cn.php
-[ info ] [ ROUTE ] array (
-)
-[ info ] [ HEADER ] array (
-  'cookie' => 'thinkphp_show_page_trace=0|0; PHPSESSID=tl96f2vm7m2nrqqthn9uh0km0j; thinkphp_show_page_trace=0|0',
-  'accept-language' => 'en-US,en;q=0.9',
-  'accept-encoding' => 'gzip, deflate, br',
-  'referer' => 'http://127.0.0.1:8899/index/item/index?mpi=m-p-i-1',
-  'sec-fetch-dest' => 'empty',
-  'sec-fetch-mode' => 'cors',
-  'sec-fetch-site' => 'same-origin',
-  'origin' => 'http://127.0.0.1:8899',
-  'content-type' => 'application/x-www-form-urlencoded; charset=UTF-8',
-  'user-agent' => 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/83.0.4103.116 Safari/537.36',
-  'x-requested-with' => 'XMLHttpRequest',
-  'accept' => 'application/json, text/javascript, */*; q=0.01',
-  'content-length' => '46',
-  'connection' => 'keep-alive',
-  'host' => '127.0.0.1:8899',
-)
-[ info ] [ PARAM ] array (
-  'page' => '1',
-  'limit' => '10',
-  'filterRules' => '[]',
-  'sort' => '[]',
-)
-[ info ] [ DB ] INIT mysql
-[ sql ] [ DB ] CONNECT:[ UseTime:0.001613s ] mysql:host=127.0.0.1;port=3306;dbname=operator;charset=utf8
-[ sql ] [ SQL ] SHOW COLUMNS FROM `think_item` [ RunTime:0.002356s ]
-[ sql ] [ SQL ] SELECT `id`,`code`,`sn`,`pn`,`pid`,`sort`,`catagoryid`,`is_kit`,`status`,`create_time`,`update_time`,`is_backup` FROM `think_item` ORDER BY `sort` ASC [ RunTime:0.002014s ]
-[ sql ] [ SQL ] SHOW COLUMNS FROM `think_catagory` [ RunTime:0.002532s ]
-[ sql ] [ SQL ] SELECT * FROM `think_catagory` WHERE  `id` = 5 LIMIT 1 [ RunTime:0.001072s ]
-[ sql ] [ SQL ] SELECT * FROM `think_catagory` WHERE  `id` = 8 LIMIT 1 [ RunTime:0.001148s ]
-[ sql ] [ SQL ] SELECT * FROM `think_catagory` WHERE  `id` = 6 LIMIT 1 [ RunTime:0.002365s ]
-[ sql ] [ SQL ] SELECT * FROM `think_catagory` WHERE  `id` = 8 LIMIT 1 [ RunTime:0.000984s ]
-[ sql ] [ SQL ] SELECT * FROM `think_catagory` WHERE  `id` = 7 LIMIT 1 [ RunTime:0.000998s ]
-[ sql ] [ SQL ] SELECT * FROM `think_catagory` WHERE  `id` = 7 LIMIT 1 [ RunTime:0.001327s ]
-[ sql ] [ SQL ] SELECT * FROM `think_catagory` WHERE  `id` = 6 LIMIT 1 [ RunTime:0.001210s ]
-[ sql ] [ SQL ] SELECT * FROM `think_catagory` WHERE  `id` = 7 LIMIT 1 [ RunTime:0.000920s ]
-[ sql ] [ SQL ] SELECT * FROM `think_catagory` WHERE  `id` = 6 LIMIT 1 [ RunTime:0.001126s ]
-[ sql ] [ SQL ] SELECT * FROM `think_catagory` WHERE  `id` = 5 LIMIT 1 [ RunTime:0.002499s ]
-[ sql ] [ SQL ] SELECT * FROM `think_catagory` WHERE  `id` = 5 LIMIT 1 [ RunTime:0.000807s ]
-[ sql ] [ SQL ] SELECT * FROM `think_catagory` WHERE  `id` = 5 LIMIT 1 [ RunTime:0.001136s ]
-[ sql ] [ SQL ] SELECT * FROM `think_catagory` WHERE  `id` = 3 LIMIT 1 [ RunTime:0.000461s ]
-[ sql ] [ SQL ] SELECT * FROM `think_catagory` WHERE  `id` = 2 LIMIT 1 [ RunTime:0.000459s ]
-[ sql ] [ SQL ] SELECT * FROM `think_catagory` WHERE  `id` = 4 LIMIT 1 [ RunTime:0.000360s ]
-[ sql ] [ SQL ] SELECT * FROM `think_catagory` WHERE  `id` = 1 LIMIT 1 [ RunTime:0.000325s ]
-[ sql ] [ SQL ] SELECT * FROM `think_catagory` WHERE  `id` = 8 LIMIT 1 [ RunTime:0.000386s ]
-[ sql ] [ SQL ] SELECT * FROM `think_catagory` WHERE  `id` = 1 LIMIT 1 [ RunTime:0.000295s ]
-[ sql ] [ SQL ] SELECT * FROM `think_catagory` WHERE  `id` = 2 LIMIT 1 [ RunTime:0.000260s ]
-[ sql ] [ SQL ] SELECT * FROM `think_catagory` WHERE  `id` = 8 LIMIT 1 [ RunTime:0.000219s ]
-[ sql ] [ SQL ] SELECT * FROM `think_catagory` WHERE  `id` = 8 LIMIT 1 [ RunTime:0.000218s ]
-[ sql ] [ SQL ] SELECT * FROM `think_catagory` WHERE  `id` = 1 LIMIT 1 [ RunTime:0.000215s ]
----------------------------------------------------------------
-
-[2020-09-14T10:03:57+08:00] 127.0.0.1 GET 127.0.0.1:8899/index/workorder/index?mpi=m-p-i-1
-[运行时间：0.021183s] [吞吐率：47.21req/s] [内存消耗：537.84kb] [文件加载：82]
-[ info ] [ LANG ] /var/www/html/operator/thinkphp/lang/zh-cn.php
-[ info ] [ ROUTE ] array (
-)
-[ info ] [ HEADER ] array (
-  'cookie' => 'PHPSESSID=tl96f2vm7m2nrqqthn9uh0km0j; thinkphp_show_page_trace=0|0',
-  'accept-language' => 'en-US,en;q=0.9',
-  'accept-encoding' => 'gzip, deflate, br',
-  'referer' => 'http://127.0.0.1:8899/index',
-  'sec-fetch-dest' => 'iframe',
-  'sec-fetch-mode' => 'navigate',
-  'sec-fetch-site' => 'same-origin',
-  'accept' => 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9',
-  'user-agent' => 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/83.0.4103.116 Safari/537.36',
-  'upgrade-insecure-requests' => '1',
-  'connection' => 'keep-alive',
-  'host' => '127.0.0.1:8899',
-  'content-type' => '',
-  'content-length' => '',
-)
-[ info ] [ PARAM ] array (
-  'mpi' => 'm-p-i-1',
-)
-[ info ] [ VIEW ] /var/www/html/operator/application/index/view/workorder/index.html [ array (
-  0 => 'admin_id',
-  1 => 'admin_username',
-  2 => 'title',
-) ]
----------------------------------------------------------------
-
-[2020-09-14T10:03:58+08:00] 127.0.0.1 GET 127.0.0.1:8899/index/workorder/workorderlist.html?page=1&limit=10
-[运行时间：0.423337s] [吞吐率：2.36req/s] [内存消耗：1,068.38kb] [文件加载：95]
-[ info ] [ LANG ] /var/www/html/operator/thinkphp/lang/zh-cn.php
-[ info ] [ ROUTE ] array (
-)
-[ info ] [ HEADER ] array (
-  'cookie' => 'thinkphp_show_page_trace=0|0; PHPSESSID=tl96f2vm7m2nrqqthn9uh0km0j; thinkphp_show_page_trace=0|0',
-  'accept-language' => 'en-US,en;q=0.9',
-  'accept-encoding' => 'gzip, deflate, br',
-  'referer' => 'http://127.0.0.1:8899/index/workorder/index?mpi=m-p-i-1',
-  'sec-fetch-dest' => 'empty',
-  'sec-fetch-mode' => 'cors',
-  'sec-fetch-site' => 'same-origin',
-  'x-requested-with' => 'XMLHttpRequest',
-  'user-agent' => 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/83.0.4103.116 Safari/537.36',
-  'accept' => 'application/json, text/javascript, */*; q=0.01',
-  'connection' => 'keep-alive',
-  'host' => '127.0.0.1:8899',
-  'content-type' => '',
-  'content-length' => '',
-)
-[ info ] [ PARAM ] array (
-  'page' => '1',
-  'limit' => '10',
-)
-[ info ] [ DB ] INIT mysql
-[ sql ] [ DB ] CONNECT:[ UseTime:0.000516s ] mysql:host=127.0.0.1;port=3306;dbname=operator;charset=utf8
-[ sql ] [ SQL ] SHOW COLUMNS FROM `think_workorder` [ RunTime:0.287334s ]
-[ sql ] [ SQL ] SELECT * FROM `think_workorder` ORDER BY `id` DESC LIMIT 0,10 [ RunTime:0.002047s ]
-[ sql ] [ SQL ] SHOW COLUMNS FROM `think_notification` [ RunTime:0.026294s ]
-[ sql ] [ SQL ] SELECT * FROM `think_notification` WHERE  `id` = 101 LIMIT 1 [ RunTime:0.001255s ]
-[ sql ] [ SQL ] SHOW COLUMNS FROM `think_org` [ RunTime:0.004081s ]
-[ sql ] [ SQL ] SELECT * FROM `think_org` WHERE  `id` = 1 LIMIT 1 [ RunTime:0.000804s ]
-[ sql ] [ SQL ] SHOW COLUMNS FROM `think_item` [ RunTime:0.002792s ]
-[ sql ] [ SQL ] SELECT * FROM `think_item` WHERE  `id` = 68 LIMIT 1 [ RunTime:0.001155s ]
-[ sql ] [ SQL ] SHOW COLUMNS FROM `think_catagory` [ RunTime:0.001789s ]
-[ sql ] [ SQL ] SELECT * FROM `think_catagory` WHERE  `id` = 6 LIMIT 1 [ RunTime:0.001572s ]
-[ sql ] [ SQL ] SHOW COLUMNS FROM `think_user` [ RunTime:0.001529s ]
-[ sql ] [ SQL ] SELECT * FROM `think_user` WHERE  `id` = 2 LIMIT 1 [ RunTime:0.000797s ]
-[ sql ] [ SQL ] SELECT * FROM `think_user` WHERE  `id` = 2 LIMIT 1 [ RunTime:0.000579s ]
-[ sql ] [ SQL ] SELECT * FROM `think_user` WHERE  `id` = 2 LIMIT 1 [ RunTime:0.000341s ]
-[ sql ] [ SQL ] SELECT * FROM `think_notification` WHERE  `id` = 100 LIMIT 1 [ RunTime:0.000352s ]
-[ sql ] [ SQL ] SELECT * FROM `think_org` WHERE  `id` = 1 LIMIT 1 [ RunTime:0.000363s ]
-[ sql ] [ SQL ] SELECT * FROM `think_item` WHERE  `id` = 61 LIMIT 1 [ RunTime:0.000394s ]
-[ sql ] [ SQL ] SELECT * FROM `think_catagory` WHERE  `id` = 2 LIMIT 1 [ RunTime:0.000291s ]
-[ sql ] [ SQL ] SELECT * FROM `think_user` WHERE  `id` = 2 LIMIT 1 [ RunTime:0.000272s ]
-[ sql ] [ SQL ] SELECT * FROM `think_user` WHERE  `id` = 2 LIMIT 1 [ RunTime:0.000582s ]
-[ sql ] [ SQL ] SELECT * FROM `think_user` WHERE  `id` = 2 LIMIT 1 [ RunTime:0.001311s ]
-[ sql ] [ SQL ] SELECT * FROM `think_notification` WHERE  `id` = 99 LIMIT 1 [ RunTime:0.000829s ]
-[ sql ] [ SQL ] SELECT * FROM `think_org` WHERE  `id` = 1 LIMIT 1 [ RunTime:0.000724s ]
-[ sql ] [ SQL ] SELECT * FROM `think_item` WHERE  `id` = 60 LIMIT 1 [ RunTime:0.001281s ]
-[ sql ] [ SQL ] SELECT * FROM `think_catagory` WHERE  `id` = 4 LIMIT 1 [ RunTime:0.000991s ]
-[ sql ] [ SQL ] SELECT * FROM `think_user` WHERE  `id` = 2 LIMIT 1 [ RunTime:0.000718s ]
-[ sql ] [ SQL ] SELECT * FROM `think_user` WHERE  `id` = 2 LIMIT 1 [ RunTime:0.000469s ]
-[ sql ] [ SQL ] SELECT * FROM `think_user` WHERE  `id` IS NULL LIMIT 1 [ RunTime:0.000246s ]
-[ sql ] [ SQL ] SELECT * FROM `think_notification` WHERE  `id` = 98 LIMIT 1 [ RunTime:0.000299s ]
-[ sql ] [ SQL ] SELECT * FROM `think_org` WHERE  `id` = 1 LIMIT 1 [ RunTime:0.000268s ]
-[ sql ] [ SQL ] SELECT * FROM `think_item` WHERE  `id` = 68 LIMIT 1 [ RunTime:0.000334s ]
-[ sql ] [ SQL ] SELECT * FROM `think_catagory` WHERE  `id` = 6 LIMIT 1 [ RunTime:0.000291s ]
-[ sql ] [ SQL ] SELECT * FROM `think_user` WHERE  `id` = 2 LIMIT 1 [ RunTime:0.000301s ]
-[ sql ] [ SQL ] SELECT * FROM `think_user` WHERE  `id` = 2 LIMIT 1 [ RunTime:0.000272s ]
-[ sql ] [ SQL ] SELECT * FROM `think_user` WHERE  `id` IS NULL LIMIT 1 [ RunTime:0.000228s ]
-[ sql ] [ SQL ] SELECT * FROM `think_notification` WHERE  `id` = 97 LIMIT 1 [ RunTime:0.000307s ]
-[ sql ] [ SQL ] SELECT * FROM `think_org` WHERE  `id` = 1 LIMIT 1 [ RunTime:0.000285s ]
-[ sql ] [ SQL ] SELECT * FROM `think_item` WHERE  `id` = 60 LIMIT 1 [ RunTime:0.000352s ]
-[ sql ] [ SQL ] SELECT * FROM `think_catagory` WHERE  `id` = 4 LIMIT 1 [ RunTime:0.000493s ]
-[ sql ] [ SQL ] SELECT * FROM `think_user` WHERE  `id` = 2 LIMIT 1 [ RunTime:0.001465s ]
-[ sql ] [ SQL ] SELECT * FROM `think_user` WHERE  `id` IS NULL LIMIT 1 [ RunTime:0.000647s ]
-[ sql ] [ SQL ] SELECT * FROM `think_user` WHERE  `id` IS NULL LIMIT 1 [ RunTime:0.000942s ]
-[ sql ] [ SQL ] SELECT * FROM `think_notification` WHERE  `id` = 96 LIMIT 1 [ RunTime:0.001216s ]
-[ sql ] [ SQL ] SELECT * FROM `think_org` WHERE  `id` = 1 LIMIT 1 [ RunTime:0.000970s ]
-[ sql ] [ SQL ] SELECT * FROM `think_item` WHERE  `id` = 65 LIMIT 1 [ RunTime:0.000848s ]
-[ sql ] [ SQL ] SELECT * FROM `think_catagory` WHERE  `id` = 5 LIMIT 1 [ RunTime:0.000382s ]
-[ sql ] [ SQL ] SELECT * FROM `think_user` WHERE  `id` = 2 LIMIT 1 [ RunTime:0.000380s ]
-[ sql ] [ SQL ] SELECT * FROM `think_user` WHERE  `id` IS NULL LIMIT 1 [ RunTime:0.000298s ]
-[ sql ] [ SQL ] SELECT * FROM `think_user` WHERE  `id` IS NULL LIMIT 1 [ RunTime:0.000319s ]
-[ sql ] [ SQL ] SELECT * FROM `think_notification` WHERE  `id` = 96 LIMIT 1 [ RunTime:0.000373s ]
-[ sql ] [ SQL ] SELECT * FROM `think_org` WHERE  `id` = 1 LIMIT 1 [ RunTime:0.000347s ]
-[ sql ] [ SQL ] SELECT * FROM `think_item` WHERE  `id` = 64 LIMIT 1 [ RunTime:0.000400s ]
-[ sql ] [ SQL ] SELECT * FROM `think_catagory` WHERE  `id` = 5 LIMIT 1 [ RunTime:0.000316s ]
-[ sql ] [ SQL ] SELECT * FROM `think_user` WHERE  `id` = 2 LIMIT 1 [ RunTime:0.000286s ]
-[ sql ] [ SQL ] SELECT * FROM `think_user` WHERE  `id` IS NULL LIMIT 1 [ RunTime:0.000232s ]
-[ sql ] [ SQL ] SELECT * FROM `think_user` WHERE  `id` IS NULL LIMIT 1 [ RunTime:0.000428s ]
-[ sql ] [ SQL ] SELECT * FROM `think_notification` WHERE  `id` = 96 LIMIT 1 [ RunTime:0.001479s ]
-[ sql ] [ SQL ] SELECT * FROM `think_org` WHERE  `id` = 1 LIMIT 1 [ RunTime:0.001352s ]
-[ sql ] [ SQL ] SELECT * FROM `think_item` WHERE  `id` = 63 LIMIT 1 [ RunTime:0.001250s ]
-[ sql ] [ SQL ] SELECT * FROM `think_catagory` WHERE  `id` = 5 LIMIT 1 [ RunTime:0.000729s ]
-[ sql ] [ SQL ] SELECT * FROM `think_user` WHERE  `id` = 2 LIMIT 1 [ RunTime:0.000972s ]
-[ sql ] [ SQL ] SELECT * FROM `think_user` WHERE  `id` IS NULL LIMIT 1 [ RunTime:0.000637s ]
-[ sql ] [ SQL ] SELECT * FROM `think_user` WHERE  `id` IS NULL LIMIT 1 [ RunTime:0.000328s ]
-[ sql ] [ SQL ] SELECT * FROM `think_notification` WHERE  `id` = 96 LIMIT 1 [ RunTime:0.000385s ]
-[ sql ] [ SQL ] SELECT * FROM `think_org` WHERE  `id` = 1 LIMIT 1 [ RunTime:0.000355s ]
-[ sql ] [ SQL ] SELECT * FROM `think_item` WHERE  `id` = 47 LIMIT 1 [ RunTime:0.000460s ]
-[ sql ] [ SQL ] SELECT * FROM `think_catagory` WHERE  `id` = 5 LIMIT 1 [ RunTime:0.000406s ]
-[ sql ] [ SQL ] SELECT * FROM `think_user` WHERE  `id` = 2 LIMIT 1 [ RunTime:0.000366s ]
-[ sql ] [ SQL ] SELECT * FROM `think_user` WHERE  `id` = 2 LIMIT 1 [ RunTime:0.000371s ]
-[ sql ] [ SQL ] SELECT * FROM `think_user` WHERE  `id` IS NULL LIMIT 1 [ RunTime:0.000302s ]
-[ sql ] [ SQL ] SELECT * FROM `think_notification` WHERE  `id` = 95 LIMIT 1 [ RunTime:0.000397s ]
-[ sql ] [ SQL ] SELECT * FROM `think_org` WHERE  `id` = 1 LIMIT 1 [ RunTime:0.000410s ]
-[ sql ] [ SQL ] SELECT * FROM `think_item` WHERE  `id` = 61 LIMIT 1 [ RunTime:0.001239s ]
-[ sql ] [ SQL ] SELECT * FROM `think_catagory` WHERE  `id` = 2 LIMIT 1 [ RunTime:0.001328s ]
-[ sql ] [ SQL ] SELECT * FROM `think_user` WHERE  `id` = 2 LIMIT 1 [ RunTime:0.000628s ]
-[ sql ] [ SQL ] SELECT * FROM `think_user` WHERE  `id` IS NULL LIMIT 1 [ RunTime:0.000428s ]
-[ sql ] [ SQL ] SELECT * FROM `think_user` WHERE  `id` IS NULL LIMIT 1 [ RunTime:0.001129s ]
-[ sql ] [ SQL ] SELECT * FROM `think_workorder` [ RunTime:0.001264s ]
----------------------------------------------------------------
-
-[2020-09-14T10:03:59+08:00] 127.0.0.1 GET 127.0.0.1:8899/index/settlement/index?mpi=m-p-i-1
-[运行时间：0.031935s] [吞吐率：31.31req/s] [内存消耗：473.84kb] [文件加载：82]
-[ info ] [ LANG ] /var/www/html/operator/thinkphp/lang/zh-cn.php
-[ info ] [ ROUTE ] array (
-)
-[ info ] [ HEADER ] array (
-  'cookie' => 'PHPSESSID=tl96f2vm7m2nrqqthn9uh0km0j; thinkphp_show_page_trace=0|0',
-  'accept-language' => 'en-US,en;q=0.9',
-  'accept-encoding' => 'gzip, deflate, br',
-  'referer' => 'http://127.0.0.1:8899/index',
-  'sec-fetch-dest' => 'iframe',
-  'sec-fetch-mode' => 'navigate',
-  'sec-fetch-site' => 'same-origin',
-  'accept' => 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9',
-  'user-agent' => 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/83.0.4103.116 Safari/537.36',
-  'upgrade-insecure-requests' => '1',
-  'connection' => 'keep-alive',
-  'host' => '127.0.0.1:8899',
-  'content-type' => '',
-  'content-length' => '',
-)
-[ info ] [ PARAM ] array (
-  'mpi' => 'm-p-i-1',
-)
-[ info ] [ VIEW ] /var/www/html/operator/application/index/view/settlement/index.html [ array (
-  0 => 'admin_id',
-  1 => 'admin_username',
-  2 => 'title',
-) ]
----------------------------------------------------------------
-
-[2020-09-14T10:03:59+08:00] 127.0.0.1 GET 127.0.0.1:8899/index/settlement/settlementlist.html?page=1&limit=10
-[运行时间：0.019025s] [吞吐率：52.56req/s] [内存消耗：813.77kb] [文件加载：91]
-[ info ] [ LANG ] /var/www/html/operator/thinkphp/lang/zh-cn.php
-[ info ] [ ROUTE ] array (
-)
-[ info ] [ HEADER ] array (
-  'cookie' => 'thinkphp_show_page_trace=0|0; PHPSESSID=tl96f2vm7m2nrqqthn9uh0km0j; thinkphp_show_page_trace=0|0',
-  'accept-language' => 'en-US,en;q=0.9',
-  'accept-encoding' => 'gzip, deflate, br',
-  'referer' => 'http://127.0.0.1:8899/index/settlement/index?mpi=m-p-i-1',
-  'sec-fetch-dest' => 'empty',
-  'sec-fetch-mode' => 'cors',
-  'sec-fetch-site' => 'same-origin',
-  'x-requested-with' => 'XMLHttpRequest',
-  'user-agent' => 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/83.0.4103.116 Safari/537.36',
-  'accept' => 'application/json, text/javascript, */*; q=0.01',
-  'connection' => 'keep-alive',
-  'host' => '127.0.0.1:8899',
-  'content-type' => '',
-  'content-length' => '',
-)
-[ info ] [ PARAM ] array (
-  'page' => '1',
-  'limit' => '10',
-)
-[ info ] [ DB ] INIT mysql
-[ sql ] [ DB ] CONNECT:[ UseTime:0.001227s ] mysql:host=127.0.0.1;port=3306;dbname=operator;charset=utf8
-[ sql ] [ SQL ] SHOW COLUMNS FROM `think_settlement` [ RunTime:0.001700s ]
-[ sql ] [ SQL ] SELECT * FROM `think_settlement` ORDER BY `id` DESC LIMIT 0,10 [ RunTime:0.000596s ]
-[ sql ] [ SQL ] SHOW COLUMNS FROM `think_org` [ RunTime:0.000903s ]
-[ sql ] [ SQL ] SELECT * FROM `think_org` WHERE  `id` = 1 LIMIT 1 [ RunTime:0.000497s ]
-[ sql ] [ SQL ] SELECT * FROM `think_org` WHERE  `id` = 1 LIMIT 1 [ RunTime:0.000343s ]
-[ sql ] [ SQL ] SELECT * FROM `think_org` WHERE  `id` = 1 LIMIT 1 [ RunTime:0.000273s ]
-[ sql ] [ SQL ] SELECT * FROM `think_org` WHERE  `id` = 1 LIMIT 1 [ RunTime:0.000214s ]
-[ sql ] [ SQL ] SELECT * FROM `think_org` WHERE  `id` = 1 LIMIT 1 [ RunTime:0.000170s ]
-[ sql ] [ SQL ] SELECT * FROM `think_org` WHERE  `id` = 1 LIMIT 1 [ RunTime:0.000220s ]
-[ sql ] [ SQL ] SELECT * FROM `think_org` WHERE  `id` = 1 LIMIT 1 [ RunTime:0.000238s ]
-[ sql ] [ SQL ] SELECT * FROM `think_org` WHERE  `id` = 1 LIMIT 1 [ RunTime:0.000211s ]
-[ sql ] [ SQL ] SELECT * FROM `think_org` WHERE  `id` = 1 LIMIT 1 [ RunTime:0.000208s ]
-[ sql ] [ SQL ] SELECT * FROM `think_org` WHERE  `id` = 1 LIMIT 1 [ RunTime:0.000208s ]
-[ sql ] [ SQL ] SELECT * FROM `think_settlement` [ RunTime:0.000226s ]
----------------------------------------------------------------
-
-[2020-09-14T10:04:01+08:00] 127.0.0.1 GET 127.0.0.1:8899/admin/org/index?mpi=m-p-i-1
-[运行时间：0.028089s] [吞吐率：35.60req/s] [内存消耗：473.81kb] [文件加载：82]
-[ info ] [ LANG ] /var/www/html/operator/thinkphp/lang/zh-cn.php
-[ info ] [ ROUTE ] array (
-)
-[ info ] [ HEADER ] array (
-  'cookie' => 'PHPSESSID=tl96f2vm7m2nrqqthn9uh0km0j; thinkphp_show_page_trace=0|0',
-  'accept-language' => 'en-US,en;q=0.9',
-  'accept-encoding' => 'gzip, deflate, br',
-  'referer' => 'http://127.0.0.1:8899/index',
-  'sec-fetch-dest' => 'iframe',
-  'sec-fetch-mode' => 'navigate',
-  'sec-fetch-site' => 'same-origin',
-  'accept' => 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9',
-  'user-agent' => 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/83.0.4103.116 Safari/537.36',
-  'upgrade-insecure-requests' => '1',
-  'connection' => 'keep-alive',
-  'host' => '127.0.0.1:8899',
-  'content-type' => '',
-  'content-length' => '',
-)
-[ info ] [ PARAM ] array (
-  'mpi' => 'm-p-i-1',
-)
-[ info ] [ VIEW ] /var/www/html/operator/application/admin/view/org/index.html [ array (
-  0 => 'admin_id',
-  1 => 'admin_username',
-  2 => 'title',
-) ]
----------------------------------------------------------------
-
-[2020-09-14T10:04:01+08:00] 127.0.0.1 POST 127.0.0.1:8899/admin/org/orglist.html
-[运行时间：0.014968s] [吞吐率：66.81req/s] [内存消耗：718.70kb] [文件加载：87]
-[ info ] [ LANG ] /var/www/html/operator/thinkphp/lang/zh-cn.php
-[ info ] [ ROUTE ] array (
-)
-[ info ] [ HEADER ] array (
-  'cookie' => 'thinkphp_show_page_trace=0|0; PHPSESSID=tl96f2vm7m2nrqqthn9uh0km0j; thinkphp_show_page_trace=0|0',
-  'accept-language' => 'en-US,en;q=0.9',
-  'accept-encoding' => 'gzip, deflate, br',
-  'referer' => 'http://127.0.0.1:8899/admin/org/index?mpi=m-p-i-1',
-  'sec-fetch-dest' => 'empty',
-  'sec-fetch-mode' => 'cors',
-  'sec-fetch-site' => 'same-origin',
-  'origin' => 'http://127.0.0.1:8899',
-  'content-type' => 'application/x-www-form-urlencoded; charset=UTF-8',
-  'user-agent' => 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/83.0.4103.116 Safari/537.36',
-  'x-requested-with' => 'XMLHttpRequest',
-  'accept' => 'application/json, text/javascript, */*; q=0.01',
-  'content-length' => '46',
-  'connection' => 'keep-alive',
-  'host' => '127.0.0.1:8899',
-)
-[ info ] [ PARAM ] array (
-  'page' => '1',
-  'limit' => '10',
-  'filterRules' => '[]',
-  'sort' => '[]',
-)
-[ info ] [ DB ] INIT mysql
-[ sql ] [ DB ] CONNECT:[ UseTime:0.001086s ] mysql:host=127.0.0.1;port=3306;dbname=operator;charset=utf8
-[ sql ] [ SQL ] SHOW COLUMNS FROM `think_org` [ RunTime:0.001524s ]
-[ sql ] [ SQL ] SELECT `id`,name as title,`pid`,`sort`,`status`,`create_time`,`update_time` FROM `think_org` ORDER BY `sort` ASC [ RunTime:0.002005s ]
----------------------------------------------------------------
-
-[2020-09-14T10:04:05+08:00] 127.0.0.1 GET 127.0.0.1:8899/index/diaginfo/index?mpi=m-p-i-1
-[运行时间：0.012365s] [吞吐率：80.87req/s] [内存消耗：473.84kb] [文件加载：82]
-[ info ] [ LANG ] /var/www/html/operator/thinkphp/lang/zh-cn.php
-[ info ] [ ROUTE ] array (
-)
-[ info ] [ HEADER ] array (
-  'cookie' => 'PHPSESSID=tl96f2vm7m2nrqqthn9uh0km0j; thinkphp_show_page_trace=0|0',
-  'accept-language' => 'en-US,en;q=0.9',
-  'accept-encoding' => 'gzip, deflate, br',
-  'referer' => 'http://127.0.0.1:8899/index',
-  'sec-fetch-dest' => 'iframe',
-  'sec-fetch-mode' => 'navigate',
-  'sec-fetch-site' => 'same-origin',
-  'accept' => 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9',
-  'user-agent' => 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/83.0.4103.116 Safari/537.36',
-  'upgrade-insecure-requests' => '1',
-  'connection' => 'keep-alive',
-  'host' => '127.0.0.1:8899',
-  'content-type' => '',
-  'content-length' => '',
-)
-[ info ] [ PARAM ] array (
-  'mpi' => 'm-p-i-1',
-)
-[ info ] [ VIEW ] /var/www/html/operator/application/index/view/diaginfo/index.html [ array (
-  0 => 'admin_id',
-  1 => 'admin_username',
-  2 => 'title',
-) ]
----------------------------------------------------------------
-
-[2020-09-14T10:04:05+08:00] 127.0.0.1 GET 127.0.0.1:8899/index/diaginfo/diaginfolist.html?page=1&limit=10
-[运行时间：0.072383s] [吞吐率：13.82req/s] [内存消耗：3,105.76kb] [文件加载：87]
-[ info ] [ LANG ] /var/www/html/operator/thinkphp/lang/zh-cn.php
-[ info ] [ ROUTE ] array (
-)
-[ info ] [ HEADER ] array (
-  'cookie' => 'thinkphp_show_page_trace=0|0; PHPSESSID=tl96f2vm7m2nrqqthn9uh0km0j; thinkphp_show_page_trace=0|0',
-  'accept-language' => 'en-US,en;q=0.9',
-  'accept-encoding' => 'gzip, deflate, br',
-  'referer' => 'http://127.0.0.1:8899/index/diaginfo/index?mpi=m-p-i-1',
-  'sec-fetch-dest' => 'empty',
-  'sec-fetch-mode' => 'cors',
-  'sec-fetch-site' => 'same-origin',
-  'x-requested-with' => 'XMLHttpRequest',
-  'user-agent' => 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/83.0.4103.116 Safari/537.36',
-  'accept' => 'application/json, text/javascript, */*; q=0.01',
-  'connection' => 'keep-alive',
-  'host' => '127.0.0.1:8899',
-  'content-type' => '',
-  'content-length' => '',
-)
-[ info ] [ PARAM ] array (
-  'page' => '1',
-  'limit' => '10',
-)
-[ info ] [ DB ] INIT mysql
-[ sql ] [ DB ] CONNECT:[ UseTime:0.000690s ] mysql:host=127.0.0.1;port=3306;dbname=operator;charset=utf8
-[ sql ] [ SQL ] SHOW COLUMNS FROM `think_singledia_info` [ RunTime:0.037147s ]
-[ sql ] [ SQL ] SELECT * FROM `think_singledia_info` LIMIT 0,10 [ RunTime:0.001166s ]
-[ sql ] [ SQL ] SELECT * FROM `think_singledia_info` [ RunTime:0.005435s ]

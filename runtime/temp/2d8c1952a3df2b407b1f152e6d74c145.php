@@ -1,4 +1,4 @@
-<?php /*a:2:{s:72:"/Applications/MAMP/htdocs/operator/application/index/view/item/edit.html";i:1598686424;s:82:"/Applications/MAMP/htdocs/operator/application/index/view/public/layer_layout.html";i:1582010668;}*/ ?>
+<?php /*a:2:{s:72:"/Applications/MAMP/htdocs/operator/application/index/view/item/edit.html";i:1598787732;s:82:"/Applications/MAMP/htdocs/operator/application/index/view/public/layer_layout.html";i:1582010668;}*/ ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -86,8 +86,8 @@
         <div class="layui-form-item">
             <label class="layui-form-label">启用日期：</label>
             <div class="layui-input-block">
-                <input type="text" name="start_date" id="date" lay-verify="date" placeholder="yyyy-MM-dd" autocomplete="off" class="layui-input" value="<?php echo htmlentities($itemInfo['start_date']); ?>">
-                <input type="text" name="start_date" class="layui-input" placeholder="请输入启用日期" autocomplete="off" lay-verify="date" lay-reqText="启用日期不能为空" value="<?php echo htmlentities($itemInfo['start_date']); ?>">
+
+                <input type="text" name="start_date" class="layui-input" placeholder="请输入启用日期" autocomplete="off" lay-verify="datetime" lay-reqText="启用日期不能为空" value="<?php echo htmlentities($itemInfo['start_date']); ?>">
             </div>
         </div>
         <div class="layui-form-item">

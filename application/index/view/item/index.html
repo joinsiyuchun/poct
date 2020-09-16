@@ -3,28 +3,25 @@
 {block name="main"}
 {// 数据表格}
 <!--<div class="layui-form" action="">-->
-<table class="layui-hide" id="treeTable" lay-filter="treeTable"></table>
+    <table class="layui-hide" id="treeTable" lay-filter="treeTable"></table>
 <!--</div>-->
 {// 顶部工具栏}
 <script type="text/html" id="toolbar">
     <div class="dataToolbar">
         <div class="layui-inline">
-            <input class="layui-input" name="keywords" id="keywords" value="{:input('keywords')}" autocomplete="on"
-                   placeholder="请输入设备编码">
+            <input class="layui-input" name="keywords" id="keywords" value="{:input('keywords')}" autocomplete="on" placeholder="请输入设备编码">
         </div>
         <button class="layui-btn search-btn" data-type="reload"><i class="iconfont">&#xe679;</i> 查询</button>
         <button class="layui-btn" id="import" data-type="import"><i class="iconfont">&#xe692;</i> 导入设备档案
         </button>
-
         <div class="layui-inline">
             {if (buttonCheck('index/item/add')) }
             <button class="layui-btn" id="add" data-pid="0"><i class="iconfont">&#xe692;</i> 添加顶层设备</button>
             {/if}
             {if (buttonCheck('index/item/asign')) }
-            <button class="layui-btn" id="assign" data-pid="0"><i class="iconfont">&#xe692;</i> 分配组织</button>
+            <button class="layui-btn"  id="assign" data-pid="0"><i class="iconfont">&#xe692;</i> 分配组织</button>
             {/if}
-            <button class="layui-btn layui-btn-primary open-all" id="openAll"><i class="iconfont">&#xe9d6;</i> 全部关闭
-            </button>
+            <button class="layui-btn layui-btn-primary open-all" id="openAll"><i class="iconfont">&#xe9d6;</i> 全部关闭</button>
         </div>
     </div>
 </script>
@@ -35,16 +32,13 @@
     <a href="javascript:;" class="layui-btn layui-btn-xs" onclick="edit('{{d.id}}')"><i class="iconfont">&#xe7e0;</i> 编辑</a>
     {/if}
     {if (buttonCheck('index/item/del')) }
-    <a href='javascript:;' class="layui-btn layui-btn-danger layui-btn-xs" onclick="del('{{d.id}}')"><i
-            class="iconfont">&#xe6b4;</i> 删除</a>
+    <a href='javascript:;' class="layui-btn layui-btn-danger layui-btn-xs" onclick="del('{{d.id}}')"><i class="iconfont">&#xe6b4;</i> 删除</a>
     {/if}
     {if (buttonCheck('index/item/getQrcode')) }
-    <a href="javascript:;" class="layui-btn layui-btn-xs" onclick="getQrcode('{{d.id}}')"><i
-            class="iconfont">&#xe7e0;</i> 二维码</a>
+    <a href="javascript:;" class="layui-btn layui-btn-xs" onclick="getQrcode('{{d.id}}')"><i class="iconfont">&#xe7e0;</i> 二维码</a>
     {/if}
     {if (buttonCheck('index/item/assignOrg')) }
-    <a href="javascript:;" lay-event="assignOrg" class="layui-btn layui-btn-xs" onclick="assignOrg('{{d.id}}')"><i
-            class="iconfont">&#xe7e0;</i>分配组织</a>
+    <a href="javascript:;" lay-event="assignOrg" class="layui-btn layui-btn-xs" onclick="assignOrg('{{d.id}}')"><i class="iconfont">&#xe7e0;</i>分配组织</a>
     {/if}
 </script>
 
@@ -69,11 +63,9 @@
 <script type="text/html" id="is_backup">
     {eq name="$Think.session.admin_id" value="1"}
     {{# if(d.is_backup == 1){ }}
-    <button class="layui-btn layui-btn-xs layui-btn-danger " onclick="setBackup('{{d.id}}', '{{d.is_bakcup}}')">是
-    </button>
+    <button class="layui-btn layui-btn-xs layui-btn-danger " onclick="setBackup('{{d.id}}', '{{d.is_bakcup}}')">是</button>
     {{# } else { }}
-    <button class="layui-btn layui-btn-xs layui-btn-success" onclick="setBackup('{{d.id}}', '{{d.is_backup}}')">否
-    </button>
+    <button class="layui-btn layui-btn-xs layui-btn-success" onclick="setBackup('{{d.id}}', '{{d.is_backup}}')">否</button>
     {{# } }}
     {else/}
     {{# if(d.is_backup == 1){ }}
@@ -90,8 +82,7 @@
     <i class="layui-icon layui-icon-close text-fail"></i>
     {{# } else if (d.is_kit == 2) { }}
     {if (buttonCheck('index/item/addChild')) }
-    <a href="javascript:;" lay-event="addChild" class="layui-btn layui-btn-xs"
-       onclick="addChild('{{d.id}}', '{{d.title}}')"><i class="iconfont">&#xe7e0;</i> 添加</a>
+    <a href="javascript:;" lay-event="addChild" class="layui-btn layui-btn-xs" onclick="addChild('{{d.id}}', '{{d.title}}')"><i class="iconfont">&#xe7e0;</i> 添加</a>
     {else}
     <i class="layui-icon layui-icon-ok text-success"></i>
     {/if}
@@ -105,7 +96,7 @@
         version: '1061458899',
         base: '__STATIC__/layui_exts/treeGrid/'
     }).extend({
-        treeTable: 'treeGrid/treeGrid'
+        treeTable : 'treeGrid/treeGrid'
     });
 </script>
 {/block}
@@ -137,45 +128,45 @@
             onDblClickRow: false, //去除双击事件
             cols: [
                 [
-                    {checkbox: true},
-                    {field: 'id', align: 'center', width: 60, title: 'ID'},
-                    {field: 'title', width: 150, title: '设备分类'},
-                    {field: 'code', width: 90, title: '设备编码'},
-                    {field: 'status', width: 100, align: 'center', title: '状态', templet: '#status'},
-                    {field: 'is_backup', width: 100, align: 'center', title: '是否备机', templet: '#is_backup'},
-                    {field: 'sn', width: 100, title: '序列号'},
-                    {field: 'pn', width: 100, title: 'P/N'},
-                    {field: 'is_kit', width: 100, align: 'center', title: '子组件', templet: '#isMenu'},
-                    {fixed: 'right', align: 'center', width: 350, title: '操作', toolbar: '#barTool'}
+                    { checkbox: true},
+                    { field: 'id', align: 'center', width: 60, title: 'ID' },
+                    { field: 'title', width: 150, title: '设备分类'},
+                    { field: 'code', width: 90, title: '设备编码'},
+                    { field: 'status', width: 100, align: 'center', title: '状态', templet: '#status'},
+                    { field: 'is_backup', width: 100, align: 'center', title: '是否备机', templet: '#is_backup'},
+                    { field: 'sn', width: 100, title: '序列号'},
+                    { field: 'pn', width: 100, title: 'P/N'},
+                    { field: 'is_kit', width: 100, align: 'center', title: '子组件', templet: '#isMenu'},
+                    { fixed: 'right', align: 'center', width: 350, title: '操作', toolbar: '#barTool' }
                 ]
             ],
             page: false
         });
 
-        $('.search-btn').on('click', function () {
+        $('.search-btn').on('click', function(){
 
             var keywords = $('input[name="keywords"]').val();
             $.ajax({
                 type: "post",
                 url: "{:url('itemList')}",
-                data: {keywords: keywords},
+                data: {keywords : keywords},
                 dataType: 'json',
                 success: function (data) {
                     // console.log(data.data);
-                    var itemlist = data.data;
-                    itemlist.forEach(function (e) {
-                        var newtitle = "<font color='red'>" + e['title'] + "</font>";
-                        treeGrid.updateRow(tableId, {id: e['id'], title: newtitle});
+                     var itemlist=data.data;
+                    itemlist.forEach(function(e) {
+                         var newtitle="<font color='red'>"+e['title']+"</font>";
+                        treeGrid.updateRow(tableId,{id:e['id'],title:newtitle});
                     });
 
 
                 }
             });
-            return false;
+             return false;
         });
 
         // 展开关闭节点
-        $('#openAll').click(function (e) {
+        $('#openAll').click(function(e) {
             var treedata = treeGrid.getDataTreeList(tableId);
             treeGrid.treeOpenAll(tableId, !treedata[0][treeGrid.config.cols.isOpen]);
             mark = !mark;
@@ -193,12 +184,12 @@
                 skin: 'layui-layer-molv',
                 btn: ['立即提交', '重置'],
                 btnAlign: 'c',
-                yes: function (index, layero) {
+                yes: function(index, layero){
                     var submit = layero.find('iframe').contents().find("#submit");// #subBtn为页面层提交按钮ID
                     submit.click();// 触发提交监听
                     return false;
                 },
-                btn2: function (index, layero) {
+                btn2:function (index,layero) {
                     var reset = layero.find('iframe').contents().find("#reset");// #subBtn为页面层提交按钮ID
                     reset.click();// 触发重置按钮
                     return false;
@@ -208,10 +199,10 @@
         // 分配机构
         $('#assign').on('click', function () {
             var checkStatus = treeGrid.checkStatus(tableId); //idTest 即为基础参数 id 对应的值
-            var checkeddata = checkStatus.data;
+            var checkeddata=checkStatus.data;
             var arr = new Array();
-            for (i = 0; i < checkeddata.length; i++) {
-                arr[i] = checkeddata[i]["id"];
+            for(i=0;i<checkeddata.length;i++){
+                arr[i]=checkeddata[i]["id"];
             }
             var str = arr.join("|");
             var index = layer.open({
@@ -222,19 +213,18 @@
                 skin: 'layui-layer-molv',
                 btn: ['保存', '取消'],
                 btnAlign: 'c',
-                yes: function (index, layero) {
+                yes: function(index, layero){
                     var submit = layero.find('iframe').contents().find("#submit");// #subBtn为页面层提交按钮ID
                     submit.click();// 触发提交监听
                     return false;
                 },
-                btn2: function (index, layero) {
+                btn2:function (index,layero) {
                     layer.close(index);
                 }
             });
         });
 
-
-        // 分配机构
+        // import excel
         $('#import').on('click', function () {
             var index = layer.open({
                 type: 2,
@@ -249,6 +239,7 @@
                 }
             });
         });
+
     });
 
     // 添加子节点
@@ -261,12 +252,12 @@
             skin: 'layui-layer-molv',
             btn: ['立即提交', '重置'],
             btnAlign: 'c',
-            yes: function (index, layero) {
+            yes: function(index, layero){
                 var submit = layero.find('iframe').contents().find("#submit");// #subBtn为页面层提交按钮ID
                 submit.click();// 触发提交监听
                 return false;
             },
-            btn2: function (index, layero) {
+            btn2:function (index,layero) {
                 var reset = layero.find('iframe').contents().find("#reset");// #subBtn为页面层提交按钮ID
                 reset.click();// 触发重置按钮
                 return false;
@@ -284,12 +275,12 @@
             skin: 'layui-layer-molv',
             btn: ['保存', '取消'],
             btnAlign: 'c',
-            yes: function (index, layero) {
+            yes: function(index, layero){
                 var submit = layero.find('iframe').contents().find("#submit");// #subBtn为页面层提交按钮ID
                 submit.click();// 触发提交监听
                 return false;
             },
-            btn2: function (index, layero) {
+            btn2:function (index,layero) {
                 layer.close(index);
             }
         });
@@ -306,7 +297,7 @@
             end: function (index, layero) {
                 return false;
             },
-            content: '<div style="text-align:center"><img src="' + "/static/uploads/" + id + '.jpg" /></div>'
+            content: '<div style="text-align:center"><img src="' + "/static/uploads/"+id + '.jpg" /></div>'
         });
     }
 
@@ -321,12 +312,12 @@
             skin: 'layui-layer-molv',
             btn: ['保存', '取消'],
             btnAlign: 'c',
-            yes: function (index, layero) {
+            yes: function(index, layero){
                 var submit = layero.find('iframe').contents().find("#submit");// #subBtn为页面层提交按钮ID
                 submit.click();// 触发提交监听
                 return false;
             },
-            btn2: function (index, layero) {
+            btn2:function (index,layero) {
                 layer.close(index);
             }
         });
@@ -334,10 +325,10 @@
 
     // 删除节点
     function del(id) {
-        layer.confirm('您确定要删除该节点吗？', {
+        layer.confirm('您确定要删除该节点吗？',{
             icon: 3,
             skin: 'layer-ext-moon'
-        }, function (index) {
+        },function(index){
             // 加载层
             var loading = layer.msg('处理中，请稍后...', {
                 icon: 16,
@@ -346,23 +337,22 @@
             $.ajax({
                 type: "post",
                 url: "{:url('item/delete')}",
-                data: {id: id},
+                data: {id : id},
                 dataType: 'json',
-                beforeSend: function () {
-                },
+                beforeSend: function(){},
                 success: function (data) {
                     layer.close(loading);
                     if (data.status == 1) {
                         layer.msg(data.message, {
                             time: 1500
-                        }, function () {
+                        },function(){
                             window.location.reload();
                         });
                     } else if (data.status == 0) {
                         layer.alert(data.message, {
                             icon: 2,
                             skin: 'layer-ext-moon'
-                        }, function () {
+                        },function(){
                             window.location.reload();
                         });
                     }
@@ -384,23 +374,22 @@
             type: 'POST',
             dataType: 'json',
             data: {
-                id: id,
-                status: status
+                id : id,
+                status : status
             },
-            beforeSend: function () {
-            },
+            beforeSend: function(){},
             success: function (data) {
                 layer.close(loading);
                 if (data.status == 1) {
                     layer.msg(data.message, {
                         time: 1500
-                    }, function () {
+                    },function(){
                         window.location.reload();
                     });
                 } else {
                     layer.alert(data.message, {
                         icon: 2
-                    }, function () {
+                    },function(){
                         window.location.reload();
                     });
                 }
@@ -420,23 +409,22 @@
             type: 'POST',
             dataType: 'json',
             data: {
-                id: id,
-                status: status
+                id : id,
+                status : status
             },
-            beforeSend: function () {
-            },
+            beforeSend: function(){},
             success: function (data) {
                 layer.close(loading);
                 if (data.status == 1) {
                     layer.msg(data.message, {
                         time: 1500
-                    }, function () {
+                    },function(){
                         window.location.reload();
                     });
                 } else {
                     layer.alert(data.message, {
                         icon: 2
-                    }, function () {
+                    },function(){
                         window.location.reload();
                     });
                 }

@@ -1,4 +1,4 @@
-<?php /*a:2:{s:76:"/Applications/MAMP/htdocs/operator/application/index/view/bireport/cost.html";i:1599145294;s:82:"/Applications/MAMP/htdocs/operator/application/index/view/public/layer_layout.html";i:1582010668;}*/ ?>
+<?php /*a:2:{s:76:"/Applications/MAMP/htdocs/operator/application/index/view/bireport/cost.html";i:1599966188;s:82:"/Applications/MAMP/htdocs/operator/application/index/view/public/layer_layout.html";i:1582010668;}*/ ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -126,7 +126,8 @@
             ,id: 'dataTable'
             ,cols: [[  // 表格列标题及数据
                 {field: 'id', width: 200, title: 'ID', sort: true, align: 'center'}
-                ,{field: 'date', width: 200, title: '统计月份', sort: true,  align: 'center'}
+                ,{field: 'year', width: 200, title: '统计月份', sort: true,  align: 'center'}
+                ,{field: 'month', width: 200, title: '统计月份', sort: true,  align: 'center'}
                 ,{field: 'cost', width: 200, title: '成本', sort: true,  align: 'center'}
 
             ]], done() {

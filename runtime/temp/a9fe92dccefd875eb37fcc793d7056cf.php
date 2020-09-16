@@ -1,4 +1,4 @@
-<?php /*a:2:{s:73:"/Applications/MAMP/htdocs/operator/application/index/view/item/index.html";i:1583917701;s:76:"/Applications/MAMP/htdocs/operator/application/index/view/public/layout.html";i:1582011447;}*/ ?>
+<?php /*a:2:{s:73:"/Applications/MAMP/htdocs/operator/application/index/view/item/index.html";i:1600186741;s:76:"/Applications/MAMP/htdocs/operator/application/index/view/public/layout.html";i:1582011447;}*/ ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -34,7 +34,8 @@
             <input class="layui-input" name="keywords" id="keywords" value="<?php echo input('keywords'); ?>" autocomplete="on" placeholder="请输入设备编码">
         </div>
         <button class="layui-btn search-btn" data-type="reload"><i class="iconfont">&#xe679;</i> 查询</button>
-
+        <button class="layui-btn" id="import" data-type="import"><i class="iconfont">&#xe692;</i> 导入设备档案
+        </button>
         <div class="layui-inline">
             <?php if((buttonCheck('index/item/add'))): ?>
             <button class="layui-btn" id="add" data-pid="0"><i class="iconfont">&#xe692;</i> 添加顶层设备</button>
@@ -248,7 +249,21 @@
             });
         });
 
-
+        // import excel
+        $('#import').on('click', function () {
+            var index = layer.open({
+                type: 2,
+                title: '<i class=iconfont>&#xe7e0;</i> 导入设备档案',
+                area: ['800px', '560px'],
+                content: ['<?php echo url("upload2db/index"); ?>?type=' + 'bireport', 'yes'],
+                skin: 'layui-layer-molv',
+                btn: ['取消'],
+                btnAlign: 'c',
+                yes: function (index, layero) {
+                    layer.close(index);
+                }
+            });
+        });
 
     });
 

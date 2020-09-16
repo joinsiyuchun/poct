@@ -49,7 +49,7 @@ Uploader = (function(superClass) {
         }
       };
     })(this));
-    return $(window).on('beforeunload.upload2db-' + this.id, (function(_this) {
+    return $(window).on('beforeunload.uploader-' + this.id, (function(_this) {
       return function(e) {
         if (!_this.uploading) {
           return;
@@ -236,8 +236,8 @@ Uploader = (function(superClass) {
       file = ref[i];
       this.cancel(file);
     }
-    $(window).off('.upload2db-' + this.id);
-    return $(document).off('.upload2db-' + this.id);
+    $(window).off('.uploader-' + this.id);
+    return $(document).off('.uploader-' + this.id);
   };
 
   Uploader.i18n = {
