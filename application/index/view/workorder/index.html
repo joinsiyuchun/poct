@@ -51,6 +51,16 @@
     {{# } }}
 
 </script>
+
+{// 是否停机}
+<script type="text/html" id="is_halt">
+    {{# if(d.is_halt == 0){ }}
+    <button class="layui-btn layui-btn-xs layui-btn-warm ">未停机</button>
+    {{# } else if(d.is_halt == 1) { }}
+    <button class="layui-btn layui-btn-xs layui-btn-danger">停机</button>
+    {{# } }}
+
+</script>
 {/block}
 
 {block name="layui"}{/block}
@@ -90,6 +100,8 @@
                 ,{field: 'code', width: 200, title: '设备编码', sort: true,  align: 'center'}
                 ,{field: 'sn', width: 200, title: '序列号', sort: true,  align: 'center'}
                 ,{field: 'status', width: 80, title: '状态',align: 'center', sort: true, templet: '#status'}
+                ,{field: 'is_halt', width: 200, title: '是否故障停机', sort: true,  align: 'center',templet: '#is_halt'}
+                ,{field: 'halt_time', width: 200, title: '因故障停机时间', sort: true,  align: 'center'}
                 ,{field: 'reporter', width: 200, title: '报修人', sort: true,  align: 'center'}
                 ,{field: 'create_time', width: 200, title: '报修时间', sort: true,  align: 'center'}
                 ,{field: 'recepter', width: 200, title: '接修人', sort: true,  align: 'center'}

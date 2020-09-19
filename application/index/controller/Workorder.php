@@ -47,6 +47,8 @@ class Workorder extends Base
             $wolist[$k]["id"]=$v["id"];
             $wolist[$k]["code"]=$v->notification["code"];
             $wolist[$k]["status"]=$v["status"];
+            $wolist[$k]["is_halt"]=$v["is_halt"];
+            $wolist[$k]["halt_time"]=$v["halt_time"];
             $wolist[$k]["report_org"]=$v->notification["org"]["name"];
             $wolist[$k]["item"]=$v->items["catagory"]["name"];
             $wolist[$k]["code"]=$v->items["code"];
