@@ -2,7 +2,7 @@
 <html style="height: 100%">
 <head>
     <meta charset="utf-8">
-    <title>主页一</title>
+    <title>设备概览</title>
     <meta name="renderer" content="webkit">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
@@ -12,15 +12,59 @@
     {load href="__CSS__/iconfont/iconfont.css"/}
 </head>
 <style>
-    .layui-top-box {padding:20px;color:#fff}
-    .panel {margin-bottom:17px;background-color:#eee;border:1px solid transparent;border-radius: 5px;-webkit-box-shadow:0 1px 1px rgba(0,0,0,.05);box-shadow:0 1px 1px rgba(0,0,0,.05)}
-    .panel-body {height: 75px;}
-    .panel-icon {float: left; height: 75px; line-height: 75px; border-bottom-left-radius: 5px; border-top-left-radius: 5px; text-align: center}
-    .panel-icon i {font-size: 45px; }
-    .panel-info {float: left; padding: 10px; text-align: right;}
-    .panel-info span {display: block;}
-    .panel-info .counts {font-size: 30px; color: #333; line-height: 40px; text-shadow: 2px 1px 1px #999;}
-    .panel-info .counts-name {font-size: 15px; color: #999; line-height: 20px;}
+    .layui-top-box {
+        padding: 20px;
+        color: #fff
+    }
+
+    .panel {
+        margin-bottom: 17px;
+        background-color: #eee;
+        border: 1px solid transparent;
+        border-radius: 5px;
+        -webkit-box-shadow: 0 1px 1px rgba(0, 0, 0, .05);
+        box-shadow: 0 1px 1px rgba(0, 0, 0, .05)
+    }
+
+    .panel-body {
+        height: 75px;
+    }
+
+    .panel-icon {
+        float: left;
+        height: 75px;
+        line-height: 75px;
+        border-bottom-left-radius: 5px;
+        border-top-left-radius: 5px;
+        text-align: center
+    }
+
+    .panel-icon i {
+        font-size: 45px;
+    }
+
+    .panel-info {
+        float: left;
+        padding: 10px;
+        text-align: right;
+    }
+
+    .panel-info span {
+        display: block;
+    }
+
+    .panel-info .counts {
+        font-size: 30px;
+        color: #333;
+        line-height: 40px;
+        text-shadow: 2px 1px 1px #999;
+    }
+
+    .panel-info .counts-name {
+        font-size: 15px;
+        color: #999;
+        line-height: 20px;
+    }
 </style>
 <body>
 
@@ -30,14 +74,85 @@
             <div class="layui-col-md3">
                 <div class="col-xs-6 col-md-3">
                     <div class="panel">
-                        <div class="panel-body">
-                            <div class="panel-icon layui-col-xs3 layui-col-md3 layui-bg-cyan">
-                                <i class="iconfont">&#xe936;</i>
-                            </div>
-                            <div class="panel-info layui-col-xs9 layui-col-md9">
-                                <span class="counts">5</span>
-                                <span class="counts-name">品类数量</span>
-                            </div>
+                        设备分类:
+                    </div>
+                </div>
+            </div>
+            <div class="layui-col-md3">
+                <div class="col-xs-6 col-md-3">
+                    <div class="panel">
+                        <select name="modules" lay-verify="required" lay-search="">
+                            <option value="">直接选择或搜索选择</option>
+                            <option value="1">layer</option>
+                            <option value="2">form</option>
+                            <option value="3">layim</option>
+                            <option value="4">element</option>
+                            <option value="5">laytpl</option>
+                            <option value="6">upload</option>
+                            <option value="7">laydate</option>
+                            <option value="8">laypage</option>
+                            <option value="9">flow</option>
+                            <option value="10">util</option>
+                            <option value="11">code</option>
+                            <option value="12">tree</option>
+                            <option value="13">layedit</option>
+                            <option value="14">nav</option>
+                            <option value="15">tab</option>
+                            <option value="16">table</option>
+                            <option value="17">select</option>
+                            <option value="18">checkbox</option>
+                            <option value="19">switch</option>
+                            <option value="20">radio</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+            <div class="layui-col-md3">
+                <div class="col-xs-6 col-md-3">
+                    <div class="panel">
+                        设备编码:
+                    </div>
+                </div>
+            </div>
+            <div class="layui-col-md3">
+                <div class="col-xs-6 col-md-3">
+                    <div class="panel">
+                        <select name="modules" lay-verify="required" lay-search="">
+                            <option value="">直接选择或搜索选择</option>
+                            <option value="1">layer</option>
+                            <option value="2">form</option>
+                            <option value="3">layim</option>
+                            <option value="4">element</option>
+                            <option value="5">laytpl</option>
+                            <option value="6">upload</option>
+                            <option value="7">laydate</option>
+                            <option value="8">laypage</option>
+                            <option value="9">flow</option>
+                            <option value="10">util</option>
+                            <option value="11">code</option>
+                            <option value="12">tree</option>
+                            <option value="13">layedit</option>
+                            <option value="14">nav</option>
+                            <option value="15">tab</option>
+                            <option value="16">table</option>
+                            <option value="17">select</option>
+                            <option value="18">checkbox</option>
+                            <option value="19">switch</option>
+                            <option value="20">radio</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="layuimini-main layui-top-box">
+        <div class="layui-row layui-col-space15">
+            <div class="layui-col-md3">
+                <div class="col-xs-6 col-md-3">
+                    <div class="panel">
+                        <div id="month-total-income" class="panel-body">
+
                         </div>
                     </div>
                 </div>
@@ -45,14 +160,8 @@
             <div class="layui-col-md3">
                 <div class="col-xs-6 col-md-3">
                     <div class="panel">
-                        <div class="panel-body">
-                            <div class="panel-icon layui-col-xs3 layui-col-md3 layui-bg-red">
-                                <i class="iconfont">&#xea62;</i>
-                            </div>
-                            <div class="panel-info layui-col-xs9 layui-col-md9">
-                                <span class="counts">10</span>
-                                <span class="counts-name">设备数量</span>
-                            </div>
+                        <div id="month-total-cost" class="panel-body">
+
                         </div>
                     </div>
                 </div>
@@ -60,14 +169,8 @@
             <div class="layui-col-md3">
                 <div class="col-xs-6 col-md-3">
                     <div class="panel">
-                        <div class="panel-body">
-                            <div class="panel-icon layui-col-xs3 layui-col-md3 layui-bg-orange">
-                                <i class="iconfont">&#xe7f0;</i>
-                            </div>
-                            <div class="panel-info layui-col-xs9 layui-col-md9">
-                                <span class="counts">100</span>
-                                <span class="counts-name">当年检查人次</span>
-                            </div>
+                        <div id="month-total-exam" class="panel-body">
+
                         </div>
                     </div>
                 </div>
@@ -75,24 +178,32 @@
             <div class="layui-col-md3">
                 <div class="col-xs-6 col-md-3">
                     <div class="panel">
-                        <div class="panel-body">
-                            <div class="panel-icon layui-col-xs3 layui-col-md3 layui-bg-green">
-                                <i class="iconfont">&#xe7fe;</i>
-                            </div>
-                            <div class="panel-info layui-col-xs9 layui-col-md9">
-                                <span class="counts">100</span>
-                                <span class="counts-name">当年总收入</span>
-                            </div>
+                        <div id="month-total-percent" class="panel-body">
+
                         </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
+
     <fieldset class="layui-elem-field layui-field-title" style="margin-top: 50px;">
         <legend>月收入趋势</legend>
     </fieldset>
     <div id="container" style="height: 350px; margin: 0"></div>
+    <fieldset class="layui-elem-field layui-field-title" style="margin-top: 50px;">
+        <legend>效率分析</legend>
+    </fieldset>
+    <div id="container1" style="height: 350px; margin: 0"></div>
+    <fieldset class="layui-elem-field layui-field-title" style="margin-top: 50px;">
+        <legend>成本分析</legend>
+    </fieldset>
+    <div id="container2" style="height: 350px; margin: 0"></div>
+    <fieldset class="layui-elem-field layui-field-title" style="margin-top: 50px;">
+        <legend>检查部位</legend>
+    </fieldset>
+    <div id="container3" style="height: 350px; margin: 0"></div>
+
     <fieldset class="layui-elem-field layui-field-title" style="margin-top: 50px;">
         <legend>设备分类概览</legend>
     </fieldset>
@@ -106,201 +217,211 @@
             <li>DSA概览</li>
         </ul>
         <div class="layui-tab-content" style="height: 100px;">
-            <div class="layui-tab-item layui-show"> <div class="layui-top-box">
-                <div class="layui-row layui-col-space15">
-                    <table class="layui-table">
-                        <thead>
-                        <tr>
-                            <th colspan="2" style="font-weight: bold;">CT数据概览</th>
-                        </tr>
-                        </thead>
-                        <tbody>
-                        <tr>
-                            <th style="width:250px">设备全称</th>
-                            <td>X射线计算机断层摄影设备</td>
-                        </tr>
-                        <tr>
-                            <th>设备数量</th>
-                            <td>7</td>
-                        </tr>
+            <div class="layui-tab-item layui-show">
+                <div class="layui-top-box">
+                    <div class="layui-row layui-col-space15">
+                        <table class="layui-table">
+                            <thead>
+                            <tr>
+                                <th colspan="2" style="font-weight: bold;">CT数据概览</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr>
+                                <th style="width:250px">设备全称</th>
+                                <td>X射线计算机断层摄影设备</td>
+                            </tr>
+                            <tr>
+                                <th>设备数量</th>
+                                <td>7</td>
+                            </tr>
 
-                        <tr>
-                            <th>当年检查人次</th>
-                            <td>1000人次</td>
-                        </tr>
-                        <tr>
-                            <th>当年检查总收入</th>
-                            <td>¥234234</td>
-                        </tr>
-                        <tr>
-                            <th>检查阳性率</th>
-                            <td>87%</td>
-                        </tr>
-                        <tr>
-                            <th>本月故障率（故障台数/总台数）</th>
-                            <td>10%</td>
-                        </tr>
-                        </tbody>
-                    </table>
+                            <tr>
+                                <th>当年检查人次</th>
+                                <td>1000人次</td>
+                            </tr>
+                            <tr>
+                                <th>当年检查总收入</th>
+                                <td>¥234234</td>
+                            </tr>
+                            <tr>
+                                <th>检查阳性率</th>
+                                <td>87%</td>
+                            </tr>
+                            <tr>
+                                <th>本月故障率（故障台数/总台数）</th>
+                                <td>10%</td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
                 </div>
+            </div>
+            <div class="layui-tab-item">
+                <div class="layui-top-box">
+                    <div class="layui-row layui-col-space15">
+                        <table class="layui-table">
+                            <thead>
+                            <tr>
+                                <th colspan="2" style="font-weight: bold;">MRI数据概览</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr>
+                                <th style="width:250px">设备全称</th>
+                                <td>核磁共振成像系统</td>
+                            </tr>
+                            <tr>
+                                <th>设备数量</th>
+                                <td>2</td>
+                            </tr>
 
-            </div></div>
-            <div class="layui-tab-item"> <div class="layui-top-box">
-                <div class="layui-row layui-col-space15">
-                    <table class="layui-table">
-                        <thead>
-                        <tr>
-                            <th colspan="2" style="font-weight: bold;">MRI数据概览</th>
-                        </tr>
-                        </thead>
-                        <tbody>
-                        <tr>
-                            <th style="width:250px">设备全称</th>
-                            <td>核磁共振成像系统</td>
-                        </tr>
-                        <tr>
-                            <th>设备数量</th>
-                            <td>2</td>
-                        </tr>
+                            <tr>
+                                <th>当年检查人次</th>
+                                <td>1000人次</td>
+                            </tr>
+                            <tr>
+                                <th>当年检查总收入</th>
+                                <td>¥234234</td>
+                            </tr>
+                            <tr>
+                                <th>检查阳性率</th>
+                                <td>87%</td>
+                            </tr>
+                            <tr>
+                                <th>本月故障率（故障台数/总台数）</th>
+                                <td>10%</td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
 
-                        <tr>
-                            <th>当年检查人次</th>
-                            <td>1000人次</td>
-                        </tr>
-                        <tr>
-                            <th>当年检查总收入</th>
-                            <td>¥234234</td>
-                        </tr>
-                        <tr>
-                            <th>检查阳性率</th>
-                            <td>87%</td>
-                        </tr>
-                        <tr>
-                            <th>本月故障率（故障台数/总台数）</th>
-                            <td>10%</td>
-                        </tr>
-                        </tbody>
-                    </table>
                 </div>
+            </div>
+            <div class="layui-tab-item">
+                <div class="layui-top-box">
+                    <div class="layui-row layui-col-space15">
+                        <table class="layui-table">
+                            <thead>
+                            <tr>
+                                <th colspan="2" style="font-weight: bold;">MRI数据概览</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr>
+                                <th style="width:250px">设备全称</th>
+                                <td>核磁共振成像系统</td>
+                            </tr>
+                            <tr>
+                                <th>设备数量</th>
+                                <td>2</td>
+                            </tr>
 
-            </div></div>
-            <div class="layui-tab-item"><div class="layui-top-box">
-                <div class="layui-row layui-col-space15">
-                    <table class="layui-table">
-                        <thead>
-                        <tr>
-                            <th colspan="2" style="font-weight: bold;">MRI数据概览</th>
-                        </tr>
-                        </thead>
-                        <tbody>
-                        <tr>
-                            <th style="width:250px">设备全称</th>
-                            <td>核磁共振成像系统</td>
-                        </tr>
-                        <tr>
-                            <th>设备数量</th>
-                            <td>2</td>
-                        </tr>
+                            <tr>
+                                <th>当年检查人次</th>
+                                <td>1000人次</td>
+                            </tr>
+                            <tr>
+                                <th>当年检查总收入</th>
+                                <td>¥234234</td>
+                            </tr>
+                            <tr>
+                                <th>检查阳性率</th>
+                                <td>87%</td>
+                            </tr>
+                            <tr>
+                                <th>本月故障率（故障台数/总台数）</th>
+                                <td>10%</td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
 
-                        <tr>
-                            <th>当年检查人次</th>
-                            <td>1000人次</td>
-                        </tr>
-                        <tr>
-                            <th>当年检查总收入</th>
-                            <td>¥234234</td>
-                        </tr>
-                        <tr>
-                            <th>检查阳性率</th>
-                            <td>87%</td>
-                        </tr>
-                        <tr>
-                            <th>本月故障率（故障台数/总台数）</th>
-                            <td>10%</td>
-                        </tr>
-                        </tbody>
-                    </table>
                 </div>
+            </div>
+            <div class="layui-tab-item">
+                <div class="layui-top-box">
+                    <div class="layui-row layui-col-space15">
+                        <table class="layui-table">
+                            <thead>
+                            <tr>
+                                <th colspan="2" style="font-weight: bold;">MRI数据概览</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr>
+                                <th style="width:250px">设备全称</th>
+                                <td>核磁共振成像系统</td>
+                            </tr>
+                            <tr>
+                                <th>设备数量</th>
+                                <td>2</td>
+                            </tr>
 
-            </div></div>
-            <div class="layui-tab-item"><div class="layui-top-box">
-                <div class="layui-row layui-col-space15">
-                    <table class="layui-table">
-                        <thead>
-                        <tr>
-                            <th colspan="2" style="font-weight: bold;">MRI数据概览</th>
-                        </tr>
-                        </thead>
-                        <tbody>
-                        <tr>
-                            <th style="width:250px">设备全称</th>
-                            <td>核磁共振成像系统</td>
-                        </tr>
-                        <tr>
-                            <th>设备数量</th>
-                            <td>2</td>
-                        </tr>
+                            <tr>
+                                <th>当年检查人次</th>
+                                <td>1000人次</td>
+                            </tr>
+                            <tr>
+                                <th>当年检查总收入</th>
+                                <td>¥234234</td>
+                            </tr>
+                            <tr>
+                                <th>检查阳性率</th>
+                                <td>87%</td>
+                            </tr>
+                            <tr>
+                                <th>本月故障率（故障台数/总台数）</th>
+                                <td>10%</td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
 
-                        <tr>
-                            <th>当年检查人次</th>
-                            <td>1000人次</td>
-                        </tr>
-                        <tr>
-                            <th>当年检查总收入</th>
-                            <td>¥234234</td>
-                        </tr>
-                        <tr>
-                            <th>检查阳性率</th>
-                            <td>87%</td>
-                        </tr>
-                        <tr>
-                            <th>本月故障率（故障台数/总台数）</th>
-                            <td>10%</td>
-                        </tr>
-                        </tbody>
-                    </table>
                 </div>
+            </div>
+            <div class="layui-tab-item">
+                <div class="layui-top-box">
+                    <div class="layui-row layui-col-space15">
+                        <table class="layui-table">
+                            <thead>
+                            <tr>
+                                <th colspan="2" style="font-weight: bold;">MRI数据概览</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr>
+                                <th style="width:250px">设备全称</th>
+                                <td>核磁共振成像系统</td>
+                            </tr>
+                            <tr>
+                                <th>设备数量</th>
+                                <td>2</td>
+                            </tr>
 
-            </div></div>
-            <div class="layui-tab-item"><div class="layui-top-box">
-                <div class="layui-row layui-col-space15">
-                    <table class="layui-table">
-                        <thead>
-                        <tr>
-                            <th colspan="2" style="font-weight: bold;">MRI数据概览</th>
-                        </tr>
-                        </thead>
-                        <tbody>
-                        <tr>
-                            <th style="width:250px">设备全称</th>
-                            <td>核磁共振成像系统</td>
-                        </tr>
-                        <tr>
-                            <th>设备数量</th>
-                            <td>2</td>
-                        </tr>
+                            <tr>
+                                <th>当年检查人次</th>
+                                <td>1000人次</td>
+                            </tr>
+                            <tr>
+                                <th>当年检查总收入</th>
+                                <td>¥234234</td>
+                            </tr>
+                            <tr>
+                                <th>检查阳性率</th>
+                                <td>87%</td>
+                            </tr>
+                            <tr>
+                                <th>本月故障率（故障台数/总台数）</th>
+                                <td>10%</td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
 
-                        <tr>
-                            <th>当年检查人次</th>
-                            <td>1000人次</td>
-                        </tr>
-                        <tr>
-                            <th>当年检查总收入</th>
-                            <td>¥234234</td>
-                        </tr>
-                        <tr>
-                            <th>检查阳性率</th>
-                            <td>87%</td>
-                        </tr>
-                        <tr>
-                            <th>本月故障率（故障台数/总台数）</th>
-                            <td>10%</td>
-                        </tr>
-                        </tbody>
-                    </table>
                 </div>
-
-            </div></div>
+            </div>
         </div>
     </div>
 
@@ -312,57 +433,258 @@
 <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/echarts/dist/echarts.min.js"></script>
 
 <script type="text/javascript">
-    var dom = document.getElementById("container");
-    var myChart = echarts.init(dom);
 
-    option = null;
-    option = {
-        xAxis: {
-            type: 'category',
-            data: ['2020-01', '2020-02', '2020-03', '2020-04', '2020-05', '2020-06', '2020-07', '2020-08']
-        },
-        yAxis: {
-            type: 'value'
-        },
-        series: [{
-            data: [563,820, 932, 901, 934, 1290, 1330, 1320],
-            type: 'line'
-        }]
-    };
-    ;
-    if (option && typeof option === "object") {
-        myChart.setOption(option, true);
-    }
+    $.ajax({
+        url: '{:url("api/echarts/income")}',
+        dataType: 'json',
+    }).done(function (res) {
+
+        console.log(res);
+        var dom = document.getElementById("container");
+        var myChart = echarts.init(dom);
+
+        option = {
+            // title: {
+            //     text: '月收入趋势'
+            // },
+            tooltip: {
+                trigger: 'axis'
+            },
+            // legend: {
+            //     data: ['下载量']
+            // },
+            grid: {
+                left: 50,
+                bottom: 20,
+            },
+            xAxis: {
+                type: 'category',
+                data: res.xAxis
+            },
+            yAxis: {
+                type: 'value',
+            },
+            series: [
+                {
+                    type: 'line',
+                    data: res.series,
+                }
+            ]
+        };
+        myChart.setOption(option);
+    });
+
+
+    $.ajax({
+        url: '{:url("api/echarts/item")}',
+        dataType: 'json',
+    }).done(function (res) {
+
+        console.log(res);
+        var dom = document.getElementById("container1");
+        var myChart = echarts.init(dom);
+
+        var option = {
+            // title: {
+            //     text: '商品订单'
+            // },
+            tooltip: {},
+            legend: {
+                data: ['检查人次']
+            },
+            grid: {
+                left: 50,
+                bottom: 20,
+            },
+            xAxis: {
+                data: res.xAxis
+            },
+            yAxis: {
+                type: 'value'
+            },
+            series: [{
+                name: '检查人次',
+                type: 'bar', //柱状
+                data: res.series,
+                itemStyle: {
+                    normal: { //柱子颜色
+                        color: 'red'
+                    }
+                },
+            }]
+        };
+        myChart.setOption(option);
+    });
+
+
+    $.ajax({
+        url: '{:url("api/echarts/income")}',
+        dataType: 'json',
+    }).done(function (res) {
+
+        console.log(res);
+        var dom = document.getElementById("container2");
+        var myChart = echarts.init(dom);
+
+        option = {
+            // title: {
+            //     text: '堆叠区域图'
+            // },
+            tooltip: {
+                trigger: 'axis',
+                axisPointer: {
+                    type: 'cross',
+                    label: {
+                        backgroundColor: '#6a7985'
+                    }
+                }
+            },
+            legend: {
+                data: ['成本趋势']
+            },
+            toolbox: {
+                feature: {
+                    saveAsImage: {}
+                }
+            },
+            grid: {
+                left: 50,
+                bottom: 20,
+            },
+            xAxis: [
+                {
+                    type: 'category',
+                    boundaryGap: false,
+                    data: ['周一', '周二', '周三', '周四', '周五', '周六', '周日']
+                }
+            ],
+            yAxis: [
+                {
+                    type: 'value'
+                }
+            ],
+            series: [
+                {
+                    name: '邮件营销',
+                    type: 'line',
+                    smooth: true,
+                    stack: '总量',
+                    areaStyle: {},
+                    data: [120, 132, 101, 134, 90, 230, 210]
+                },
+            ]
+        };
+        myChart.setOption(option);
+    });
+
+
+    $.ajax({
+        url: '{:url("api/echarts/income")}',
+        dataType: 'json',
+    }).done(function (res) {
+
+        console.log(res);
+        var dom = document.getElementById("container3");
+        var myChart = echarts.init(dom);
+
+
+        option = {
+            tooltip: {
+                trigger: 'item',
+                formatter: '{a} <br/>{b}: {c} ({d}%)'
+            },
+            legend: {
+                orient: 'vertical',
+                left: 10,
+                data: ['头', '胸', '躯干', '四肢', '全身']
+            },
+            grid: {
+                left: 50,
+                bottom: 20,
+            },
+            series: [
+                {
+                    name: '访问来源',
+                    type: 'pie',
+                    radius: ['50%', '70%'],
+                    avoidLabelOverlap: false,
+                    label: {
+                        show: false,
+                        position: 'center'
+                    },
+                    emphasis: {
+                        label: {
+                            show: true,
+                            fontSize: '30',
+                            fontWeight: 'bold'
+                        }
+                    },
+                    labelLine: {
+                        show: false
+                    },
+                    data: [
+                        {value: 335, name: '头'},
+                        {value: 310, name: '胸'},
+                        {value: 234, name: '躯干'},
+                        {value: 135, name: '四肢'},
+                        {value: 1548, name: '全身'}
+                    ]
+                }
+            ]
+        };
+
+        myChart.setOption(option);
+    });
+
+
+    // option = null;
+    // option = {
+    //     xAxis: {
+    //         type: 'category',
+    //         data: ['2020-01', '2020-02', '2020-03', '2020-04', '2020-05', '2020-06', '2020-07', '2020-08']
+    //     },
+    //     yAxis: {
+    //         type: 'value'
+    //     },
+    //     series: [{
+    //         data: [],
+    //         type: 'line'
+    //     }]
+    // };
+    // ;
+    // if (option && typeof option === "object") {
+    //     myChart.setOption(option, true);
+    // }
 </script>
 <script>
-    layui.use('element', function(){
+    layui.use('element', function () {
         var $ = layui.jquery
-            ,element = layui.element; //Tab的切换功能，切换事件监听等，需要依赖element模块
+            , element = layui.element; //Tab的切换功能，切换事件监听等，需要依赖element模块
 
         //触发事件
         var active = {
-            tabAdd: function(){
+            tabAdd: function () {
                 //新增一个Tab项
                 element.tabAdd('demo', {
-                    title: '新选项'+ (Math.random()*1000|0) //用于演示
-                    ,content: '内容'+ (Math.random()*1000|0)
-                    ,id: new Date().getTime() //实际使用一般是规定好的id，这里以时间戳模拟下
+                    title: '新选项' + (Math.random() * 1000 | 0) //用于演示
+                    , content: '内容' + (Math.random() * 1000 | 0)
+                    , id: new Date().getTime() //实际使用一般是规定好的id，这里以时间戳模拟下
                 })
             }
-            ,tabDelete: function(othis){
+            , tabDelete: function (othis) {
                 //删除指定Tab项
                 element.tabDelete('demo', '44'); //删除：“商品管理”
 
 
                 othis.addClass('layui-btn-disabled');
             }
-            ,tabChange: function(){
+            , tabChange: function () {
                 //切换到指定Tab项
                 element.tabChange('demo', '22'); //切换到：用户管理
             }
         };
 
-        $('.site-demo-active').on('click', function(){
+        $('.site-demo-active').on('click', function () {
             var othis = $(this), type = othis.data('type');
             active[type] ? active[type].call(this, othis) : '';
         });
@@ -371,8 +693,8 @@
         var layid = location.hash.replace(/^#test=/, '');
         element.tabChange('test', layid);
 
-        element.on('tab(test)', function(elem){
-            location.hash = 'test='+ $(this).attr('lay-id');
+        element.on('tab(test)', function (elem) {
+            location.hash = 'test=' + $(this).attr('lay-id');
         });
 
     });

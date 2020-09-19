@@ -36,7 +36,7 @@ class Index extends Base
     {
         // 设置模板变量
         $this -> view -> assign([
-            'title' => '控制台',
+            'title' => '设备概览',
             'tp_version' => App::VERSION
         ]);
 
