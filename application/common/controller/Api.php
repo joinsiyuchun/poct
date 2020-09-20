@@ -20,6 +20,9 @@ class Api extends Controller
             }
             $this->user = Session::get('user');
             $this->org = Session::get('org');
+            if(!isset($this->org)){
+                $this->org=['id' =>1];
+            }
         }
     }
 

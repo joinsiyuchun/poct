@@ -311,7 +311,7 @@ class Item extends Base
         //2. 获取qrcode
         try {
             $url2 = 'https://api.weixin.qq.com/cgi-bin/wxaapp/createwxaqrcode?access_token=' . $accesstoken;
-            $param['path']="pages/index/index?id=".$id;
+            $param['path']="pages/itempage/index?id=".$id;
             $param['width']=430;
             $qrdata =$this->request($url2, 'POST',$param);
             $file =$id.".jpg";

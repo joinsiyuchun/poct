@@ -40,14 +40,14 @@ class User extends Api {
                 $orgid=$org->org_id;
                 Session::set('org', ['id' => $orgid]);
             }else{
-                $data1 = [
-                    'user_id' => (int)$user->id,
-                    'org_id' => 2,
-                    'status' => 1,
-                    'expire_time' => strtotime('+1 year')
-                ];
-                UserOrgModel::create($data1);
-                Session::set('org', ['id' =>2]);
+//                $data1 = [
+//                    'user_id' => (int)$user->id,
+//                    'org_id' => 2,
+//                    'status' => 1,
+//                    'expire_time' => strtotime('+1 year')
+//                ];
+//                UserOrgModel::create($data1);
+                Session::set('org', ['id' =>1]);
             }
             return json(['isLogin' => true]);
         }
@@ -76,19 +76,26 @@ class User extends Api {
 
     public function company()
     {
-
+        $companylist = [];
         $user = UserModel::get($this->user['id'], 'UserOrg');
-        $orglist=$user["user_org"];
-        foreach($orglist as $k =>$v){
-            $company=OrgModel::get($v['org_id']);
-            $companylist[$k]['id']=$company['id'];
-            $companylist[$k]['name']=$company['name'];
+        $orglist = $user["user_org"];
+        if (!isset($orglist)) {
+            $company = OrgModel::get(1);
+            $companylist[0]['id'] = $company['id'];
+            $companylist[0]['name'] = $company['name'];
+        } else {
+            foreach ($orglist as $k => $v) {
+                $company = OrgModel::get($v['org_id']);
+                $companylist[$k]['id'] = $company['id'];
+                $companylist[$k]['name'] = $company['name'];
+            }
         }
         return json($companylist);
     }
 
     public function companylist()
     {
+        $companylist = [];
         $orglist = OrgModel::all();
         foreach($orglist as $k =>$v){
             $companylist['org_id'][$k]=$v['id'];
