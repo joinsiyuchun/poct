@@ -23,7 +23,6 @@
 <div class="layui-fluid">
 
 
-
     <div class="layui-row layui-col-space15">
         <div class="layui-col-sm12">
             <div class="layui-card">
@@ -34,18 +33,21 @@
                             <div class="layui-inline">
                                 <label class="layui-form-label">设备分类</label>
                                 <div class="layui-input-inline">
-                                    <input type="text" name="cid" placeholder="请输入" autocomplete="off" class="layui-input">
+                                    <input type="text" name="cid" placeholder="请输入" autocomplete="off"
+                                           class="layui-input">
                                 </div>
                             </div>
                             <div class="layui-inline">
                                 <label class="layui-form-label">设备编码</label>
                                 <div class="layui-input-inline">
-                                    <input type="text" name="username" placeholder="请输入" autocomplete="off" class="layui-input">
+                                    <input type="text" name="username" placeholder="请输入" autocomplete="off"
+                                           class="layui-input">
                                 </div>
                             </div>
 
                             <div class="layui-inline">
-                                <button class="layui-btn layuiadmin-btn-comm" data-type="reload" lay-submit lay-filter="LAY-app-contcomm-search">
+                                <button class="layui-btn layuiadmin-btn-comm" data-type="reload" lay-submit
+                                        lay-filter="LAY-app-contcomm-search">
                                     <i class="layui-icon layui-icon-search layuiadmin-button-btn"></i>
                                 </button>
                             </div>
@@ -60,10 +62,10 @@
                     本年总收入
                 </div>
                 <div class="layui-card-body layuiadmin-card-list">
-                    <p class="layuiadmin-big-font">¥9,999,666</p>
+                    <p class="layuiadmin-big-font">¥<span id="year-total-revenue">-</span></p>
                     <p>
                         本月总收入：
-                        <span class="layuiadmin-span-color">¥9,999,666 </span>
+                        <span class="layuiadmin-span-color">¥<span id="month-total-revenue">-</span> </span>
                     </p>
                 </div>
             </div>
@@ -74,10 +76,10 @@
                     本年总成本
                 </div>
                 <div class="layui-card-body layuiadmin-card-list">
-                    <p class="layuiadmin-big-font">¥33,555</p>
+                    <p class="layuiadmin-big-font">¥<span id="year-total-cost">-</span></p>
                     <p>
                         本月总成本
-                        <span class="layuiadmin-span-color">¥35,908</span>
+                        <span class="layuiadmin-span-color">¥<span id="month-total-cost">-</span></span>
                     </p>
                 </div>
             </div>
@@ -90,10 +92,10 @@
                 </div>
                 <div class="layui-card-body layuiadmin-card-list">
 
-                    <p class="layuiadmin-big-font">999,666</p>
+                    <p class="layuiadmin-big-font"><span id="year-total-inspection">-</span></p>
                     <p>
                         本月检查人次
-                        <span class="layuiadmin-span-color">123，432</span>
+                        <span class="layuiadmin-span-color"><span id="month-total-inspection">-</span></span>
                     </p>
                 </div>
             </div>
@@ -105,10 +107,10 @@
                 </div>
                 <div class="layui-card-body layuiadmin-card-list">
 
-                    <p class="layuiadmin-big-font">66,66%</p>
+                    <p class="layuiadmin-big-font"><span id="year-return-rate">-</span>%</p>
                     <p>
                         去年收益率
-                        <span class="layuiadmin-span-color">15% </span>
+                        <span class="layuiadmin-span-color"><span id="last-year-return-rate">-</span>% </span>
                     </p>
                 </div>
             </div>
@@ -125,7 +127,8 @@
                 <div class="layui-card-body">
                     <div class="layui-row">
                         <div class="layui-col-sm8">
-                            <div class="layui-carousel layadmin-carousel layadmin-dataview" data-anim="fade" lay-filter="LAY-index-pageone">
+                            <div class="layui-carousel layadmin-carousel layadmin-dataview" data-anim="fade"
+                                 lay-filter="LAY-index-pageone">
                                 <div carousel-item id="LAY-index-pagetwo">
                                     <div><i class="layui-icon layui-icon-loading1 layadmin-loading"></i></div>
                                 </div>
@@ -134,23 +137,23 @@
                         </div>
                         <div class="layui-col-sm4">
                             <div class="layuiadmin-card-list">
-                                <p class="layuiadmin-normal-font">月均检查人次：1000</p>
+                                <p class="layuiadmin-normal-font">月均检查人次：<span id="month-avg-inspection">-</span></p>
                                 <span>同上期增加</span>
-                                <div class="layui-progress layui-progress-big" lay-showPercent="yes">
+                                <div class="layui-progress layui-progress-big" lay-showPercent="yes" lay-filter="efficiency-avg-compare">
                                     <div class="layui-progress-bar" lay-percent="30%"></div>
                                 </div>
                             </div>
                             <div class="layuiadmin-card-list">
-                                <p class="layuiadmin-normal-font">单月最大检查人次：200</p>
+                                <p class="layuiadmin-normal-font">单月最大检查人次：<span id="month-max-inspection">-</span></p>
                                 <span>同上期增加</span>
-                                <div class="layui-progress layui-progress-big" lay-showPercent="yes">
+                                <div class="layui-progress layui-progress-big" lay-showPercent="yes" lay-filter="efficiency-max-compare">
                                     <div class="layui-progress-bar" lay-percent="20%"></div>
                                 </div>
                             </div>
                             <div class="layuiadmin-card-list">
-                                <p class="layuiadmin-normal-font">单月最小检查人次：40</p>
+                                <p class="layuiadmin-normal-font">单月最小检查人次：<span id="month-min-inspection">-</span></p>
                                 <span>同上期减少</span>
-                                <div class="layui-progress layui-progress-big" lay-showPercent="yes">
+                                <div class="layui-progress layui-progress-big" lay-showPercent="yes" lay-filter="efficiency-min-compare">
                                     <div class="layui-progress-bar" lay-percent="25%"></div>
                                 </div>
                             </div>
@@ -171,7 +174,8 @@
                 <div class="layui-card-body">
                     <div class="layui-row">
                         <div class="layui-col-sm8">
-                            <div class="layui-carousel layadmin-carousel layadmin-dataview" data-anim="fade" lay-filter="LAY-index-pageone">
+                            <div class="layui-carousel layadmin-carousel layadmin-dataview" data-anim="fade"
+                                 lay-filter="LAY-index-pageone">
                                 <div carousel-item id="LAY-index-pageone">
                                     <div><i class="layui-icon layui-icon-loading1 layadmin-loading"></i></div>
                                 </div>
@@ -179,24 +183,28 @@
 
                         </div>
                         <div class="layui-col-sm4">
+
                             <div class="layuiadmin-card-list">
-                                <p class="layuiadmin-normal-font">年收益率：12%</p>
+                                <p class="layuiadmin-normal-font">年收益率：<span id="benefit-revenue-rate">-</span>%</p>
                                 <span>同上期增加</span>
-                                <div class="layui-progress layui-progress-big" lay-showPercent="yes">
-                                    <div class="layui-progress-bar" lay-percent="30%"></div>
+                                <div class="layui-progress layui-progress-big"
+                                     lay-showPercent="yes" lay-filter="benefit-year-compare">
+                                    <div class="layui-progress-bar" lay-percent="0%"></div>
                                 </div>
                             </div>
                             <div class="layuiadmin-card-list">
-                                <p class="layuiadmin-normal-font">月均收入：¥324，34</p>
+                                <p class="layuiadmin-normal-font">月均收入：¥<span id="month-avg-revenue">-</span></p>
                                 <span>同上期增加</span>
-                                <div class="layui-progress layui-progress-big" lay-showPercent="yes">
+                                <div  class="layui-progress layui-progress-big"
+                                     lay-showPercent="yes" lay-filter="benefit-revenue-compare">
                                     <div class="layui-progress-bar" lay-percent="20%"></div>
                                 </div>
                             </div>
                             <div class="layuiadmin-card-list">
-                                <p class="layuiadmin-normal-font">月均成本：¥3322，342</p>
+                                <p class="layuiadmin-normal-font">月均成本：¥<span id="month-avg-cost">-</span></p>
                                 <span>同上期减少</span>
-                                <div class="layui-progress layui-progress-big" lay-showPercent="yes">
+                                <div class="layui-progress layui-progress-big"
+                                     lay-showPercent="yes" lay-filter="benefit-cost-compare">
                                     <div class="layui-progress-bar" lay-percent="25%"></div>
                                 </div>
                             </div>
@@ -211,7 +219,7 @@
                 <ul class="layui-tab-title">
                     <li class="layui-this">科室分析</li>
                     <li>检查来源分析</li>
-                    <li >本月可变成本</li>
+                    <li>本月可变成本</li>
                     <li>本月固定成本</li>
                 </ul>
                 <div class="layui-tab-content">
@@ -242,14 +250,13 @@
                 <div class="layui-card-body">
                     <div class="layui-row">
                         <div class="layui-col-sm12">
-                            <div class="layui-carousel layadmin-carousel layadmin-dataview" data-anim="fade" lay-filter="LAY-index-pagethree">
+                            <div class="layui-carousel layadmin-carousel layadmin-dataview" data-anim="fade"
+                                 lay-filter="LAY-index-pagethree">
                                 <div carousel-item id="LAY-index-pagethree">
                                     <div><i class="layui-icon layui-icon-loading1 layadmin-loading"></i></div>
                                 </div>
                             </div>
-
                         </div>
-
                     </div>
                 </div>
             </div>
@@ -262,70 +269,13 @@
 {load href="__LAYUI__/layui.js"/}
 
 <script>
-    layui.use('table', function(){
-        var table = layui.table;
-
-        table.render({
-            elem: '#varcost'
-            ,url:'/demo/table/user/'
-            ,cellMinWidth: 80 //全局定义常规单元格的最小宽度，layui 2.2.1 新增
-            ,cols: [[
-                {field:'id', width:80, title: 'ID', sort: true}
-                ,{field:'equip_id',  title: '设备ID'}
-                ,{field:'type', title: '费用类型'}
-                ,{field:'start_dt', title: '计费开始时间'}
-                ,{field:'end_dt', title: '计费开始时间'}
-                ,{field:'amount', title: '金额', sort: true}
-            ]]
-        });
-        table.render({
-            elem: '#fixcost'
-            ,url:'/demo/table/user/'
-            ,cellMinWidth: 80 //全局定义常规单元格的最小宽度，layui 2.2.1 新增
-            ,cols: [[
-                {field:'id', width:80, title: 'ID', sort: true}
-                ,{field:'equip_id',  title: '设备ID'}
-                ,{field:'type', title: '费用类型'}
-                ,{field:'start_dt', title: '计费开始时间'}
-                ,{field:'end_dt', title: '计费开始时间'}
-                ,{field:'amount', title: '金额', sort: true}
-            ]]
-        });
-        table.render({
-            elem: '#dept'
-            ,url:'/demo/table/user/'
-            ,cellMinWidth: 80 //全局定义常规单元格的最小宽度，layui 2.2.1 新增
-            ,cols: [[
-                {field:'id', width:80, title: 'ID', sort: true}
-                ,{field:'equip_id',  title: '设备ID'}
-                ,{field:'dept_name', title: '科室名称'}
-                ,{field:'count', title: '本月检查人次', sort: true}
-                ,{field:'profit', title: '本月收入', sort: true}
-                ,{field:'cost', title: '本月成本', sort: true}
-            ]]
-        });
-        table.render({
-            elem: '#source'
-            ,url:'/demo/table/user/'
-            ,cellMinWidth: 80 //全局定义常规单元格的最小宽度，layui 2.2.1 新增
-            ,cols: [[
-                {field:'id', width:80, title: 'ID', sort: true}
-                ,{field:'equip_id',  title: '设备ID'}
-                ,{field:'dept_name', title: '检查来源'}
-                ,{field:'count', title: '本月检查人次'}
-                ,{field:'profit', title: '本月收入'}
-                ,{field:'cost', title: '本月成本', sort: true}
-            ]]
-        });
-    });
 </script>
 <script>
     layui.config({
         base: '__LAYUI__/' //静态资源所在路径
     }).extend({
         index: 'lib/index' //主入口模块
-    }).use(['index', 'sample']);
+    }).use(['index', 'simple']);
 </script>
-
 </body>
 </html>
