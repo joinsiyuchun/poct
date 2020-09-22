@@ -24,11 +24,12 @@ class Echarts extends API
         'fixcost',
         'varcost',
         'source',
+        'equips',
     ];
 
     public function failure_rate()
     {
-        $eid = Request::param('eid', 47);
+        $eid = Request::param('id', 47);
         $sql = <<<SQL
  SELECT
     item_id as eid, FROM_UNIXTIME(create_time, '%Y-%m') as ctime, COUNT(*) as times
@@ -213,5 +214,47 @@ SQL;
                     ]
                 ]
             ];
+    }
+
+    public function equips()
+    {
+        $eid = Request::param('id', 47);
+        $sql = <<<SQL
+SELECT  tc.id as category_id,tc.name as category,ti.id,ti.code 
+FROM think_catagory tc 
+INNER JOIN think_item ti
+ON tc.id = ti.catagoryid
+WHERE tc.status=1 AND ti.status = 1
+ORDER BY tc.sort,tc.name,ti.sort
+
+SQL;
+        $result = Db::query($sql);
+
+        $response = [];
+
+        $tmpArr = [];
+        foreach ($result as $row) {
+            $cid = $row['category_id'];
+            $category = $row['category'];
+            $eid = $row['id'];
+            $code = $row['code'];
+            $tmpArr["$category-$cid"][] = [
+                'id' => $eid,
+                'code' => $code
+            ];
+        }
+
+//        foreach ($tmpArr as $name => $data) {
+//            $xAxis = [];
+//            $series = [];
+//            foreach ($data as $td) {
+//                $xAxis[] = $td['key'];
+//                $series[] = $td['value'];
+//            }
+//            $response[$name]['xAxis'] = $xAxis;
+//            $response[$name]['series'] = $series;
+//        }
+
+        return $tmpArr;
     }
 }

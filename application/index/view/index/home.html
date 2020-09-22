@@ -31,23 +31,17 @@
                     <div class="layui-form" lay-filter="">
                         <div class="layui-form-item">
                             <div class="layui-inline">
-                                <label class="layui-form-label">设备分类</label>
-                                <div class="layui-input-inline">
-                                    <input type="text" name="cid" placeholder="请输入" autocomplete="off"
-                                           class="layui-input">
-                                </div>
-                            </div>
-                            <div class="layui-inline">
                                 <label class="layui-form-label">设备编码</label>
                                 <div class="layui-input-inline">
-                                    <input type="text" name="username" placeholder="请输入" autocomplete="off"
-                                           class="layui-input">
+                                    <select id="equips">
+                                        <option value="">请选择设备</option>
+                                    </select>
                                 </div>
                             </div>
 
                             <div class="layui-inline">
                                 <button class="layui-btn layuiadmin-btn-comm" data-type="reload" lay-submit
-                                        lay-filter="LAY-app-contcomm-search">
+                                        lay-filter="LAY-app-contcomm-search" id="equip-query">
                                     <i class="layui-icon layui-icon-search layuiadmin-button-btn"></i>
                                 </button>
                             </div>
@@ -139,21 +133,24 @@
                             <div class="layuiadmin-card-list">
                                 <p class="layuiadmin-normal-font">月均检查人次：<span id="month-avg-inspection">-</span></p>
                                 <span>同上期比较:<span id="efficiency-avg-compare-value"></span></span>
-                                <div id="efficiency-avg-compare" class="layui-progress layui-progress-big" lay-filter="efficiency-avg-compare">
+                                <div id="efficiency-avg-compare" class="layui-progress layui-progress-big"
+                                     lay-filter="efficiency-avg-compare">
                                     <div class="layui-progress-bar" lay-percent="0%"></div>
                                 </div>
                             </div>
                             <div class="layuiadmin-card-list">
                                 <p class="layuiadmin-normal-font">单月最大检查人次：<span id="month-max-inspection">-</span></p>
                                 <span>同上期比较:<span id="efficiency-max-compare-value"></span></span>
-                                <div id="efficiency-max-compare" class="layui-progress layui-progress-big"  lay-filter="efficiency-max-compare">
+                                <div id="efficiency-max-compare" class="layui-progress layui-progress-big"
+                                     lay-filter="efficiency-max-compare">
                                     <div class="layui-progress-bar" lay-percent="0%"></div>
                                 </div>
                             </div>
                             <div class="layuiadmin-card-list">
                                 <p class="layuiadmin-normal-font">单月最小检查人次：<span id="month-min-inspection">-</span></p>
                                 <span>同上期比较:<span id="efficiency-min-compare-value"></span></span>
-                                <div id="efficiency-min-compare" class="layui-progress layui-progress-big" lay-filter="efficiency-min-compare">
+                                <div id="efficiency-min-compare" class="layui-progress layui-progress-big"
+                                     lay-filter="efficiency-min-compare">
                                     <div class="layui-progress-bar" lay-percent="0%"></div>
                                 </div>
                             </div>
@@ -187,21 +184,24 @@
                             <div class="layuiadmin-card-list">
                                 <p class="layuiadmin-normal-font">年收益率：<span id="benefit-revenue-rate">-</span>%</p>
                                 <span>同上期比较:<span id="benefit-year-compare-value"></span></span>
-                                <div id="benefit-year-compare" class="layui-progress layui-progress-big" lay-filter="benefit-year-compare">
+                                <div id="benefit-year-compare" class="layui-progress layui-progress-big"
+                                     lay-filter="benefit-year-compare">
                                     <div class="layui-progress-bar" lay-percent="0%"></div>
                                 </div>
                             </div>
                             <div class="layuiadmin-card-list">
                                 <p class="layuiadmin-normal-font">月均收入：¥<span id="month-avg-revenue">-</span></p>
                                 <span>同上期比较:<span id="benefit-revenue-compare-value"></span></span>
-                                <div id="benefit-revenue-compare" class="layui-progress layui-progress-big" lay-filter="benefit-revenue-compare">
+                                <div id="benefit-revenue-compare" class="layui-progress layui-progress-big"
+                                     lay-filter="benefit-revenue-compare">
                                     <div class="layui-progress-bar" lay-percent="0%"></div>
                                 </div>
                             </div>
                             <div class="layuiadmin-card-list">
                                 <p class="layuiadmin-normal-font">月均成本：¥<span id="month-avg-cost">-</span></p>
                                 <span>同上期比较:<span id="benefit-cost-compare-value"></span></span>
-                                <div id="benefit-cost-compare" class="layui-progress layui-progress-big" lay-filter="benefit-cost-compare">
+                                <div id="benefit-cost-compare" class="layui-progress layui-progress-big"
+                                     lay-filter="benefit-cost-compare">
                                     <div class="layui-progress-bar" lay-percent="0%"></div>
                                 </div>
                             </div>
