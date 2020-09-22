@@ -5,6 +5,7 @@ namespace app\api\controller;
 
 use app\common\controller\Api;
 use think\Db;
+use think\facade\Request;
 
 
 class Echarts extends API
@@ -27,14 +28,17 @@ class Echarts extends API
 
     public function failure_rate()
     {
+        $eid = Request::param('eid', 47);
         $sql = <<<SQL
  SELECT
     item_id as eid, FROM_UNIXTIME(create_time, '%Y-%m') as ctime, COUNT(*) as times
 FROM
-    operator.think_workorder
-group by item_id, FROM_UNIXTIME(create_time, '%Y-%m')
+    think_workorder
+WHERE item_id = ?
+GROUP BY item_id, FROM_UNIXTIME(create_time, '%Y-%m')
+
 SQL;
-        $result = Db::query($sql);
+        $result = Db::query($sql, [$eid]);
         $response = [];
 
         $tmpArr = [];
