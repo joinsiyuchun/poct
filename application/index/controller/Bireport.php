@@ -225,6 +225,7 @@ class Bireport extends Base
             $addcostorder["type"]=$data["type"];
             $addcostorder["start_date"]=$data["start_date"];
             $addcostorder["end_date"]=$data["end_date"];
+            $addcostorder["is_fix"]=$data["is_fix"];
             $addcostorder["amount"]=$data["amount"];
             $addcostorder["memo"]=$data["memo"];
             $ids=explode('|',$data["ids"]);

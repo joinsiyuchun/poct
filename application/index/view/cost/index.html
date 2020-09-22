@@ -36,7 +36,19 @@
     <button class="layui-btn layui-btn-xs" >人员费用</button>
     {{# } else if(d.type == 5) { }}
     <button class="layui-btn layui-btn-xs" >场地费用</button>
-    {/if}
+
+    {{# } }}
+
+
+</script>
+
+{// 是否固定成本}
+<script type="text/html" id="is_fix">
+
+    {{# if(d.type == 0){ }}
+    <button class="layui-btn layui-btn-xs" >可变成本</button>
+    {{# } else { }}
+    <button class="layui-btn layui-btn-xs" >固定成本</button>
     {{# } }}
 
 
@@ -75,6 +87,7 @@
                 {field: 'id', width: 200, title: 'ID', sort: true, align: 'center'}
                 ,{field: 'item_id', width: 200, title: '设备ID', align: 'center'}
                 ,{field: 'type', width: 200, title: '费用类型', sort: true,  align: 'center',templet: '#status'}
+                ,{field: 'is_fix', width: 200, title: '是否固定成本', sort: true,  align: 'center',templet: '#is_fix'}
                 ,{field: 'start_date', width: 200, title: '开始日期', sort: true,  align: 'center'}
                 ,{field: 'end_date', width: 200, title: '截止日期', sort: true,  align: 'center'}
                 ,{field: 'amount', width: 200, title: '总金额', sort: true,  align: 'center'}

@@ -23,6 +23,16 @@
             </div>
         </div>
         <div class="layui-form-item">
+            <label class="layui-form-label">是否固定成本</label>
+            <div class="layui-input-block">
+                <select name="is_fix" lay-filter="orgFilter" lay-verify="required" lay-reqText="不能为空">
+                    <option value="0">可变成本</option>
+                    <option value="1">固定成本</option>
+
+                </select>
+            </div>
+        </div>
+        <div class="layui-form-item">
             <label class="layui-form-label">费用开始日期：</label>
             <div class="layui-input-block">
                 <input type="date" name="start_date" class="layui-input" placeholder="yyyy-MM-dd" autocomplete="off" lay-verify="date" lay-reqText="日期不能为空">

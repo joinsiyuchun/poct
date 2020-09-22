@@ -10,6 +10,12 @@
             </div>
         </div>
         <div class="layui-form-item">
+            <label class="layui-form-label">折旧年限：</label>
+            <div class="layui-input-block">
+                <input type="text" name="depreciation" lay-verify="required" lay-reqText="折旧年限不能为空" placeholder="请输入折旧年限" autocomplete="off" class="layui-input" value="{$catagoryInfo.depreciation}">
+            </div>
+        </div>
+        <div class="layui-form-item">
             <label class="layui-form-label">是否启用：</label>
             <div class="layui-input-block">
                 <input type="radio" name="status" value="1" title="启用" lay-verify="required" {eq name="$catagoryInfo.status" value="1"}checked{/eq}>
