@@ -11,6 +11,28 @@ layui.define
             reload($('#equips').val());
         });
 
+        layui.jquery.ajax({
+            url: '/api/echarts/equips',
+            dataType: 'json'
+        }).done(function (res) {
+            $('#equips').empty();
+            $('#equips').append($(' <option value="">请选择设备</option>'));
+            for (var prop in res) {
+                var group = $('<optgroup label="' + prop + '"></optgroup>');
+                var val = res[prop];
+
+                val.map(function (equip) {
+                    var option = $('<option value="' + equip.id + '">' + equip.code + '</option>');
+                    group.append(option);
+                });
+                $('#equips').append(group);
+            }
+
+            layui.use('form', function () {
+                layui.form.render();
+            });
+        });
+
         var reload = function (equipId) {
             layui.use(["element", "table", "admin", "carousel", "echarts"], function () {
                 layui.element.init();
@@ -335,26 +357,6 @@ layui.define
                     layui.jquery('#benefit-revenue-rate').text(res.benefitRevenueRate);
                 });
 
-
-                layui.jquery.ajax({
-                    url: '/api/echarts/equips',
-                    dataType: 'json'
-                }).done(function (res) {
-                    for (var prop in res) {
-                        var group = $('<optgroup label="' + prop + '"></optgroup>');
-                        var val = res[prop];
-
-                        val.map(function (equip) {
-                            var option = $('<option value="' + equip.id + '">' + equip.code + '</option>');
-                            group.append(option);
-                        });
-                        $('#equips').append(group);
-                    }
-
-                    layui.use('form', function () {
-                        layui.form.render();
-                    });
-                });
 
             });
         }
