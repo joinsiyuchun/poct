@@ -94,8 +94,9 @@ CREATE TABLE `think_catagory` (
   `update_time` int(10) unsigned DEFAULT NULL COMMENT '更新时间',
   `sort` int(11) DEFAULT '0',
   `img_url` varchar(255) DEFAULT '‘images/1.jpg’',
+  `depreciation` double DEFAULT '0',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8 COMMENT='产品目录表';
+) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8 COMMENT='产品目录表';
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -236,6 +237,7 @@ CREATE TABLE `think_item_cost` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `item_id` int(10) unsigned NOT NULL DEFAULT '0',
   `type` int(10) unsigned NOT NULL,
+  `is_fix` varchar(45) DEFAULT '0',
   `start_date` date NOT NULL,
   `end_date` date NOT NULL,
   `amount` decimal(12,2) NOT NULL,
@@ -243,7 +245,8 @@ CREATE TABLE `think_item_cost` (
   `create_time` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '创建时间',
   `update_time` int(10) unsigned DEFAULT NULL COMMENT '更新时间',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8 COMMENT='成本补录表';
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8 COMMENT='成本补录表';
+
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
