@@ -16,8 +16,8 @@ class Echarts extends API
         'failure_rate',
         'efficiency',
         'benefit',
-        'benefit_compare',
-        'efficiency_compare',
+        'benefit_efficiency_compare',
+
         'dept',
         'fixcost',
         'varcost',
@@ -83,20 +83,23 @@ class Echarts extends API
         ];
     }
 
-    public function benefit_compare()
+    public function benefit_efficiency_compare()
     {
         return [
-            'yearComparePercent' => 13,
-            'revenuePercent' => 30,
-            'costPercent' => 50,
-            'benefitRevenueRate' => 15
+            'benefitYearCompare' => 13,
+            'benefitRevenueCompare' => 30,
+            'benefitCostCompare' => 50,
+            'benefitRevenueRate' => 15,
+            'efficiencyMaxCompare' => -13,
+            'efficiencyMinCompare' => 30,
+            'efficiencyAvgCompare' => 50,
         ];
     }
 
     public function efficiency_compare()
     {
         return [
-            'maxComparePercent' => 13,
+            'maxComparePercent' => -13,
             'minComparePercent' => 30,
             'avgComparePercent' => 50,
         ];
@@ -153,7 +156,7 @@ class Echarts extends API
                         'type' => '人员工资',
                         'start_dt' => '2020-09-01',
                         'end_dt' => '2020-10-01',
-                        'amount' =>123123 ,
+                        'amount' => 123123,
                     ]
                 ]
             ];
@@ -172,7 +175,7 @@ class Echarts extends API
                         'type' => '电费',
                         'start_dt' => '2020-09-01',
                         'end_dt' => '2020-10-01',
-                        'amount' =>123 ,
+                        'amount' => 123,
                     ]
                 ]
             ];

@@ -4,13 +4,8 @@
 layui.define
 (
     function (exports) {
-
-        layui.use('element', function () {
-
-        });
-
-
         layui.use(["element", "table", "admin", "carousel", "echarts"], function () {
+            layui.element.init();
 
             layui.jquery(".layadmin-carousel").each
             (
@@ -291,26 +286,24 @@ layui.define
                 layui.jquery("[lay-filter=compare-to-last-year]").children().children().text(res.percent + '%');
                 layui.element.progress('compare-to-last-year', res.percent + '%');
             });
-
             layui.jquery.ajax({
-                url: '/api/echarts/benefit_compare',
+                url: '/api/echarts/benefit_efficiency_compare',
                 dataType: 'json',
             }).done(function (res) {
-                layui.element.init();
-                layui.element.progress('benefit-year-compare', res.yearComparePercent + '%');
-                layui.element.progress('benefit-revenue-compare', res.revenuePercent + '%');
-                layui.element.progress('benefit-cost-compare', res.costPercent + '%');
+
+                ids = ['benefit-year-compare', 'benefit-revenue-compare', 'benefit-cost-compare', 'efficiency-max-compare', 'efficiency-min-compare', 'efficiency-avg-compare'];
+                ids.forEach(function (id) {
+                    key = id.replace(/\-[a-z]/g, function (txtjq) {
+                        return txtjq.toUpperCase().replace("-", "");
+                    });
+                    layui.element.progress(id, Math.abs(res[key]) + '%');
+                    layui.jquery('#' + id + '-value').text(res[key] + '%').attr('style', res[key] > 0 ? 'color:green' : 'color:red');
+                    if (res[key] < 0) {
+                        layui.jquery('#' + id).children().addClass('layui-bg-red');
+                    }
+                });
+
                 layui.jquery('#benefit-revenue-rate').text(res.benefitRevenueRate);
-            });
-
-            layui.jquery.ajax({
-                url: '/api/echarts/efficiency_compare',
-                dataType: 'json',
-            }).done(function (res) {
-                layui.element.init();
-                layui.element.progress('efficiency-max-compare', res.maxComparePercent + '%');
-                layui.element.progress('efficiency-min-compare', res.minComparePercent + '%');
-                layui.element.progress('efficiency-avg-compare', res.avgComparePercent + '%');
             });
         });
         exports('simple', this);
