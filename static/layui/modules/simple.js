@@ -178,44 +178,56 @@ layui.define
                 dataType: 'json',
             }).done(function (res) {
 
+                console.log(res)
 
-                maxValue = Math.max.apply(null, res.series);
-                minValue = Math.min.apply(null, res.series);
+                xAxis = [];
+                series = [];
+                legend = [];
+                for (var prop in res) {
+
+                    maxValue = Math.max.apply(null, res[prop].series);
+                    minValue = Math.min.apply(null, res[prop].series);
+                    xAxis = xAxis.concat(res[prop].xAxis);
+                    var obj = {
+                        name: prop, type: "line",
+                        data: res[prop].series,
+
+                        markPoint: {
+                            data: [
+                                {
+                                    name: "年最高",
+                                    value: maxValue,
+                                    xAxis: res[prop].series.length,
+                                    yAxis: maxValue,
+                                    symbolSize: 18
+                                },
+                                {
+                                    name: "年最低",
+                                    value: minValue,
+                                    xAxis: res[prop].series.length,
+                                    yAxis: minValue
+                                }
+                            ]
+                        },
+                        markLine: {data: [{type: "average", name: "平均值"}]}
+                    };
+                    series.push(obj);
+                    legend.push(prop)
+                }
+                console.log(xAxis);
+                console.log(series);
+
                 option = {
                     title: {text: "设备故障率分析", subtext: "单位：%"},
                     tooltip: {trigger: "axis"},
-                    legend: {data: ["CT01"]},
+                    legend: {data: legend},
                     calculable: !0,
                     xAxis: [{
                         type: "category",
-                        data: res.xAxis
+                        data: xAxis
                     }],
                     yAxis: [{type: "value"}],
-                    series:
-                        [
-                            {
-                                name: "CT01", type: "line",
-                                data: res.series,
-                                markPoint: {
-                                    data: [
-                                        {
-                                            name: "年最高",
-                                            value: maxValue,
-                                            xAxis: res.series.length,
-                                            yAxis: maxValue,
-                                            symbolSize: 18
-                                        },
-                                        {
-                                            name: "年最低",
-                                            value: minValue,
-                                            xAxis: res.series.length,
-                                            yAxis: minValue
-                                        }
-                                    ]
-                                },
-                                markLine: {data: [{type: "average", name: "平均值"}]}
-                            }
-                        ]
+                    series: series
                 };
 
                 dom = layui.jquery("#LAY-index-pagethree").children("div");

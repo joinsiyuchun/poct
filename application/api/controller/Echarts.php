@@ -4,6 +4,7 @@ namespace app\api\controller;
 
 
 use app\common\controller\Api;
+use think\Db;
 
 
 class Echarts extends API
@@ -26,10 +27,39 @@ class Echarts extends API
 
     public function failure_rate()
     {
-        return [
-            'xAxis' => ['2020-01', '2020-02', '2020-03', '2020-04', '2020-05', '2020-06', '2020-07', '2020-08'],
-            'series' => [100, 200, 300, 400, 500, 600, 700, 455]
-        ];
+        $sql = <<<SQL
+ SELECT
+    item_id as eid, FROM_UNIXTIME(create_time, '%Y-%m') as ctime, COUNT(*) as times
+FROM
+    operator.think_workorder
+group by item_id, FROM_UNIXTIME(create_time, '%Y-%m')
+SQL;
+        $result = Db::query($sql);
+        $response = [];
+
+        $tmpArr = [];
+        foreach ($result as $row) {
+            $eid = $row['eid'];
+            $ctime = $row['ctime'];
+            $times = $row['times'];
+            $tmpArr[$eid][] = [
+                'key' => $ctime,
+                'value' => $times
+            ];
+        }
+
+        foreach ($tmpArr as $name => $data) {
+            $xAxis = [];
+            $series = [];
+            foreach ($data as $td) {
+                $xAxis[] = $td['key'];
+                $series[] = $td['value'];
+            }
+            $response[$name]['xAxis'] = $xAxis;
+            $response[$name]['series'] = $series;
+        }
+
+        return $response;
     }
 
     public function efficiency()
