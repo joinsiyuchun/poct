@@ -13,20 +13,157 @@ class Echarts extends API
     const  DEFAULT_EID = 47;
     protected $checkLoginExclude = [
         'return_rate',
-        'inspection',
-        'cost',
-        'revenue',
+        'global_year',
+        'global_month',
         'failure_rate',
-        'efficiency',
-        'benefit',
+        'efficiency_last_year',
+        'efficiency_current_year',
+        'efficiency_min_current_year',
+        'efficiency_max_current_year',
+        'efficiency_avg_current_year',
+        'efficiency_min_last_year',
+        'efficiency_max_last_year',
+        'efficiency_avg_last_year',
+        'return_rate_last_year',
+        'income_per_mon_last_year',
+        'income_per_mon_current_year',
+        'cost_per_mon_current_year',
+        'cost_per_mon_last_year',
+        'return_rate_current_year',
+        'benefit_last_year',
+        'benefit_current_year',
         'benefit_efficiency_compare',
-
         'dept',
         'fixcost',
         'varcost',
         'source',
         'equips',
     ];
+
+    protected $tempItemMap = [
+        47 => '4.1.40.2.8.01.1710001',
+        52 => 'B01',
+        54 => 'M02',
+        55 => 'M03',
+        56 => 'A07',
+        57 => 'B05',
+        58 => 'M04',
+        59 => 'B06',
+        60 => 'A08',
+        61 => 'A01',
+        62 => 'A02',
+        63 => 'A03',
+        64 => 'A09',
+        65 => 'A10',
+        66 => '1798231',
+        67 => 'Q21323',
+        68 => '187463',
+        69 => '3253',
+        70 => 'test0001',
+        71 => 'M01',
+        72 => 'CT01',
+        73 => 'M03',
+        74 => '1',
+    ];
+
+    protected function mapCode($eid)
+    {
+        return $eid;
+        // return $this->tempItemMap[$eid];
+    }
+
+    /**
+     * 本年总收入、本年总成本、本年检查人次：
+     * @return array
+     */
+    public function global_year()
+    {
+        $eid = Request::param('id', self::DEFAULT_EID);
+        $sql = <<<SQL
+        SELECT item_id, sum(total_income) as total_income, sum(total_cost) as total_cost, sum(inspection_times) as inspection_times 
+        FROM `item_info_data` 
+        WHERE year(date_time) = year(NOW()) 
+        AND item_id = ?
+        GROUP BY item_id;
+SQL;
+
+        $data = Db::query($sql, [$eid]);
+        $row = array_pop($data);
+        if ($row) {
+            return [
+                'income' => number_format($row['total_income']),
+                'cost' => number_format($row['total_cost']),
+                'inspection' => number_format($row['inspection_times'])
+            ];
+        }
+
+        return [];
+    }
+
+    /**
+     * 本月总收入、本月总成本、本月检查人次：
+     * @return array
+     */
+    public function global_month()
+    {
+        $eid = Request::param('id', self::DEFAULT_EID);
+        $sql = <<<SQL
+        SELECT item_id, sum(total_income) as total_income, sum(total_cost) as total_cost, sum(inspection_times) as inspection_times 
+        FROM `item_info_data` 
+        WHERE year(date_time) = year(NOW()) 
+        AND month(date_time) = month(NOW()) 
+        AND item_id = ?
+        GROUP BY item_id;
+SQL;
+
+        $data = Db::query($sql, [$eid]);
+        $row = array_pop($data);
+        if ($row) {
+            return [
+                'income' => number_format($row['total_income']),
+                'cost' => number_format($row['total_cost']),
+                'inspection' => number_format($row['inspection_times'])
+            ];
+        }
+
+        return [];
+    }
+
+    public function return_rate()
+    {
+        $eid = Request::param('id', self::DEFAULT_EID);
+        $sql = <<<SQL
+SELECT item_id, return_rate,dur FROM (
+SELECT a.item_id, round((a.total_income - a.total_cost) / b.purchase_price, 2) as return_rate,'current' as dur
+FROM (SELECT item_id, sum(total_income) as total_income, sum(total_cost) as total_cost
+      FROM `item_info_data`
+      where year(date_time) = year(NOW())
+      GROUP BY item_id) as a
+         join think_item as b on a.item_id = b.id and b.`status` = 1 
+union all
+SELECT a.item_id, round((a.total_income - a.total_cost) / b.purchase_price, 2) as return_rate ,'last' as dur
+FROM (SELECT item_id, sum(total_income) as total_income, sum(total_cost) as total_cost
+      FROM `item_info_data`
+      where year(date_time) = year(NOW()) - 1
+      GROUP BY item_id) as a
+         join think_item as b on a.item_id = b.id and b.`status` = 1
+       ) AS d where d.item_id = ? ;
+SQL;
+
+
+        $data = Db::query($sql, [$eid]);
+
+        $response = [
+            'last' => 0,
+            'current' => 0
+        ];
+
+        foreach ($data as $row) {
+            $response[$row['dur']] = $row['return_rate'];
+        }
+        return $response;
+    }
+
 
     public function failure_rate()
     {
@@ -68,37 +205,23 @@ SQL;
         return $response;
     }
 
-    public function efficiency()
+    /**
+     * -- 效率分析：
+     * -- 设备效率趋势分析（去年）：
+     * @return array[]
+     */
+    public function efficiency_last_year()
     {
         $eid = Request::param('id', self::DEFAULT_EID);
-        $last = Request::param('last', false);
         $sql = <<<SQL
-SELECT
-    a.item_id as eid,
-    date_format(report_date,'%Y-%c') as xAxis,
-    count(request_id) AS series
-FROM think_singledia_info AS a
-WHERE  year(a.report_date)=YEAR(NOW())
-AND item_id = ?
-group by  a.item_id,
-          date_format(report_date,'%Y-%c')
+SELECT item_id, DATE_FORMAT(date_time, '%Y-%m') as t_time, sum(inspection_times) as inspection_times
+FROM `item_info_data`
+where year(date_time) = year(NOW()) - 1
+and item_id = ?
+GROUP BY item_id, DATE_FORMAT(date_time, '%Y-%m');
 SQL;
-        $sqlLastyear = <<<SQL
-SELECT
-    a.item_id as eid,
-    date_format(report_date,'%Y-%c') as xAxis,
-    count(request_id) AS series
-FROM think_singledia_info AS a
-WHERE  year(a.report_date)=YEAR(NOW())-1
-AND item_id = ?
-group by  a.item_id,
-          date_format(report_date,'%Y-%c')
-SQL;
-        if ($last === 'true') {
-            $result = Db::query($sqlLastyear, [$eid]);
-        } else {
-            $result = Db::query($sql, [$eid]);
-        }
+
+        $result = Db::query($sql, [$eid]);
 
         $response = [
             'xAxis' => [],
@@ -106,9 +229,8 @@ SQL;
         ];
 
         foreach ($result as $row) {
-            //  $eid = $row['eid'];
-            $ctime = $row['xAxis'];
-            $times = $row['series'];
+            $ctime = $row['t_time'];
+            $times = $row['inspection_times'];
             $response['xAxis'][] = $ctime;
             $response['series'][] = $times;
         }
@@ -116,144 +238,832 @@ SQL;
         return $response;
     }
 
-    public function benefit()
+    /**
+     * -- 效率分析：
+     * -- 设备效率趋势分析（今年）：
+     * @return array[]
+     */
+    public function efficiency_current_year()
     {
-        return [
-            'xAxis' => ['2020-01', '2020-02', '2020-03', '2020-04', '2020-05', '2020-06', '2020-07', '2020-08'],
-            'series' => [
-                'income' => [333, 1231, 24214, 23424, 2222, 4342, 1344, 455],
-                'cost' => [100, 200, 300, 400, 500, 600, 700, 455]
-            ]
+        $eid = Request::param('id', self::DEFAULT_EID);
+        $sql = <<<SQL
+SELECT item_id, DATE_FORMAT(date_time, '%Y-%m') as t_time, sum(inspection_times) as inspection_times
+FROM `item_info_data`
+where year(date_time) = year(NOW())
+and item_id = ?
+GROUP BY item_id, DATE_FORMAT(date_time, '%Y-%m');
+
+SQL;
+
+        $result = Db::query($sql, [$eid]);
+
+        $response = [
+            'xAxis' => [],
+            'series' => []
         ];
+
+        foreach ($result as $row) {
+            $ctime = $row['t_time'];
+            $times = $row['inspection_times'];
+            $response['xAxis'][] = $ctime;
+            $response['series'][] = $times;
+        }
+
+        return $response;
     }
 
-    public function revenue()
+    /**
+     * -- 月均检查人次、同上期比较（未乘100%）（去年）：
+     * @return array[]
+     */
+    public function efficiency_avg_last_year()
     {
-        return [
-            'year' => number_format(999999999),
-            'month' => number_format(111111111)
+        $eid = Request::param('id', self::DEFAULT_EID);
+        $sql = <<<SQL
+
+SELECT c.item_id,
+       c.inspection_times_per,
+       case c.inspection_times_per - d.inspection_times_per
+           when 0 then 0
+           else if(round((c.inspection_times_per - d.inspection_times_per) / d.inspection_times_per, 2) is null, 1,
+                   round((c.inspection_times_per - d.inspection_times_per) / d.inspection_times_per,
+                         2)) end as inspection_times_per_mom
+FROM (SELECT a.item_id, a.t_year, round(avg(a.inspection_times), 0) as inspection_times_per
+      FROM (SELECT item_id,
+                   year(date_time)                 as t_year,
+                   DATE_FORMAT(date_time, '%Y-%m') as t_time,
+                   sum(inspection_times)           as inspection_times
+            FROM `item_info_data`
+            where year(date_time) = year(NOW()) - 1
+            GROUP BY item_id, year(date_time), DATE_FORMAT(date_time, '%Y-%m')) as a
+      GROUP BY a.item_id, a.t_year) as c
+         LEFT JOIN (SELECT b.item_id, b.t_year, round(avg(b.inspection_times), 0) as inspection_times_per
+                    FROM (SELECT item_id,
+                                 year(date_time)                 as t_year,
+                                 DATE_FORMAT(date_time, '%Y-%m') as t_time,
+                                 sum(inspection_times)           as inspection_times
+                          FROM `item_info_data`
+                          where year(date_time) = year(NOW()) - 2
+                          GROUP BY item_id, year(date_time), DATE_FORMAT(date_time, '%Y-%m')) as b
+                    GROUP BY b.item_id, b.t_year) as d 
+         ON c.item_id = d.item_id AND c.t_year - 1 = d.t_year
+WHERE c.item_id = ?;
+SQL;
+
+        $result = Db::query($sql, [$eid]);
+
+        $response = [
+            'inspection_times_per' => [],
+            'inspection_times_per_mom' => []
         ];
+
+        foreach ($result as $row) {
+            $ctime = $row['inspection_times_per'];
+            $times = $row['inspection_times_per_mom'];
+            $response['inspection_times_per'] = $ctime;
+            $response['inspection_times_per_mom'] = $times;
+        }
+
+        return $response;
     }
 
-    public function cost()
+    /**
+     * -- 月均检查人次、同上期比较（未乘100%）（今年）：
+     * @return array[]
+     */
+    public function efficiency_avg_current_year()
     {
-        return [
-            'year' => number_format(88888888888),
-            'month' => number_format(22222222)
+        $eid = Request::param('id', self::DEFAULT_EID);
+        $sql = <<<SQL
+
+SELECT c.item_id,
+       c.inspection_times_per,
+       case c.inspection_times_per - d.inspection_times_per
+           when 0 then 0
+           else if(round((c.inspection_times_per - d.inspection_times_per) / d.inspection_times_per, 2) is null, 1,
+                   round((c.inspection_times_per - d.inspection_times_per) / d.inspection_times_per,
+                         2)) end as inspection_times_per_mom
+FROM (SELECT a.item_id, a.t_year, round(avg(a.inspection_times), 0) as inspection_times_per
+      FROM (SELECT item_id,
+                   year(date_time)                 as t_year,
+                   DATE_FORMAT(date_time, '%Y-%m') as t_time,
+                   sum(inspection_times)           as inspection_times
+            FROM `item_info_data`
+            where year(date_time) = year(NOW())
+            GROUP BY item_id, year(date_time), DATE_FORMAT(date_time, '%Y-%m')) as a
+      GROUP BY a.item_id, a.t_year) as c
+         LEFT JOIN (SELECT b.item_id, b.t_year, round(avg(b.inspection_times), 0) as inspection_times_per
+                    FROM (SELECT item_id,
+                                 year(date_time)                 as t_year,
+                                 DATE_FORMAT(date_time, '%Y-%m') as t_time,
+                                 sum(inspection_times)           as inspection_times
+                          FROM `item_info_data`
+                          where year(date_time) = year(NOW()) - 1
+                          GROUP BY item_id, year(date_time), DATE_FORMAT(date_time, '%Y-%m')) as b
+                    GROUP BY b.item_id, b.t_year) as d 
+        ON c.item_id = d.item_id and c.t_year - 1 = d.t_year 
+WHERE c.item_id = ?;
+SQL;
+
+        $result = Db::query($sql, [$eid]);
+
+        $response = [
+            'inspection_times_per' => [],
+            'inspection_times_per_mom' => []
         ];
+
+        foreach ($result as $row) {
+            $ctime = $row['inspection_times_per'];
+            $times = $row['inspection_times_per_mom'];
+            $response['inspection_times_per'] = $ctime;
+            $response['inspection_times_per_mom'] = $times;
+        }
+
+        return $response;
     }
 
-    public function inspection()
+    /**
+     * -- -- 单月最大检查人次、同上期比较（未乘100%）（去年）：
+     * @return array[]
+     */
+    public function efficiency_max_last_year()
     {
-        return [
-            'year' => number_format(55555555),
-            'month' => number_format(3333333)
+        $eid = Request::param('id', self::DEFAULT_EID);
+        $sql = <<<SQL
+
+SELECT c.item_id,
+       c.inspection_times_max,
+       case c.inspection_times_max - d.inspection_times_max
+           when 0 then 0
+           else if(round((c.inspection_times_max - d.inspection_times_max) / d.inspection_times_max, 2) is null, 1,
+                   round((c.inspection_times_max - d.inspection_times_max) / d.inspection_times_max,
+                         2)) end as inspection_times_max_mom
+FROM (SELECT a.item_id, a.t_year, max(a.inspection_times) as inspection_times_max
+      FROM (SELECT item_id,
+                   year(date_time)                 as t_year,
+                   DATE_FORMAT(date_time, '%Y-%m') as t_time,
+                   sum(inspection_times)           as inspection_times
+            FROM `item_info_data`
+            where year(date_time) = year(NOW()) - 1
+            GROUP BY item_id, year(date_time), DATE_FORMAT(date_time, '%Y-%m')) as a
+      GROUP BY a.item_id, a.t_year) as c
+         left join (SELECT b.item_id, b.t_year, max(b.inspection_times) as inspection_times_max
+                    FROM (SELECT item_id,
+                                 year(date_time)                 as t_year,
+                                 DATE_FORMAT(date_time, '%Y-%m') as t_time,
+                                 sum(inspection_times)           as inspection_times
+                          FROM `item_info_data`
+                          where year(date_time) = year(NOW()) - 2
+                          GROUP BY item_id, year(date_time), DATE_FORMAT(date_time, '%Y-%m')) as b
+                    GROUP BY b.item_id, b.t_year) as d on c.item_id = d.item_id and c.t_year - 1 = d.t_year 
+WHERE c.item_id = ?;
+SQL;
+
+        $result = Db::query($sql, [$eid]);
+
+        $response = [
+            'inspection_times_max' => [],
+            'inspection_times_max_mom' => []
         ];
+
+        foreach ($result as $row) {
+            $ctime = $row['inspection_times_max'];
+            $times = $row['inspection_times_max_mom'];
+            $response['inspection_times_max'] = $ctime;
+            $response['inspection_times_max_mom'] = $times;
+        }
+
+        return $response;
     }
 
-    public function return_rate()
+    /**
+     * -- 单月最大检查人次、同上期比较（未乘100%）（今年）：
+     * @return array[]
+     */
+    public function efficiency_max_current_year()
     {
-        return [
-            'year' => 666.66,
-            'lastYear' => 30.3
+        $eid = Request::param('id', self::DEFAULT_EID);
+        $sql = <<<SQL
+
+SELECT c.item_id,
+       c.inspection_times_max,
+       case c.inspection_times_max - d.inspection_times_max
+           when 0 then 0
+           else if(round((c.inspection_times_max - d.inspection_times_max) / d.inspection_times_max, 2) is null, 1,
+                   round((c.inspection_times_max - d.inspection_times_max) / d.inspection_times_max,
+                         2)) end as inspection_times_max_mom
+FROM (SELECT a.item_id, a.t_year, max(a.inspection_times) as inspection_times_max
+      FROM (SELECT item_id,
+                   year(date_time)                 as t_year,
+                   DATE_FORMAT(date_time, '%Y-%m') as t_time,
+                   sum(inspection_times)           as inspection_times
+            FROM `item_info_data`
+            where year(date_time) = year(NOW())
+            GROUP BY item_id, year(date_time), DATE_FORMAT(date_time, '%Y-%m')) as a
+      GROUP BY a.item_id, a.t_year) as c
+         left join (SELECT b.item_id, b.t_year, max(b.inspection_times) as inspection_times_max
+                    FROM (SELECT item_id,
+                                 year(date_time)                 as t_year,
+                                 DATE_FORMAT(date_time, '%Y-%m') as t_time,
+                                 sum(inspection_times)           as inspection_times
+                          FROM `item_info_data`
+                          where year(date_time) = year(NOW()) - 1
+                          GROUP BY item_id, year(date_time), DATE_FORMAT(date_time, '%Y-%m')) as b
+                    GROUP BY b.item_id, b.t_year) as d on c.item_id = d.item_id and c.t_year - 1 = d.t_year 
+WHERE c.item_id = ?;
+
+SQL;
+
+        $result = Db::query($sql, [$eid]);
+
+        $response = [
+            'inspection_times_max' => [],
+            'inspection_times_max_mom' => []
         ];
+
+        foreach ($result as $row) {
+            $ctime = $row['inspection_times_max'];
+            $times = $row['inspection_times_max_mom'];
+            $response['inspection_times_max'] = $ctime;
+            $response['inspection_times_max_mom'] = $times;
+        }
+
+        return $response;
     }
 
-    public function benefit_efficiency_compare()
+    /**
+     * -- 单月最小检查人次、同上期比较（未乘100%）（去年）：
+     * @return array[]
+     */
+    public function efficiency_min_last_year()
     {
-        return [
-            'benefitYearCompare' => 13,
-            'benefitRevenueCompare' => 30,
-            'benefitCostCompare' => 50,
-            'benefitRevenueRate' => 15,
-            'efficiencyMaxCompare' => -13,
-            'efficiencyMinCompare' => 30,
-            'efficiencyAvgCompare' => 50,
+        $eid = Request::param('id', self::DEFAULT_EID);
+        $sql = <<<SQL
+
+
+SELECT c.item_id,
+       c.inspection_times_min,
+       case c.inspection_times_min - d.inspection_times_min
+           when 0 then 0
+           else if(round((c.inspection_times_min - d.inspection_times_min) / d.inspection_times_min, 2) is null, 1,
+                   round((c.inspection_times_min - d.inspection_times_min) / d.inspection_times_min,
+                         2)) end as inspection_times_min_mom
+FROM (SELECT a.item_id, a.t_year, min(a.inspection_times) as inspection_times_min
+      FROM (SELECT item_id,
+                   year(date_time)                 as t_year,
+                   DATE_FORMAT(date_time, '%Y-%m') as t_time,
+                   sum(inspection_times)           as inspection_times
+            FROM `item_info_data`
+            where year(date_time) = year(NOW()) - 1
+            GROUP BY item_id, year(date_time), DATE_FORMAT(date_time, '%Y-%m')) as a
+      GROUP BY a.item_id, a.t_year) as c
+         left join (SELECT b.item_id, b.t_year, min(b.inspection_times) as inspection_times_min
+                    FROM (SELECT item_id,
+                                 year(date_time)                 as t_year,
+                                 DATE_FORMAT(date_time, '%Y-%m') as t_time,
+                                 sum(inspection_times)           as inspection_times
+                          FROM `item_info_data`
+                          where year(date_time) = year(NOW()) - 2
+                          GROUP BY item_id, year(date_time), DATE_FORMAT(date_time, '%Y-%m')) as b
+                    GROUP BY b.item_id, b.t_year) as d on c.item_id = d.item_id and c.t_year - 1 = d.t_year 
+WHERE c.item_id = ?;
+
+SQL;
+
+        $result = Db::query($sql, [$eid]);
+
+        $response = [
+            'inspection_times_min' => [],
+            'inspection_times_min_mom' => []
         ];
+
+        foreach ($result as $row) {
+            $ctime = $row['inspection_times_min'];
+            $times = $row['inspection_times_min_mom'];
+            $response['inspection_times_min'] = $ctime;
+            $response['inspection_times_min_mom'] = $times;
+        }
+
+        return $response;
     }
 
-    public function efficiency_compare()
+    /**
+     * -- 单月最小检查人次、同上期比较（未乘100%）（今年）：
+     * @return array[]
+     */
+    public function efficiency_min_current_year()
     {
-        return [
-            'maxComparePercent' => -13,
-            'minComparePercent' => 30,
-            'avgComparePercent' => 50,
+        $eid = Request::param('id', self::DEFAULT_EID);
+        $sql = <<<SQL
+
+
+
+SELECT c.item_id,
+       c.inspection_times_min,
+       case c.inspection_times_min - d.inspection_times_min
+           when 0 then 0
+           else if(round((c.inspection_times_min - d.inspection_times_min) / d.inspection_times_min, 2) is null, 1,
+                   round((c.inspection_times_min - d.inspection_times_min) / d.inspection_times_min,
+                         2)) end as inspection_times_min_mom
+FROM (SELECT a.item_id, a.t_year, min(a.inspection_times) as inspection_times_min
+      FROM (SELECT item_id,
+                   year(date_time)                 as t_year,
+                   DATE_FORMAT(date_time, '%Y-%m') as t_time,
+                   sum(inspection_times)           as inspection_times
+            FROM `item_info_data`
+            where year(date_time) = year(NOW())
+            GROUP BY item_id, year(date_time), DATE_FORMAT(date_time, '%Y-%m')) as a
+      GROUP BY a.item_id, a.t_year) as c
+         left join (SELECT b.item_id, b.t_year, min(b.inspection_times) as inspection_times_min
+                    FROM (SELECT item_id,
+                                 year(date_time)                 as t_year,
+                                 DATE_FORMAT(date_time, '%Y-%m') as t_time,
+                                 sum(inspection_times)           as inspection_times
+                          FROM `item_info_data`
+                          where year(date_time) = year(NOW()) - 1
+                          GROUP BY item_id, year(date_time), DATE_FORMAT(date_time, '%Y-%m')) as b
+                    GROUP BY b.item_id, b.t_year) as d on c.item_id = d.item_id and c.t_year - 1 = d.t_year 
+WHERE c.item_id = ?;
+
+SQL;
+
+        $result = Db::query($sql, [$eid]);
+
+        $response = [
+            'inspection_times_min' => [],
+            'inspection_times_min_mom' => []
         ];
+
+        foreach ($result as $row) {
+            $ctime = $row['inspection_times_min'];
+            $times = $row['inspection_times_min_mom'];
+            $response['inspection_times_min'] = $ctime;
+            $response['inspection_times_min_mom'] = $times;
+        }
+
+        return $response;
     }
 
+    /**
+     * -- 效益分析（更新）：
+     * --    设备效益趋势分析（去年）（更新）：
+     * @return array[]
+     */
+    public function benefit_last_year()
+    {
+
+        $eid = Request::param('id', self::DEFAULT_EID);
+        $sql = <<<SQL
+   SELECT item_id,
+       DATE_FORMAT(date_time, '%Y-%m') as t_time,
+       sum(total_income)               as total_income,
+       sum(total_cost)                 as total_cost
+FROM `item_info_data`
+WHERE year(date_time) = year(NOW()) - 1
+AND item_id = ?
+GROUP BY item_id, DATE_FORMAT(date_time, '%Y-%m');
+SQL;
+
+        $result = Db::query($sql, [$eid]);
+
+        $response = [
+            'xAxis' => [],
+        ];
+
+        foreach ($result as $row) {
+            $ctime = $row['t_time'];
+            $income = $row['total_income'];
+            $cost = $row['total_cost'];
+            $response['xAxis'][] = $ctime;
+            $response['income'][] = $income;
+            $response['cost'][] = $cost;
+        }
+
+        return $response;
+
+
+    }
+
+    /**
+     * -- 效益分析（更新）：
+     * -- 设备效益趋势分析（今年）（更新）：
+     * @return array[]
+     */
+    public function benefit_current_year()
+    {
+
+        $eid = Request::param('id', self::DEFAULT_EID);
+        $sql = <<<SQL
+
+SELECT item_id,
+       DATE_FORMAT(date_time, '%Y-%m') as t_time,
+       sum(total_income)               as total_income,
+       sum(total_cost)                 as total_cost
+FROM `item_info_data`
+WHERE year(date_time) = year(NOW())
+AND item_id = ?
+GROUP BY item_id, DATE_FORMAT(date_time, '%Y-%m');
+SQL;
+
+        $result = Db::query($sql, [$eid]);
+
+        $response = [
+            'xAxis' => [],
+            'series' => []
+        ];
+
+        foreach ($result as $row) {
+            $ctime = $row['t_time'];
+            $income = $row['total_income'];
+            $cost = $row['total_cost'];
+            $response['xAxis'][] = $ctime;
+            $response['income'][] = $income;
+            $response['cost'][] = $cost;
+        }
+
+        return $response;
+    }
+
+    /**
+     * -- 年收益率、同上期比较（未乘100%）（去年）（更新）：
+     * @return int[]
+     */
+    public function return_rate_last_year()
+    {
+        $eid = Request::param('id', self::DEFAULT_EID);
+        $sql = <<<SQL
+
+SELECT a.item_id,
+       round(a.profit_year / c.purchase_price, 2)                                     as return_rate,
+       case a.profit_year - b.profit_year
+           when 0 then 0
+           else if(a.profit_year < 0 and b.profit_year = 0, -1,
+                   if(round((a.profit_year - b.profit_year) / b.profit_year, 2) is null, 1,
+                      round((a.profit_year - b.profit_year) / b.profit_year, 2))) end as return_rate_mom
+FROM (SELECT item_id, sum(total_income) - sum(total_cost) as profit_year
+      FROM `item_info_data`
+      WHERE year(date_time) = year(NOW()) - 1
+      GROUP BY item_id) as a
+         LEFT JOIN (SELECT item_id, sum(total_income) - sum(total_cost) as profit_year
+                    FROM `item_info_data`
+                    WHERE year(date_time) = year(NOW()) - 2
+                    GROUP BY item_id) as b on a.item_id = b.item_id
+         JOIN think_item as c on a.item_id = c.id and c.`status` = 1
+         AND a.item_id = ?;
+SQL;
+
+        $response = [
+            'return_rate' => 0,
+            'return_rate_mom' => 0
+        ];
+
+        $data = Db::query($sql, [$eid]);
+        $row = array_pop($data);
+        if ($row) {
+            $response['return_rate'] = $row['return_rate'];
+            $response['return_rate_mom'] = $row['return_rate_mom'];
+        }
+
+        return $response;
+    }
+
+    /**
+     * -- 年收益率、同上期比较（未乘100%）（今年）（更新）：
+     * @return int[]
+     */
+    public function return_rate_current_year()
+    {
+        $eid = Request::param('id', self::DEFAULT_EID);
+        $sql = <<<SQL
+
+SELECT a.item_id,
+       round(a.profit_year / c.purchase_price, 2)                                     as return_rate,
+       case a.profit_year - b.profit_year
+           when 0 then 0
+           else if(a.profit_year < 0 and b.profit_year = 0, -1,
+                   if(round((a.profit_year - b.profit_year) / b.profit_year, 2) is null, 1,
+                      round((a.profit_year - b.profit_year) / b.profit_year, 2))) end as return_rate_mom
+FROM (SELECT item_id, sum(total_income) - sum(total_cost) as profit_year
+      FROM `item_info_data`
+      WHERE year(date_time) = year(NOW())
+      GROUP BY item_id) as a
+         LEFT JOIN (SELECT item_id, sum(total_income) - sum(total_cost) as profit_year
+                    FROM `item_info_data`
+                    WHERE year(date_time) = year(NOW()) - 1
+                    GROUP BY item_id) as b on a.item_id = b.item_id
+         JOIN think_item as c on a.item_id = c.id and c.`status` = 1
+         AND a.item_id = ?;
+SQL;
+
+        $response = [
+            'return_rate' => 0,
+            'return_rate_mom' => 0
+        ];
+
+        $data = Db::query($sql, [$eid]);
+        $row = array_pop($data);
+        if ($row) {
+            $response['return_rate'] = $row['return_rate'];
+            $response['return_rate_mom'] = $row['return_rate_mom'];
+        }
+
+        return $response;
+    }
+
+    /**
+     *-- 月均收入、同上期比较（未乘100%）（去年）（更新）：：
+     * @return int[]
+     */
+    public function income_per_mon_last_year()
+    {
+        $eid = Request::param('id', self::DEFAULT_EID);
+        $sql = <<<SQL
+
+SELECT c.item_id,
+       c.income_per,
+       case c.income_per - d.income_per
+           when 0 then 0
+           else if(round((c.income_per - d.income_per) / d.income_per, 2) is null, 1,
+                   round((c.income_per - d.income_per) / d.income_per, 2)) end as income_per_mom
+FROM (SELECT a.item_id, round(AVG(a.total_income), 2) income_per
+      FROM (SELECT item_id, DATE_FORMAT(date_time, '%Y-%m'), sum(total_income) as total_income
+            FROM `item_info_data`
+            WHERE year(date_time) = year(NOW()) - 1
+            GROUP BY item_id, DATE_FORMAT(date_time, '%Y-%m')) as a
+      GROUP BY a.item_id) as c
+         LEFT JOIN (SELECT b.item_id, round(AVG(b.total_income), 2) income_per
+                    FROM (SELECT item_id, DATE_FORMAT(date_time, '%Y-%m'), sum(total_income) as total_income
+                          FROM `item_info_data`
+                          WHERE year(date_time) = year(NOW()) - 2
+                          GROUP BY item_id, DATE_FORMAT(date_time, '%Y-%m')) as b
+                    GROUP BY b.item_id) as d 
+                    on c.item_id = d.item_id AND c.item_id = ?; 
+SQL;
+
+        $response = [
+            'income_per' => 0,
+            'income_per_mom' => 0
+        ];
+
+        $data = Db::query($sql, [$eid]);
+        $row = array_pop($data);
+        if ($row) {
+            $response['income_per'] = $row['income_per'];
+            $response['income_per_mom'] = $row['income_per_mom'];
+        }
+
+        return $response;
+    }
+
+
+    /**
+     *-- 月均收入、同上期比较（未乘100%）（今年）（更新）：
+     * @return int[]
+     */
+    public function income_per_mon_current_year()
+    {
+        $eid = Request::param('id', self::DEFAULT_EID);
+        $sql = <<<SQL
+
+
+SELECT c.item_id,
+       c.income_per,
+       case c.income_per - d.income_per
+           when 0 then 0
+           else if(round((c.income_per - d.income_per) / d.income_per, 2) is null, 1,
+                   round((c.income_per - d.income_per) / d.income_per, 2)) end as income_per_mom
+FROM (SELECT a.item_id, round(AVG(a.total_income), 2) income_per
+      FROM (SELECT item_id, DATE_FORMAT(date_time, '%Y-%m'), sum(total_income) as total_income
+            FROM `item_info_data`
+            WHERE year(date_time) = year(NOW())
+            GROUP BY item_id, DATE_FORMAT(date_time, '%Y-%m')) as a
+      GROUP BY a.item_id) as c
+         LEFT JOIN (SELECT b.item_id, round(AVG(b.total_income), 2) income_per
+                    FROM (SELECT item_id, DATE_FORMAT(date_time, '%Y-%m'), sum(total_income) as total_income
+                          FROM `item_info_data`
+                          WHERE year(date_time) = year(NOW()) - 1
+                          GROUP BY item_id, DATE_FORMAT(date_time, '%Y-%m')) as b
+                    GROUP BY b.item_id) as d on c.item_id = d.item_id AND c.item_id = ?; 
+SQL;
+
+        $response = [
+            'income_per' => 0,
+            'income_per_mom' => 0
+        ];
+
+        $data = Db::query($sql, [$eid]);
+        $row = array_pop($data);
+        if ($row) {
+            $response['income_per'] = $row['income_per'];
+            $response['income_per_mom'] = $row['income_per_mom'];
+        }
+
+        return $response;
+    }
+
+    /**
+     *--- 月均成本、同上期比较（未乘100%）（去年）（更新）：
+     * @return int[]
+     */
+    public function cost_per_mon_last_year()
+    {
+        $eid = Request::param('id', self::DEFAULT_EID);
+        $sql = <<<SQL
+
+SELECT c.item_id,
+       c.cost_per,
+       case c.cost_per - d.cost_per
+           when 0 then 0
+           else if(round((c.cost_per - d.cost_per) / d.cost_per, 2) is null, 1,
+                   round((c.cost_per - d.cost_per) / d.cost_per, 2)) end as cost_per_mom
+FROM (SELECT a.item_id, round(AVG(a.total_cost), 2) cost_per
+      FROM (SELECT item_id, DATE_FORMAT(date_time, '%Y-%m'), sum(total_cost) as total_cost
+            FROM `item_info_data`
+            WHERE year(date_time) = year(NOW()) - 1
+            GROUP BY item_id, DATE_FORMAT(date_time, '%Y-%m')) as a
+      GROUP BY a.item_id) as c
+         LEFT JOIN (SELECT b.item_id, round(AVG(b.total_cost), 2) cost_per
+                    FROM (SELECT item_id, DATE_FORMAT(date_time, '%Y-%m'), sum(total_cost) as total_cost
+                          FROM `item_info_data`
+                          WHERE year(date_time) = year(NOW()) - 2
+                          GROUP BY item_id, DATE_FORMAT(date_time, '%Y-%m')) as b
+                    GROUP BY b.item_id) as d on c.item_id = d.item_id AND c.item_id = ?; 
+SQL;
+
+        $response = [
+            'cost_per' => 0,
+            'cost_per_mom' => 0
+        ];
+
+        $data = Db::query($sql, [$eid]);
+        $row = array_pop($data);
+        if ($row) {
+            $response['cost_per'] = $row['cost_per'];
+            $response['cost_per_mom'] = $row['cost_per_mom'];
+        }
+
+        return $response;
+    }
+
+    /**
+     *-- 月均成本、同上期比较（未乘100%）（今年）（更新）：
+     * @return int[]
+     */
+    public function cost_per_mon_current_year()
+    {
+        $eid = Request::param('id', self::DEFAULT_EID);
+        $sql = <<<SQL
+
+
+SELECT c.item_id,
+       c.cost_per,
+       case c.cost_per - d.cost_per
+           when 0 then 0
+           else if(round((c.cost_per - d.cost_per) / d.cost_per, 2) is null, 1,
+                   round((c.cost_per - d.cost_per) / d.cost_per, 2)) end as cost_per_mom
+FROM (SELECT a.item_id, round(AVG(a.total_cost), 2) cost_per
+      FROM (SELECT item_id, DATE_FORMAT(date_time, '%Y-%m'), sum(total_cost) as total_cost
+            FROM `item_info_data`
+            WHERE year(date_time) = year(NOW())
+            GROUP BY item_id, DATE_FORMAT(date_time, '%Y-%m')) as a
+      GROUP BY a.item_id) as c
+         LEFT JOIN (SELECT b.item_id, round(AVG(b.total_cost), 2) cost_per
+                    FROM (SELECT item_id, DATE_FORMAT(date_time, '%Y-%m'), sum(total_cost) as total_cost
+                          FROM `item_info_data`
+                          WHERE year(date_time) = year(NOW()) - 1
+                          GROUP BY item_id, DATE_FORMAT(date_time, '%Y-%m')) as b
+                    GROUP BY b.item_id) as d on c.item_id = d.item_id AND c.item_id = ?;
+
+SQL;
+
+        $response = [
+            'cost_per' => 0,
+            'cost_per_mom' => 0
+        ];
+
+        $data = Db::query($sql, [$eid]);
+        $row = array_pop($data);
+        if ($row) {
+            $response['cost_per'] = $row['cost_per'];
+            $response['cost_per_mom'] = $row['cost_per_mom'];
+        }
+
+        return $response;
+    }
+
+    /**
+     *   -- 科室分析（更新）：
+     * @return mixed
+     */
     public function dept()
     {
+
+        $eid = Request::param('id', self::DEFAULT_EID);
+        $sql = <<<SQL
+      
+SELECT item_id, department, COUNT(DISTINCT request_id) as inspection_times, sum(profit) as income
+FROM `think_singledia_info`
+where year(report_date) = year(NOW())
+    and month(report_date) = month(NOW())
+    and item_id = ?
+GROUP BY item_id, department;
+
+SQL;
+
+        $data = Db::query($sql, [$eid]);
+
         return
             [
                 'code' => 0,
 
-                'data' => [
-                    [
-                        'id' => 14,
-                        'equip_id' => '31',
-                        'dept_name' => '科室2',
-                        'count' => 501,
-                        'profit' => 123456,
-                        'cost' => 23451,
-                    ]
-                ]
+                'data' => $data
             ];
     }
 
+    /**
+     * -- 检查来源分析（更新）：
+     * @return mixed
+     */
     public function source()
     {
+        $eid = Request::param('id', self::DEFAULT_EID);
+        $sql = <<<SQL
+     
+SELECT item_id, patient_source, COUNT(DISTINCT request_id) as inspection_times, sum(profit) as income
+FROM `think_singledia_info`
+where year(report_date) = year(NOW())
+  and month(report_date) = month(NOW())
+  and item_id = ?
+GROUP BY item_id, patient_source;
+
+SQL;
+
+        $data = Db::query($sql, [$eid]);
+
         return
             [
                 'code' => 0,
 
-                'data' => [
-                    [
-                        'id' => 13,
-                        'equip_id' => '30',
-                        'dept_name' => '科室1',
-                        'count' => 50,
-                        'profit' => 12345,
-                        'cost' => 2345,
-                    ]
-                ]
+                'data' => $data
             ];
     }
 
+    /**
+     * -- 本月固定成本（更新）：
+     * @return mixed
+     */
     public function fixcost()
     {
+        $eid = Request::param('id', self::DEFAULT_EID);
+        $sql = <<<SQL
+     
+
+SELECT item_id, cost_item, min(date_time) as start_date, max(date_time) as end_date, sum(cost) total_cost
+FROM `item_cost_detail`
+where year(date_time) = year(NOW())
+  and month(date_time) = month(NOW())
+  and cost_type = '固定成本'
+  and item_id = ?
+GROUP BY item_id, cost_item;
+
+SQL;
+
+        $data = Db::query($sql, [$eid]);
+
         return
             [
                 'code' => 0,
 
-                'data' => [
-                    [
-                        'id' => 13,
-                        'equip_id' => '30',
-                        'type' => '人员工资',
-                        'start_dt' => '2020-09-01',
-                        'end_dt' => '2020-10-01',
-                        'amount' => 123123,
-                    ]
-                ]
+                'data' => $data
             ];
     }
 
+    /**
+     * -- 本月可变成本（更新）：
+     * @return array|mixed
+     */
     public function varcost()
     {
+
+        $eid = Request::param('id', self::DEFAULT_EID);
+        $sql = <<<SQL
+SELECT item_id, cost_item, min(date_time) as start_date, max(date_time) as end_date, sum(cost) total_cost
+FROM `item_cost_detail`
+where year(date_time) = year(NOW())
+  and month(date_time) = month(NOW())
+  and cost_type = '可变成本'
+  and item_id = ?
+GROUP BY item_id, cost_item;
+
+SQL;
+
+        $data = Db::query($sql, [$eid]);
+
         return
             [
                 'code' => 0,
 
-                'data' => [
-                    [
-                        'id' => 13,
-                        'equip_id' => '30',
-                        'type' => '电费',
-                        'start_dt' => '2020-09-01',
-                        'end_dt' => '2020-10-01',
-                        'amount' => 123,
-                    ]
-                ]
+                'data' => $data
             ];
     }
 

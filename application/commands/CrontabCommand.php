@@ -19,8 +19,11 @@ class CrontabCommand extends Command
     protected function execute(Input $input, Output $output)
     {
         try {
-            $argc = $input->getArgument('procedure');
-            $result = Db::query(sprintf('call %s', $argc));
+            $procedure = $input->getArgument('procedure');
+            $result = Db::query(sprintf('call CostInfo()', $procedure));
+            $output->info(json_encode($result, JSON_PRETTY_PRINT));
+            $result = Db::query(sprintf('call ItemInfo()', $procedure));
+            $output->info(json_encode($result, JSON_PRETTY_PRINT));
         } catch (\Exception $e) {
             $output->error($e->getMessage());
         }

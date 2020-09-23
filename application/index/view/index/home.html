@@ -114,8 +114,10 @@
                 <div class="layui-card-header">
                     效率分析
                     <div class="layui-btn-group layuiadmin-btn-group">
-                        <a href="javascript:;" id="inspection-last-year" class="layui-btn layui-btn-primary layui-btn-xs">去年</a>
-                        <a href="javascript:;" id="inspection-current-year" class="layui-btn layui-btn-primary layui-btn-xs">今年</a>
+                        <a href="javascript:;" id="inspection-last-year"
+                           class="layui-btn layui-btn-primary layui-btn-xs">去年</a>
+                        <a href="javascript:;" id="inspection-current-year"
+                           class="layui-btn layui-btn-primary layui-btn-xs">今年</a>
                     </div>
                 </div>
                 <div class="layui-card-body">
@@ -132,25 +134,25 @@
                         <div class="layui-col-sm4">
                             <div class="layuiadmin-card-list">
                                 <p class="layuiadmin-normal-font">月均检查人次：<span id="month-avg-inspection">-</span></p>
-                                <span>同上期比较:<span id="efficiency-avg-compare-value"></span></span>
-                                <div id="efficiency-avg-compare" class="layui-progress layui-progress-big"
-                                     lay-filter="efficiency-avg-compare">
+                                <span>同上期比较:<span id="month-avg-inspection-percent"></span></span>
+                                <div id="month-avg-inspection-percent-bar" class="layui-progress layui-progress-big"
+                                     lay-filter="month-avg-inspection-percent-bar">
                                     <div class="layui-progress-bar" lay-percent="0%"></div>
                                 </div>
                             </div>
                             <div class="layuiadmin-card-list">
                                 <p class="layuiadmin-normal-font">单月最大检查人次：<span id="month-max-inspection">-</span></p>
-                                <span>同上期比较:<span id="efficiency-max-compare-value"></span></span>
-                                <div id="efficiency-max-compare" class="layui-progress layui-progress-big"
-                                     lay-filter="efficiency-max-compare">
+                                <span>同上期比较:<span id="month-max-inspection-percent"></span></span>
+                                <div id="month-max-inspection-percent-bar" class="layui-progress layui-progress-big"
+                                     lay-filter="month-max-inspection-percent-bar">
                                     <div class="layui-progress-bar" lay-percent="0%"></div>
                                 </div>
                             </div>
                             <div class="layuiadmin-card-list">
                                 <p class="layuiadmin-normal-font">单月最小检查人次：<span id="month-min-inspection">-</span></p>
-                                <span>同上期比较:<span id="efficiency-min-compare-value"></span></span>
-                                <div id="efficiency-min-compare" class="layui-progress layui-progress-big"
-                                     lay-filter="efficiency-min-compare">
+                                <span>同上期比较:<span id="month-min-inspection-percent"></span></span>
+                                <div id="month-min-inspection-percent-bar" class="layui-progress layui-progress-big"
+                                     lay-filter="month-min-inspection-percent-bar">
                                     <div class="layui-progress-bar" lay-percent="0%"></div>
                                 </div>
                             </div>
@@ -164,8 +166,8 @@
                 <div class="layui-card-header">
                     效益分析
                     <div class="layui-btn-group layuiadmin-btn-group">
-                        <a href="javascript:;" class="layui-btn layui-btn-primary layui-btn-xs">去年</a>
-                        <a href="javascript:;" class="layui-btn layui-btn-primary layui-btn-xs">今年</a>
+                        <a href="javascript:;" class="layui-btn layui-btn-primary layui-btn-xs"  id="benefit-last-year">去年</a>
+                        <a href="javascript:;" class="layui-btn layui-btn-primary layui-btn-xs" id="benefit-current-year">今年</a>
                     </div>
                 </div>
                 <div class="layui-card-body">
@@ -182,26 +184,26 @@
                         <div class="layui-col-sm4">
 
                             <div class="layuiadmin-card-list">
-                                <p class="layuiadmin-normal-font">年收益率：<span id="benefit-revenue-rate">-</span>%</p>
-                                <span>同上期比较:<span id="benefit-year-compare-value"></span></span>
-                                <div id="benefit-year-compare" class="layui-progress layui-progress-big"
-                                     lay-filter="benefit-year-compare">
+                                <p class="layuiadmin-normal-font">年收益率：<span id="benefit-return-rate">-</span>%</p>
+                                <span>同上期比较:<span id="benefit-return-rate-percent"></span></span>
+                                <div id="benefit-return-rate-bar" class="layui-progress layui-progress-big"
+                                     lay-filter="benefit-return-rate-bar">
                                     <div class="layui-progress-bar" lay-percent="0%"></div>
                                 </div>
                             </div>
                             <div class="layuiadmin-card-list">
-                                <p class="layuiadmin-normal-font">月均收入：¥<span id="month-avg-revenue">-</span></p>
-                                <span>同上期比较:<span id="benefit-revenue-compare-value"></span></span>
-                                <div id="benefit-revenue-compare" class="layui-progress layui-progress-big"
-                                     lay-filter="benefit-revenue-compare">
+                                <p class="layuiadmin-normal-font">月均收入：¥<span id="benefit-avg-income">-</span></p>
+                                <span>同上期比较:<span id="benefit-avg-income-percent"></span></span>
+                                <div id="benefit-avg-income-bar" class="layui-progress layui-progress-big"
+                                     lay-filter="benefit-avg-income-bar">
                                     <div class="layui-progress-bar" lay-percent="0%"></div>
                                 </div>
                             </div>
                             <div class="layuiadmin-card-list">
-                                <p class="layuiadmin-normal-font">月均成本：¥<span id="month-avg-cost">-</span></p>
-                                <span>同上期比较:<span id="benefit-cost-compare-value"></span></span>
-                                <div id="benefit-cost-compare" class="layui-progress layui-progress-big"
-                                     lay-filter="benefit-cost-compare">
+                                <p class="layuiadmin-normal-font">月均成本：¥<span id="benefit-avg-cost">-</span></p>
+                                <span>同上期比较:<span id="benefit-avg-cost-percent"></span></span>
+                                <div id="benefit-avg-cost-bar" class="layui-progress layui-progress-big"
+                                     lay-filter="benefit-avg-cost-bar">
                                     <div class="layui-progress-bar" lay-percent="0%"></div>
                                 </div>
                             </div>
