@@ -7,33 +7,7 @@ layui.define
 
         var defaultLoadEquipId = 47;
 
-        layui.jquery('#equip-query').on('click', function () {
-            reload($('#equips').val());
-        });
-
-        layui.jquery.ajax({
-            url: '/api/echarts/equips',
-            dataType: 'json'
-        }).done(function (res) {
-            $('#equips').empty();
-            $('#equips').append($(' <option value="">请选择设备</option>'));
-            for (var prop in res) {
-                var group = $('<optgroup label="' + prop + '"></optgroup>');
-                var val = res[prop];
-
-                val.map(function (equip) {
-                    var option = $('<option value="' + equip.id + '">' + equip.code + '</option>');
-                    group.append(option);
-                });
-                $('#equips').append(group);
-            }
-
-            layui.use('form', function () {
-                layui.form.render();
-            });
-        });
-
-        var reload = function (equipId) {
+        function initPage() {
             layui.use(["element", "table", "admin", "carousel", "echarts"], function () {
                 layui.element.init();
 
@@ -54,42 +28,163 @@ layui.define
                 layui.element.render("progress")
 
                 layui.jquery.ajax({
-                    url: '/api/echarts/revenue',
-                    dataType: 'json',
-                    data: {'id': equipId}
+                    url: '/api/echarts/equips',
+                    dataType: 'json'
                 }).done(function (res) {
-                    layui.jquery('#year-total-revenue').text(res.year);
-                    layui.jquery('#month-total-revenue').text(res.month);
+                    $('#equips').empty();
+                    $('#equips').append($(' <option value="">请选择设备</option>'));
+                    for (var prop in res) {
+                        var group = $('<optgroup label="' + prop + '"></optgroup>');
+                        var val = res[prop];
+
+                        val.map(function (equip) {
+                            var option = $('<option value="' + equip.id + '">' + equip.code + '</option>');
+                            group.append(option);
+                        });
+                        $('#equips').append(group);
+                    }
+
+                    layui.use('form', function () {
+                        layui.form.render();
+                    });
                 });
 
+                layui.jquery('#equip-query').on('click', function () {
+                    reload($('#equips').val());
+                });
+
+
+                layui.jquery('#inspection-current-year').on('click', function () {
+                    efficiency($('#equips').val(), false);
+                });
+
+
+                layui.jquery('#inspection-last-year').on('click', function () {
+                    efficiency($('#equips').val(), true);
+                });
+
+
+                layui.jquery('#equip-query').on('click', function () {
+                    reload($('#equips').val());
+                });
+
+                layui.jquery('#equip-query').on('click', function () {
+                    reload($('#equips').val());
+                });
+
+                layui.jquery('#equip-query').on('click', function () {
+                    reload($('#equips').val());
+                });
+
+                layui.jquery('#equip-query').on('click', function () {
+                    reload($('#equips').val());
+                });
+
+            });
+        }
+
+        function efficiency(equipId, last) {
+            console.log({id: equipId, last: last ? true : false});
+            layui.use(["carousel", "echarts"], function () {
                 layui.jquery.ajax({
-                    url: '/api/echarts/cost',
+                    url: '/api/echarts/efficiency',
                     dataType: 'json',
-                    data: {id: equipId}
+                    data: {id: equipId, last: last ? true : false}
                 }).done(function (res) {
-                    layui.jquery('#year-total-cost').text(res.year);
-                    layui.jquery('#month-total-cost').text(res.month);
+                    console.log(res)
+                    maxValue = Math.max.apply(null, res.series);
+                    minValue = Math.min.apply(null, res.series);
+                    avgValue = 0;//Math.round(res.series.reduce((a, b) => a + b) / res.series.length);
+
+                    layui.jquery("#month-max-inspection").text(maxValue);
+                    layui.jquery("#month-min-inspection").text(minValue);
+                    layui.jquery("#month-avg-inspection").text(avgValue);
+                    option = {
+                        title: {text: "设备效率趋势分析", subtext: "单位：人次"},
+                        tooltip: {trigger: "axis"},
+                        legend: {data: ["检查人次"]},
+                        calculable: !0,
+                        xAxis: [{
+                            type: "category",
+                            data: res.xAxis//["1月", "2月", "3月", "4月", "5月", "6月", "7月", "8月", "9月", "10月", "11月", "12月"]
+                        }],
+                        yAxis: [{type: "value"}],
+                        series:
+                            [
+                                {
+                                    name: "检查人次", type: "line",
+                                    data: res.series,// [2.6, 5.9, 9, 26.4, 28.7, 70.7, 175.6, 182.2, 48.7, 18.8, 6, 2.3],
+                                    markPoint: {
+                                        data: [
+                                            {
+                                                name: "年最高",
+                                                value: maxValue,
+                                                xAxis: res.series.length,
+                                                yAxis: maxValue,
+                                                symbolSize: 18
+                                            },
+                                            {
+                                                name: "年最低",
+                                                value: minValue,
+                                                xAxis: res.series.length,
+                                                yAxis: minValue
+                                            }
+                                        ]
+                                    },
+                                    markLine: {data: [{type: "average", name: "平均值"}]}
+                                }
+                            ]
+                    };
+
+                    dom = layui.jquery("#LAY-index-pagetwo").children("div");
+                    myChart = (layui.carousel, layui.echarts).init(dom[0], layui.echartsTheme);
+                    myChart.setOption(option, true);
+                    window.onresize = myChart.resize;
+
                 });
+            });
+        }
 
-                layui.jquery.ajax({
-                    url: '/api/echarts/inspection',
-                    dataType: 'json',
-                    data: {id: equipId}
-                }).done(function (res) {
-                    layui.jquery('#year-total-inspection').text(res.year);
-                    layui.jquery('#month-total-inspection').text(res.month);
-                });
+        function global_bind(equipId) {
+            layui.jquery.ajax({
+                url: '/api/echarts/revenue',
+                dataType: 'json',
+                data: {'id': equipId}
+            }).done(function (res) {
+                layui.jquery('#year-total-revenue').text(res.year);
+                layui.jquery('#month-total-revenue').text(res.month);
+            });
 
-                layui.jquery.ajax({
-                    url: '/api/echarts/return_rate',
-                    dataType: 'json',
-                    data: {id: equipId}
-                }).done(function (res) {
-                    layui.jquery('#year-return-rate').text(res.year);
-                    layui.jquery('#last-year-return-rate').text(res.lastYear);
-                });
+            layui.jquery.ajax({
+                url: '/api/echarts/cost',
+                dataType: 'json',
+                data: {id: equipId}
+            }).done(function (res) {
+                layui.jquery('#year-total-cost').text(res.year);
+                layui.jquery('#month-total-cost').text(res.month);
+            });
 
+            layui.jquery.ajax({
+                url: '/api/echarts/inspection',
+                dataType: 'json',
+                data: {id: equipId}
+            }).done(function (res) {
+                layui.jquery('#year-total-inspection').text(res.year);
+                layui.jquery('#month-total-inspection').text(res.month);
+            });
 
+            layui.jquery.ajax({
+                url: '/api/echarts/return_rate',
+                dataType: 'json',
+                data: {id: equipId}
+            }).done(function (res) {
+                layui.jquery('#year-return-rate').text(res.year);
+                layui.jquery('#last-year-return-rate').text(res.lastYear);
+            });
+        }
+
+        function table_bind(equipId) {
+            layui.use(["table"], function () {
                 layui.table.render({
                     elem: '#varcost'
                     , url: '/api/echarts/varcost/'
@@ -142,7 +237,11 @@ layui.define
                         , {field: 'cost', title: '本月成本', sort: true}
                     ]]
                 });
+            });
+        }
 
+        function benefit(equipId) {
+            layui.use(["carousel", "echarts"], function () {
                 layui.jquery.ajax({
                     url: '/api/echarts/benefit',
                     dataType: 'json',
@@ -206,8 +305,11 @@ layui.define
                     myChart.setOption(option, true);
                     window.onresize = myChart.resize;
                 });
+            });
+        }
 
-
+        function failure_rate(equipId) {
+            layui.use(["carousel", "echarts"], function () {
                 layui.jquery.ajax({
                     url: '/api/echarts/failure_rate',
                     dataType: 'json',
@@ -271,62 +373,11 @@ layui.define
                     myChart.setOption(option, true);
                     window.onresize = myChart.resize;
                 });
+            });
+        }
 
-                layui.jquery.ajax({
-                    url: '/api/echarts/efficiency',
-                    dataType: 'json',
-                    data: {id: equipId}
-                }).done(function (res) {
-                    maxValue = Math.max.apply(null, res.series);
-                    minValue = Math.min.apply(null, res.series);
-                    avgValue = Math.round(res.series.reduce((a, b) => a + b) / res.series.length);
-
-                    layui.jquery("#month-max-inspection").text(maxValue);
-                    layui.jquery("#month-min-inspection").text(minValue);
-                    layui.jquery("#month-avg-inspection").text(avgValue);
-                    option = {
-                        title: {text: "设备效率趋势分析", subtext: "单位：人次"},
-                        tooltip: {trigger: "axis"},
-                        legend: {data: ["检查人次"]},
-                        calculable: !0,
-                        xAxis: [{
-                            type: "category",
-                            data: res.xAxis//["1月", "2月", "3月", "4月", "5月", "6月", "7月", "8月", "9月", "10月", "11月", "12月"]
-                        }],
-                        yAxis: [{type: "value"}],
-                        series:
-                            [
-                                {
-                                    name: "检查人次", type: "line",
-                                    data: res.series,// [2.6, 5.9, 9, 26.4, 28.7, 70.7, 175.6, 182.2, 48.7, 18.8, 6, 2.3],
-                                    markPoint: {
-                                        data: [
-                                            {
-                                                name: "年最高",
-                                                value: maxValue,
-                                                xAxis: res.series.length,
-                                                yAxis: maxValue,
-                                                symbolSize: 18
-                                            },
-                                            {
-                                                name: "年最低",
-                                                value: minValue,
-                                                xAxis: res.series.length,
-                                                yAxis: minValue
-                                            }
-                                        ]
-                                    },
-                                    markLine: {data: [{type: "average", name: "平均值"}]}
-                                }
-                            ]
-                    };
-
-                    dom = layui.jquery("#LAY-index-pagetwo").children("div");
-                    myChart = (layui.carousel, layui.echarts).init(dom[0], layui.echartsTheme);
-                    myChart.setOption(option, true);
-                    window.onresize = myChart.resize;
-
-                });
+        function efficiency_compare(equipId) {
+            layui.use(["carousel", "echarts"], function () {
 
                 layui.jquery.ajax({
                     url: '/api/echarts/efficiency_compare',
@@ -356,10 +407,19 @@ layui.define
 
                     layui.jquery('#benefit-revenue-rate').text(res.benefitRevenueRate);
                 });
-
-
             });
         }
+
+        function reload(equipId) {
+            table_bind(equipId);
+            global_bind(equipId);
+            failure_rate(equipId);
+            benefit(equipId);
+            efficiency(equipId);
+            efficiency_compare(equipId);
+        }
+
+        initPage();
         reload(defaultLoadEquipId);
         exports('simple', this);
     }

@@ -10,6 +10,7 @@ use think\facade\Request;
 
 class Echarts extends API
 {
+    const  DEFAULT_EID = 47;
     protected $checkLoginExclude = [
         'return_rate',
         'inspection',
@@ -29,7 +30,7 @@ class Echarts extends API
 
     public function failure_rate()
     {
-        $eid = Request::param('id', 47);
+        $eid = Request::param('id', self::DEFAULT_EID);
         $sql = <<<SQL
  SELECT
     item_id as eid, FROM_UNIXTIME(create_time, '%Y-%m') as ctime, COUNT(*) as times
@@ -69,10 +70,50 @@ SQL;
 
     public function efficiency()
     {
-        return [
-            'xAxis' => ['2020-01', '2020-02', '2020-03', '2020-04', '2020-05', '2020-06', '2020-07', '2020-08'],
-            'series' => [100, 200, 300, 400, 500, 600, 700, 455]
+        $eid = Request::param('id', self::DEFAULT_EID);
+        $last = Request::param('last', false);
+        $sql = <<<SQL
+SELECT
+    a.item_id as eid,
+    date_format(report_date,'%Y-%c') as xAxis,
+    count(request_id) AS series
+FROM think_singledia_info AS a
+WHERE  year(a.report_date)=YEAR(NOW())
+AND item_id = ?
+group by  a.item_id,
+          date_format(report_date,'%Y-%c')
+SQL;
+        $sqlLastyear = <<<SQL
+SELECT
+    a.item_id as eid,
+    date_format(report_date,'%Y-%c') as xAxis,
+    count(request_id) AS series
+FROM think_singledia_info AS a
+WHERE  year(a.report_date)=YEAR(NOW())-1
+AND item_id = ?
+group by  a.item_id,
+          date_format(report_date,'%Y-%c')
+SQL;
+        if ($last === 'true') {
+            $result = Db::query($sqlLastyear, [$eid]);
+        } else {
+            $result = Db::query($sql, [$eid]);
+        }
+
+        $response = [
+            'xAxis' => [],
+            'series' => []
         ];
+
+        foreach ($result as $row) {
+            //  $eid = $row['eid'];
+            $ctime = $row['xAxis'];
+            $times = $row['series'];
+            $response['xAxis'][] = $ctime;
+            $response['series'][] = $times;
+        }
+
+        return $response;
     }
 
     public function benefit()
@@ -218,7 +259,7 @@ SQL;
 
     public function equips()
     {
-        $eid = Request::param('id', 47);
+        $eid = Request::param('id', self::DEFAULT_EID);
         $sql = <<<SQL
 SELECT  tc.id as category_id,tc.name as category,ti.id,ti.code 
 FROM think_catagory tc 
@@ -231,30 +272,17 @@ SQL;
         $result = Db::query($sql);
 
         $response = [];
-
-        $tmpArr = [];
         foreach ($result as $row) {
             $cid = $row['category_id'];
             $category = $row['category'];
             $eid = $row['id'];
             $code = $row['code'];
-            $tmpArr["$category-$cid"][] = [
+            $response["$category-$cid"][] = [
                 'id' => $eid,
                 'code' => $code
             ];
         }
 
-//        foreach ($tmpArr as $name => $data) {
-//            $xAxis = [];
-//            $series = [];
-//            foreach ($data as $td) {
-//                $xAxis[] = $td['key'];
-//                $series[] = $td['value'];
-//            }
-//            $response[$name]['xAxis'] = $xAxis;
-//            $response[$name]['series'] = $series;
-//        }
-
-        return $tmpArr;
+        return $response;
     }
 }
