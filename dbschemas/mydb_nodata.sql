@@ -633,4 +633,85 @@ CREATE TABLE `think_workorder` (
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
+
+/*
+Navicat Premium Data Transfer
+
+Source Server : mysql_local
+Source Server Type : MySQL
+Source Server Version : 50719
+Source Host : localhost:3308
+Source Schema : operator
+
+Target Server Type : MySQL
+Target Server Version : 50719
+File Encoding : 65001
+
+Date: 23/09/2020 19:35:46
+*/
+
+SET NAMES utf8mb4;
+SET FOREIGN_KEY_CHECKS = 0;
+
+-- ----------------------------
+-- Table structure for item_info_data
+-- ----------------------------
+DROP TABLE IF EXISTS `item_info_data`;
+CREATE TABLE `item_info_data` (
+`item_id` int(11) NULL DEFAULT NULL,
+`date_time` date NULL DEFAULT NULL,
+`total_income` decimal(20, 2) NULL DEFAULT NULL,
+`inspection_times` int(11) NULL DEFAULT NULL,
+`total_cost` decimal(20, 2) NULL DEFAULT NULL
+) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
+
+SET FOREIGN_KEY_CHECKS = 1;
+
+  /*
+ Navicat Premium Data Transfer
+
+ Source Server         : mysql_local
+ Source Server Type    : MySQL
+ Source Server Version : 50719
+ Source Host           : localhost:3308
+ Source Schema         : operator
+
+ Target Server Type    : MySQL
+ Target Server Version : 50719
+ File Encoding         : 65001
+
+ Date: 23/09/2020 15:30:09
+*/
+
+SET NAMES utf8mb4;
+SET FOREIGN_KEY_CHECKS = 0;
+
+-- ----------------------------
+-- Table structure for item_cost_detail
+-- ----------------------------
+DROP TABLE IF EXISTS `item_cost_detail`;
+CREATE TABLE `item_cost_detail`  (
+  `cost_id` int(11) NOT NULL COMMENT '成本编号',
+  `item_id` int(11) NOT NULL COMMENT '设备id',
+  `cost_item` varchar(50) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '成本项目',
+  `cost_type` varchar(50) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '成本类型',
+  `date_time` date NULL DEFAULT NULL COMMENT '日期',
+  `cost` decimal(16, 2) NULL DEFAULT NULL COMMENT '单日成本'
+) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Table structure for item_info_data
+-- ----------------------------
+DROP TABLE IF EXISTS `item_info_data`;
+CREATE TABLE `item_info_data`  (
+  `item_code` varchar(50) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
+  `date_time` date NULL DEFAULT NULL,
+  `total_income` decimal(20, 2) NULL DEFAULT NULL,
+  `inspection_times` int(11) NULL DEFAULT NULL,
+  `total_cost` decimal(20, 2) NULL DEFAULT NULL
+) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
+
+SET FOREIGN_KEY_CHECKS = 1;
+
+
 -- Dump completed on 2020-09-22 11:29:18
