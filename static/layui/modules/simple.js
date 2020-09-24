@@ -300,36 +300,35 @@ layui.define
                 layui.table.render({
                     elem: '#varcost'
                     , url: '/api/echarts/varcost/'
-                    , where:{id:equipId}
+                    , where: {id: equipId}
                     , cellMinWidth: 80 //全局定义常规单元格的最小宽度，layui 2.2.1 新增
                     , cols: [[
-                        {field: 'id', width: 80, title: 'ID', sort: true}
-                        , {field: 'equip_id', title: '设备ID'}
-                        , {field: 'type', title: '费用类型'}
-                        , {field: 'start_dt', title: '计费开始时间'}
-                        , {field: 'end_dt', title: '计费开始时间'}
-                        , {field: 'amount', title: '金额', sort: true}
+
+                        {field: 'item_id', title: '设备ID'}
+                        , {field: 'cost_item', title: '费用类型'}
+                        , {field: 'start_date', title: '计费开始时间'}
+                        , {field: 'end_date', title: '计费开始时间'}
+                        , {field: 'total_cost', title: '金额', sort: true}
                     ]]
                 });
                 layui.table.render({
                     elem: '#fixcost'
                     , url: '/api/echarts/fixcost/'
-                    , where:{id:equipId}
+                    , where: {id: equipId}
                     , cellMinWidth: 80 //全局定义常规单元格的最小宽度，layui 2.2.1 新增
                     , cols: [[
-                        {field: 'id', width: 80, title: 'ID', sort: true}
-                        , {field: 'equip_id', title: '设备ID'}
-                        , {field: 'type', title: '费用类型'}
-                        , {field: 'start_dt', title: '计费开始时间'}
-                        , {field: 'end_dt', title: '计费开始时间'}
-                        , {field: 'amount', title: '金额', sort: true}
+                        {field: 'item_id', title: '设备ID'}
+                        , {field: 'cost_item', title: '费用类型'}
+                        , {field: 'start_date', title: '计费开始时间'}
+                        , {field: 'end_date', title: '计费开始时间'}
+                        , {field: 'total_cost', title: '金额', sort: true}
                     ]]
                 });
                 //item_id, department, COUNT(DISTINCT request_id) as inspection_times, sum(profit) as income
                 layui.table.render({
                     elem: '#dept'
                     , url: '/api/echarts/dept/'
-                    , where:{id:equipId}
+                    , where: {id: equipId}
                     , cellMinWidth: 80 //全局定义常规单元格的最小宽度，layui 2.2.1 新增
                     , cols: [[
                         {field: 'item_id', title: '设备ID'}
@@ -342,7 +341,7 @@ layui.define
                 layui.table.render({
                     elem: '#source'
                     , url: '/api/echarts/source/'
-                    , where:{id:equipId}
+                    , where: {id: equipId}
                     , cellMinWidth: 80 //全局定义常规单元格的最小宽度，layui 2.2.1 新增
                     , cols: [[
                         {field: 'item_id', title: '设备ID'}
@@ -380,7 +379,11 @@ layui.define
                                     name: "成本", type: "bar",
                                     data: res.cost,
                                     markPoint: {
-                                        data: [{type: "max", name: "最大值", symbolSize: 8}, {type: "min", name: "最小值",symbolSize: 8}]
+                                        data: [{type: "max", name: "最大值", symbolSize: 8}, {
+                                            type: "min",
+                                            name: "最小值",
+                                            symbolSize: 8
+                                        }]
                                     },
                                     markLine: {data: [{type: "average", name: "平均值"}]}
                                 },
@@ -477,7 +480,11 @@ layui.define
                                     name: "成本", type: "bar",
                                     data: res.cost,
                                     markPoint: {
-                                        data: [{type: "max", name: "最大值", symbolSize: 8}, {type: "min", name: "最小值",symbolSize: 8}]
+                                        data: [{type: "max", name: "最大值", symbolSize: 8}, {
+                                            type: "min",
+                                            name: "最小值",
+                                            symbolSize: 8
+                                        }]
                                     },
                                     markLine: {data: [{type: "average", name: "平均值"}]}
                                 },
