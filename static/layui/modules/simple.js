@@ -85,6 +85,14 @@ layui.define
             });
         }
 
+        function chPBClass(bRed, id) {
+            if (bRed) {
+                layui.jquery('#' + id).children().removeClass('layui-bg-green').addClass('layui-bg-red');
+            } else {
+                layui.jquery('#' + id).children().removeClass('layui-bg-red').addClass('layui-bg-green');
+            }
+        }
+
 //效率去年
         function efficiency_last_year(equipId) {
             layui.use(["carousel", "echarts"], function () {
@@ -142,9 +150,8 @@ layui.define
                     layui.jquery("#month-avg-inspection").text(res.inspection_times_per);
                     layui.element.progress('month-avg-inspection-percent-bar', Math.abs(res.inspection_times_per_mom * 100) + '%');
                     layui.jquery('#month-avg-inspection-percent').text(res.inspection_times_per_mom * 100 + '%').attr('style', res.inspection_times_per_mom * 100 > 0 ? 'color:green' : 'color:red');
-                    if (res.inspection_times_per_mom * 100 < 0) {
-                        layui.jquery('#month-avg-inspection-percent-bar').children().addClass('layui-bg-red');
-                    }
+                    chPBClass(res.inspection_times_per_mom * 100 < 0, 'month-avg-inspection-percent-bar');
+
                 });
 
                 layui.jquery.ajax({
@@ -155,9 +162,8 @@ layui.define
                     layui.jquery("#month-max-inspection").text(res.inspection_times_max);
                     layui.element.progress('month-max-inspection-percent-bar', Math.abs(res.inspection_times_max_mom * 100) + '%');
                     layui.jquery('#month-max-inspection-percent').text(res.inspection_times_max_mom * 100 + '%').attr('style', res.inspection_times_max_mom * 100 > 0 ? 'color:green' : 'color:red');
-                    if (res.inspection_times_max_mom * 100 < 0) {
-                        layui.jquery('#month-max-inspection-percent-bar').children().addClass('layui-bg-red');
-                    }
+                    chPBClass(res.inspection_times_max_mom * 100 < 0, 'month-max-inspection-percent-bar');
+
                 });
 
                 layui.jquery.ajax({
@@ -169,9 +175,8 @@ layui.define
                     layui.jquery("#month-min-inspection").text(res.inspection_times_min);
                     layui.element.progress('month-min-inspection-percent-bar', Math.abs(res.inspection_times_min_mom * 100) + '%');
                     layui.jquery('#month-min-inspection-percent').text(res.inspection_times_min_mom * 100 + '%').attr('style', res.inspection_times_min_mom * 100 > 0 ? 'color:green' : 'color:red');
-                    if (res.inspection_times_min_mom * 100 < 0) {
-                        layui.jquery('#month-min-inspection-percent-bar').children().addClass('layui-bg-red');
-                    }
+                    chPBClass(res.inspection_times_min_mom * 100 < 0, 'month-min-inspection-percent-bar');
+
                 });
             });
         }
@@ -227,9 +232,7 @@ layui.define
                     layui.jquery("#month-avg-inspection").text(res.inspection_times_per);
                     layui.element.progress('month-avg-inspection-percent-bar', Math.abs(res.inspection_times_per_mom * 100) + '%');
                     layui.jquery('#month-avg-inspection-percent').text(res.inspection_times_per_mom * 100 + '%').attr('style', res.inspection_times_per_mom * 100 > 0 ? 'color:green' : 'color:red');
-                    if (res.inspection_times_per_mom * 100 < 0) {
-                        layui.jquery('#month-avg-inspection-percent-bar').children().addClass('layui-bg-red');
-                    }
+                    chPBClass(res.inspection_times_per_mom * 100 < 0, 'month-avg-inspection-percent-bar');
                 });
 
                 layui.jquery.ajax({
@@ -240,9 +243,7 @@ layui.define
                     layui.jquery("#month-max-inspection").text(res.inspection_times_max);
                     layui.element.progress('month-max-inspection-percent-bar', Math.abs(res.inspection_times_max_mom * 100) + '%');
                     layui.jquery('#month-max-inspection-percent').text(res.inspection_times_max_mom * 100 + '%').attr('style', res.inspection_times_max_mom * 100 > 0 ? 'color:green' : 'color:red');
-                    if (res.inspection_times_max_mom * 100 < 0) {
-                        layui.jquery('#month-max-inspection-percent-bar').children().addClass('layui-bg-red');
-                    }
+                    chPBClass(res.inspection_times_max_mom * 100 < 0, 'month-max-inspection-percent-bar');
                 });
 
                 layui.jquery.ajax({
@@ -254,9 +255,8 @@ layui.define
                     layui.jquery("#month-min-inspection").text(res.inspection_times_min);
                     layui.element.progress('month-min-inspection-percent-bar', Math.abs(res.inspection_times_min_mom * 100) + '%');
                     layui.jquery('#month-min-inspection-percent').text(res.inspection_times_min_mom * 100 + '%').attr('style', res.inspection_times_min_mom * 100 > 0 ? 'color:green' : 'color:red');
-                    if (res.inspection_times_min_mom * 100 < 0) {
-                        layui.jquery('#month-min-inspection-percent-bar').children().addClass('layui-bg-red');
-                    }
+                    chPBClass(res.inspection_times_min_mom * 100 < 0, 'month-min-inspection-percent-bar');
+
                 });
             });
         }
@@ -411,9 +411,7 @@ layui.define
                     layui.jquery('#benefit-return-rate').text(res.return_rate);
                     layui.element.progress('benefit-return-rate-bar', Math.abs(res.return_rate_mom * 100) + '%');
                     layui.jquery('#benefit-return-rate-percent').text(res.return_rate_mom * 100 + '%').attr('style', res.return_rate_mom * 100 > 0 ? 'color:green' : 'color:red');
-                    if (res.return_rate_mom * 100 < 0) {
-                        layui.jquery('#benefit-return-rate-bar').children().addClass('layui-bg-red');
-                    }
+                    chPBClass(res.return_rate_mom * 100 < 0, 'benefit-return-rate-bar');
                     // layui.jquery('#month-avg-cost').text(avgCostValue);
 
                 });
@@ -427,9 +425,7 @@ layui.define
                     layui.jquery('#benefit-avg-income').text(res.income_per);
                     layui.element.progress('benefit-avg-income-bar', Math.abs(res.income_per_mom * 100) + '%');
                     layui.jquery('#benefit-avg-income-percent').text(res.income_per_mom * 100 + '%').attr('style', res.income_per_mom * 100 > 0 ? 'color:green' : 'color:red');
-                    if (res.income_per_mom * 100 < 0) {
-                        layui.jquery('#benefit-avg-income-bar').children().addClass('layui-bg-red');
-                    }
+                    chPBClass(res.income_per_mom * 100 < 0, 'benefit-avg-income-bar');
                     // layui.jquery('#month-avg-cost').text(avgCostValue);
 
                 });
@@ -443,9 +439,7 @@ layui.define
                     layui.jquery('#benefit-avg-cost').text(res.cost_per);
                     layui.element.progress('benefit-avg-cost-bar', Math.abs(res.cost_per_mom * 100) + '%');
                     layui.jquery('#benefit-avg-cost-percent').text(res.cost_per_mom * 100 + '%').attr('style', res.cost_per_mom * 100 > 0 ? 'color:green' : 'color:red');
-                    if (res.cost_per_mom * 100 < 0) {
-                        layui.jquery('#benefit-avg-cost-bar').children().addClass('layui-bg-red');
-                    }
+                    chPBClass(res.cost_per_mom * 100 < 0, 'benefit-avg-cost-bar');
                     // layui.jquery('#month-avg-cost').text(avgCostValue);
 
                 });
@@ -512,9 +506,9 @@ layui.define
                     layui.jquery('#benefit-return-rate').text(res.return_rate);
                     layui.element.progress('benefit-return-rate-bar', Math.abs(res.return_rate_mom * 100) + '%');
                     layui.jquery('#benefit-return-rate-percent').text(res.return_rate_mom * 100 + '%').attr('style', res.return_rate_mom * 100 > 0 ? 'color:green' : 'color:red');
-                    if (res.return_rate_mom * 100 < 0) {
-                        layui.jquery('#benefit-return-rate-bar').children().addClass('layui-bg-red');
-                    }
+
+                    chPBClass(res.return_rate_mom * 100 < 0, 'benefit-return-rate-bar');
+
                     // layui.jquery('#month-avg-cost').text(avgCostValue);
 
                 });
@@ -528,9 +522,7 @@ layui.define
                     layui.jquery('#benefit-avg-income').text(res.income_per);
                     layui.element.progress('benefit-avg-income-bar', Math.abs(res.income_per_mom * 100) + '%');
                     layui.jquery('#benefit-avg-income-percent').text(res.income_per_mom * 100 + '%').attr('style', res.income_per_mom * 100 > 0 ? 'color:green' : 'color:red');
-                    if (res.income_per_mom * 100 < 0) {
-                        layui.jquery('#benefit-avg-income-bar').children().addClass('layui-bg-red');
-                    }
+                    chPBClass(res.income_per_mom * 100 < 0, 'benefit-avg-income-bar');
                     // layui.jquery('#month-avg-cost').text(avgCostValue);
 
                 });
@@ -544,9 +536,9 @@ layui.define
                     layui.jquery('#benefit-avg-cost').text(res.cost_per);
                     layui.element.progress('benefit-avg-cost-bar', Math.abs(res.cost_per_mom * 100) + '%');
                     layui.jquery('#benefit-avg-cost-percent').text(res.cost_per_mom * 100 + '%').attr('style', res.cost_per_mom * 100 > 0 ? 'color:green' : 'color:red');
-                    if (res.cost_per_mom * 100 < 0) {
-                        layui.jquery('#benefit-avg-cost-bar').children().addClass('layui-bg-red');
-                    }
+
+                    chPBClass(res.cost_per_mom * 100 < 0, 'benefit-avg-cost-bar');
+
                     // layui.jquery('#month-avg-cost').text(avgCostValue);
 
                 });
