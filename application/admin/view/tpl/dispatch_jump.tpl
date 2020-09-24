@@ -45,7 +45,7 @@
     </p>
 </div>
 <div class="copyright">
-    <p>Powered by <a href="https://www.yck12.com/">一键修</a></p>
+    <p>Powered by <a href="https://www.yck12.com/">医析</a></p>
 </div>
 {if $url}
     <script type="text/javascript">

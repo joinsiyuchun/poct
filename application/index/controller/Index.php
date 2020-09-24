@@ -24,7 +24,7 @@ class Index extends Base
         $menu = $rbac -> getAuthMenu(Session::get('admin_role_id'));
 
         // 设置模板变量
-        $this -> view -> assign('title', '一键修设备维修管理系统');
+        $this -> view -> assign('title', '医析医疗设备智慧管理系统');
         $this -> view -> assign('menu', $menu);
 
         // 渲染模板
