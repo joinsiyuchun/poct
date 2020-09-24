@@ -24,6 +24,8 @@ class Echarts extends API
         'efficiency_min_last_year',
         'efficiency_max_last_year',
         'efficiency_avg_last_year',
+        'failure_rate_current_year',
+        'failure_rate_last_year',
         'return_rate_last_year',
         'income_per_mon_last_year',
         'income_per_mon_current_year',
@@ -164,42 +166,75 @@ SQL;
         return $response;
     }
 
-
-    public function failure_rate()
+    /**
+     * -- 设备故障次数分析（去年）（更新）：
+     * @return array
+     */
+    public function failure_rate_last_year()
     {
         $eid = Request::param('id', self::DEFAULT_EID);
         $sql = <<<SQL
- SELECT
-    item_id as eid, FROM_UNIXTIME(create_time, '%Y-%m') as ctime, COUNT(*) as times
-FROM
-    think_workorder
-WHERE item_id = ?
-GROUP BY item_id, FROM_UNIXTIME(create_time, '%Y-%m')
-
+SELECT c.item_id, c.t_time, if(d.failures_number is null, 0, d.failures_number) as failures_number
+FROM (SELECT DISTINCT a.id as item_id, DATE_FORMAT(b.datelist, '%Y-%m') as t_time
+      FROM think_item as a,
+           think_calendar as b
+      where a.`status` = 1
+        and year(b.datelist) = year(NOW()) - 1) as c
+         LEFT JOIN (SELECT item_id, FROM_UNIXTIME(create_time, '%Y-%m') as t_time, count(1) as failures_number
+                    FROM `think_workorder`
+                    where FROM_UNIXTIME(create_time, '%Y') = year(NOW()) - 1
+                    GROUP BY item_id, FROM_UNIXTIME(create_time, '%Y-%m')) as d
+                   on c.item_id = d.item_id and c.t_time = d.t_time
+WHERE c.item_id = ?;
 SQL;
         $result = Db::query($sql, [$eid]);
-        $response = [];
 
-        $tmpArr = [];
+        $response = [
+            'xAxis' => [],
+            'series' => []
+        ];
         foreach ($result as $row) {
-            $eid = $row['eid'];
-            $ctime = $row['ctime'];
-            $times = $row['times'];
-            $tmpArr[$eid][] = [
-                'key' => $ctime,
-                'value' => $times
-            ];
+            $ctime = $row['t_time'];
+            $times = $row['failures_number'];
+            $response['xAxis'][] = $ctime;
+            $response['series'][] = $times;
         }
 
-        foreach ($tmpArr as $name => $data) {
-            $xAxis = [];
-            $series = [];
-            foreach ($data as $td) {
-                $xAxis[] = $td['key'];
-                $series[] = $td['value'];
-            }
-            $response[$name]['xAxis'] = $xAxis;
-            $response[$name]['series'] = $series;
+        return $response;
+    }
+
+    /**
+     * -- 设备故障次数分析（今年）（更新）：
+     * @return array
+     */
+    public function failure_rate_current_year()
+    {
+        $eid = Request::param('id', self::DEFAULT_EID);
+        $sql = <<<SQL
+SELECT c.item_id, c.t_time, if(d.failures_number is null, 0, d.failures_number) as failures_number
+FROM (SELECT DISTINCT a.id as item_id, DATE_FORMAT(b.datelist, '%Y-%m') as t_time
+      FROM think_item as a,
+           think_calendar as b
+      where a.`status` = 1
+        and year(b.datelist) = year(NOW())) as c
+         LEFT JOIN (SELECT item_id, FROM_UNIXTIME(create_time, '%Y-%m') as t_time, count(1) as failures_number
+                    FROM `think_workorder`
+                    where FROM_UNIXTIME(create_time, '%Y') = year(NOW())
+                    GROUP BY item_id, FROM_UNIXTIME(create_time, '%Y-%m')) as d
+                   on c.item_id = d.item_id and c.t_time = d.t_time
+WHERE c.item_id = ?;
+SQL;
+        $result = Db::query($sql, [$eid]);
+
+        $response = [
+            'xAxis' => [],
+            'series' => []
+        ];
+        foreach ($result as $row) {
+            $ctime = $row['t_time'];
+            $times = $row['failures_number'];
+            $response['xAxis'][] = $ctime;
+            $response['series'][] = $times;
         }
 
         return $response;

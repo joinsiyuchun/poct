@@ -52,34 +52,34 @@ layui.define
                 });
 
                 layui.jquery('#equip-query').on('click', function () {
-                    reload($('#equips').val());
+                    reload($('#equips').val() || defaultLoadEquipId);
                 });
 
 
                 layui.jquery('#inspection-current-year').on('click', function () {
-                    efficiency_current_year($('#equips').val());
+                    efficiency_current_year($('#equips').val() || defaultLoadEquipId);
                 });
 
 
                 layui.jquery('#inspection-last-year').on('click', function () {
-                    efficiency_last_year($('#equips').val());
+                    efficiency_last_year($('#equips').val() || defaultLoadEquipId);
                 });
 
 
                 layui.jquery('#benefit-last-year').on('click', function () {
-                    benefit_last_year($('#equips').val());
+                    benefit_last_year($('#equips').val() || defaultLoadEquipId);
                 });
 
                 layui.jquery('#benefit-current-year').on('click', function () {
-                    benefit_current_year($('#equips').val());
+                    benefit_current_year($('#equips').val() || defaultLoadEquipId);
                 });
 
-                layui.jquery('#equip-query').on('click', function () {
-                    reload($('#equips').val());
+                layui.jquery('#failure_rate_last').on('click', function () {
+                    failure_rate_last_year($('#equips').val() || defaultLoadEquipId);
                 });
 
-                layui.jquery('#equip-query').on('click', function () {
-                    reload($('#equips').val());
+                layui.jquery('#failure_rate_current').on('click', function () {
+                    failure_rate_current_year($('#equips').val() || defaultLoadEquipId);
                 });
 
             });
@@ -115,7 +115,12 @@ layui.define
                                 {
                                     name: "检查人次", type: "line",
                                     data: res.series,// [2.6, 5.9, 9, 26.4, 28.7, 70.7, 175.6, 182.2, 48.7, 18.8, 6, 2.3],
-                                    markPoint: {data: [{type: "max", name: "最大值"}, {type: "min", name: "最小值"}]},
+                                    markPoint: {
+                                        data: [{type: "max", name: "最大值", symbolSize: 18}, {
+                                            type: "min",
+                                            name: "最小值"
+                                        }]
+                                    },
                                     markLine: {data: [{type: "average", name: "平均值"}]}
                                 }
                             ]
@@ -195,7 +200,12 @@ layui.define
                                 {
                                     name: "检查人次", type: "line",
                                     data: res.series,// [2.6, 5.9, 9, 26.4, 28.7, 70.7, 175.6, 182.2, 48.7, 18.8, 6, 2.3],
-                                    markPoint: {data: [{type: "max", name: "最大值"}, {type: "min", name: "最小值"}]},
+                                    markPoint: {
+                                        data: [{type: "max", name: "最大值", symbolSize: 18}, {
+                                            type: "min",
+                                            name: "最小值"
+                                        }]
+                                    },
                                     markLine: {data: [{type: "average", name: "平均值"}]}
                                 }
                             ]
@@ -258,7 +268,6 @@ layui.define
                 dataType: 'json',
                 data: {'id': equipId}
             }).done(function (res) {
-                console.log(res)
                 layui.jquery('#month-total-cost').text(res.cost);
                 layui.jquery('#month-total-inspection').text(res.inspection);
                 layui.jquery('#month-total-revenue').text(res.income);
@@ -269,7 +278,6 @@ layui.define
                 dataType: 'json',
                 data: {id: equipId}
             }).done(function (res) {
-                console.log(res)
 
                 layui.jquery('#year-total-revenue').text(res.income);
                 layui.jquery('#year-total-inspection').text(res.inspection);
@@ -281,7 +289,6 @@ layui.define
                 dataType: 'json',
                 data: {id: equipId}
             }).done(function (res) {
-                console.log(res);
                 layui.jquery('#year-return-rate').text(res.current);
                 layui.jquery('#last-year-return-rate').text(res.last);
             });
@@ -354,15 +361,6 @@ layui.define
                     data: {id: equipId}
                 }).done(function (res) {
 
-                    maxValue = Math.max.apply(null, res.series.income);
-                    minValue = Math.min.apply(null, res.series.income);
-
-                    avgRevenueValue = Math.round(res.series.income.reduce((a, b) => a + b) / res.series.income.length);
-                    avgCostValue = Math.round(res.series.cost.reduce((a, b) => a + b) / res.series.cost.length);
-
-                    layui.jquery('#month-avg-revenue').text(avgRevenueValue);
-                    layui.jquery('#month-avg-cost').text(avgCostValue);
-
                     option = {
                         title: {text: "设备效益趋势分析", subtext: "单位：万元"},
                         tooltip: {trigger: "axis"},
@@ -377,30 +375,16 @@ layui.define
                             [
                                 {
                                     name: "成本", type: "bar",
-                                    data: res.series.cost,
-                                    markPoint: {data: [{type: "max", name: "最大值"}, {type: "min", name: "最小值"}]},
+                                    data: res.cost,
+                                    markPoint: {
+                                        data: [{type: "max", name: "最大值", symbolSize: 8}, {type: "min", name: "最小值",symbolSize: 8}]
+                                    },
                                     markLine: {data: [{type: "average", name: "平均值"}]}
                                 },
                                 {
                                     name: "收入", type: "bar",
-                                    data: res.series.income,//[2.6, 5.9, 9, 26.4, 28.7, 70.7, 175.6, 182.2, 48.7, 18.8, 6, 2.3],
-                                    markPoint: {
-                                        data: [
-                                            {
-                                                name: "年最高",
-                                                value: maxValue,
-                                                xAxis: res.series.income.length,
-                                                yAxis: maxValue,
-                                                symbolSize: 18
-                                            },
-                                            {
-                                                name: "年最低",
-                                                value: minValue,
-                                                xAxis: res.series.income.length,
-                                                yAxis: minValue
-                                            }
-                                        ]
-                                    },
+                                    data: res.income,//[2.6, 5.9, 9, 26.4, 28.7, 70.7, 175.6, 182.2, 48.7, 18.8, 6, 2.3],
+                                    markPoint: {data: [{type: "max", name: "最大值"}, {type: "min", name: "最小值"}]},
                                     markLine: {data: [{type: "average", name: "平均值"}]}
                                 }
                             ]
@@ -410,6 +394,54 @@ layui.define
                     myChart = (layui.carousel, layui.echarts).init(dom[0], layui.echartsTheme);
                     myChart.setOption(option, true);
                     window.onresize = myChart.resize;
+                });
+
+                layui.jquery.ajax({
+                    url: '/api/echarts/return_rate_last_year',
+                    dataType: 'json',
+                    data: {id: equipId}
+                }).done(function (res) {
+
+                    layui.jquery('#benefit-return-rate').text(res.return_rate);
+                    layui.element.progress('benefit-return-rate-bar', Math.abs(res.return_rate_mom * 100) + '%');
+                    layui.jquery('#benefit-return-rate-percent').text(res.return_rate_mom * 100 + '%').attr('style', res.return_rate_mom * 100 > 0 ? 'color:green' : 'color:red');
+                    if (res.return_rate_mom * 100 < 0) {
+                        layui.jquery('#benefit-return-rate-bar').children().addClass('layui-bg-red');
+                    }
+                    // layui.jquery('#month-avg-cost').text(avgCostValue);
+
+                });
+
+                layui.jquery.ajax({
+                    url: '/api/echarts/income_per_mon_last_year',
+                    dataType: 'json',
+                    data: {id: equipId}
+                }).done(function (res) {
+
+                    layui.jquery('#benefit-avg-income').text(res.income_per);
+                    layui.element.progress('benefit-avg-income-bar', Math.abs(res.income_per_mom * 100) + '%');
+                    layui.jquery('#benefit-avg-income-percent').text(res.income_per_mom * 100 + '%').attr('style', res.income_per_mom * 100 > 0 ? 'color:green' : 'color:red');
+                    if (res.income_per_mom * 100 < 0) {
+                        layui.jquery('#benefit-avg-income-bar').children().addClass('layui-bg-red');
+                    }
+                    // layui.jquery('#month-avg-cost').text(avgCostValue);
+
+                });
+
+                layui.jquery.ajax({
+                    url: '/api/echarts/cost_per_mon_last_year',
+                    dataType: 'json',
+                    data: {id: equipId}
+                }).done(function (res) {
+
+                    layui.jquery('#benefit-avg-cost').text(res.cost_per);
+                    layui.element.progress('benefit-avg-cost-bar', Math.abs(res.cost_per_mom * 100) + '%');
+                    layui.jquery('#benefit-avg-cost-percent').text(res.cost_per_mom * 100 + '%').attr('style', res.cost_per_mom * 100 > 0 ? 'color:green' : 'color:red');
+                    if (res.cost_per_mom * 100 < 0) {
+                        layui.jquery('#benefit-avg-cost-bar').children().addClass('layui-bg-red');
+                    }
+                    // layui.jquery('#month-avg-cost').text(avgCostValue);
+
                 });
             });
         }
@@ -422,7 +454,6 @@ layui.define
                     dataType: 'json',
                     data: {id: equipId}
                 }).done(function (res) {
-                    console.log(res)
 
                     // layui.jquery('#month-avg-revenue').text(avgRevenueValue);
                     // layui.jquery('#month-avg-cost').text(avgCostValue);
@@ -442,7 +473,9 @@ layui.define
                                 {
                                     name: "成本", type: "bar",
                                     data: res.cost,
-                                    markPoint: {data: [{type: "max", name: "最大值"}, {type: "min", name: "最小值"}]},
+                                    markPoint: {
+                                        data: [{type: "max", name: "最大值", symbolSize: 8}, {type: "min", name: "最小值",symbolSize: 8}]
+                                    },
                                     markLine: {data: [{type: "average", name: "平均值"}]}
                                 },
                                 {
@@ -465,7 +498,6 @@ layui.define
                     dataType: 'json',
                     data: {id: equipId}
                 }).done(function (res) {
-                    console.log(res)
 
                     layui.jquery('#benefit-return-rate').text(res.return_rate);
                     layui.element.progress('benefit-return-rate-bar', Math.abs(res.return_rate_mom * 100) + '%');
@@ -482,7 +514,6 @@ layui.define
                     dataType: 'json',
                     data: {id: equipId}
                 }).done(function (res) {
-                    console.log(res)
 
                     layui.jquery('#benefit-avg-income').text(res.income_per);
                     layui.element.progress('benefit-avg-income-bar', Math.abs(res.income_per_mom * 100) + '%');
@@ -499,7 +530,6 @@ layui.define
                     dataType: 'json',
                     data: {id: equipId}
                 }).done(function (res) {
-                    console.log(res)
 
                     layui.jquery('#benefit-avg-cost').text(res.cost_per);
                     layui.element.progress('benefit-avg-cost-bar', Math.abs(res.cost_per_mom * 100) + '%');
@@ -513,61 +543,80 @@ layui.define
             });
         }
 
-        function failure_rate(equipId) {
+        function failure_rate_current_year(equipId) {
             layui.use(["carousel", "echarts"], function () {
                 layui.jquery.ajax({
-                    url: '/api/echarts/failure_rate',
+                    url: '/api/echarts/failure_rate_current_year',
                     dataType: 'json',
                     data: {id: equipId}
                 }).done(function (res) {
+                    console.log(res)
 
-
-                    xAxis = [];
-                    series = [];
-                    legend = [];
-                    for (var prop in res) {
-
-                        maxValue = Math.max.apply(null, res[prop].series);
-                        minValue = Math.min.apply(null, res[prop].series);
-                        xAxis = xAxis.concat(res[prop].xAxis);
-                        var obj = {
-                            name: prop, type: "line",
-                            data: res[prop].series,
-
-                            markPoint: {
-                                data: [
-                                    {
-                                        name: "年最高",
-                                        value: maxValue,
-                                        xAxis: res[prop].series.length,
-                                        yAxis: maxValue,
-                                        symbolSize: 18
-                                    },
-                                    {
-                                        name: "年最低",
-                                        value: minValue,
-                                        xAxis: res[prop].series.length,
-                                        yAxis: minValue
-                                    }
-                                ]
-                            },
-                            markLine: {data: [{type: "average", name: "平均值"}]}
-                        };
-                        series.push(obj);
-                        legend.push(prop)
-                    }
-
-                    option = {
+                    var option = {
                         title: {text: "设备故障率分析", subtext: "单位：%"},
                         tooltip: {trigger: "axis"},
-                        legend: {data: legend},
+                        legend: {data: ["设备故障分析"]},
                         calculable: !0,
                         xAxis: [{
                             type: "category",
-                            data: xAxis
+                            data: res.xAxis
                         }],
                         yAxis: [{type: "value"}],
-                        series: series
+                        series: [
+                            {
+                                data: res.series,
+                                name: "设备故障次数", type: "line",
+                                markPoint: {
+                                    data: [{type: "max", name: "最大值", symbolSize: 18}, {
+                                        type: "min",
+                                        name: "最小值"
+                                    }]
+                                },
+                                markLine: {data: [{type: "average", name: "平均值"}]}
+                            }
+                        ]
+                    };
+
+                    dom = layui.jquery("#LAY-index-pagethree").children("div");
+                    myChart = (layui.carousel, layui.echarts).init(dom[0], layui.echartsTheme);
+                    myChart.setOption(option, true);
+                    window.onresize = myChart.resize;
+                });
+            });
+        }
+
+        function failure_rate_last_year(equipId) {
+            layui.use(["carousel", "echarts"], function () {
+                layui.jquery.ajax({
+                    url: '/api/echarts/failure_rate_last_year',
+                    dataType: 'json',
+                    data: {id: equipId}
+                }).done(function (res) {
+                    console.log(res)
+
+                    var option = {
+                        title: {text: "设备故障率分析", subtext: "单位：%"},
+                        tooltip: {trigger: "axis"},
+                        legend: {data: ["设备故障分析"]},
+                        calculable: !0,
+                        xAxis: [{
+                            type: "category",
+                            data: res.xAxis
+                        }],
+                        yAxis: [{type: "value"}],
+                        series: [
+                            {
+                                data: res.series,
+                                name: "设备故障次数", type: "line",
+                                markPoint: {
+                                    data: [{type: "max", name: "最大值", symbolSize: 18}, {
+                                        type: "min",
+                                        name: "最小值"
+                                    }]
+                                },
+                                markLine: {data: [{type: "average", name: "平均值"}]}
+                            }
+                        ]
                     };
 
                     dom = layui.jquery("#LAY-index-pagethree").children("div");
@@ -615,7 +664,7 @@ layui.define
         function reload(equipId) {
             table_bind(equipId);
             global_bind(equipId);
-            failure_rate(equipId);
+            failure_rate_current_year(equipId);
             benefit_current_year(equipId);
             efficiency_current_year(equipId);
         }
