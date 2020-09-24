@@ -992,8 +992,9 @@ SQL;
      */
     public function dept()
     {
-
         $eid = Request::param('id', self::DEFAULT_EID);
+//        var_dump($eid);
+//        exit;
         $sql = <<<SQL
       
 SELECT item_id, department, COUNT(DISTINCT request_id) as inspection_times, sum(profit) as income
@@ -1010,7 +1011,6 @@ SQL;
         return
             [
                 'code' => 0,
-
                 'data' => $data
             ];
     }

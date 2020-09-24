@@ -300,6 +300,7 @@ layui.define
                 layui.table.render({
                     elem: '#varcost'
                     , url: '/api/echarts/varcost/'
+                    , where:{id:equipId}
                     , cellMinWidth: 80 //全局定义常规单元格的最小宽度，layui 2.2.1 新增
                     , cols: [[
                         {field: 'id', width: 80, title: 'ID', sort: true}
@@ -313,6 +314,7 @@ layui.define
                 layui.table.render({
                     elem: '#fixcost'
                     , url: '/api/echarts/fixcost/'
+                    , where:{id:equipId}
                     , cellMinWidth: 80 //全局定义常规单元格的最小宽度，layui 2.2.1 新增
                     , cols: [[
                         {field: 'id', width: 80, title: 'ID', sort: true}
@@ -323,29 +325,30 @@ layui.define
                         , {field: 'amount', title: '金额', sort: true}
                     ]]
                 });
+                //item_id, department, COUNT(DISTINCT request_id) as inspection_times, sum(profit) as income
                 layui.table.render({
                     elem: '#dept'
                     , url: '/api/echarts/dept/'
+                    , where:{id:equipId}
                     , cellMinWidth: 80 //全局定义常规单元格的最小宽度，layui 2.2.1 新增
                     , cols: [[
-                        {field: 'id', width: 80, title: 'ID', sort: true}
-                        , {field: 'equip_id', title: '设备ID'}
-                        , {field: 'dept_name', title: '科室名称'}
-                        , {field: 'count', title: '本月检查人次', sort: true}
-                        , {field: 'profit', title: '本月收入', sort: true}
+                        {field: 'item_id', title: '设备ID'}
+                        , {field: 'department', title: '科室名称'}
+                        , {field: 'inspection_times', title: '本月检查人次', sort: true}
+                        , {field: 'income', title: '本月收入', sort: true}
                         , {field: 'cost', title: '本月成本', sort: true}
                     ]]
                 });
                 layui.table.render({
                     elem: '#source'
                     , url: '/api/echarts/source/'
+                    , where:{id:equipId}
                     , cellMinWidth: 80 //全局定义常规单元格的最小宽度，layui 2.2.1 新增
                     , cols: [[
-                        {field: 'id', width: 80, title: 'ID', sort: true}
-                        , {field: 'equip_id', title: '设备ID'}
-                        , {field: 'dept_name', title: '检查来源'}
-                        , {field: 'count', title: '本月检查人次'}
-                        , {field: 'profit', title: '本月收入'}
+                        {field: 'item_id', title: '设备ID'}
+                        , {field: 'patient_source', title: '检查来源'}
+                        , {field: 'inspection_times', title: '本月检查人次'}
+                        , {field: 'income', title: '本月收入'}
                         , {field: 'cost', title: '本月成本', sort: true}
                     ]]
                 });
