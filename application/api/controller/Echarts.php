@@ -301,7 +301,7 @@ SQL;
             $ctime = $row['t_time'];
             $times = $row['inspection_times'];
             $response['xAxis'][] = $ctime;
-            $response['series'][] = $times;
+            $response['series'][] =intval( $times);
         }
 
         return $response;
@@ -356,7 +356,7 @@ SQL;
             $ctime = $row['inspection_times_per'];
             $times = $row['inspection_times_per_mom'];
             $response['inspection_times_per'] = $ctime;
-            $response['inspection_times_per_mom'] = $times;
+            $response['inspection_times_per_mom'] = intval( $times);;
         }
 
         return $response;

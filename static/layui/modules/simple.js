@@ -132,7 +132,8 @@ layui.define
                                     markPoint: {
                                         data: [{type: "max", name: "最大值", symbolSize: 18}, {
                                             type: "min",
-                                            name: "最小值"
+                                            name: "最小值",
+                                            symbolSize: 12
                                         }]
                                     },
                                     markLine: {data: [{type: "average", name: "平均值"}]}
@@ -195,7 +196,6 @@ layui.define
                     dataType: 'json',
                     data: {id: equipId}
                 }).done(function (res) {
-
                     option = {
                         title: {text: "设备效率趋势分析", subtext: "单位：人次"},
                         tooltip: {trigger: "axis"},
@@ -214,7 +214,8 @@ layui.define
                                     markPoint: {
                                         data: [{type: "max", name: "最大值", symbolSize: 18}, {
                                             type: "min",
-                                            name: "最小值"
+                                            name: "最小值",
+                                            symbolSize: 12
                                         }]
                                     },
                                     markLine: {data: [{type: "average", name: "平均值"}]}
@@ -385,10 +386,10 @@ layui.define
                                     name: "成本", type: "bar",
                                     data: res.cost,
                                     markPoint: {
-                                        data: [{type: "max", name: "最大值", symbolSize: 8}, {
+                                        data: [{type: "max", name: "最大值", symbolSize: 18}, {
                                             type: "min",
                                             name: "最小值",
-                                            symbolSize: 8
+                                            symbolSize: 12
                                         }]
                                     },
                                     markLine: {data: [{type: "average", name: "平均值"}]}
@@ -396,7 +397,13 @@ layui.define
                                 {
                                     name: "收入", type: "bar",
                                     data: res.income,//[2.6, 5.9, 9, 26.4, 28.7, 70.7, 175.6, 182.2, 48.7, 18.8, 6, 2.3],
-                                    markPoint: {data: [{type: "max", name: "最大值"}, {type: "min", name: "最小值"}]},
+                                    markPoint: {
+                                        data: [{type: "max", name: "最大值", symbolSize: 18}, {
+                                            type: "min",
+                                            name: "最小值",
+                                            symbolSize: 12
+                                        }]
+                                    },
                                     markLine: {data: [{type: "average", name: "平均值"}]}
                                 }
                             ]
@@ -480,10 +487,10 @@ layui.define
                                     name: "成本", type: "bar",
                                     data: res.cost,
                                     markPoint: {
-                                        data: [{type: "max", name: "最大值", symbolSize: 8}, {
+                                        data: [{type: "max", name: "最大值", symbolSize: 18}, {
                                             type: "min",
                                             name: "最小值",
-                                            symbolSize: 8
+                                            symbolSize: 12
                                         }]
                                     },
                                     markLine: {data: [{type: "average", name: "平均值"}]}
@@ -491,7 +498,13 @@ layui.define
                                 {
                                     name: "收入", type: "bar",
                                     data: res.income,//[2.6, 5.9, 9, 26.4, 28.7, 70.7, 175.6, 182.2, 48.7, 18.8, 6, 2.3],
-                                    markPoint: {data: [{type: "max", name: "最大值"}, {type: "min", name: "最小值"}]},
+                                    markPoint: {
+                                        data: [{type: "max", name: "最大值", symbolSize: 18}, {
+                                            type: "min",
+                                            name: "最小值",
+                                            symbolSize: 12
+                                        }]
+                                    },
                                     markLine: {data: [{type: "average", name: "平均值"}]}
                                 }
                             ]
@@ -577,7 +590,8 @@ layui.define
                                 markPoint: {
                                     data: [{type: "max", name: "最大值", symbolSize: 18}, {
                                         type: "min",
-                                        name: "最小值"
+                                        name: "最小值",
+                                        symbolSize: 12
                                     }]
                                 },
                                 markLine: {data: [{type: "average", name: "平均值"}]}
@@ -619,7 +633,8 @@ layui.define
                                 markPoint: {
                                     data: [{type: "max", name: "最大值", symbolSize: 18}, {
                                         type: "min",
-                                        name: "最小值"
+                                        name: "最小值",
+                                        symbolSize: 12
                                     }]
                                 },
                                 markLine: {data: [{type: "average", name: "平均值"}]}
