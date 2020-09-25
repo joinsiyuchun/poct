@@ -370,7 +370,7 @@ layui.define
                 }).done(function (res) {
 
                     option = {
-                        title: {text: "设备效益趋势分析", subtext: "单位：万元"},
+                        title: {text: "设备效益趋势分析", subtext: "单位：元"},
                         tooltip: {trigger: "axis"},
                         legend: {data: ["成本", "收入"]},
                         calculable: !0,
@@ -465,7 +465,7 @@ layui.define
                     // layui.jquery('#month-avg-cost').text(avgCostValue);
 
                     option = {
-                        title: {text: "设备效益趋势分析", subtext: "单位：万元"},
+                        title: {text: "设备效益趋势分析", subtext: "单位：元"},
                         tooltip: {trigger: "axis"},
                         legend: {data: ["成本", "收入"]},
                         calculable: !0,
