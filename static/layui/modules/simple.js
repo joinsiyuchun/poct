@@ -314,7 +314,7 @@ layui.define
                         {field: 'item_id', title: '设备ID'}
                         , {field: 'cost_item', title: '费用类型'}
                         , {field: 'start_date', title: '计费开始时间'}
-                        , {field: 'end_date', title: '计费开始时间'}
+                        , {field: 'end_date', title: '计费结束时间'}
                         , {field: 'total_cost', title: '金额', sort: true}
                     ]]
                 });
@@ -327,7 +327,7 @@ layui.define
                         {field: 'item_id', title: '设备ID'}
                         , {field: 'cost_item', title: '费用类型'}
                         , {field: 'start_date', title: '计费开始时间'}
-                        , {field: 'end_date', title: '计费开始时间'}
+                        , {field: 'end_date', title: '计费结束时间'}
                         , {field: 'total_cost', title: '金额', sort: true}
                     ]]
                 });
