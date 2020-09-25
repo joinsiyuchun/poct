@@ -5,7 +5,7 @@ layui.define
 (
     function (exports) {
 
-        var defaultLoadEquipId = '47';
+        var defaultLoadEquipId = 0;
 
 //页面初始化
         function initPage() {
@@ -40,13 +40,19 @@ layui.define
                         var val = res[prop];
 
                         val.map(function (equip) {
+                            if (defaultLoadEquipId == 0) {
+                                defaultLoadEquipId = equip.id;
+                            }
                             var option = $('<option value="' + equip.id + '">' + equip.code + '</option>');
                             group.append(option);
                         });
                         $('#equips').append(group);
+
                     }
 
                     layui.use('form', function () {
+                        $('#equips').val(defaultLoadEquipId);
+                        reload(defaultLoadEquipId);
                         layui.form.render();
                     });
                 });
@@ -672,7 +678,6 @@ layui.define
         }
 
         initPage();
-        reload(defaultLoadEquipId);
         exports('simple', this);
     }
 );
