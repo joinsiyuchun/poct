@@ -267,14 +267,14 @@
 {load href="__JS__/jquery-3.4.1.min.js"/}
 {load href="__LAYUI__/layui.js"/}
 
-<script>
-</script>
+
 <script>
     layui.config({
-        base: '__LAYUI__/' //静态资源所在路径
+        base: '__JS__/res/' //静态资源所在路径
     }).extend({
-        index: 'lib/index' //主入口模块
-    }).use(['index', 'simple']);
+        simple: 'simple' //主入口模块
+    }).use(['simple']);
 </script>
+
 </body>
 </html>

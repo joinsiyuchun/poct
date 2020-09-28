@@ -8,6 +8,6 @@ return [
     'imageW'    => 120,
     'imageH'    => 38,
     'length'    => 4,
-    'useNoise'  => true,
+    'useNoise'  => false,
     'useCurve'  => false
 ];

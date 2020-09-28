@@ -97,6 +97,7 @@ class Item extends Base
     public function itemListbyct()
     {
         $map = [];
+        $itemList=[];
         $keywords = Request::param('keywords');
         if ( !empty($keywords) ) {
             $map[] = ['code', 'like', '%' . $keywords . '%'];

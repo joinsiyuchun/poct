@@ -7,8 +7,16 @@
 <script type="text/html" id="toolbar">
     <div class="dataToolbar">
         <div class="layui-inline">
+            <label class="layui-form-label">设备编码</label>
             <input class="layui-input" name="keywords" id="keywords" value="{:input('keywords')}" autocomplete="on" placeholder="请输入设备编码">
         </div>
+        <div class="layui-inline">
+            <label class="layui-form-label">查询时间</label>
+            <div class="layui-input-inline">
+                <input type="text" class="layui-input" name="test"  id="test" placeholder=" - ">
+            </div>
+        </div>
+
         <button class="layui-btn search-btn" data-type="reload"><i class="iconfont">&#xe679;</i> 查询</button>
 
         <div class="layui-inline">
@@ -33,11 +41,18 @@
 {block name="layui"}{/block}
 {block name="javascript"}
 <script>
-    layui.use(['jquery', 'layer', 'form', 'table'], function () {
+    layui.use(['jquery', 'layer', 'form', 'table','laydate'], function () {
         var $ = layui.$,
             layer = layui.layer,
             form = layui.form,
-            table = layui.table;
+            table = layui.table,
+            laydate = layui.laydate;
+        //年月范围
+        laydate.render({
+            elem: '#test'
+            ,type: 'month'
+            ,range: true
+        });
         // 渲染数据表格
 
         table.render({
@@ -186,4 +201,5 @@
         });
     });
 </script>
+
 {/block}
