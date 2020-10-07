@@ -240,4 +240,21 @@ class Bireport extends Base
         return resMsg(1, '成本补录成功', 'index');
     }
 
+    // 后台管理首页
+    public function singleanalysis()
+    {
+//        // 实例化RBAC类
+//        $rbac = Rbac::instance();
+//
+//        // 根据角色获取菜单
+//        $menu = $rbac -> getAuthMenu(Session::get('admin_role_id'));
+//
+//        // 设置模板变量
+        $this -> view -> assign('title', '单台设备效率效益分析');
+//        $this -> view -> assign('menu', $menu);
+
+        // 渲染模板
+        return $this -> fetch('singleanalysis');
+    }
+
 }

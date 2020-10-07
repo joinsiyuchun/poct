@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html style="height: 100%">
+<head>
+    <meta charset="utf-8">
+    <title>设备概览</title>
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    {// 加载CSS样式}
+    {load href="__LAYUI__/css/layui.css"/}
+    {load href="__LAYUI__/css/admin.css"/}
+
+</head>
+<style>
+    .layui-top-box {
+        padding: 20px;
+        color: #fff
+    }
+
+</style>
+<body>
+
+<div class="layui-fluid">
+
+
+    <div class="layui-row layui-col-space15">
+        <div class="layui-col-sm12">
+            <div class="layui-card">
+                <div class="layui-card-header">查询条件</div>
+                <div class="layui-card-body ">
+                    <div class="layui-form" lay-filter="">
+                        <div class="layui-form-item">
+                            <div class="layui-inline">
+                                <label class="layui-form-label">设备编码</label>
+                                <div class="layui-input-inline">
+                                    <select id="equips">
+                                        <option value="">请选择设备</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div class="layui-inline">
+                                <button class="layui-btn layuiadmin-btn-comm" data-type="reload" lay-submit
+                                        lay-filter="LAY-app-contcomm-search" id="equip-query">
+                                    <i class="layui-icon layui-icon-search layuiadmin-button-btn"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="layui-col-sm6 layui-col-md3">
+            <div class="layui-card">
+                <div class="layui-card-header">
+                    本年总收入
+                </div>
+                <div class="layui-card-body layuiadmin-card-list">
+                    <p class="layuiadmin-big-font">¥<span id="year-total-revenue">-</span></p>
+                    <p>
+                        本月总收入：
+                        <span class="layuiadmin-span-color">¥<span id="month-total-revenue">-</span> </span>
+                    </p>
+                </div>
+            </div>
+        </div>
+        <div class="layui-col-sm6 layui-col-md3">
+            <div class="layui-card">
+                <div class="layui-card-header">
+                    本年总成本
+                </div>
+                <div class="layui-card-body layuiadmin-card-list">
+                    <p class="layuiadmin-big-font">¥<span id="year-total-cost">-</span></p>
+                    <p>
+                        本月总成本
+                        <span class="layuiadmin-span-color">¥<span id="month-total-cost">-</span></span>
+                    </p>
+                </div>
+            </div>
+        </div>
+        <div class="layui-col-sm6 layui-col-md3">
+            <div class="layui-card">
+                <div class="layui-card-header">
+                    本年检查人次
+
+                </div>
+                <div class="layui-card-body layuiadmin-card-list">
+
+                    <p class="layuiadmin-big-font"><span id="year-total-inspection">-</span></p>
+                    <p>
+                        本月检查人次
+                        <span class="layuiadmin-span-color"><span id="month-total-inspection">-</span></span>
+                    </p>
+                </div>
+            </div>
+        </div>
+        <div class="layui-col-sm6 layui-col-md3">
+            <div class="layui-card">
+                <div class="layui-card-header">
+                    本年收益率
+                </div>
+                <div class="layui-card-body layuiadmin-card-list">
+
+                    <p class="layuiadmin-big-font"><span id="year-return-rate">-</span>%</p>
+                    <p>
+                        去年收益率
+                        <span class="layuiadmin-span-color"><span id="last-year-return-rate">-</span>% </span>
+                    </p>
+                </div>
+            </div>
+        </div>
+        <div class="layui-col-sm12">
+            <div class="layui-card">
+                <div class="layui-card-header">
+                    效率分析
+                    <div class="layui-btn-group layuiadmin-btn-group">
+                        <a href="javascript:;" id="inspection-last-year"
+                           class="layui-btn layui-btn-primary layui-btn-xs">去年</a>
+                        <a href="javascript:;" id="inspection-current-year"
+                           class="layui-btn layui-btn-primary layui-btn-xs">今年</a>
+                    </div>
+                </div>
+                <div class="layui-card-body">
+                    <div class="layui-row">
+                        <div class="layui-col-sm8">
+                            <div class="layui-carousel layadmin-carousel layadmin-dataview" data-anim="fade"
+                                 lay-filter="LAY-index-pageone">
+                                <div carousel-item id="LAY-index-pagetwo">
+                                    <div><i class="layui-icon layui-icon-loading1 layadmin-loading"></i></div>
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="layui-col-sm4">
+                            <div class="layuiadmin-card-list">
+                                <p class="layuiadmin-normal-font">月均检查人次：<span id="month-avg-inspection">-</span></p>
+                                <span>同上期比较:<span id="month-avg-inspection-percent"></span></span>
+                                <div id="month-avg-inspection-percent-bar" class="layui-progress layui-progress-big"
+                                     lay-filter="month-avg-inspection-percent-bar">
+                                    <div class="layui-progress-bar" lay-percent="0%"></div>
+                                </div>
+                            </div>
+                            <div class="layuiadmin-card-list">
+                                <p class="layuiadmin-normal-font">单月最大检查人次：<span id="month-max-inspection">-</span></p>
+                                <span>同上期比较:<span id="month-max-inspection-percent"></span></span>
+                                <div id="month-max-inspection-percent-bar" class="layui-progress layui-progress-big"
+                                     lay-filter="month-max-inspection-percent-bar">
+                                    <div class="layui-progress-bar" lay-percent="0%"></div>
+                                </div>
+                            </div>
+                            <div class="layuiadmin-card-list">
+                                <p class="layuiadmin-normal-font">单月最小检查人次：<span id="month-min-inspection">-</span></p>
+                                <span>同上期比较:<span id="month-min-inspection-percent"></span></span>
+                                <div id="month-min-inspection-percent-bar" class="layui-progress layui-progress-big"
+                                     lay-filter="month-min-inspection-percent-bar">
+                                    <div class="layui-progress-bar" lay-percent="0%"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="layui-col-sm12">
+            <div class="layui-card">
+                <div class="layui-card-header">
+                    效益分析
+                    <div class="layui-btn-group layuiadmin-btn-group">
+                        <a href="javascript:;" class="layui-btn layui-btn-primary layui-btn-xs"  id="benefit-last-year">去年</a>
+                        <a href="javascript:;" class="layui-btn layui-btn-primary layui-btn-xs" id="benefit-current-year">今年</a>
+                    </div>
+                </div>
+                <div class="layui-card-body">
+                    <div class="layui-row">
+                        <div class="layui-col-sm8">
+                            <div class="layui-carousel layadmin-carousel layadmin-dataview" data-anim="fade"
+                                 lay-filter="LAY-index-pageone">
+                                <div carousel-item id="LAY-index-pageone">
+                                    <div><i class="layui-icon layui-icon-loading1 layadmin-loading"></i></div>
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="layui-col-sm4">
+
+                            <div class="layuiadmin-card-list">
+                                <p class="layuiadmin-normal-font">年收益率：<span id="benefit-return-rate">-</span>%</p>
+                                <span>同上期比较:<span id="benefit-return-rate-percent"></span></span>
+                                <div id="benefit-return-rate-bar" class="layui-progress layui-progress-big"
+                                     lay-filter="benefit-return-rate-bar">
+                                    <div class="layui-progress-bar" lay-percent="0%"></div>
+                                </div>
+                            </div>
+                            <div class="layuiadmin-card-list">
+                                <p class="layuiadmin-normal-font">月均收入：¥<span id="benefit-avg-income">-</span></p>
+                                <span>同上期比较:<span id="benefit-avg-income-percent"></span></span>
+                                <div id="benefit-avg-income-bar" class="layui-progress layui-progress-big"
+                                     lay-filter="benefit-avg-income-bar">
+                                    <div class="layui-progress-bar" lay-percent="0%"></div>
+                                </div>
+                            </div>
+                            <div class="layuiadmin-card-list">
+                                <p class="layuiadmin-normal-font">月均成本：¥<span id="benefit-avg-cost">-</span></p>
+                                <span>同上期比较:<span id="benefit-avg-cost-percent"></span></span>
+                                <div id="benefit-avg-cost-bar" class="layui-progress layui-progress-big"
+                                     lay-filter="benefit-avg-cost-bar">
+                                    <div class="layui-progress-bar" lay-percent="0%"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="layui-col-sm12 layui-card">
+            <div class="layui-tab layui-tab-brief layadmin-latestData">
+                <ul class="layui-tab-title">
+                    <li class="layui-this">科室分析</li>
+                    <li>检查来源分析</li>
+                    <li>本月可变成本</li>
+                    <li>本月固定成本</li>
+                </ul>
+                <div class="layui-tab-content">
+                    <div class="layui-tab-item layui-show">
+                        <table id="dept"></table>
+                    </div>
+                    <div class="layui-tab-item">
+                        <table id="source"></table>
+                    </div>
+                    <div class="layui-tab-item">
+                        <table id="varcost"></table>
+                    </div>
+                    <div class="layui-tab-item">
+                        <table id="fixcost"></table>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="layui-col-sm12">
+            <div class="layui-card">
+                <div class="layui-card-header">
+                    设备故障次数分析
+                    <div class="layui-btn-group layuiadmin-btn-group">
+                        <a href="javascript:;" class="layui-btn layui-btn-primary layui-btn-xs" id="failure_rate_last">去年</a>
+                        <a href="javascript:;" class="layui-btn layui-btn-primary layui-btn-xs" id="failure_rate_current">今年</a>
+                    </div>
+                </div>
+                <div class="layui-card-body">
+                    <div class="layui-row">
+                        <div class="layui-col-sm12">
+                            <div class="layui-carousel layadmin-carousel layadmin-dataview" data-anim="fade"
+                                 lay-filter="LAY-index-pagethree">
+                                <div carousel-item id="LAY-index-pagethree">
+                                    <div><i class="layui-icon layui-icon-loading1 layadmin-loading"></i></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+{// 加载js文件}
+{load href="__JS__/jquery-3.4.1.min.js"/}
+{load href="__LAYUI__/layui.js"/}
+
+
+<script>
+    layui.config({
+        base: '__JS__/res/' //静态资源所在路径
+    }).extend({
+        simple: 'simple' //主入口模块
+    }).use(['simple']);
+</script>
+
+</body>
+</html>
