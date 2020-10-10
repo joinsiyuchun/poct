@@ -169,13 +169,19 @@ SQL;
     public function source_list()
     {
         $sql = <<<SQL
+-- SELECT 
+--     patient_source as source, round(SUM(profit)/10000,2) as total_profit,count(1) total_times
+-- FROM
+--     think_singledia_info
+-- WHERE
+--     YEAR(inspection_date) = YEAR(NOW())
+-- GROUP BY patient_source
 SELECT 
-    patient_source as source, SUM(profit) as total_profit,count(1) total_times
+    source, SUM(total_amount) as total_profit,sum(total_count) as total_times
 FROM
-    think_singledia_info
-WHERE
-    YEAR(inspection_date) = YEAR(NOW())
-GROUP BY patient_source
+    patient_source_ananlysis
+where year = year(now())
+GROUP BY source;
 SQL;
         $result = Db::query($sql);
         $all_counts=0;
@@ -185,7 +191,7 @@ SQL;
         $response = [];
         foreach ($result as $k=>$row) {
             $i=(double)$row['total_profit'];
-            $total=(int)$row['total_times'];
+            $total=$row['total_times'];
             $percent=$total/$all_counts*100;
             $response[$k]['title']=$row['source'];
             $response[$k]['total']['number'][0]=$i;
@@ -197,7 +203,7 @@ SQL;
             $response[$k]['num']['number'][0]=$total;
             $response[$k]['num']['content']='{nt}';
             $response[$k]['num']['textAlign']='center';
-            $response[$k]['num']['toFixed']=2;
+            $response[$k]['num']['toFixed']=0;
             $response[$k]['num']['style']['fill']='#26fcd8';
             $response[$k]['num']['style']['fontWeight']='bold';
 
