@@ -5,7 +5,8 @@ namespace app\index\controller;
 
 
 use app\admin\common\controller\Base;
-use app\index\common\model\Analysis as AnalysisModel;
+use app\index\common\model\Monthreport as MonthreportModel;
+use app\index\common\model\Costreport as CostreportModel;
 use app\index\common\model\Org as OrgModel;
 use app\index\common\model\Item_cost as ItemCostModel;
 
@@ -16,25 +17,110 @@ use think\facade\Request;
 
 class Bireport extends Base
 {
-    // 后台管理首页
-    public function mri()
+
+    // 效益月报表
+    public function index()
     {
-//        // 实例化RBAC类
-//        $rbac = Rbac::instance();
-//
-//        // 根据角色获取菜单
-//        $menu = $rbac -> getAuthMenu(Session::get('admin_role_id'));
-//
-//        // 设置模板变量
-        $this -> view -> assign('title', 'MRI效率效益分析');
-//        $this -> view -> assign('menu', $menu);
+        // 设置模板变量
+        $this -> view -> assign([
+            'title' => '设备效益月报表'
+        ]);
 
         // 渲染模板
-        return $this -> fetch('mri');
+        return $this -> view -> fetch('index');
+
     }
 
-    // 后台管理控制台
-    public function ct()
+    public function monthreport()
+    {
+        $map = [];
+        // 搜索功能
+        $keywords = Request::param('keywords');
+        if ( !empty($keywords) ) {
+            $map[] = ['item_id', 'like', '%'.$keywords.'%'];
+        }
+
+        // 定义分页参数
+        $limit = isset($_GET['limit']) ? $_GET['limit'] : 10;
+        $page = isset($_GET['page']) ? $_GET['page'] : 1;
+
+        // 获取产品目录信息
+        $itemList = MonthreportModel::where($map)
+            -> page($page, $limit)
+            -> order('date_time', 'desc')
+            -> order('item_id', 'desc')
+            -> select();
+        $monthlist=[];
+        foreach($itemList as $k=>$v){
+            $monthlist[$k]["item_id"]=$v["item_id"];
+            $monthlist[$k]["item_code"]=$v->item["code"];
+            $monthlist[$k]["catagory"]=$v->item->catagory["name"];
+            $monthlist[$k]["date_time"]=$v["date_time"];
+            $monthlist[$k]["total_income"]=$v["total_income"];
+            $monthlist[$k]["inspection_times"]=$v["inspection_times"];
+            $monthlist[$k]["total_cost"]=$v["total_cost"];
+        }
+        $total = count(MonthreportModel::where($map)->select());
+        $result = array("code" => 0, "msg" => "查询成功", "count" => $total, "data" => $monthlist);
+        return json($result);
+
+    }
+
+    // 成本月报表
+    public function costreport()
+    {
+        // 设置模板变量
+        $this -> view -> assign([
+            'title' => '设备成本月报表'
+        ]);
+
+        // 渲染模板
+        return $this -> view -> fetch('costreport');
+
+    }
+
+    public function costmonthreport()
+    {
+        $map = [];
+        // 搜索功能
+        $keywords = Request::param('keywords');
+        if ( !empty($keywords) ) {
+            $map[] = ['item_id', 'like', '%'.$keywords.'%'];
+        }
+
+        // 定义分页参数
+        $limit = isset($_GET['limit']) ? $_GET['limit'] : 10;
+        $page = isset($_GET['page']) ? $_GET['page'] : 1;
+
+        // 获取产品目录信息
+        $itemList = CostreportModel::where($map)
+            -> page($page, $limit)
+            -> order('date_time', 'desc')
+            -> order('item_id', 'desc')
+            -> select();
+        $monthlist=[];
+        foreach($itemList as $k=>$v){
+            $monthlist[$k]["item_id"]=$v["item_id"];
+            $monthlist[$k]["item_code"]=$v->item["code"];
+            if(isset($v->item->catagory)){
+                $monthlist[$k]["catagory"]=$v->item->catagory["name"];
+            }else{
+                $monthlist[$k]["catagory"]='无效设备';
+            }
+
+            $monthlist[$k]["date_time"]=$v["date_time"];
+            $monthlist[$k]["cost_type"]=$v["cost_type"];
+            $monthlist[$k]["cost_item"]=$v["cost_item"];
+            $monthlist[$k]["cost"]=$v["cost"];
+        }
+        $total = count(CostreportModel::where($map)->select());
+        $result = array("code" => 0, "msg" => "查询成功", "count" => $total, "data" => $monthlist);
+        return json($result);
+
+    }
+
+    // 补录成本
+    public function addcostpage()
     {
         // 设置模板变量
         $this -> view -> assign([
@@ -42,161 +128,10 @@ class Bireport extends Base
         ]);
 
         // 渲染模板
-        return $this -> view -> fetch('ct');
+        return $this -> view -> fetch('addcostpage');
 
     }
 
-    // 编辑节点
-    public function benefit()
-    {
-        // 获取id
-        $itemId = Request::param('id');
-
-        // 设置模板变量
-        $this -> view -> assign('item_id', $itemId);
-        return $this -> view -> fetch('benefit');
-    }
-// 编辑节点
-    public function get_benefit()
-    {
-        $map = [];
-        $itemList=[];
-        $keywords = Request::param('keywords');
-        $itemId = Request::param('id');
-        if ( !empty($keywords) ) {
-            $map[] = ['code', 'like', '%' . $keywords . '%'];
-        }
-
-        $items = AnalysisModel::where($map)
-            ->where('equipid',$itemId)
-            -> order('year', 'asc')
-            -> order('month', 'asc')
-            -> field('id,year,month,benefit')
-            -> select();
-//            -> toArray();
-        foreach($items as $i=>$v){
-            $itemList[$i]["id"]=$v["id"];
-            $itemList[$i]["year"]=$v["year"];
-            $itemList[$i]["month"]=$v["month"];
-            $itemList[$i]["benefit"]=$v["benefit"];
-        }
-
-        $total = count($itemList);
-        $result = array("code" => 0, "count" => $total, "data" => $itemList);
-        return json($result);
-    }
-
-    // 编辑节点
-    public function get_cost()
-    {
-        $map = [];
-        $itemList=[];
-        $keywords = Request::param('keywords');
-        if ( !empty($keywords) ) {
-            $map[] = ['code', 'like', '%' . $keywords . '%'];
-        }
-
-        $items = AnalysisModel::where($map)
-            -> order('year', 'asc')
-            -> order('month', 'asc')
-            -> field('id,year,month,cost')
-            -> select();
-//            -> toArray();
-        foreach($items as $i=>$v){
-            $itemList[$i]["id"]=$v["id"];
-            $itemList[$i]["year"]=$v["year"];
-            $itemList[$i]["month"]=$v["month"];
-            $itemList[$i]["cost"]=$v["cost"];
-        }
-
-        $total = count($itemList);
-        $result = array("code" => 0, "count" => $total, "data" => $itemList);
-        return json($result);
-    }
-
-    // 编辑节点
-    public function get_usage()
-    {
-        $map = [];
-        $itemList=[];
-        $keywords = Request::param('keywords');
-        if ( !empty($keywords) ) {
-            $map[] = ['code', 'like', '%' . $keywords . '%'];
-        }
-
-        $items = AnalysisModel::where($map)
-            -> order('year', 'asc')
-            -> order('month', 'asc')
-            -> field('id,year,month,usage')
-            -> select();
-//            -> toArray();
-        foreach($items as $i=>$v){
-            $itemList[$i]["id"]=$v["id"];
-            $itemList[$i]["year"]=$v["year"];
-            $itemList[$i]["month"]=$v["month"];
-            $itemList[$i]["usage"]=$v["usage"];
-        }
-
-        $total = count($itemList);
-        $result = array("code" => 0, "count" => $total, "data" => $itemList);
-        return json($result);
-    }
-
-    // 编辑节点
-    public function get_downtime()
-    {
-        $map = [];
-        $itemList=[];
-        $keywords = Request::param('keywords');
-        if ( !empty($keywords) ) {
-            $map[] = ['code', 'like', '%' . $keywords . '%'];
-        }
-
-        $items = AnalysisModel::where($map)
-            -> order('year', 'asc')
-            -> order('month', 'asc')
-            -> field('id,year,month,downtime')
-            -> select();
-//            -> toArray();
-        foreach($items as $i=>$v){
-            $itemList[$i]["id"]=$v["id"];
-            $itemList[$i]["year"]=$v["year"];
-            $itemList[$i]["month"]=$v["month"];
-            $itemList[$i]["downtime"]=$v["downtime"];
-        }
-
-        $total = count($itemList);
-        $result = array("code" => 0, "count" => $total, "data" => $itemList);
-        return json($result);
-    }
-    // 编辑节点
-    public function cost()
-    {
-        // 获取节点id
-        $itemId = Request::param('id');
-
-        return $this -> view -> fetch('cost');
-    }
-
-    // 编辑节点
-    public function usage()
-    {
-        // 获取节点id
-        $itemId = Request::param('id');
-
-        return $this -> view -> fetch('usage');
-    }
-
-    // 编辑节点
-    public function downtime()
-    {
-        // 获取节点id
-        $itemId = Request::param('id');
-
-        return $this -> view -> fetch('downtime');
-    }
-
-    //批量分配组织
     public function addcost()
     {
         // 获取节点id
@@ -240,7 +175,7 @@ class Bireport extends Base
         return resMsg(1, '成本补录成功', 'index');
     }
 
-    // 后台管理首页
+
     public function singleanalysis()
     {
 //        // 实例化RBAC类

@@ -10,12 +10,7 @@
             <label class="layui-form-label">设备编码</label>
             <input class="layui-input" name="keywords" id="keywords" value="{:input('keywords')}" autocomplete="on" placeholder="请输入设备编码">
         </div>
-        <div class="layui-inline">
-            <label class="layui-form-label">查询时间</label>
-            <div class="layui-input-inline">
-                <input type="text" class="layui-input" name="test"  id="test" placeholder=" - ">
-            </div>
-        </div>
+
 
         <button class="layui-btn search-btn" data-type="reload"><i class="iconfont">&#xe679;</i> 查询</button>
 
@@ -26,14 +21,6 @@
     </div>
 </script>
 
-{// 行内工具栏}
-<script type="text/html" id="barTool">
-    <a href="javascript:;" lay-event="benefit" class="layui-btn layui-btn-xs">收入</a>
-    <a href="javascript:;" lay-event="cost" class="layui-btn layui-btn-xs">成本</a>
-    <a href="javascript:;" lay-event="usage" class="layui-btn layui-btn-xs">使用率</a>
-    <a href='javascript:;' lay-event="downtime" class="layui-btn layui-btn-danger layui-btn-xs">故障率</a>
-
-</script>
 
 
 {/block}
@@ -57,7 +44,7 @@
 
         table.render({
             elem : '#dataTable'
-            ,url : '{:url("item/itemListbyct")}'
+            ,url : '{:url("item/itemListbyaddcost")}'
             ,cellMinWidth: 80
             ,height: 'full-100'
             ,page: {
@@ -88,7 +75,6 @@
                 ,{field: 'start_date', width: 200, title: '启用日期', align: 'center'}
                 ,{field: 'sn', width: 200, title: '序列号', align: 'center'}
                 ,{field: 'pn', width: 200, title: 'P/N', align: 'center'}
-                ,{fixed: 'right', width: 300, title: '操作', align:'center', toolbar: '#barTool'}
             ]], done() {
                 // 搜索功能
                 var $ = layui.$, active = {

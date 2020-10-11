@@ -1,49 +1,20 @@
-{extend name="public:layer_layout"/}
+{extend name="public:layout"/}
 
 {block name="main"}
-<fieldset class="layui-elem-field layui-field-title" style="margin-top: 50px;">
-    <legend>月使用率趋势</legend>
-</fieldset>
-<div id="container" style="height: 350px; margin: 0"></div>
+{// 数据表格}
 <table class="layui-hide" id="dataTable" lay-filter="dataTable"></table>
+{// 顶部工具栏}
 <script type="text/html" id="toolbar">
     <div class="dataToolbar">
         <div class="layui-inline">
-            <input class="layui-input" name="keywords" id="keywords" value="{:input('keywords')}" autocomplete="on" placeholder="请输入设备ID">
+            <input class="layui-input" name="keywords" id="keywords" value="{:input('keywords')}" autocomplete="on" placeholder="请输入设备编码">
         </div>
         <button class="layui-btn search-btn" data-type="reload"><i class="iconfont">&#xe679;</i> 查询</button>
-
     </div>
 </script>
 {/block}
 
 {block name="javascript"}
-
-<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/echarts/dist/echarts.min.js"></script>
-<script type="text/javascript">
-    var dom = document.getElementById("container");
-    var myChart = echarts.init(dom);
-
-    option = null;
-    option = {
-        xAxis: {
-            type: 'category',
-            data: ['2020-01', '2020-02', '2020-03', '2020-04', '2020-05', '2020-06', '2020-07', '2020-08']
-        },
-        yAxis: {
-            type: 'value'
-        },
-        series: [{
-            data: [563,820, 932, 901, 934, 1290, 1330, 1320],
-            type: 'line'
-        }]
-    };
-    ;
-    if (option && typeof option === "object") {
-        myChart.setOption(option, true);
-    }
-</script>
-
 <script>
     layui.use(['jquery', 'layer', 'form', 'table'], function () {
         var $ = layui.$,
@@ -54,7 +25,7 @@
         // 渲染数据表格
         table.render({
             elem : '#dataTable'
-            ,url : '{:url("get_usage")}'
+            ,url : '{:url("monthreport")}'
             ,cellMinWidth: 80
             ,height: 'full-100'
             ,page: {
@@ -65,16 +36,21 @@
             // ,toolbar: 'default'  // 开启顶部工具栏（默认模板）
             ,toolbar: '#toolbar' // 指定顶部工具栏模板
             // ,even: true  // 隔行背景
-            ,title: '收入信息表'  // 表格标题，用户导出数据文件名
+            ,title: '收入报表'  // 表格标题，用户导出数据文件名
             ,text: {  // 指定无数据或数据异常时的提示文本
                 none: '暂无相关数据' //默认：无数据。注：该属性为 layui 2.2.5 开始新增
             }
             ,id: 'dataTable'
             ,cols: [[  // 表格列标题及数据
-                {field: 'id', width: 200, title: 'ID', sort: true, align: 'center'}
-                ,{field: 'year', width: 200, title: '统计年份', sort: true,  align: 'center'}
-                ,{field: 'month', width: 200, title: '统计月份', sort: true,  align: 'center'}
-                ,{field: 'usage', width: 200, title: '使用率', sort: true,  align: 'center'}
+                {title: '#', type: 'numbers'}
+                ,{checkbox: true}
+                ,{field: 'catagory', width: 200, title: '设备名称', sort: true, align: 'center'}
+                ,{field: 'item_id', width: 200, title: '设备ID', sort: true, align: 'center'}
+                ,{field: 'item_code', width: 200, title: '设备编码', sort: true, align: 'center'}
+                ,{field: 'date_time', width: 200, title: '日期', sort: true, align: 'center'}
+                ,{field: 'total_income', width: 200, title: '本月总收入', align: 'center'}
+                ,{field: 'inspection_times', width: 200, title: '本月治疗人次',align: 'center'}
+                ,{field: 'total_cost', width: 200, title: '本月总成本', sort: true,  align: 'center'}
 
             ]], done() {
                 // 搜索功能
@@ -99,7 +75,5 @@
             }
         });
     });
-
-
 </script>
 {/block}

@@ -94,7 +94,7 @@ class Item extends Base
         return json($result);
     }
 
-    public function itemListbyct()
+    public function itemListbyaddcost()
     {
         $map = [];
         $itemList=[];
@@ -104,7 +104,8 @@ class Item extends Base
         }
 
         $items = ItemModel::where($map)
-            ->where('catagoryid',6)
+            ->where('status',1)
+            ->where('pid',0)
             -> order('sort', 'asc')
             -> field('id, code,location,brand,model, sn,pn, pid, sort,purchase_price,start_date, catagoryid, is_kit, status, create_time, update_time,is_backup')
             -> select();

@@ -571,9 +571,9 @@ layui.define
                     console.log(res)
 
                     var option = {
-                        title: {text: "设备故障率分析", subtext: "单位：%"},
+                        title: {text: "故障次数分析", subtext: "单位：次数"},
                         tooltip: {trigger: "axis"},
-                        legend: {data: ["设备故障分析"]},
+                        legend: {data: ["故障次数"]},
                         calculable: !0,
                         xAxis: [{
                             type: "category",
