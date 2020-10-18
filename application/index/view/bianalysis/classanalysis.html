@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html style="height: 100%">
+<head>
+    <meta charset="utf-8">
+    <title>设备概览</title>
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    {// 加载CSS样式}
+    {load href="__LAYUI__/css/layui.css"/}
+    {load href="__LAYUI__/css/admin.css"/}
+
+</head>
+<style>
+    .layui-top-box {
+        padding: 20px;
+        color: #fff
+    }
+
+</style>
+<body>
+
+<div class="layui-fluid">
+
+
+    <div class="layui-row layui-col-space15">
+        <div class="layui-col-sm12">
+            <div class="layui-card">
+                <div class="layui-card-header">查询条件</div>
+                <div class="layui-card-body ">
+                    <div class="layui-form" lay-filter="">
+                        <div class="layui-form-item">
+                            <div class="layui-inline">
+                                <label class="layui-form-label">设备编码</label>
+                                <div class="layui-input-inline">
+                                    <select id="equips">
+                                        <option value="">请选择设备</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div class="layui-inline">
+                                <button class="layui-btn layuiadmin-btn-comm" data-type="reload" lay-submit
+                                        lay-filter="LAY-app-contcomm-search" id="equip-query">
+                                    <i class="layui-icon layui-icon-search layuiadmin-button-btn"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="layui-col-sm6 layui-col-md3">
+            <div class="layui-card">
+                <div class="layui-card-header">
+                    12个月故障报修数量(次)
+                </div>
+                <div class="layui-card-body layuiadmin-card-list">
+                    <p class="layuiadmin-big-font"><span id="total_report_num">-</span></p>
+                    <p>
+                        本月报修数量(次)
+                        <span class="layuiadmin-span-color"><span id="month_report_num">-</span></span>
+                    </p>
+                </div>
+            </div>
+        </div>
+        <div class="layui-col-sm6 layui-col-md3">
+            <div class="layui-card">
+                <div class="layui-card-header">
+                    12个月故障停机时长(小时)
+
+                </div>
+                <div class="layui-card-body layuiadmin-card-list">
+
+                    <p class="layuiadmin-big-font"><span id="total_repair_time">-</span></p>
+                    <p>
+                        本月故障停机时长(小时)
+                        <span class="layuiadmin-span-color"><span id="month_repair_time">-</span></span>
+                    </p>
+                </div>
+            </div>
+        </div>
+        <div class="layui-col-sm6 layui-col-md3">
+            <div class="layui-card">
+                <div class="layui-card-header">
+                    维修合同本年折算金额（元）
+                </div>
+                <div class="layui-card-body layuiadmin-card-list">
+                    <p class="layuiadmin-big-font">¥<span id="year_contract_cost">-</span></p>
+                    <p>
+                        本年合同外维修费用（元）：
+                        <span class="layuiadmin-span-color">¥<span id="year_single_cost">-</span> </span>
+                    </p>
+                </div>
+            </div>
+        </div>
+        <div class="layui-col-sm6 layui-col-md3">
+            <div class="layui-card">
+                <div class="layui-card-header">
+                    使用时长(月)
+                </div>
+                <div class="layui-card-body layuiadmin-card-list">
+
+                    <p class="layuiadmin-big-font"><span id="month_gap">-</span></p>
+                    <p>
+                        财务报废期限（月）
+                        <span class="layuiadmin-span-color"><span id="dep_period">-</span></span>
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <div class="layui-col-sm12">
+            <div class="layui-card">
+                <div class="layui-card-header">
+                    设备保障综合分析
+                    <div class="layui-btn-group layuiadmin-btn-group">
+                        <a href="javascript:;" class="layui-btn layui-btn-primary layui-btn-xs"  id="benefit-last-year">去年</a>
+                        <a href="javascript:;" class="layui-btn layui-btn-primary layui-btn-xs" id="benefit-current-year">今年</a>
+                    </div>
+                </div>
+                <div class="layui-card-body">
+                    <div class="layui-row">
+                        <div class="layui-col-sm8">
+                            <div class="layui-carousel layadmin-carousel layadmin-dataview" data-anim="fade"
+                                 lay-filter="LAY-index-pageone">
+                                <div carousel-item id="LAY-index-pageone">
+                                    <div><i class="layui-icon layui-icon-loading1 layadmin-loading"></i></div>
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="layui-col-sm4">
+
+                            <div class="layuiadmin-card-list">
+                                <p class="layuiadmin-normal-font">故障率：<span id="benefit-return-rate">-</span>%</p>
+                                <span>同上期比较:<span id="benefit-return-rate-percent"></span></span>
+                                <div id="benefit-return-rate-bar" class="layui-progress layui-progress-big"
+                                     lay-filter="benefit-return-rate-bar">
+                                    <div class="layui-progress-bar" lay-percent="0%"></div>
+                                </div>
+                            </div>
+                            <div class="layuiadmin-card-list">
+                                <p class="layuiadmin-normal-font">可用率：¥<span id="benefit-avg-income">-</span></p>
+                                <span>同上期比较:<span id="benefit-avg-income-percent"></span></span>
+                                <div id="benefit-avg-income-bar" class="layui-progress layui-progress-big"
+                                     lay-filter="benefit-avg-income-bar">
+                                    <div class="layui-progress-bar" lay-percent="0%"></div>
+                                </div>
+                            </div>
+                            <div class="layuiadmin-card-list">
+                                <p class="layuiadmin-normal-font">维修费用率：¥<span id="benefit-avg-cost">-</span></p>
+                                <span>同上期比较:<span id="benefit-avg-cost-percent"></span></span>
+                                <div id="benefit-avg-cost-bar" class="layui-progress layui-progress-big"
+                                     lay-filter="benefit-avg-cost-bar">
+                                    <div class="layui-progress-bar" lay-percent="0%"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="layui-col-sm12 layui-card">
+            <div class="layui-tab layui-tab-brief layadmin-latestData">
+                <ul class="layui-tab-title">
+                    <li class="layui-this">设备基本信息</li>
+                    <li>设备故障维修</li>
+                    <li>设备计量强检</li>
+                </ul>
+                <div class="layui-tab-content">
+                    <div class="layui-tab-item layui-show">
+                        <table id="dept"></table>
+                    </div>
+                    <div class="layui-tab-item">
+                        <table id="source"></table>
+                    </div>
+                    <div class="layui-tab-item">
+                        <table id="varcost"></table>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+</div>
+{// 加载js文件}
+{load href="__JS__/jquery-3.4.1.min.js"/}
+{load href="__LAYUI__/layui.js"/}
+
+
+<script>
+    layui.config({
+        base: '__JS__/res/' //静态资源所在路径
+    }).extend({
+        simple: 'simple' //主入口模块
+    }).use(['class']);
+</script>
+
+</body>
+</html>

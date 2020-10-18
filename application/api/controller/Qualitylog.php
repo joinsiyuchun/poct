@@ -19,6 +19,7 @@ class Qualitylog extends Api
         $qcorder["location"] = $this->request->post('location/s');
         $qcorder["item_id"] = $this->request->post('id/');
         $qcorder["operator"] = $this->user["id"];
+        $qcorder["qc_time"] = date('Y-m-d h:i:s');
         $qcorder["org_id"] = $this->org["id"];
         QualityLogModel::create($qcorder);
         return json([

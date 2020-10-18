@@ -34,9 +34,18 @@
 {// 检查类型}
 <script type="text/html" id="type">
     {{# if(d.type == 1){ }}
-    <button class="layui-btn layui-btn-xs layui-btn-warm">强检计量</button>
+    <button class="layui-btn layui-btn-xs layui-btn-warm">强检</button>
     {{# } else if(d.type == 2){ }}
-    <button class="layui-btn layui-btn-xs layui-btn-success">自检计量</button>
+    <button class="layui-btn layui-btn-xs layui-btn-success">非强检</button>
+    {{# } }}
+</script>
+
+{// 是否计量}
+<script type="text/html" id="is_measure">
+    {{# if(d.is_measure == 1){ }}
+    <button class="layui-btn layui-btn-xs layui-btn-warm">计量</button>
+    {{# } else if(d.is_measure == 0){ }}
+    <button class="layui-btn layui-btn-xs layui-btn-success">非计量</button>
     {{# } }}
 </script>
 {/block}
@@ -107,7 +116,8 @@
                 {title: '#', type: 'numbers'}
                 ,{checkbox: true}
                 ,{field: 'id', width: 60, title: 'ID', sort: true, align: 'center'}
-                ,{field: 'type', width: 200, title: '检测计量类型', sort: true, align: 'center', templet: '#type'}
+                ,{field: 'type', width: 200, title: '检测类型', sort: true, align: 'center', templet: '#type'}
+                ,{field: 'is_measure', width: 200, title: '是否计量', sort: true, align: 'center', templet: '#is_measure'}
                 ,{field: 'operator', width: 150, title: '检测计量人员', align: 'center'}
                 ,{field: 'qc_status', width: 100, title: '检测计量结果',align: 'center', templet: '#status'}
                 ,{field: 'qc_time', width: 200, title: '检测计量时间', sort: true,  align: 'center'}

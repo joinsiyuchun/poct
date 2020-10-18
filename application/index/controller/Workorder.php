@@ -123,6 +123,7 @@ class Workorder extends Base
                 $workorder["org_id"]=$data["org_id"];
                 $workorder["location"]=$data["location"];
                 $workorder["status"]=0;
+                $workorder["report_time"]=date('Y-m-d H:i:s');
                 WorkorderModel::create($workorder);
         } catch (\Exception $e) {
             return resMsg(0, '接修单添加失败' . '<br>' . $e->getMessage(), 'add' );

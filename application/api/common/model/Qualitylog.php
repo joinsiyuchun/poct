@@ -12,10 +12,7 @@ class Qualitylog extends Model
     protected $pk = 'id';
     protected $table = 'think_quality_log';
 
-    // 定义自动时间戳和数据格式
-    protected $autoWriteTimestamp = true;
-    protected $createTime = 'qc_time';
-    protected $dateFormat = 'Y-m-d H:i:s';
+
 
     function org(){
         return $this->belongsTo('Org','org_id');

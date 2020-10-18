@@ -31,7 +31,7 @@ class Node extends Model
             $res = [];
             if (1 == $roleId) {
                 $res = $this -> field('id, name as title, pid, path, icon')
-                    ->where('is_menu', 2)->select()->toArray();
+                    ->where('is_menu', 2)->order("sort")->select()->toArray();
             } else {
                 $roleModel = new Role();
                 $roleInfo = $roleModel->getRoleInfoById($roleId)['data'];
@@ -40,6 +40,7 @@ class Node extends Model
                     $res = $this->field('id, name as title, pid, path, icon')
                         -> whereIn('id', $roleInfo['rules'])
                         -> where('is_menu', 2)
+                        -> order("sort")
                         -> select()
                         -> toArray();
                 }

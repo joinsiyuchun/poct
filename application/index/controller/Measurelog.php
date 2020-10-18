@@ -51,6 +51,7 @@ class Measurelog extends Base
             $qcloglist[$k]["org_id"]=$v["org"]["name"];
             $qcloglist[$k]["memo"]=$v["memo"];
             $qcloglist[$k]["type"]=$v["type"];
+            $qcloglist[$k]["is_measure"]=$v["is_measure"];
         }
         $total = count(MeasureLogModel::where($map)->select());
         $result = array("code" => 0, "msg" => "查询成功", "count" => $total, "data" => $qcloglist);

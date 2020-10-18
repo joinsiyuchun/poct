@@ -54,45 +54,6 @@ class Item extends Base
         return json($result);
     }
 
-    // item列表
-    public function itemListbymri()
-    {
-        $map = [];
-        $keywords = Request::param('keywords');
-        if ( !empty($keywords) ) {
-            $map[] = ['code', 'like', '%' . $keywords . '%'];
-        }
-
-        $items = ItemModel::where($map)
-            ->where('catagoryid',8)
-            -> order('sort', 'asc')
-            -> field('id, code,location,brand,model, sn,pn, pid, sort, catagoryid, is_kit, status,purchase_price,start_date, create_time, update_time,is_backup')
-            -> select();
-//            -> toArray();
-        foreach($items as $i=>$v){
-            $itemList[$i]["id"]=$v["id"];
-            $itemList[$i]["code"]=$v["code"];
-            $itemList[$i]["location"]=$v["location"];
-            $itemList[$i]["brand"]=$v["brand"];
-            $itemList[$i]["model"]=$v["model"];
-            $itemList[$i]["sn"]=$v["sn"];
-            $itemList[$i]["pn"]=$v["pn"];
-            $itemList[$i]["pid"]=$v["pid"];
-            $catagory=$v->catagory;
-            $itemList[$i]["title"]=$catagory["name"];
-            $itemList[$i]["is_kit"]=$v["is_kit"];
-            $itemList[$i]["status"]=$v["status"];
-            $itemList[$i]["purchase_price"]=$v["purchase_price"];
-            $itemList[$i]["start_date"]=$v["start_date"];
-            $itemList[$i]["create_time"]=$v["create_time"];
-            $itemList[$i]["update_time"]=$v["update_time"];
-            $itemList[$i]["is_backup"]=$v["is_backup"];
-        }
-
-        $total = count($itemList);
-        $result = array("code" => 0, "count" => $total, "data" => $itemList);
-        return json($result);
-    }
 
     public function itemListbyaddcost()
     {

@@ -3,7 +3,7 @@
  * 管理员登录日志表模型
  */
 
-namespace app\index\common\model;
+namespace app\api\common\model;
 
 
 use think\Model;
