@@ -116,8 +116,9 @@
                 <div class="layui-card-header">
                     设备保障综合分析
                     <div class="layui-btn-group layuiadmin-btn-group">
-                        <a href="javascript:;" class="layui-btn layui-btn-primary layui-btn-xs"  id="benefit-last-year">去年</a>
-                        <a href="javascript:;" class="layui-btn layui-btn-primary layui-btn-xs" id="benefit-current-year">今年</a>
+
+                        <a href="javascript:;" class="layui-btn layui-btn-primary layui-btn-xs" id="analysis-current-year">今年</a>
+                        <a href="javascript:;" class="layui-btn layui-btn-primary layui-btn-xs"  id="analysis-last-year">去年</a>
                     </div>
                 </div>
                 <div class="layui-card-body">
@@ -134,26 +135,23 @@
                         <div class="layui-col-sm4">
 
                             <div class="layuiadmin-card-list">
-                                <p class="layuiadmin-normal-font">故障率：<span id="benefit-return-rate">-</span>%</p>
-                                <span>同上期比较:<span id="benefit-return-rate-percent"></span></span>
-                                <div id="benefit-return-rate-bar" class="layui-progress layui-progress-big"
-                                     lay-filter="benefit-return-rate-bar">
+                                <p class="layuiadmin-normal-font">故障率：<span id="fault-rate">-</span>%</p>
+                                <div id="fault-rate-bar" class="layui-progress layui-progress-big"
+                                     lay-filter="fault-rate-bar">
                                     <div class="layui-progress-bar" lay-percent="0%"></div>
                                 </div>
                             </div>
                             <div class="layuiadmin-card-list">
-                                <p class="layuiadmin-normal-font">可用率：¥<span id="benefit-avg-income">-</span></p>
-                                <span>同上期比较:<span id="benefit-avg-income-percent"></span></span>
-                                <div id="benefit-avg-income-bar" class="layui-progress layui-progress-big"
-                                     lay-filter="benefit-avg-income-bar">
+                                <p class="layuiadmin-normal-font">可用率：<span id="usage-rate">-</span>%</p>
+                                <div id="usage-rate-bar" class="layui-progress layui-progress-big"
+                                     lay-filter="usage-rate-bar">
                                     <div class="layui-progress-bar" lay-percent="0%"></div>
                                 </div>
                             </div>
                             <div class="layuiadmin-card-list">
-                                <p class="layuiadmin-normal-font">维修费用率：¥<span id="benefit-avg-cost">-</span></p>
-                                <span>同上期比较:<span id="benefit-avg-cost-percent"></span></span>
-                                <div id="benefit-avg-cost-bar" class="layui-progress layui-progress-big"
-                                     lay-filter="benefit-avg-cost-bar">
+                                <p class="layuiadmin-normal-font">维修费用率：<span id="cost-rate">-</span>%</p>
+                                <div id="cost-rate-bar" class="layui-progress layui-progress-big"
+                                     lay-filter="cost-rate-bar">
                                     <div class="layui-progress-bar" lay-percent="0%"></div>
                                 </div>
                             </div>
@@ -167,18 +165,18 @@
             <div class="layui-tab layui-tab-brief layadmin-latestData">
                 <ul class="layui-tab-title">
                     <li class="layui-this">设备基本信息</li>
-                    <li>设备故障维修</li>
-                    <li>设备计量强检</li>
+                    <li>设备维修记录</li>
+                    <li>设备质控记录</li>
                 </ul>
                 <div class="layui-tab-content">
                     <div class="layui-tab-item layui-show">
-                        <table id="dept"></table>
+                        <table id="item"></table>
                     </div>
                     <div class="layui-tab-item">
-                        <table id="source"></table>
+                        <table id="workorder"></table>
                     </div>
                     <div class="layui-tab-item">
-                        <table id="varcost"></table>
+                        <table id="measure"></table>
                     </div>
                 </div>
             </div>

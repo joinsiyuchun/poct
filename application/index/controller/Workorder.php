@@ -28,6 +28,7 @@ class Workorder extends Base
     public function workorderList()
     {
         $map = [];
+        $wolist = [];
         // 搜索功能
         $keywords = Request::param('keywords');
         if ( !empty($keywords) ) {

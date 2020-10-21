@@ -24,7 +24,7 @@ class Qualitylog extends Base
     {
         // 定义全局查询条件
         $map = []; // 将所有的查询条件封装到这个数组中
-
+        $qcloglist = [];
         // 搜索功能
         $keywords = Request::param('keywords');
         if ( !empty($keywords) ) {

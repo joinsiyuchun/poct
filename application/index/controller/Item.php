@@ -24,6 +24,7 @@ class Item extends Base
     public function itemList()
     {
         $map = [];
+        $itemList = [];
         $keywords = Request::param('keywords');
         if ( !empty($keywords) ) {
             $map[] = ['code', 'like', '%' . $keywords . '%'];

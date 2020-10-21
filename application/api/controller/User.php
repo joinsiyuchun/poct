@@ -31,11 +31,12 @@ class User extends Api {
                 $user = UserModel::create(['openid' => $openid]);
             }
             $org=UserOrgModel::get(['user_id'=>(int) $user->id,'status'=>1]);
-            $realname=$user["user_name"];
-            if($realname==null){
-                $realname=$user->id;
-            }
-            Session::set('user', ['id' => (int) $user->id, 'openid' => $openid, 'realname' => $realname]);
+//            $realname=$user["user_name"];
+//            if($realname==null){
+//                $realname=$user->id;
+//            }
+       //     Session::set('user', ['id' => (int) $user->id, 'openid' => $openid, 'realname' => $realname]);
+            Session::set('user', ['id' => (int) $user->id, 'openid' => $openid]);
             if($org!=null){
                 $orgid=$org->org_id;
                 Session::set('org', ['id' => $orgid]);
