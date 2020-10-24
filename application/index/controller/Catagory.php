@@ -7,7 +7,10 @@ namespace app\index\controller;
 use app\admin\common\controller\Base;
 use app\admin\common\model\Org as OrgModel;
 use app\index\common\model\Catagory as CatagoryModel;
+use app\index\common\model\CatagoryPricelist;
 use app\index\common\model\OrgCatagory as OrgCatagoryModel;
+use app\index\common\model\Pricelist as PricelistModel;
+use think\Db;
 use think\facade\Request;
 use think\facade\Tree;
 
@@ -36,21 +39,96 @@ class Catagory extends Base
         $page = isset($_GET['page']) ? $_GET['page'] : 1;
 
         // 获取产品目录信息
-        $catagoryList = CatagoryModel::where($map)
+        $catagoryList = CatagoryModel::with(['catagoryPricelist'])
+            ->with(['catagoryPricelist.pricelist'])
+            ->where($map)
             -> page($page, $limit)
             -> order('id', 'desc')
-            -> select();
-        $total = count(CatagoryModel::where($map)->select());
+            -> select()
+            ->toArray();
+
+        foreach ($catagoryList as &$list){
+            $catagoryPricelist = $list['catagory_pricelist'];
+            $priceDesc = '';
+            if(!empty($catagoryPricelist)){
+                foreach ($catagoryPricelist as $pricelist){
+                    $price = $pricelist['pricelist'];
+                    $priceDesc .= $price['item_name'].': '.$price['unit_price'].", ";
+                }
+            }
+            $list['price_desc'] = $priceDesc;
+            unset($list['catagory_pricelist']);
+        }
+        $total = CatagoryModel::where($map)->count('id');
+
         $result = array("code" => 0, "msg" => "查询成功", "count" => $total, "data" => $catagoryList);
         return json($result);
-
-        // 3. 设置模板变量
-        $this -> view -> assign('catagoryList', $catagoryList);
-
-        // 4. 渲染模板
-        return $this -> view -> fetch('index');
     }
 
+    public function pricelistPage()
+    {
+        // 获取分类id
+        $catagoryId = Request::param('id');
+        $this -> view -> assign('catagoryId', $catagoryId);
+        return $this -> view -> fetch('priceList');
+    }
+
+    // 医保收费列表
+    public function pricelist()
+    {
+        // 定义分页参数
+        $limit = isset($_GET['limit']) ? $_GET['limit'] : 10;
+        $page = isset($_GET['page']) ? $_GET['page'] : 1;
+        $map = [];
+        // 搜索功能
+        $keywords = Request::param('keywords');
+        if ( !empty($keywords) ) {
+            $query = PricelistModel::where('item_name', 'like', '%'.$keywords.'%')
+                ->whereOr('insurance_code', 'like', '%'.$keywords.'%');
+            $total = $query->count('id');
+            $priceList = $query->page($page, $limit)
+                ->order('id', 'desc')
+                ->select();
+        }else{
+            // 获取产品目录信息
+            $priceList = PricelistModel::page($page, $limit)
+                -> order('id', 'desc')
+                -> select();
+            $total = PricelistModel::count('id');
+        }
+
+        $result = array("code" => 0, "msg" => "查询成功", "count" => $total, "data" => $priceList);
+        return json($result);
+    }
+
+    public function saveCategoryPrice()
+    {
+        $res = 0;
+        $categoryId = Request::param('categoryId');
+        $priceIds = Request::param('priceIds', []);
+
+        if(empty($categoryId) || empty($priceIds)){
+            return json(['code' => $res, "msg" => '失败']);
+        }
+
+        $existPriceids = CatagoryPricelist::where('category_id', $categoryId)
+            ->whereIn('pricelist_id', $priceIds)
+            ->column('pricelist_id');
+        $time = time();
+        $saveData = [];
+        foreach ($priceIds as $priceId){
+            if(!in_array($priceId, $existPriceids)){
+                $saveData[] = [
+                    'category_id' => (int)$categoryId,
+                    'pricelist_id' => (int)$priceId,
+                    'create_time' => $time,
+                    'update_time' => $time,
+                ];
+            }
+        }
+        $res = Db::table(CatagoryPricelist::TABLE_NAME)->insertAll($saveData);
+        return json(['code' => (int)$res, "msg" => $res ? '成功' : '失败']);
+    }
     // 添加产品目录
     public function add()
     {
@@ -192,6 +270,8 @@ class Catagory extends Base
         // 渲染模板
         return $this -> view -> fetch('auth');
     }
+
+
     // 处理角色授权 添加角色-权限表
     public function doAuth()
     {

@@ -34,7 +34,7 @@
     {{# if ( d.id == '1' ) { }}
     <a href="javascript:;" class="layui-btn layui-btn-xs layui-btn-disabled"><i class="iconfont">&#xe825;</i> 关联机构</a>
     {{# } else { }}
-    <a href="javascript:;" lay-event="auth" class="layui-btn layui-btn-xs"><i class="iconfont">&#xe825;</i> 关联机构</a>
+    <a href="javascript:;" lay-event="auth" class="layui-btn layui-btn-xs"><i class="iconfont">&#xe825;</i> 收费编码</a>
     {{# } }}
     {/if}
 </script>
@@ -92,6 +92,7 @@
                 ,{field: 'name', width: 200, title: '分类名称', align: 'center'}
                 ,{field: 'status', width: 80, title: '状态',align: 'center', templet: '#status'}
                 ,{field: 'depreciation', width: 100, title: '折旧年限',align: 'center'}
+                ,{field: 'price_desc', width: 100, title: '关联收费价格',align: 'center'}
                 ,{field: 'create_time', width: 200, title: '创建时间', sort: true,  align: 'center'}
                 ,{field: 'update_time', width: 200, title: '更新时间', sort: true,  align: 'center'}
                 ,{fixed: 'right', width: 250, title: '操作', align:'center', toolbar: '#barTool'}
@@ -183,17 +184,24 @@
                     });
                 });
             }else if ( e === 'auth' ) {
+                var selectData = layui.table.checkStatus('dataTable').data;
+                console.log(selectData)
+
                 var index = layer.open({
                     type: 2,
-                    title: '<i class=iconfont>&#xe7e0;</i> 关联机构',
-                    area: ['400px', '625px'],
-                    content: ['{:url("catagory/auth")}?id=' + data.id, 'yes'],
+                    title: '<i class=iconfont>&#xe7e0;</i> 收费编码',
+                    area: ['77%', '90%'],
+                    content: ['{:url("catagory/pricelistPage")}?id=' + data.id, 'yes'],
                     skin: 'layui-layer-molv',
                     btn: ['保存', '取消'],
                     btnAlign: 'c',
                     yes: function(index, layero){
                         var submit = layero.find('iframe').contents().find("#submit");// #subBtn为页面层提交按钮ID
                         submit.click();// 触发提交监听
+                        var iframeWindow = window['layui-layer-iframe' + index];
+                        var tableData = iframeWindow.layui.table.checkStatus('priceListDataTable').data;
+                        var catagoryId = layero.find('iframe').contents().find("#catagoryId").val();
+                        saveCategoryPrice(catagoryId, tableData);
                         return false;
                     },
                     btn2:function (index,layero) {
@@ -253,6 +261,41 @@
                     });
                 } else {
                     layer.alert(data.message, {
+                        icon: 2
+                    },function(){
+                        window.location.reload();
+                    });
+                }
+            }
+        });
+    }
+
+    function saveCategoryPrice(categoryId, data) {
+        // console.log(categoryId)
+
+        var priceIds = data.map((item,index,array)=>{
+            //执行代码
+            return item.id;
+        });
+        console.log(priceIds)
+        $.ajax({
+            url: "{:url('catagory/saveCategoryPrice')}",
+            type: 'POST',
+            dataType: 'json',
+            data: {
+                categoryId : categoryId,
+                priceIds : priceIds
+            },
+            beforeSend: function(){},
+            success: function (data) {
+                if (data.code > 0) {
+                    layer.alert(data.msg, {
+                        icon: 6
+                    },function(){
+                        window.location.reload();
+                    });
+                } else {
+                    layer.alert(data.msg, {
                         icon: 2
                     },function(){
                         window.location.reload();
