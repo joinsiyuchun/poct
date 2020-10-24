@@ -3,7 +3,7 @@
 {block name="main"}
 {// 数据表格}
 <!--<div class="layui-form" action="">-->
-    <table class="layui-hide" id="treeTable" lay-filter="treeTable"></table>
+<table class="layui-hide" id="dataTable" lay-filter="dataTable"></table>
 <!--</div>-->
 {// 顶部工具栏}
 <script type="text/html" id="toolbar">
@@ -90,44 +90,34 @@
 </script>
 {/block}
 
-{block name="layui"}
-<script>
-    layui.config({
-        version: '1061458899',
-        base: '__STATIC__/layui_exts/treeGrid/'
-    }).extend({
-        treeTable : 'treeGrid/treeGrid'
-    });
-</script>
-{/block}
+
 {block name="javascript"}
 <script>
-    layui.use(['jquery', 'layer', 'form', 'table', 'treeGrid'], function () {
-        var o = layui.$,
+    layui.use(['jquery', 'layer', 'form', 'table'], function () {
+        var $ = layui.$,
             layer = layui.layer,
             form = layui.form,
-            table = layui.table,
-            treeGrid = layui.treeGrid;
-        var tableId = 'treeTable',
-            mark = true;
-
-        treeTable = treeGrid.render({
-            id: tableId,
-            elem: '#' + tableId,
-            toolbar: '#toolbar',
-            idField: 'id',
-            url: "{:url('item/itemList')}",
-            cellMinWidth: 100,
-            height: 'full-100',
-            treeId: 'id', //树形id字段名称
-            treeUpId: 'pid', //树形父id字段名称
-            treeShowName: 'title', //以树形式显示的字段
-            height: 'full-140',
-            isFilter: false,
-            iconOpen: false, //是否显示图标【默认显示】
-            isOpenDefault: false, //节点默认是展开还是折叠【默认展开】
-            onDblClickRow: false, //去除双击事件
-            cols: [
+            table = layui.table;
+        // 渲染数据表格
+        table.render({
+            elem : '#dataTable'
+            ,url : '{:url("itemList")}'
+            ,cellMinWidth: 80
+            ,height: 'full-100'
+            ,page: {
+                prev: '上一页',
+                next: '下一页',
+                layout: ['prev', 'page', 'next', 'skip', 'count', 'limit']
+            }
+            // ,toolbar: 'default'  // 开启顶部工具栏（默认模板）
+            ,toolbar: '#toolbar' // 指定顶部工具栏模板
+            // ,even: true  // 隔行背景
+            ,title: '检查单信息表'  // 表格标题，用户导出数据文件名
+            ,text: {  // 指定无数据或数据异常时的提示文本
+                none: '暂无相关数据' //默认：无数据。注：该属性为 layui 2.2.5 开始新增
+            }
+            ,id: 'dataTable'
+            ,cols: [
                 [
                     { checkbox: true},
                     { field: 'id', align: 'center', width: 60, title: 'ID' },
@@ -137,34 +127,33 @@
                     { field: 'is_backup', width: 100, align: 'center', title: '是否备机', templet: '#is_backup'},
                     { field: 'sn', width: 100, title: '序列号'},
                     { field: 'pn', width: 100, title: 'P/N'},
-                    { field: 'is_kit', width: 100, align: 'center', title: '子组件', templet: '#isMenu'},
+//                    { field: 'is_kit', width: 100, align: 'center', title: '子组件', templet: '#isMenu'},
                     { fixed: 'right', align: 'center', width: 350, title: '操作', toolbar: '#barTool' }
                 ]
-            ],
-            page: false
+            ], done() {
+                // 搜索功能
+                var $ = layui.$, active = {
+                    reload: function(){
+                        var keywords = $('#keywords');
+                        //执行重载
+                        table.reload('dataTable', {
+                            page: {
+                                curr: 1 //重新从第 1 页开始
+                            }
+                            ,where: {
+                                keywords: keywords.val()
+                            }
+                        }, 'data');
+                    }
+                };
+                $('.search-btn').on('click', function(){
+                    var type = $(this).data('type');
+                    active[type] ? active[type].call(this) : '';
+                });
+            }
         });
 
-        $('.search-btn').on('click', function(){
 
-            var keywords = $('input[name="keywords"]').val();
-            $.ajax({
-                type: "post",
-                url: "{:url('itemList')}",
-                data: {keywords : keywords},
-                dataType: 'json',
-                success: function (data) {
-                    // console.log(data.data);
-                     var itemlist=data.data;
-                    itemlist.forEach(function(e) {
-                         var newtitle="<font color='red'>"+e['title']+"</font>";
-                        treeGrid.updateRow(tableId,{id:e['id'],title:newtitle});
-                    });
-
-
-                }
-            });
-             return false;
-        });
 
         // 展开关闭节点
         $('#openAll').click(function(e) {

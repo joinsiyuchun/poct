@@ -30,7 +30,7 @@ class Item extends Base
             $map[] = ['code', 'like', '%' . $keywords . '%'];
         }
 
-        $items = ItemModel::where($map)
+        $items = ItemModel::where($map)->where('pid',0)
             -> order('sort', 'asc')
             -> field('id, code, sn,pn, pid, sort, catagoryid, is_kit, status, create_time, update_time,is_backup')
             -> select();
