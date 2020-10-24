@@ -1,20 +1,14 @@
 <?php
-/**
- * 机构表模型
- */
-
 namespace app\index\common\model;
-
 
 use think\Model;
 
-
-
-class Catagory extends Model
+class CatagoryPricelist extends Model
 {
+    const TABLE_NAME = 'think_catagory_pricelist';
     // 定义主键和数据表
     protected $pk = 'id';
-    protected $table = 'think_catagory';
+    protected $table = self::TABLE_NAME;
 
     // 定义自动时间戳和数据格式
     protected $autoWriteTimestamp = true;
@@ -22,7 +16,7 @@ class Catagory extends Model
     protected $updateTime = 'update_time';
     protected $dateFormat = 'Y-m-d H:i:s';
 
-    public function catagoryPricelist(){
-        return $this->hasMany('CatagoryPricelist','category_id', 'id')->field('id,category_id,pricelist_id');
+    public function pricelist(){
+        return $this->hasOne('Pricelist','id', 'pricelist_id')->field('id,item_name, unit_price');
     }
 }

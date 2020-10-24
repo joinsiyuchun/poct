@@ -2,10 +2,6 @@
 namespace app\api\controller;
 
 use app\common\controller\Api;
-use app\api\common\model\Catagory as CategoryModel;
-use app\api\common\model\Workorder as OrderModel;
-use app\api\common\model\Notification as NotificationModel;
-use app\api\common\model\Item as ItemModel;
 use app\api\common\model\Org as OrgModel;
 
 class Catagory extends Api
