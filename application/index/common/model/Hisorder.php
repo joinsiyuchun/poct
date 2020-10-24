@@ -18,4 +18,8 @@ class Hisorder extends Model
     protected $updateTime = 'update_time';
     protected $dateFormat = 'Y-m-d H:i:s';
 
+    function org(){
+        return $this->belongsTo('Org','department_id');
+    }
+
 }

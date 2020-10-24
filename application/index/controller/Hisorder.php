@@ -42,6 +42,7 @@ class Hisorder extends Base
             -> select();
         foreach($hisorderList as $k=>$v){
             $wolist[$k]["id"]=$v["id"];
+            $wolist[$k]["order_department"]=$v->org["name"];
             $wolist[$k]["diagnosis_catagory"]=$v["diagnosis_catagory"];
             $wolist[$k]["request_id"]=$v["request_id"];
             $wolist[$k]["diagnosis_no"]=$v["diagnosis_no"];
