@@ -80,10 +80,10 @@ SQL;
         //asset
         $total_items = ItemModel::where(['status'=>1,'pid'=>0])
             -> count();
-        $cur_items = ItemModel::where(['status'=>1,'pid'=>0])->whereTime('create_time','y')
+        $cur_items = ItemModel::where(['status'=>1,'pid'=>0])->whereTime('start_date','y')
             -> count();
         $total_amount=ItemModel::where(['status'=>1,'pid'=>0])->sum('purchase_price');
-        $cur_amount=ItemModel::where(['status'=>1,'pid'=>0])->whereTime('create_time','y')->sum('purchase_price');
+        $cur_amount=ItemModel::where(['status'=>1,'pid'=>0])->whereTime('start_date','y')->sum('purchase_price');
         // 设置模板变量
         $this -> view -> assign('title', '医析医疗设备智慧管理系统');
         $this -> view -> assign('list1', $list1);

@@ -21,7 +21,7 @@ class Repair extends API
     {
         $sql = <<<SQL
 SELECT 
-    DATE_FORMAT(FROM_UNIXTIME(create_time), '%Y-%m') AS t_time,
+    DATE_FORMAT(start_date, '%Y-%m') AS t_time,
     COUNT(1) AS amount
 FROM
     think_item
