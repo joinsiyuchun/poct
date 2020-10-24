@@ -8,6 +8,8 @@ use app\admin\common\controller\Base;
 
 use app\index\common\model\Hisorder as HisorderModel;
 
+use app\index\common\model\Pdalog as PdalogModel;
+
 use think\facade\Request;
 
 
@@ -76,6 +78,46 @@ class Hisorder extends Base
             return resMsg(0, '检查单删除失败' . '<br>' . $e->getMessage(), 'index' );
         }
         return resMsg(1, '检查单删除成功', 'index');
+    }
+
+    // 编辑对应的PDA记录
+    public function edit()
+    {
+        // 获取对应的HIS收费id
+        $id = Request::param('id');
+        $hisorder=HisorderModel::where('id', $id) -> find();
+        $pdalog=[];
+        $diagnosisId=$hisorder["diagnosis_id"];
+        $prescriptioId=$hisorder["prescription_id"];
+        $pdalog = PdalogModel::where(['diagnosis_id'=>$diagnosisId,'prescription_id'=>$prescriptioId]) -> find();
+
+        // 设置模板变量
+        $this -> view -> assign('title', '编辑检查设备信息');
+        $this -> view -> assign('pdalog', $pdalog);
+
+        // 渲染模板
+        return $this -> view -> fetch('edit');
+    }
+
+    // 执行编辑PDA记录
+    public function doEdit()
+    {
+        // 1. 获取的用户提交的信息
+        $data = Request::param();
+
+        // 执行编辑操作
+        try {
+            $pdalog = PdalogModel::where('id', $data['id']) -> find();
+            if (!empty($pdalog)) {
+                PdalogModel::update($data);
+            }else{
+                PdalogModel::create($data);
+            }
+
+        } catch (\Exception $e) {
+            return resMsg(0, '编辑失败' . '<br>' . $e->getMessage(), 'edit' );
+        }
+        return resMsg(1, '编辑成功', 'index');
     }
 
 
