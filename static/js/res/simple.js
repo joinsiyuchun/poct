@@ -3,89 +3,122 @@ layui.define
     function (exports) {
 
         var defaultLoadEquipId = 0;
+        var defaultLoadDepId = 0;
 
 //页面初始化
         function initPage() {
-            layui.use(["element", "table",  "carousel", "echarts"], function () {
-                var element = layui.element
-                element.init();
+            layui.use(["element", "table", "carousel", "echarts"], function () {
+                    var element = layui.element
+                    element.init();
 
-                layui.jquery(".layadmin-carousel").each
-                (
-                    function () {
-                        (layui.carousel).render({
-                            elem: this,
-                            width: "100%",
-                            arrow: "none",
-                            interval: layui.jquery(this).data("interval"),
-                            autoplay: layui.jquery(this).data("autoplay") === !0,
-                            trigger: layui.device().ios || layui.device().android ? "click" : "hover",
-                            anim: layui.jquery(this).data("anim")
-                        })
-                    }
-                );
-                layui.element.render("progress")
+                    layui.jquery(".layadmin-carousel").each
+                    (
+                        function () {
+                            (layui.carousel).render({
+                                elem: this,
+                                width: "100%",
+                                arrow: "none",
+                                interval: layui.jquery(this).data("interval"),
+                                autoplay: layui.jquery(this).data("autoplay") === !0,
+                                trigger: layui.device().ios || layui.device().android ? "click" : "hover",
+                                anim: layui.jquery(this).data("anim")
+                            })
+                        }
+                    );
+                    layui.element.render("progress")
 
-                layui.jquery.ajax({
-                    url: '/api/echarts/equips',
-                    dataType: 'json'
-                }).done(function (res) {
-                    $('#equips').empty();
-                    $('#equips').append($(' <option value="">请选择设备</option>'));
-                    for (var prop in res) {
-                        var group = $('<optgroup label="' + prop + '"></optgroup>');
-                        var val = res[prop];
 
-                        val.map(function (equip) {
-                            if (defaultLoadEquipId == 0) {
-                                defaultLoadEquipId = equip.id;
-                            }
-                            var option = $('<option value="' + equip.id + '">' + equip.code + '</option>');
-                            group.append(option);
+                    layui.jquery.ajax({
+                        url: '/api/echarts/deps',
+                        dataType: 'json'
+                    }).done(function (res) {
+                        console.log(res)
+                        layui.jquery('#departments').empty();
+                        layui.jquery('#departments').append(layui.jquery('<option value="">请选择记账科室</option>'));
+                        for (var prop in res) {
+                            var group = layui.jquery('<optgroup label="' + prop + '"></optgroup>');
+                            var val = res[prop];
+
+                            val.map(function (equip) {
+                                if (defaultLoadDepId == 0) {
+                                    defaultLoadDepId = equip.id;
+                                }
+                                var option = layui.jquery('<option value="' + equip.id + '">' + equip.code + '</option>');
+                                group.append(option);
+                            });
+                            layui.jquery('#departments').append(group);
+                        }
+
+                        layui.form.on('select(departments)', function (data) {
+                            var depid = data.value;
+                            reload(depid, 0);
+                            layui.jquery.ajax({
+                                url: '/api/echarts/equips',
+                                dataType: 'json',
+                                data: {id: depid}
+                            }).done(function (res) {
+                                layui.jquery('#equips').empty();
+                                layui.jquery('#equips').append(layui.jquery(' <option value="">请选择设备</option>'));
+                                for (var prop in res) {
+                                    var group = layui.jquery('<optgroup label="' + prop + '"></optgroup>');
+                                    var val = res[prop];
+
+                                    val.map(function (equip) {
+                                        if (defaultLoadEquipId == 0) {
+                                            defaultLoadEquipId = equip.id;
+                                        }
+                                        var option = layui.jquery('<option value="' + equip.id + '">' + equip.code + '</option>');
+                                        group.append(option);
+                                    });
+                                    layui.jquery('#equips').append(group);
+                                }
+                                layui.form.on('select(equips)', function (data) {
+                                    var itemid = data.value;
+                                    reload(layui.jquery('#departments').val(), itemid);
+                                });
+                                layui.form.render();
+                            });
                         });
-                        $('#equips').append(group);
 
-                    }
-
-                    layui.use('form', function () {
-                        $('#equips').val(defaultLoadEquipId);
-                        reload(defaultLoadEquipId);
+                        //   $('#departments').val(defaultLoadDepId);
+                        // reload(defaultLoadDepId);
                         layui.form.render();
+
                     });
-                });
 
-                layui.jquery('#equip-query').on('click', function () {
-                    reload($('#equips').val() || defaultLoadEquipId);
-                });
-
-
-                layui.jquery('#inspection-current-year').on('click', function () {
-                    efficiency_current_year($('#equips').val() || defaultLoadEquipId);
-                });
+                    // layui.jquery('#equip-query').on('click', function () {
+                    //     reload($('#equips').val() || defaultLoadEquipId);
+                    // });
 
 
-                layui.jquery('#inspection-last-year').on('click', function () {
-                    efficiency_last_year($('#equips').val() || defaultLoadEquipId);
-                });
+                    layui.jquery('#inspection-current-year').on('click', function () {
+                        efficiency_current_year($('#departments').val(), $('#equips').val() || defaultLoadEquipId);
+                    });
 
 
-                layui.jquery('#benefit-last-year').on('click', function () {
-                    benefit_last_year($('#equips').val() || defaultLoadEquipId);
-                });
+                    layui.jquery('#inspection-last-year').on('click', function () {
+                        efficiency_last_year($('#departments').val(), $('#equips').val() || defaultLoadEquipId);
+                    });
 
-                layui.jquery('#benefit-current-year').on('click', function () {
-                    benefit_current_year($('#equips').val() || defaultLoadEquipId);
-                });
 
-                layui.jquery('#failure_rate_last').on('click', function () {
-                    failure_rate_last_year($('#equips').val() || defaultLoadEquipId);
-                });
+                    layui.jquery('#benefit-last-year').on('click', function () {
+                        benefit_last_year($('#departments').val(), $('#equips').val() || defaultLoadEquipId);
+                    });
 
-                layui.jquery('#failure_rate_current').on('click', function () {
-                    failure_rate_current_year($('#equips').val() || defaultLoadEquipId);
-                });
+                    layui.jquery('#benefit-current-year').on('click', function () {
+                        benefit_current_year($('#departments').val(), $('#equips').val() || defaultLoadEquipId);
+                    });
 
-            });
+                    layui.jquery('#failure_rate_last').on('click', function () {
+                        failure_rate_last_year($('#departments').val(), $('#equips').val() || defaultLoadEquipId);
+                    });
+
+                    layui.jquery('#failure_rate_current').on('click', function () {
+                        failure_rate_current_year($('#departments').val(), $('#equips').val() || defaultLoadEquipId);
+                    });
+
+                }
+            );
         }
 
         function chPBClass(bRed, id) {
@@ -97,12 +130,12 @@ layui.define
         }
 
 //效率去年
-        function efficiency_last_year(equipId) {
+        function efficiency_last_year(depId, equipId) {
             layui.use(["carousel", "echarts"], function () {
                 layui.jquery.ajax({
                     url: '/api/echarts/efficiency_last_year',
                     dataType: 'json',
-                    data: {id: equipId}
+                    data: {id: equipId, depId: depId}
                 }).done(function (res) {
                     maxValue = Math.max.apply(null, res.series);
                     minValue = Math.min.apply(null, res.series);
@@ -148,7 +181,7 @@ layui.define
                 layui.jquery.ajax({
                     url: '/api/echarts/efficiency_avg_last_year',
                     dataType: 'json',
-                    data: {id: equipId}
+                    data: {id: equipId, depId: depId}
                 }).done(function (res) {
 
                     layui.jquery("#month-avg-inspection").text(res.inspection_times_per);
@@ -161,7 +194,7 @@ layui.define
                 layui.jquery.ajax({
                     url: '/api/echarts/efficiency_max_last_year',
                     dataType: 'json',
-                    data: {id: equipId}
+                    data: {id: equipId, depId: depId}
                 }).done(function (res) {
                     layui.jquery("#month-max-inspection").text(res.inspection_times_max);
                     layui.element.progress('month-max-inspection-percent-bar', Math.abs(res.inspection_times_max_mom * 100) + '%');
@@ -173,7 +206,7 @@ layui.define
                 layui.jquery.ajax({
                     url: '/api/echarts/efficiency_min_last_year',
                     dataType: 'json',
-                    data: {id: equipId}
+                    data: {id: equipId, depId: depId}
                 }).done(function (res) {
 
                     layui.jquery("#month-min-inspection").text(res.inspection_times_min);
@@ -186,12 +219,12 @@ layui.define
         }
 
 //效率今年
-        function efficiency_current_year(equipId) {
+        function efficiency_current_year(depId, equipId) {
             layui.use(["carousel", "echarts"], function () {
                 layui.jquery.ajax({
                     url: '/api/echarts/efficiency_current_year',
                     dataType: 'json',
-                    data: {id: equipId}
+                    data: {id: equipId, depId: depId}
                 }).done(function (res) {
                     option = {
                         title: {text: "设备效率趋势分析", subtext: "单位：人次"},
@@ -230,7 +263,7 @@ layui.define
                 layui.jquery.ajax({
                     url: '/api/echarts/efficiency_avg_current_year',
                     dataType: 'json',
-                    data: {id: equipId}
+                    data: {id: equipId, depId: depId}
                 }).done(function (res) {
 
                     layui.jquery("#month-avg-inspection").text(res.inspection_times_per);
@@ -242,7 +275,7 @@ layui.define
                 layui.jquery.ajax({
                     url: '/api/echarts/efficiency_max_current_year',
                     dataType: 'json',
-                    data: {id: equipId}
+                    data: {id: equipId, depId: depId}
                 }).done(function (res) {
                     layui.jquery("#month-max-inspection").text(res.inspection_times_max);
                     layui.element.progress('month-max-inspection-percent-bar', Math.abs(res.inspection_times_max_mom * 100) + '%');
@@ -253,7 +286,7 @@ layui.define
                 layui.jquery.ajax({
                     url: '/api/echarts/efficiency_min_current_year',
                     dataType: 'json',
-                    data: {id: equipId}
+                    data: {id: equipId, depId: depId}
                 }).done(function (res) {
 
                     layui.jquery("#month-min-inspection").text(res.inspection_times_min);
@@ -266,11 +299,11 @@ layui.define
         }
 
 //页头绑定
-        function global_bind(equipId) {
+        function global_bind(depId, equipId) {
             layui.jquery.ajax({
                 url: '/api/echarts/global_month',
                 dataType: 'json',
-                data: {'id': equipId}
+                data: {id: equipId, depId: depId}
             }).done(function (res) {
                 layui.jquery('#month-total-cost').text(res.cost);
                 layui.jquery('#month-total-inspection').text(res.inspection);
@@ -280,7 +313,7 @@ layui.define
             layui.jquery.ajax({
                 url: '/api/echarts/global_year',
                 dataType: 'json',
-                data: {id: equipId}
+                data: {id: equipId, depId: depId}
             }).done(function (res) {
 
                 layui.jquery('#year-total-revenue').text(res.income);
@@ -291,7 +324,7 @@ layui.define
             layui.jquery.ajax({
                 url: '/api/echarts/return_rate',
                 dataType: 'json',
-                data: {id: equipId}
+                data: {id: equipId, depId: depId}
             }).done(function (res) {
                 layui.jquery('#year-return-rate').text(res.current);
                 layui.jquery('#last-year-return-rate').text(res.last);
@@ -299,12 +332,12 @@ layui.define
         }
 
 //表格绑定
-        function table_bind(equipId) {
+        function table_bind(depId, equipId) {
             layui.use(["table"], function () {
                 layui.table.render({
                     elem: '#varcost'
                     , url: '/api/echarts/varcost/'
-                    , where: {id: equipId}
+                    , where: {id: equipId, depId: depId}
                     , cellMinWidth: 80 //全局定义常规单元格的最小宽度，layui 2.2.1 新增
                     , cols: [[
 
@@ -318,7 +351,7 @@ layui.define
                 layui.table.render({
                     elem: '#fixcost'
                     , url: '/api/echarts/fixcost/'
-                    , where: {id: equipId}
+                    , where: {id: equipId, depId: depId}
                     , cellMinWidth: 80 //全局定义常规单元格的最小宽度，layui 2.2.1 新增
                     , cols: [[
                         {field: 'item_id', title: '设备ID'}
@@ -332,7 +365,7 @@ layui.define
                 layui.table.render({
                     elem: '#dept'
                     , url: '/api/echarts/dept/'
-                    , where: {id: equipId}
+                    , where: {id: equipId, depId: depId}
                     , cellMinWidth: 80 //全局定义常规单元格的最小宽度，layui 2.2.1 新增
                     , cols: [[
                         {field: 'item_id', title: '设备ID'}
@@ -345,7 +378,7 @@ layui.define
                 layui.table.render({
                     elem: '#source'
                     , url: '/api/echarts/source/'
-                    , where: {id: equipId}
+                    , where: {id: equipId, depId: depId}
                     , cellMinWidth: 80 //全局定义常规单元格的最小宽度，layui 2.2.1 新增
                     , cols: [[
                         {field: 'item_id', title: '设备ID'}
@@ -359,12 +392,12 @@ layui.define
         }
 
 //效益去年
-        function benefit_last_year(equipId) {
+        function benefit_last_year(depId, equipId) {
             layui.use(["carousel", "echarts"], function () {
                 layui.jquery.ajax({
                     url: '/api/echarts/benefit_last_year',
                     dataType: 'json',
-                    data: {id: equipId}
+                    data: {id: equipId, depId: depId}
                 }).done(function (res) {
 
                     option = {
@@ -415,7 +448,7 @@ layui.define
                 layui.jquery.ajax({
                     url: '/api/echarts/return_rate_last_year',
                     dataType: 'json',
-                    data: {id: equipId}
+                    data: {id: equipId, depId: depId}
                 }).done(function (res) {
 
                     layui.jquery('#benefit-return-rate').text(res.return_rate);
@@ -429,7 +462,7 @@ layui.define
                 layui.jquery.ajax({
                     url: '/api/echarts/income_per_mon_last_year',
                     dataType: 'json',
-                    data: {id: equipId}
+                    data: {id: equipId, depId: depId}
                 }).done(function (res) {
 
                     layui.jquery('#benefit-avg-income').text(res.income_per);
@@ -443,7 +476,7 @@ layui.define
                 layui.jquery.ajax({
                     url: '/api/echarts/cost_per_mon_last_year',
                     dataType: 'json',
-                    data: {id: equipId}
+                    data: {id: equipId, depId: depId}
                 }).done(function (res) {
 
                     layui.jquery('#benefit-avg-cost').text(res.cost_per);
@@ -457,12 +490,12 @@ layui.define
         }
 
 //效益今年
-        function benefit_current_year(equipId) {
+        function benefit_current_year(depId, equipId) {
             layui.use(["carousel", "echarts"], function () {
                 layui.jquery.ajax({
                     url: '/api/echarts/benefit_current_year',
                     dataType: 'json',
-                    data: {id: equipId}
+                    data: {id: equipId, depId: depId}
                 }).done(function (res) {
 
                     // layui.jquery('#month-avg-revenue').text(avgRevenueValue);
@@ -516,7 +549,7 @@ layui.define
                 layui.jquery.ajax({
                     url: '/api/echarts/return_rate_current_year',
                     dataType: 'json',
-                    data: {id: equipId}
+                    data: {id: equipId, depId: depId}
                 }).done(function (res) {
 
                     layui.jquery('#benefit-return-rate').text(res.return_rate);
@@ -532,7 +565,7 @@ layui.define
                 layui.jquery.ajax({
                     url: '/api/echarts/income_per_mon_current_year',
                     dataType: 'json',
-                    data: {id: equipId}
+                    data: {id: equipId, depId: depId}
                 }).done(function (res) {
 
                     layui.jquery('#benefit-avg-income').text(res.income_per);
@@ -546,7 +579,7 @@ layui.define
                 layui.jquery.ajax({
                     url: '/api/echarts/cost_per_mon_current_year',
                     dataType: 'json',
-                    data: {id: equipId}
+                    data: {id: equipId, depId: depId}
                 }).done(function (res) {
 
                     layui.jquery('#benefit-avg-cost').text(res.cost_per);
@@ -561,12 +594,12 @@ layui.define
             });
         }
 
-        function failure_rate_current_year(equipId) {
+        function failure_rate_current_year(depId, equipId) {
             layui.use(["carousel", "echarts"], function () {
                 layui.jquery.ajax({
                     url: '/api/echarts/failure_rate_current_year',
                     dataType: 'json',
-                    data: {id: equipId}
+                    data: {id: equipId, depId: depId}
                 }).done(function (res) {
                     console.log(res)
 
@@ -604,12 +637,12 @@ layui.define
             });
         }
 
-        function failure_rate_last_year(equipId) {
+        function failure_rate_last_year(depId, equipId) {
             layui.use(["carousel", "echarts"], function () {
                 layui.jquery.ajax({
                     url: '/api/echarts/failure_rate_last_year',
                     dataType: 'json',
-                    data: {id: equipId}
+                    data: {id: equipId, depId: depId}
                 }).done(function (res) {
                     console.log(res)
 
@@ -647,13 +680,13 @@ layui.define
             });
         }
 
-        function efficiency_compare(equipId) {
+        function efficiency_compare(depId, equipId) {
             layui.use(["carousel", "echarts"], function () {
 
                 layui.jquery.ajax({
                     url: '/api/echarts/efficiency_compare',
                     dataType: 'json',
-                    data: {id: equipId}
+                    data: {id: equipId, depId: depId}
                 }).done(function (res) {
                     layui.jquery("[lay-filter=compare-to-last-year]").children().children().text(res.percent + '%');
                     layui.element.progress('compare-to-last-year', res.percent + '%');
@@ -661,7 +694,7 @@ layui.define
                 layui.jquery.ajax({
                     url: '/api/echarts/benefit_efficiency_compare',
                     dataType: 'json',
-                    data: {id: equipId}
+                    data: {id: equipId, depId: depId}
                 }).done(function (res) {
 
                     ids = ['benefit-year-compare', 'benefit-revenue-compare', 'benefit-cost-compare', 'efficiency-max-compare', 'efficiency-min-compare', 'efficiency-avg-compare'];
@@ -681,16 +714,18 @@ layui.define
             });
         }
 
-        function reload(equipId) {
-            table_bind(equipId);
-            global_bind(equipId);
-            failure_rate_current_year(equipId);
-            benefit_current_year(equipId);
-            efficiency_current_year(equipId);
+        function reload(depId, equipId) {
+            console.log(depId, equipId)
+            table_bind(depId, equipId);
+            global_bind(depId, equipId);
+            failure_rate_current_year(depId, equipId);
+            benefit_current_year(depId, equipId);
+            efficiency_current_year(depId, equipId);
         }
 
         initPage();
         exports('simple', this);
     }
-);
+)
+;
 

@@ -40,6 +40,7 @@ class Echarts extends API
         'varcost',
         'source',
         'equips',
+        'deps'
     ];
 
     protected $tempItemMap = [
@@ -74,22 +75,97 @@ class Echarts extends API
         // return $this->tempItemMap[$eid];
     }
 
-    /**
-     * 本年总收入、本年总成本、本年检查人次：
-     * @return array
-     */
-    public function global_year()
+
+    public function deps()
+    {
+        $sql = <<<SQL
+        SELECT id,name,pid from think_org where status = 1 order by pid ,id;
+SQL;
+
+        $data = Db::query($sql);
+
+        $response = [];
+        foreach ($data as $row) {
+            if ($row['pid'] == 0) {
+                $category = $row['name'];
+                $response["$category"] = [];
+            } else {
+                $eid = $row['id'];
+                $code = $row['name'];
+                $response["$category"][] = [
+                    'id' => $eid,
+                    'code' => $code
+                ];
+            }
+        }
+
+        return $response;
+    }
+
+    public function equips()
     {
         $eid = Request::param('id', self::DEFAULT_EID);
         $sql = <<<SQL
-        SELECT item_id, sum(total_income) as total_income, sum(total_cost) as total_cost, sum(inspection_times) as inspection_times 
+SELECT  tc.id as category_id,tc.name as category,ti.id,ti.code 
+FROM think_catagory tc 
+INNER JOIN think_item ti
+ON tc.id = ti.catagoryid
+WHERE tc.status=1 AND ti.status = 1
+and ti.org_list= ?
+ORDER BY tc.sort,tc.name,ti.sort
+SQL;
+        $result = Db::query($sql, [$eid]);
+
+        $response = [];
+        foreach ($result as $row) {
+            $cid = $row['category_id'];
+            $category = $row['category'];
+            $eid = $row['id'];
+            $code = $row['code'];
+            $response["$category-$cid"][] = [
+                'id' => $eid,
+                'code' => $code
+            ];
+        }
+
+        return $response;
+    }
+
+    protected function wapQuery($eid, $did, $sql)
+    {
+        $column = '';
+        $param = 0;
+        if ($did != 0) {
+            $column = ' department_id ';
+            $param = $did;
+        }
+        if ($eid != 0) {
+            $column = ' item_id ';
+            $param = $eid;
+        }
+        $sql = preg_replace('/PRColumn/', $column, $sql);
+//        echo $sql;
+//        exit;
+        return Db::query($sql, [$param]);
+    }
+
+    /*
+    * 本年总收入、本年总成本、本年检查人次：
+    * @return array
+    */
+    public function global_year()
+    {
+        $eid = Request::param('id', self::DEFAULT_EID);
+        $did = Request::param('depId', 0);
+        $sql = <<<SQL
+        SELECT PRColumn, sum(total_income) as total_income, sum(total_cost) as total_cost, sum(inspection_times) as inspection_times 
         FROM `item_info_data` 
         WHERE year(date_time) = year(NOW()) 
-        AND item_id = ?
-        GROUP BY item_id;
+        AND PRColumn = ?
+        GROUP BY PRColumn;
 SQL;
 
-        $data = Db::query($sql, [$eid]);
+        $data = $this->wapQuery($eid, $did, $sql);
         $row = array_pop($data);
         if ($row) {
             return [
@@ -109,16 +185,17 @@ SQL;
     public function global_month()
     {
         $eid = Request::param('id', self::DEFAULT_EID);
+        $did = Request::param('depId', 0);
         $sql = <<<SQL
-        SELECT item_id, sum(total_income) as total_income, sum(total_cost) as total_cost, sum(inspection_times) as inspection_times 
+        SELECT PRColumn, sum(total_income) as total_income, sum(total_cost) as total_cost, sum(inspection_times) as inspection_times 
         FROM `item_info_data` 
         WHERE year(date_time) = year(NOW()) 
         AND month(date_time) = month(NOW()) 
-        AND item_id = ?
-        GROUP BY item_id;
+        AND PRColumn=?
+        GROUP BY PRColumn;
 SQL;
 
-        $data = Db::query($sql, [$eid]);
+        $data = $this->wapQuery($eid, $did, $sql);
         $row = array_pop($data);
         if ($row) {
             return [
@@ -134,6 +211,7 @@ SQL;
     public function return_rate()
     {
         $eid = Request::param('id', self::DEFAULT_EID);
+        $did = Request::param('depId', 0);
         $sql = <<<SQL
 SELECT item_id, return_rate,dur FROM (
 SELECT a.item_id, round((a.total_income - a.total_cost) / b.purchase_price, 2) as return_rate,'current' as dur
@@ -153,7 +231,7 @@ FROM (SELECT item_id, sum(total_income) as total_income, sum(total_cost) as tota
 SQL;
 
 
-        $data = Db::query($sql, [$eid]);
+        $data = $this->wapQuery($eid, $did, $sql);
 
         $response = [
             'last' => 0,
@@ -173,6 +251,7 @@ SQL;
     public function failure_rate_last_year()
     {
         $eid = Request::param('id', self::DEFAULT_EID);
+        $did = Request::param('depId', 0);
         $sql = <<<SQL
 SELECT c.item_id, c.t_time, if(d.failures_number is null, 0, d.failures_number) as failures_number
 FROM (SELECT DISTINCT a.id as item_id, DATE_FORMAT(b.datelist, '%Y-%m') as t_time
@@ -210,6 +289,7 @@ SQL;
     public function failure_rate_current_year()
     {
         $eid = Request::param('id', self::DEFAULT_EID);
+        $did = Request::param('depId', 0);
         $sql = <<<SQL
 SELECT c.item_id, c.t_time, if(d.failures_number is null, 0, d.failures_number) as failures_number
 FROM (SELECT DISTINCT a.id as item_id, DATE_FORMAT(b.datelist, '%Y-%m') as t_time
@@ -248,6 +328,7 @@ SQL;
     public function efficiency_last_year()
     {
         $eid = Request::param('id', self::DEFAULT_EID);
+        $did = Request::param('depId', 0);
         $sql = <<<SQL
 SELECT item_id, DATE_FORMAT(date_time, '%Y-%m') as t_time, sum(inspection_times) as inspection_times
 FROM `item_info_data`
@@ -281,6 +362,7 @@ SQL;
     public function efficiency_current_year()
     {
         $eid = Request::param('id', self::DEFAULT_EID);
+        $did = Request::param('depId', 0);
         $sql = <<<SQL
 SELECT item_id, DATE_FORMAT(date_time, '%Y-%m') as t_time, sum(inspection_times) as inspection_times
 FROM `item_info_data`
@@ -301,7 +383,7 @@ SQL;
             $ctime = $row['t_time'];
             $times = $row['inspection_times'];
             $response['xAxis'][] = $ctime;
-            $response['series'][] =intval( $times);
+            $response['series'][] = intval($times);
         }
 
         return $response;
@@ -314,6 +396,7 @@ SQL;
     public function efficiency_avg_last_year()
     {
         $eid = Request::param('id', self::DEFAULT_EID);
+        $did = Request::param('depId', 0);
         $sql = <<<SQL
 
 SELECT c.item_id,
@@ -356,7 +439,7 @@ SQL;
             $ctime = $row['inspection_times_per'];
             $times = $row['inspection_times_per_mom'];
             $response['inspection_times_per'] = $ctime;
-            $response['inspection_times_per_mom'] = intval( $times);;
+            $response['inspection_times_per_mom'] = intval($times);;
         }
 
         return $response;
@@ -369,6 +452,7 @@ SQL;
     public function efficiency_avg_current_year()
     {
         $eid = Request::param('id', self::DEFAULT_EID);
+        $did = Request::param('depId', 0);
         $sql = <<<SQL
 
 SELECT c.item_id,
@@ -424,6 +508,7 @@ SQL;
     public function efficiency_max_last_year()
     {
         $eid = Request::param('id', self::DEFAULT_EID);
+        $did = Request::param('depId', 0);
         $sql = <<<SQL
 
 SELECT c.item_id,
@@ -478,6 +563,7 @@ SQL;
     public function efficiency_max_current_year()
     {
         $eid = Request::param('id', self::DEFAULT_EID);
+        $did = Request::param('depId', 0);
         $sql = <<<SQL
 
 SELECT c.item_id,
@@ -533,6 +619,7 @@ SQL;
     public function efficiency_min_last_year()
     {
         $eid = Request::param('id', self::DEFAULT_EID);
+        $did = Request::param('depId', 0);
         $sql = <<<SQL
 
 
@@ -589,6 +676,7 @@ SQL;
     public function efficiency_min_current_year()
     {
         $eid = Request::param('id', self::DEFAULT_EID);
+        $did = Request::param('depId', 0);
         $sql = <<<SQL
 
 
@@ -648,6 +736,7 @@ SQL;
     {
 
         $eid = Request::param('id', self::DEFAULT_EID);
+        $did = Request::param('depId', 0);
         $sql = <<<SQL
    SELECT item_id,
        DATE_FORMAT(date_time, '%Y-%m') as t_time,
@@ -688,6 +777,7 @@ SQL;
     {
 
         $eid = Request::param('id', self::DEFAULT_EID);
+        $did = Request::param('depId', 0);
         $sql = <<<SQL
 
 SELECT item_id,
@@ -726,6 +816,7 @@ SQL;
     public function return_rate_last_year()
     {
         $eid = Request::param('id', self::DEFAULT_EID);
+        $did = Request::param('depId', 0);
         $sql = <<<SQL
 
 SELECT a.item_id,
@@ -769,6 +860,7 @@ SQL;
     public function return_rate_current_year()
     {
         $eid = Request::param('id', self::DEFAULT_EID);
+        $did = Request::param('depId', 0);
         $sql = <<<SQL
 
 SELECT a.item_id,
@@ -812,6 +904,7 @@ SQL;
     public function income_per_mon_last_year()
     {
         $eid = Request::param('id', self::DEFAULT_EID);
+        $did = Request::param('depId', 0);
         $sql = <<<SQL
 
 SELECT c.item_id,
@@ -858,6 +951,7 @@ SQL;
     public function income_per_mon_current_year()
     {
         $eid = Request::param('id', self::DEFAULT_EID);
+        $did = Request::param('depId', 0);
         $sql = <<<SQL
 
 
@@ -903,6 +997,7 @@ SQL;
     public function cost_per_mon_last_year()
     {
         $eid = Request::param('id', self::DEFAULT_EID);
+        $did = Request::param('depId', 0);
         $sql = <<<SQL
 
 SELECT c.item_id,
@@ -947,6 +1042,7 @@ SQL;
     public function cost_per_mon_current_year()
     {
         $eid = Request::param('id', self::DEFAULT_EID);
+        $did = Request::param('depId', 0);
         $sql = <<<SQL
 
 
@@ -993,6 +1089,7 @@ SQL;
     public function dept()
     {
         $eid = Request::param('id', self::DEFAULT_EID);
+        $did = Request::param('depId', 0);
 //        var_dump($eid);
 //        exit;
         $sql = <<<SQL
@@ -1022,6 +1119,7 @@ SQL;
     public function source()
     {
         $eid = Request::param('id', self::DEFAULT_EID);
+        $did = Request::param('depId', 0);
         $sql = <<<SQL
      
 SELECT item_id, patient_source, COUNT(DISTINCT request_id) as inspection_times, sum(profit) as income
@@ -1050,6 +1148,7 @@ SQL;
     public function fixcost()
     {
         $eid = Request::param('id', self::DEFAULT_EID);
+        $did = Request::param('depId', 0);
         $sql = <<<SQL
      
 
@@ -1081,6 +1180,7 @@ SQL;
     {
 
         $eid = Request::param('id', self::DEFAULT_EID);
+        $did = Request::param('depId', 0);
         $sql = <<<SQL
 SELECT item_id, cost_item, min(date_time) as start_date, max(date_time) as end_date, sum(cost) total_cost
 FROM `item_cost_detail`
@@ -1102,32 +1202,5 @@ SQL;
             ];
     }
 
-    public function equips()
-    {
-        $eid = Request::param('id', self::DEFAULT_EID);
-        $sql = <<<SQL
-SELECT  tc.id as category_id,tc.name as category,ti.id,ti.code 
-FROM think_catagory tc 
-INNER JOIN think_item ti
-ON tc.id = ti.catagoryid
-WHERE tc.status=1 AND ti.status = 1
-ORDER BY tc.sort,tc.name,ti.sort
 
-SQL;
-        $result = Db::query($sql);
-
-        $response = [];
-        foreach ($result as $row) {
-            $cid = $row['category_id'];
-            $category = $row['category'];
-            $eid = $row['id'];
-            $code = $row['code'];
-            $response["$category-$cid"][] = [
-                'id' => $eid,
-                'code' => $code
-            ];
-        }
-
-        return $response;
-    }
 }
