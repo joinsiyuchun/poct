@@ -70,7 +70,7 @@ class Catagory extends Base
         // 获取分类id
         $catagoryId = Request::param('id');
         $this -> view -> assign('catagoryId', $catagoryId);
-        return $this -> view -> fetch('priceList');
+        return $this -> view -> fetch('pricelist');
     }
 
     // 医保收费列表
