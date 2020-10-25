@@ -230,8 +230,30 @@ FROM (SELECT item_id, sum(total_income) as total_income, sum(total_cost) as tota
        ) AS d where d.item_id = ? ;
 SQL;
 
+        $sqldid = <<<SQL
+SELECT department_id, return_rate,dur FROM (
+SELECT a.department_id, round((a.total_income - a.total_cost) / b.purchase_price, 2) as return_rate,'current' as dur
+FROM (SELECT department_id, sum(total_income) as total_income, sum(total_cost) as total_cost
+      FROM `item_info_data`
+      where year(date_time) = year(NOW())
+      GROUP BY department_id) as a
+         join think_item as b on a.department_id = b.org_list and b.`status` = 1 
+union all
+SELECT a.department_id, round((a.total_income - a.total_cost) / b.purchase_price, 2) as return_rate ,'last' as dur
+FROM (SELECT department_id, sum(total_income) as total_income, sum(total_cost) as total_cost
+      FROM `item_info_data`
+      where year(date_time) = year(NOW()) - 1
+      GROUP BY department_id) as a
+         join think_item as b on a.department_id = b.org_list and b.`status` = 1
+       ) AS d where d.department_id = ? ;
+SQL;
 
-        $data = $this->wapQuery($eid, $did, $sql);
+        if ($eid > 0) {
+            $data = $this->wapQuery($eid, $did, $sql);
+        } else {
+            $data = $this->wapQuery($eid, $did, $sqldid);
+        }
+
 
         $response = [
             'last' => 0,
@@ -239,7 +261,7 @@ SQL;
         ];
 
         foreach ($data as $row) {
-            $response[$row['dur']] = $row['return_rate'];
+            $response[$row['dur']] = is_null($row['return_rate']) ? 0 : $row['return_rate'];
         }
         return $response;
     }
@@ -266,13 +288,32 @@ FROM (SELECT DISTINCT a.id as item_id, DATE_FORMAT(b.datelist, '%Y-%m') as t_tim
                    on c.item_id = d.item_id and c.t_time = d.t_time
 WHERE c.item_id = ?;
 SQL;
-        $result = Db::query($sql, [$eid]);
+        $sqldid = <<<SQL
+SELECT c.item_id, c.t_time, if(d.failures_number is null, 0, d.failures_number) as failures_number
+FROM (SELECT DISTINCT a.org_list as department_id,a.id as item_id, DATE_FORMAT(b.datelist, '%Y-%m') as t_time
+      FROM think_item as a,
+           think_calendar as b
+      where a.`status` = 1
+        and year(b.datelist) = year(NOW())) as c
+         LEFT JOIN (SELECT item_id, FROM_UNIXTIME(create_time, '%Y-%m') as t_time, count(1) as failures_number
+                    FROM `think_workorder`
+                    where FROM_UNIXTIME(create_time, '%Y') = year(NOW())
+                    GROUP BY item_id, FROM_UNIXTIME(create_time, '%Y-%m')) as d
+                   on c.item_id = d.item_id and c.t_time = d.t_time
+WHERE c.department_id = ?;
+SQL;
+
+        if ($eid > 0) {
+            $data = $this->wapQuery($eid, $did, $sql);
+        } else {
+            $data = $this->wapQuery($eid, $did, $sqldid);
+        }
 
         $response = [
             'xAxis' => [],
             'series' => []
         ];
-        foreach ($result as $row) {
+        foreach ($data as $row) {
             $ctime = $row['t_time'];
             $times = $row['failures_number'];
             $response['xAxis'][] = $ctime;
@@ -304,13 +345,33 @@ FROM (SELECT DISTINCT a.id as item_id, DATE_FORMAT(b.datelist, '%Y-%m') as t_tim
                    on c.item_id = d.item_id and c.t_time = d.t_time
 WHERE c.item_id = ?;
 SQL;
-        $result = Db::query($sql, [$eid]);
+
+        $sqldid = <<<SQL
+SELECT c.item_id, c.t_time, if(d.failures_number is null, 0, d.failures_number) as failures_number
+FROM (SELECT DISTINCT a.org_list as department_id,a.id as item_id, DATE_FORMAT(b.datelist, '%Y-%m') as t_time
+      FROM think_item as a,
+           think_calendar as b
+      where a.`status` = 1
+        and year(b.datelist) = year(NOW())) as c
+         LEFT JOIN (SELECT item_id, FROM_UNIXTIME(create_time, '%Y-%m') as t_time, count(1) as failures_number
+                    FROM `think_workorder`
+                    where FROM_UNIXTIME(create_time, '%Y') = year(NOW())
+                    GROUP BY item_id, FROM_UNIXTIME(create_time, '%Y-%m')) as d
+                   on c.item_id = d.item_id and c.t_time = d.t_time
+WHERE c.department_id = ?;
+SQL;
+        if ($eid > 0) {
+            $data = $this->wapQuery($eid, $did, $sql);
+        } else {
+            $data = $this->wapQuery($eid, $did, $sqldid);
+        }
+
 
         $response = [
             'xAxis' => [],
             'series' => []
         ];
-        foreach ($result as $row) {
+        foreach ($data as $row) {
             $ctime = $row['t_time'];
             $times = $row['failures_number'];
             $response['xAxis'][] = $ctime;
@@ -330,21 +391,21 @@ SQL;
         $eid = Request::param('id', self::DEFAULT_EID);
         $did = Request::param('depId', 0);
         $sql = <<<SQL
-SELECT item_id, DATE_FORMAT(date_time, '%Y-%m') as t_time, sum(inspection_times) as inspection_times
+SELECT PRColumn, DATE_FORMAT(date_time, '%Y-%m') as t_time, sum(inspection_times) as inspection_times
 FROM `item_info_data`
 where year(date_time) = year(NOW()) - 1
-and item_id = ?
-GROUP BY item_id, DATE_FORMAT(date_time, '%Y-%m');
+and PRColumn = ?
+GROUP BY PRColumn, DATE_FORMAT(date_time, '%Y-%m');
 SQL;
 
-        $result = Db::query($sql, [$eid]);
+        $data = $this->wapQuery($eid, $did, $sql);
 
         $response = [
             'xAxis' => [],
             'series' => []
         ];
 
-        foreach ($result as $row) {
+        foreach ($data as $row) {
             $ctime = $row['t_time'];
             $times = $row['inspection_times'];
             $response['xAxis'][] = $ctime;
@@ -364,22 +425,21 @@ SQL;
         $eid = Request::param('id', self::DEFAULT_EID);
         $did = Request::param('depId', 0);
         $sql = <<<SQL
-SELECT item_id, DATE_FORMAT(date_time, '%Y-%m') as t_time, sum(inspection_times) as inspection_times
+SELECT PRColumn, DATE_FORMAT(date_time, '%Y-%m') as t_time, sum(inspection_times) as inspection_times
 FROM `item_info_data`
-where year(date_time) = year(NOW())
-and item_id = ?
-GROUP BY item_id, DATE_FORMAT(date_time, '%Y-%m');
-
+where year(date_time) = year(NOW()) 
+and PRColumn = ?
+GROUP BY PRColumn, DATE_FORMAT(date_time, '%Y-%m');
 SQL;
 
-        $result = Db::query($sql, [$eid]);
+        $data = $this->wapQuery($eid, $did, $sql);
 
         $response = [
             'xAxis' => [],
             'series' => []
         ];
 
-        foreach ($result as $row) {
+        foreach ($data as $row) {
             $ctime = $row['t_time'];
             $times = $row['inspection_times'];
             $response['xAxis'][] = $ctime;
@@ -738,23 +798,23 @@ SQL;
         $eid = Request::param('id', self::DEFAULT_EID);
         $did = Request::param('depId', 0);
         $sql = <<<SQL
-   SELECT item_id,
+   SELECT PRColumn,
        DATE_FORMAT(date_time, '%Y-%m') as t_time,
        sum(total_income)               as total_income,
        sum(total_cost)                 as total_cost
 FROM `item_info_data`
 WHERE year(date_time) = year(NOW()) - 1
-AND item_id = ?
-GROUP BY item_id, DATE_FORMAT(date_time, '%Y-%m');
+AND PRColumn = ?
+GROUP BY PRColumn, DATE_FORMAT(date_time, '%Y-%m');
 SQL;
 
-        $result = Db::query($sql, [$eid]);
+        $data = $this->wapQuery($eid, $did, $sql);
 
         $response = [
             'xAxis' => [],
         ];
 
-        foreach ($result as $row) {
+        foreach ($data as $row) {
             $ctime = $row['t_time'];
             $income = $row['total_income'];
             $cost = $row['total_cost'];
@@ -780,24 +840,24 @@ SQL;
         $did = Request::param('depId', 0);
         $sql = <<<SQL
 
-SELECT item_id,
+SELECT PRColumn,
        DATE_FORMAT(date_time, '%Y-%m') as t_time,
        sum(total_income)               as total_income,
        sum(total_cost)                 as total_cost
 FROM `item_info_data`
 WHERE year(date_time) = year(NOW())
-AND item_id = ?
-GROUP BY item_id, DATE_FORMAT(date_time, '%Y-%m');
+AND PRColumn = ?
+GROUP BY PRColumn, DATE_FORMAT(date_time, '%Y-%m');
 SQL;
 
-        $result = Db::query($sql, [$eid]);
+        $data = $this->wapQuery($eid, $did, $sql);
 
         $response = [
             'xAxis' => [],
             'series' => []
         ];
 
-        foreach ($result as $row) {
+        foreach ($data as $row) {
             $ctime = $row['t_time'];
             $income = $row['total_income'];
             $cost = $row['total_cost'];
@@ -1157,12 +1217,12 @@ FROM `item_cost_detail`
 where year(date_time) = year(NOW())
   and month(date_time) = month(NOW())
   and cost_type = '固定成本'
-  and item_id = ?
-GROUP BY item_id, cost_item;
+  and PRColumn = ?
+GROUP BY PRColumn, cost_item;
 
 SQL;
 
-        $data = Db::query($sql, [$eid]);
+        $data = $this->wapQuery($eid, $did, $sql);
 
         return
             [
@@ -1187,12 +1247,12 @@ FROM `item_cost_detail`
 where year(date_time) = year(NOW())
   and month(date_time) = month(NOW())
   and cost_type = '可变成本'
-  and item_id = ?
-GROUP BY item_id, cost_item;
+  and PRColumn = ?
+GROUP BY PRColumn, cost_item;
 
 SQL;
 
-        $data = Db::query($sql, [$eid]);
+        $data = $this->wapQuery($eid, $did, $sql);
 
         return
             [

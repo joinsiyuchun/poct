@@ -40,9 +40,9 @@ layui.define
                             var val = res[prop];
 
                             val.map(function (equip) {
-                                if (defaultLoadDepId == 0) {
-                                    defaultLoadDepId = equip.id;
-                                }
+                                // if (defaultLoadDepId == 0) {
+                                //     defaultLoadDepId = equip.id;
+                                // }
                                 var option = layui.jquery('<option value="' + equip.id + '">' + equip.code + '</option>');
                                 group.append(option);
                             });
@@ -64,9 +64,9 @@ layui.define
                                     var val = res[prop];
 
                                     val.map(function (equip) {
-                                        if (defaultLoadEquipId == 0) {
-                                            defaultLoadEquipId = equip.id;
-                                        }
+                                        // if (defaultLoadEquipId == 0) {
+                                        //     defaultLoadEquipId = equip.id;
+                                        // }
                                         var option = layui.jquery('<option value="' + equip.id + '">' + equip.code + '</option>');
                                         group.append(option);
                                     });
@@ -450,7 +450,7 @@ layui.define
                     dataType: 'json',
                     data: {id: equipId, depId: depId}
                 }).done(function (res) {
-
+                    console.log(res)
                     layui.jquery('#benefit-return-rate').text(res.return_rate);
                     layui.element.progress('benefit-return-rate-bar', Math.abs(res.return_rate_mom * 100) + '%');
                     layui.jquery('#benefit-return-rate-percent').text(res.return_rate_mom * 100 + '%').attr('style', res.return_rate_mom * 100 > 0 ? 'color:green' : 'color:red');
