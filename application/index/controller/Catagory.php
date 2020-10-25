@@ -73,9 +73,9 @@ class Catagory extends Base
         if ( !empty($keywords) ) {
             $query->where('item_name', 'like', '%'.$keywords.'%')
                 ->whereOr('insurance_code', 'like', '%'.$keywords.'%');
-            $sql = sprintf("select distinct p.*, (case when c.category_id =%s then 1 else 0 end) checked from think_pricelist p left join (select * from think_catagory_pricelist where category_id =%s) c on c.pricelist_id = p.id where item_name like '%%%s%%' or insurance_code like '%%%s%%' order by checked desc,p.id desc limit %s,%s",$categoryId,$categoryId, $keywords, $keywords, $skip,  $limit);
+            $sql = sprintf("select distinct p.*, (case when c.category_id =%s then true else false end) LAY_CHECKED from think_pricelist p left join (select * from think_catagory_pricelist where category_id =%s) c on c.pricelist_id = p.id where item_name like '%%%s%%' or insurance_code like '%%%s%%' order by LAY_CHECKED desc,p.id desc limit %s,%s",$categoryId,$categoryId, $keywords, $keywords, $skip,  $limit);
         }else{
-            $sql = sprintf("select distinct p.*, (case when c.category_id =%s then 1 else 0 end) checked from think_pricelist p left join (select * from think_catagory_pricelist where category_id =%s) c on c.pricelist_id = p.id order by checked desc,p.id desc limit %s,%s",$categoryId,$categoryId, $skip,  $limit);
+            $sql = sprintf("select distinct p.*, (case when c.category_id =%s then true else false end) LAY_CHECKED from think_pricelist p left join (select * from think_catagory_pricelist where category_id =%s) c on c.pricelist_id = p.id order by LAY_CHECKED desc,p.id desc limit %s,%s",$categoryId,$categoryId, $skip,  $limit);
         }
 
         $priceList = Db::query($sql);

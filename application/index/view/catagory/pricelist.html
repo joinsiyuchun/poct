@@ -36,7 +36,12 @@ layui.config({
             layer = layui.layer,
             form = layui.form,
             table = layui.table;
-
+        // 修改变量
+        // table = $.extend(table, {
+        //     config: {
+        //         checkName: 'checked'
+        //     }
+        // });
         // 渲染数据表格
         table.render({
             elem: '#priceListDataTable'
@@ -89,20 +94,12 @@ layui.config({
                     }
                 });
                 var data = result.data;
-                var checkNum = 0;
                 var pageIds = '';
                 data.forEach(function (value, key) {
-                    if (value.checked > 0) {
-                        $('tr[data-index=' + key + '] input[type="checkbox"]').prop('checked', true);
-                        $('tr[data-index=' + key + '] input[type="checkbox"]').next().addClass('layui-form-checked');
-                        checkNum++;
-                    }
                     pageIds += value.id + ',';
                 });
                 $('#pageIds').val(pageIds);
-                if (checkNum === data.length) {
-                    $('th[data-key=1-0-0' + '] input[type="checkbox"]').next().addClass('layui-form-checked');
-                }
+
             }
         });
     })
