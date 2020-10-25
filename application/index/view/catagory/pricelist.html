@@ -16,6 +16,7 @@
     {// 数据表格}
     <table  class="layui-hide" id="priceListDataTable" lay-filter="priceListDataTable"></table>
     <input type="hidden" name="id" id="catagoryId" value="{$catagoryId}" />
+    <input type="hidden" name="id" id="pageIds" />
 </form>
 {/block}
 {block name="lay_ext"}
@@ -38,51 +39,50 @@ layui.config({
 
         // 渲染数据表格
         table.render({
-            elem : '#priceListDataTable'
-            ,url : '{:url("pricelist")}?catagoryId='+{$catagoryId}
-            ,cellMinWidth: 80
-            ,height: 'full-100'
-            ,page: {
+            elem: '#priceListDataTable'
+            , url: '{:url("pricelist")}?catagoryId=' + {$catagoryId}
+            , cellMinWidth: 80
+            , height: 'full-100'
+            , page: {
                 prev: '上一页',
                 next: '下一页',
                 layout: ['prev', 'page', 'next', 'skip', 'count', 'limit']
             }
             // ,toolbar: 'default'  // 开启顶部工具栏（默认模板）
-            ,toolbar: '#toolbar' // 指定顶部工具栏模板
+            , toolbar: '#toolbar' // 指定顶部工具栏模板
             // ,even: true  // 隔行背景
-            ,title: 'Item信息表'  // 表格标题，用户导出数据文件名
-            ,text: {  // 指定无数据或数据异常时的提示文本
+            , title: 'Item信息表'  // 表格标题，用户导出数据文件名
+            , text: {  // 指定无数据或数据异常时的提示文本
                 none: '暂无相关数据' //默认：无数据。注：该属性为 layui 2.2.5 开始新增
             }
-            ,id: 'priceListDataTable'
-            ,cols: [[  // 表格列标题及数据
+            , id: 'priceListDataTable'
+            , cols: [[  // 表格列标题及数据
                 {type: 'checkbox', fixed: 'left'}
-                ,{field: 'insurance_code', width: 170, title: '编码', align: 'center'}
-                ,{field: 'item_name', width: 200, title: '项目名称',align: 'center', templet: '#status'}
-                ,{field: 'item_desc', width: 100, title: '项目说明',align: 'center'}
-                ,{field: 'exception', width: 100, title: '除外内容', align: 'center'}
-                ,{field: 'pcs', width: 120, title: '计价单位', align: 'center'}
-                ,{field: 'unit_price', width: 130, title: '价格标准(元)', sort: true,  align: 'center'}
-            ]], done: function(result,currPage,count) {
+                , {field: 'insurance_code', width: 170, title: '编码', align: 'center'}
+                , {field: 'item_name', width: 200, title: '项目名称', align: 'center', templet: '#status'}
+                , {field: 'item_desc', width: 100, title: '项目说明', align: 'center'}
+                , {field: 'exception', width: 100, title: '除外内容', align: 'center'}
+                , {field: 'pcs', width: 120, title: '计价单位', align: 'center'}
+                , {field: 'unit_price', width: 130, title: '价格标准(元)', sort: true, align: 'center'}
+            ]], done: function (result, currPage, count) {
                 // 搜索功能
                 var $ = layui.$, active = {
-                    reloadPrice: function(){
+                    reloadPrice: function () {
                         var keywords = $('#keywords');
                         //执行重载
                         table.reload('priceListDataTable', {
                             page: {
                                 curr: 1 //重新从第 1 页开始
                             }
-                            ,where: {
+                            , where: {
                                 keywords: keywords.val()
                             }
                         }, 'data');
-                        return false;
                     }
                 };
                 var lock = false;
-                $('.price-search-btn').on('click', function(){
-                    if(!lock){
+                $('.price-search-btn').on('click', function () {
+                    if (!lock) {
                         var type = $(this).data('type');
                         active[type] ? active[type].call(this) : '';
                         lock = true;
@@ -90,18 +90,21 @@ layui.config({
                 });
                 var data = result.data;
                 var checkNum = 0;
-                data.forEach(function(value, key) {
-                    if(value.checked >0){
+                var pageIds = '';
+                data.forEach(function (value, key) {
+                    if (value.checked > 0) {
                         $('tr[data-index=' + key + '] input[type="checkbox"]').prop('checked', true);
                         $('tr[data-index=' + key + '] input[type="checkbox"]').next().addClass('layui-form-checked');
-                        checkNum ++;
+                        checkNum++;
                     }
+                    pageIds += value.id + ',';
                 });
-                if(checkNum === data.length){
+                $('#pageIds').val(pageIds);
+                if (checkNum === data.length) {
                     $('th[data-key=1-0-0' + '] input[type="checkbox"]').next().addClass('layui-form-checked');
                 }
             }
         });
-    });
+    })
 </script>
 {/block}

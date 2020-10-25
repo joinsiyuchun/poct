@@ -184,8 +184,6 @@
                 });
             }else if ( e === 'auth' ) {
                 var selectData = layui.table.checkStatus('dataTable').data;
-                console.log(selectData)
-
                 var index = layer.open({
                     type: 2,
                     title: '<i class=iconfont>&#xe7e0;</i> 收费编码',
@@ -200,7 +198,8 @@
                         var iframeWindow = window['layui-layer-iframe' + index];
                         var tableData = iframeWindow.layui.table.checkStatus('priceListDataTable').data;
                         var catagoryId = layero.find('iframe').contents().find("#catagoryId").val();
-                        saveCategoryPrice(catagoryId, tableData);
+                        var pageIds = layero.find('iframe').contents().find("#pageIds").val();
+                        saveCategoryPrice(catagoryId, tableData, pageIds);
                         return false;
                     },
                     btn2:function (index,layero) {
@@ -269,21 +268,19 @@
         });
     }
 
-    function saveCategoryPrice(categoryId, data) {
-        // console.log(categoryId)
-
+    function saveCategoryPrice(categoryId, data, pageIds) {
         var priceIds = data.map((item,index,array)=>{
             //执行代码
             return item.id;
         });
-        console.log(priceIds)
         $.ajax({
             url: "{:url('catagory/saveCategoryPrice')}",
             type: 'POST',
             dataType: 'json',
             data: {
                 categoryId : categoryId,
-                priceIds : priceIds
+                priceIds : priceIds,
+                pageIds : pageIds,
             },
             beforeSend: function(){},
             success: function (data) {

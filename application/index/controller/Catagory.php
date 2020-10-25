@@ -73,9 +73,9 @@ class Catagory extends Base
         if ( !empty($keywords) ) {
             $query->where('item_name', 'like', '%'.$keywords.'%')
                 ->whereOr('insurance_code', 'like', '%'.$keywords.'%');
-            $sql = sprintf("select distinct p.*, (case when c.category_id =%s then 1 else 0 end) checked from think_pricelist p left join think_catagory_pricelist c on c.pricelist_id = p.id where item_name like '%%%s%%' or insurance_code like '%%%s%%' order by checked desc,p.id desc limit %s,%s",$categoryId, $keywords, $keywords, $skip,  $limit);
+            $sql = sprintf("select distinct p.*, (case when c.category_id =%s then 1 else 0 end) checked from think_pricelist p left join (select * from think_catagory_pricelist where category_id =%s) c on c.pricelist_id = p.id where item_name like '%%%s%%' or insurance_code like '%%%s%%' order by checked desc,p.id desc limit %s,%s",$categoryId,$categoryId, $keywords, $keywords, $skip,  $limit);
         }else{
-            $sql = sprintf("select distinct p.*, (case when c.category_id =%s then 1 else 0 end) checked from think_pricelist p left join think_catagory_pricelist c on c.pricelist_id = p.id order by checked desc,p.id desc limit %s,%s",$categoryId, $skip,  $limit);
+            $sql = sprintf("select distinct p.*, (case when c.category_id =%s then 1 else 0 end) checked from think_pricelist p left join (select * from think_catagory_pricelist where category_id =%s) c on c.pricelist_id = p.id order by checked desc,p.id desc limit %s,%s",$categoryId,$categoryId, $skip,  $limit);
         }
 
         $priceList = Db::query($sql);
@@ -89,31 +89,28 @@ class Catagory extends Base
         $res = 0;
         $categoryId = Request::param('categoryId');
         $priceIds = Request::param('priceIds', []);
-
-        if(empty($categoryId) || empty($priceIds)){
+        $pageIds = rtrim( Request::param('pageIds', ''), ',');
+        $pageIdsArr = explode(',', $pageIds);
+        if(empty($categoryId) || (empty($priceIds) && empty($pageIds))){
             return json(['code' => $res, "msg" => '数据不能为空']);
         }
 
-        $existPriceids = CatagoryPricelist::where('category_id', $categoryId)
-            ->whereIn('pricelist_id', $priceIds)
-            ->column('pricelist_id');
+        CatagoryPricelist::where('category_id', $categoryId)
+            ->whereIn('pricelist_id', $pageIds)
+            ->delete();
+
         $time = time();
         $saveData = [];
         foreach ($priceIds as $priceId){
-            if(!in_array($priceId, $existPriceids)){
-                $saveData[] = [
-                    'category_id' => (int)$categoryId,
-                    'pricelist_id' => (int)$priceId,
-                    'create_time' => $time,
-                    'update_time' => $time,
-                ];
-            }
-        }
-        if(empty($saveData)){
-            return json(['code' => (int)$res, "msg" => '已存在']);
+            $saveData[] = [
+                'category_id' => (int)$categoryId,
+                'pricelist_id' => (int)$priceId,
+                'create_time' => $time,
+                'update_time' => $time,
+            ];
         }
         $res = Db::table(CatagoryPricelist::TABLE_NAME)->insertAll($saveData);
-        return json(['code' => (int)$res, "msg" => $res ? '成功' : '失败']);
+        return json(['code' => (int)$res, "msg" => $res ? '关联成功' : '取关成功']);
     }
     // 添加产品目录
     public function add()
