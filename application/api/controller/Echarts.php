@@ -1158,12 +1158,12 @@ SELECT item_id, department, COUNT(DISTINCT request_id) as inspection_times, sum(
 FROM `think_singledia_info`
 where year(report_date) = year(NOW())
     and month(report_date) = month(NOW())
-    and item_id = ?
-GROUP BY item_id, department;
+    and PRColumn = ?
+GROUP BY PRColumn, department;
 
 SQL;
 
-        $data = Db::query($sql, [$eid]);
+        $data = $this->wapQuery($eid, $did, $sql);
 
         return
             [
@@ -1186,12 +1186,12 @@ SELECT item_id, patient_source, COUNT(DISTINCT request_id) as inspection_times, 
 FROM `think_singledia_info`
 where year(report_date) = year(NOW())
   and month(report_date) = month(NOW())
-  and item_id = ?
-GROUP BY item_id, patient_source;
+  and PRColumn = ?
+GROUP BY PRColumn, patient_source;
 
 SQL;
 
-        $data = Db::query($sql, [$eid]);
+        $data = $this->wapQuery($eid, $did, $sql);
 
         return
             [
