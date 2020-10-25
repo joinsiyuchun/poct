@@ -10,11 +10,11 @@
     <div class="layui-inline">
         <input class="layui-input" name="keywords" id="keywords" value="{:input('keywords')}" autocomplete="on" placeholder="请输入编码或名称">
     </div>
-    <button class="layui-btn search-btn" data-type="reload"><i class="iconfont">&#xe679;</i> 查询</button>
+    <a class="layui-btn price-search-btn" data-type="reloadPrice"><i class="iconfont">&#xe679;</i> 查询</a>
 </div>
 <form method="post" class="layui-form form-inline" id="form1">
     {// 数据表格}
-    <table id="priceListDataTable" lay-filter="priceListDataTable"></table>
+    <table  class="layui-hide" id="priceListDataTable" lay-filter="priceListDataTable"></table>
     <input type="hidden" name="id" id="catagoryId" value="{$catagoryId}" />
 </form>
 {/block}
@@ -39,7 +39,7 @@ layui.config({
         // 渲染数据表格
         table.render({
             elem : '#priceListDataTable'
-            ,url : '{:url("pricelist")}'
+            ,url : '{:url("pricelist")}?catagoryId='+{$catagoryId}
             ,cellMinWidth: 80
             ,height: 'full-100'
             ,page: {
@@ -63,10 +63,10 @@ layui.config({
                 ,{field: 'exception', width: 100, title: '除外内容', align: 'center'}
                 ,{field: 'pcs', width: 120, title: '计价单位', align: 'center'}
                 ,{field: 'unit_price', width: 130, title: '价格标准(元)', sort: true,  align: 'center'}
-            ]], done() {
+            ]], done: function(result,currPage,count) {
                 // 搜索功能
                 var $ = layui.$, active = {
-                    reload: function(){
+                    reloadPrice: function(){
                         var keywords = $('#keywords');
                         //执行重载
                         table.reload('priceListDataTable', {
@@ -77,12 +77,29 @@ layui.config({
                                 keywords: keywords.val()
                             }
                         }, 'data');
+                        return false;
                     }
                 };
-                $('.search-btn').on('click', function(){
-                    var type = $(this).data('type');
-                    active[type] ? active[type].call(this) : '';
+                var lock = false;
+                $('.price-search-btn').on('click', function(){
+                    if(!lock){
+                        var type = $(this).data('type');
+                        active[type] ? active[type].call(this) : '';
+                        lock = true;
+                    }
                 });
+                var data = result.data;
+                var checkNum = 0;
+                data.forEach(function(value, key) {
+                    if(value.checked >0){
+                        $('tr[data-index=' + key + '] input[type="checkbox"]').prop('checked', true);
+                        $('tr[data-index=' + key + '] input[type="checkbox"]').next().addClass('layui-form-checked');
+                        checkNum ++;
+                    }
+                });
+                if(checkNum === data.length){
+                    $('th[data-key=1-0-0' + '] input[type="checkbox"]').next().addClass('layui-form-checked');
+                }
             }
         });
     });

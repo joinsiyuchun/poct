@@ -39,26 +39,11 @@ class Catagory extends Base
         $page = isset($_GET['page']) ? $_GET['page'] : 1;
 
         // 获取产品目录信息
-        $catagoryList = CatagoryModel::with(['catagoryPricelist'])
-            ->with(['catagoryPricelist.pricelist'])
-            ->where($map)
+        $catagoryList = CatagoryModel::where($map)
             -> page($page, $limit)
             -> order('id', 'desc')
             -> select()
             ->toArray();
-
-        foreach ($catagoryList as &$list){
-            $catagoryPricelist = $list['catagory_pricelist'];
-            $priceDesc = '';
-            if(!empty($catagoryPricelist)){
-                foreach ($catagoryPricelist as $pricelist){
-                    $price = $pricelist['pricelist'];
-                    $priceDesc .= $price['item_name'].': '.$price['unit_price'].", ";
-                }
-            }
-            $list['price_desc'] = $priceDesc;
-            unset($list['catagory_pricelist']);
-        }
         $total = CatagoryModel::where($map)->count('id');
 
         $result = array("code" => 0, "msg" => "查询成功", "count" => $total, "data" => $catagoryList);
@@ -77,26 +62,24 @@ class Catagory extends Base
     public function pricelist()
     {
         // 定义分页参数
-        $limit = isset($_GET['limit']) ? $_GET['limit'] : 10;
-        $page = isset($_GET['page']) ? $_GET['page'] : 1;
-        $map = [];
+        $limit = Request::param('limit', 10);
+        $page = Request::param('page', 1);
+        $skip = $page <= 1 ? 0 : ($page-1) * $limit;
+        $categoryId = Request::param('catagoryId', 0);
+
         // 搜索功能
         $keywords = Request::param('keywords');
+        $query = Db::table(PricelistModel::TABLE_NAME);
         if ( !empty($keywords) ) {
-            $query = PricelistModel::where('item_name', 'like', '%'.$keywords.'%')
+            $query->where('item_name', 'like', '%'.$keywords.'%')
                 ->whereOr('insurance_code', 'like', '%'.$keywords.'%');
-            $total = $query->count('id');
-            $priceList = $query->page($page, $limit)
-                ->order('id', 'desc')
-                ->select();
+            $sql = sprintf("select distinct p.*, (case when c.category_id =%s then 1 else 0 end) checked from think_pricelist p left join think_catagory_pricelist c on c.pricelist_id = p.id where item_name like '%%%s%%' or insurance_code like '%%%s%%' order by checked desc,p.id desc limit %s,%s",$categoryId, $keywords, $keywords, $skip,  $limit);
         }else{
-            // 获取产品目录信息
-            $priceList = PricelistModel::page($page, $limit)
-                -> order('id', 'desc')
-                -> select();
-            $total = PricelistModel::count('id');
+            $sql = sprintf("select distinct p.*, (case when c.category_id =%s then 1 else 0 end) checked from think_pricelist p left join think_catagory_pricelist c on c.pricelist_id = p.id order by checked desc,p.id desc limit %s,%s",$categoryId, $skip,  $limit);
         }
 
+        $priceList = Db::query($sql);
+        $total = $query->count('id');
         $result = array("code" => 0, "msg" => "查询成功", "count" => $total, "data" => $priceList);
         return json($result);
     }
@@ -108,7 +91,7 @@ class Catagory extends Base
         $priceIds = Request::param('priceIds', []);
 
         if(empty($categoryId) || empty($priceIds)){
-            return json(['code' => $res, "msg" => '失败']);
+            return json(['code' => $res, "msg" => '数据不能为空']);
         }
 
         $existPriceids = CatagoryPricelist::where('category_id', $categoryId)
@@ -125,6 +108,9 @@ class Catagory extends Base
                     'update_time' => $time,
                 ];
             }
+        }
+        if(empty($saveData)){
+            return json(['code' => (int)$res, "msg" => '已存在']);
         }
         $res = Db::table(CatagoryPricelist::TABLE_NAME)->insertAll($saveData);
         return json(['code' => (int)$res, "msg" => $res ? '成功' : '失败']);
