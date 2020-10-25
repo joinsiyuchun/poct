@@ -1159,7 +1159,7 @@ FROM `think_singledia_info`
 where year(report_date) = year(NOW())
     and month(report_date) = month(NOW())
     and PRColumn = ?
-GROUP BY PRColumn, department;
+GROUP BY item_id, department;
 
 SQL;
 
@@ -1187,7 +1187,7 @@ FROM `think_singledia_info`
 where year(report_date) = year(NOW())
   and month(report_date) = month(NOW())
   and PRColumn = ?
-GROUP BY PRColumn, patient_source;
+GROUP BY item_id, patient_source;
 
 SQL;
 
