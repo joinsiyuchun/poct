@@ -47,6 +47,7 @@ class Hisorder extends Base
             $wolist[$k]["order_department"]=$v->org["name"];
             $wolist[$k]["diagnosis_catagory"]=$v["diagnosis_catagory"];
             $wolist[$k]["request_id"]=$v["request_id"];
+            $wolist[$k]["payment_time"]=$v["payment_time"];
             $wolist[$k]["diagnosis_no"]=$v["diagnosis_no"];
             $wolist[$k]["diagnosis_id"]=$v["diagnosis_id"];
             $wolist[$k]["prescription_id"]=$v["prescription_id"];

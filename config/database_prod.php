@@ -13,11 +13,11 @@ return [
     // 数据库类型
     'type'            => 'mysql',
     // 服务器地址
-    'hostname'        => 'bdm719189558.my3w.com',
+    'hostname'        => 'qdm688349364.my3w.com',
     // 数据库名
-    'database'        => 'bdm719189558_db',
+    'database'        => 'qdm688349364_db',
     // 用户名
-    'username'        => 'bdm719189558',
+    'username'        => 'qdm688349364',
     // 密码
     'password'        => 'Join379610',
     // 端口

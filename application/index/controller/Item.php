@@ -32,7 +32,6 @@ class Item extends Base
 
         $items = ItemModel::where($map)->where('pid',0)
             -> order('sort', 'asc')
-            -> field('id, code, sn,pn, pid, sort, catagoryid, is_kit, status, create_time, update_time,is_backup')
             -> select();
 //            -> toArray();
         foreach($items as $i=>$v){
@@ -40,6 +39,9 @@ class Item extends Base
             $itemList[$i]["code"]=$v["code"];
             $itemList[$i]["sn"]=$v["sn"];
             $itemList[$i]["pn"]=$v["pn"];
+            $itemList[$i]["brand"]=$v["brand"];
+            $itemList[$i]["model"]=$v["model"];
+            $itemList[$i]["location"]=$v["location"];
             $itemList[$i]["pid"]=$v["pid"];
             $catagory=$v->catagory;
             $itemList[$i]["title"]=$catagory["name"];
