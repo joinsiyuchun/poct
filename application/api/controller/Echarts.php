@@ -459,43 +459,43 @@ SQL;
         $did = Request::param('depId', 0);
         $sql = <<<SQL
 
-SELECT c.item_id,
+SELECT c.PRColumn,
        c.inspection_times_per,
        case c.inspection_times_per - d.inspection_times_per
            when 0 then 0
            else if(round((c.inspection_times_per - d.inspection_times_per) / d.inspection_times_per, 2) is null, 1,
                    round((c.inspection_times_per - d.inspection_times_per) / d.inspection_times_per,
                          2)) end as inspection_times_per_mom
-FROM (SELECT a.item_id, a.t_year, round(avg(a.inspection_times), 0) as inspection_times_per
-      FROM (SELECT item_id,
+FROM (SELECT a.PRColumn, a.t_year, round(avg(a.inspection_times), 0) as inspection_times_per
+      FROM (SELECT PRColumn,
                    year(date_time)                 as t_year,
                    DATE_FORMAT(date_time, '%Y-%m') as t_time,
                    sum(inspection_times)           as inspection_times
             FROM `item_info_data`
             where year(date_time) = year(NOW()) - 1
-            GROUP BY item_id, year(date_time), DATE_FORMAT(date_time, '%Y-%m')) as a
-      GROUP BY a.item_id, a.t_year) as c
-         LEFT JOIN (SELECT b.item_id, b.t_year, round(avg(b.inspection_times), 0) as inspection_times_per
-                    FROM (SELECT item_id,
+            GROUP BY PRColumn, year(date_time), DATE_FORMAT(date_time, '%Y-%m')) as a
+      GROUP BY a.PRColumn, a.t_year) as c
+         LEFT JOIN (SELECT b.PRColumn, b.t_year, round(avg(b.inspection_times), 0) as inspection_times_per
+                    FROM (SELECT PRColumn,
                                  year(date_time)                 as t_year,
                                  DATE_FORMAT(date_time, '%Y-%m') as t_time,
                                  sum(inspection_times)           as inspection_times
                           FROM `item_info_data`
                           where year(date_time) = year(NOW()) - 2
-                          GROUP BY item_id, year(date_time), DATE_FORMAT(date_time, '%Y-%m')) as b
-                    GROUP BY b.item_id, b.t_year) as d 
-         ON c.item_id = d.item_id AND c.t_year - 1 = d.t_year
-WHERE c.item_id = ?;
+                          GROUP BY PRColumn, year(date_time), DATE_FORMAT(date_time, '%Y-%m')) as b
+                    GROUP BY b.PRColumn, b.t_year) as d 
+         ON c.PRColumn = d.PRColumn AND c.t_year - 1 = d.t_year
+WHERE c.PRColumn = ?;
 SQL;
 
-        $result = Db::query($sql, [$eid]);
+        $data = $this->wapQuery($eid, $did, $sql);
 
         $response = [
             'inspection_times_per' => [],
             'inspection_times_per_mom' => []
         ];
 
-        foreach ($result as $row) {
+        foreach ($data as $row) {
             $ctime = $row['inspection_times_per'];
             $times = $row['inspection_times_per_mom'];
             $response['inspection_times_per'] = $ctime;
@@ -515,43 +515,43 @@ SQL;
         $did = Request::param('depId', 0);
         $sql = <<<SQL
 
-SELECT c.item_id,
+SELECT c.PRColumn,
        c.inspection_times_per,
        case c.inspection_times_per - d.inspection_times_per
            when 0 then 0
            else if(round((c.inspection_times_per - d.inspection_times_per) / d.inspection_times_per, 2) is null, 1,
                    round((c.inspection_times_per - d.inspection_times_per) / d.inspection_times_per,
                          2)) end as inspection_times_per_mom
-FROM (SELECT a.item_id, a.t_year, round(avg(a.inspection_times), 0) as inspection_times_per
-      FROM (SELECT item_id,
+FROM (SELECT a.PRColumn, a.t_year, round(avg(a.inspection_times), 0) as inspection_times_per
+      FROM (SELECT PRColumn,
                    year(date_time)                 as t_year,
                    DATE_FORMAT(date_time, '%Y-%m') as t_time,
                    sum(inspection_times)           as inspection_times
             FROM `item_info_data`
             where year(date_time) = year(NOW())
-            GROUP BY item_id, year(date_time), DATE_FORMAT(date_time, '%Y-%m')) as a
-      GROUP BY a.item_id, a.t_year) as c
-         LEFT JOIN (SELECT b.item_id, b.t_year, round(avg(b.inspection_times), 0) as inspection_times_per
-                    FROM (SELECT item_id,
+            GROUP BY PRColumn, year(date_time), DATE_FORMAT(date_time, '%Y-%m')) as a
+      GROUP BY a.PRColumn, a.t_year) as c
+         LEFT JOIN (SELECT b.PRColumn, b.t_year, round(avg(b.inspection_times), 0) as inspection_times_per
+                    FROM (SELECT PRColumn,
                                  year(date_time)                 as t_year,
                                  DATE_FORMAT(date_time, '%Y-%m') as t_time,
                                  sum(inspection_times)           as inspection_times
                           FROM `item_info_data`
                           where year(date_time) = year(NOW()) - 1
-                          GROUP BY item_id, year(date_time), DATE_FORMAT(date_time, '%Y-%m')) as b
-                    GROUP BY b.item_id, b.t_year) as d 
-        ON c.item_id = d.item_id and c.t_year - 1 = d.t_year 
-WHERE c.item_id = ?;
+                          GROUP BY PRColumn, year(date_time), DATE_FORMAT(date_time, '%Y-%m')) as b
+                    GROUP BY b.PRColumn, b.t_year) as d 
+        ON c.PRColumn = d.PRColumn and c.t_year - 1 = d.t_year 
+WHERE c.PRColumn = ?;
 SQL;
 
-        $result = Db::query($sql, [$eid]);
+        $data = $this->wapQuery($eid, $did, $sql);
 
         $response = [
             'inspection_times_per' => [],
             'inspection_times_per_mom' => []
         ];
 
-        foreach ($result as $row) {
+        foreach ($data as $row) {
             $ctime = $row['inspection_times_per'];
             $times = $row['inspection_times_per_mom'];
             $response['inspection_times_per'] = $ctime;
@@ -571,42 +571,43 @@ SQL;
         $did = Request::param('depId', 0);
         $sql = <<<SQL
 
-SELECT c.item_id,
+SELECT c.PRColumn,
        c.inspection_times_max,
        case c.inspection_times_max - d.inspection_times_max
            when 0 then 0
            else if(round((c.inspection_times_max - d.inspection_times_max) / d.inspection_times_max, 2) is null, 1,
                    round((c.inspection_times_max - d.inspection_times_max) / d.inspection_times_max,
                          2)) end as inspection_times_max_mom
-FROM (SELECT a.item_id, a.t_year, max(a.inspection_times) as inspection_times_max
-      FROM (SELECT item_id,
+FROM (SELECT a.PRColumn, a.t_year, max(a.inspection_times) as inspection_times_max
+      FROM (SELECT PRColumn,
                    year(date_time)                 as t_year,
                    DATE_FORMAT(date_time, '%Y-%m') as t_time,
                    sum(inspection_times)           as inspection_times
             FROM `item_info_data`
             where year(date_time) = year(NOW()) - 1
-            GROUP BY item_id, year(date_time), DATE_FORMAT(date_time, '%Y-%m')) as a
-      GROUP BY a.item_id, a.t_year) as c
-         left join (SELECT b.item_id, b.t_year, max(b.inspection_times) as inspection_times_max
-                    FROM (SELECT item_id,
+            GROUP BY PRColumn, year(date_time), DATE_FORMAT(date_time, '%Y-%m')) as a
+      GROUP BY a.PRColumn, a.t_year) as c
+         left join (SELECT b.PRColumn, b.t_year, max(b.inspection_times) as inspection_times_max
+                    FROM (SELECT PRColumn,
                                  year(date_time)                 as t_year,
                                  DATE_FORMAT(date_time, '%Y-%m') as t_time,
                                  sum(inspection_times)           as inspection_times
                           FROM `item_info_data`
                           where year(date_time) = year(NOW()) - 2
-                          GROUP BY item_id, year(date_time), DATE_FORMAT(date_time, '%Y-%m')) as b
-                    GROUP BY b.item_id, b.t_year) as d on c.item_id = d.item_id and c.t_year - 1 = d.t_year 
-WHERE c.item_id = ?;
+                          GROUP BY PRColumn, year(date_time), DATE_FORMAT(date_time, '%Y-%m')) as b
+                    GROUP BY b.PRColumn, b.t_year) as d on c.PRColumn = d.PRColumn and c.t_year - 1 = d.t_year 
+WHERE c.PRColumn = ?;
 SQL;
 
-        $result = Db::query($sql, [$eid]);
+
+        $data = $this->wapQuery($eid, $did, $sql);
 
         $response = [
             'inspection_times_max' => [],
             'inspection_times_max_mom' => []
         ];
 
-        foreach ($result as $row) {
+        foreach ($data as $row) {
             $ctime = $row['inspection_times_max'];
             $times = $row['inspection_times_max_mom'];
             $response['inspection_times_max'] = $ctime;
@@ -626,43 +627,43 @@ SQL;
         $did = Request::param('depId', 0);
         $sql = <<<SQL
 
-SELECT c.item_id,
+SELECT c.PRColumn,
        c.inspection_times_max,
        case c.inspection_times_max - d.inspection_times_max
            when 0 then 0
            else if(round((c.inspection_times_max - d.inspection_times_max) / d.inspection_times_max, 2) is null, 1,
                    round((c.inspection_times_max - d.inspection_times_max) / d.inspection_times_max,
                          2)) end as inspection_times_max_mom
-FROM (SELECT a.item_id, a.t_year, max(a.inspection_times) as inspection_times_max
-      FROM (SELECT item_id,
+FROM (SELECT a.PRColumn, a.t_year, max(a.inspection_times) as inspection_times_max
+      FROM (SELECT PRColumn,
                    year(date_time)                 as t_year,
                    DATE_FORMAT(date_time, '%Y-%m') as t_time,
                    sum(inspection_times)           as inspection_times
             FROM `item_info_data`
             where year(date_time) = year(NOW())
-            GROUP BY item_id, year(date_time), DATE_FORMAT(date_time, '%Y-%m')) as a
-      GROUP BY a.item_id, a.t_year) as c
-         left join (SELECT b.item_id, b.t_year, max(b.inspection_times) as inspection_times_max
-                    FROM (SELECT item_id,
+            GROUP BY PRColumn, year(date_time), DATE_FORMAT(date_time, '%Y-%m')) as a
+      GROUP BY a.PRColumn, a.t_year) as c
+         left join (SELECT b.PRColumn, b.t_year, max(b.inspection_times) as inspection_times_max
+                    FROM (SELECT PRColumn,
                                  year(date_time)                 as t_year,
                                  DATE_FORMAT(date_time, '%Y-%m') as t_time,
                                  sum(inspection_times)           as inspection_times
                           FROM `item_info_data`
                           where year(date_time) = year(NOW()) - 1
-                          GROUP BY item_id, year(date_time), DATE_FORMAT(date_time, '%Y-%m')) as b
-                    GROUP BY b.item_id, b.t_year) as d on c.item_id = d.item_id and c.t_year - 1 = d.t_year 
-WHERE c.item_id = ?;
+                          GROUP BY PRColumn, year(date_time), DATE_FORMAT(date_time, '%Y-%m')) as b
+                    GROUP BY b.PRColumn, b.t_year) as d on c.PRColumn = d.PRColumn and c.t_year - 1 = d.t_year 
+WHERE c.PRColumn = ?;
 
 SQL;
 
-        $result = Db::query($sql, [$eid]);
+        $data = $this->wapQuery($eid, $did, $sql);
 
         $response = [
             'inspection_times_max' => [],
             'inspection_times_max_mom' => []
         ];
 
-        foreach ($result as $row) {
+        foreach ($data as $row) {
             $ctime = $row['inspection_times_max'];
             $times = $row['inspection_times_max_mom'];
             $response['inspection_times_max'] = $ctime;
@@ -681,45 +682,42 @@ SQL;
         $eid = Request::param('id', self::DEFAULT_EID);
         $did = Request::param('depId', 0);
         $sql = <<<SQL
-
-
-SELECT c.item_id,
-       c.inspection_times_min,
-       case c.inspection_times_min - d.inspection_times_min
-           when 0 then 0
-           else if(round((c.inspection_times_min - d.inspection_times_min) / d.inspection_times_min, 2) is null, 1,
-                   round((c.inspection_times_min - d.inspection_times_min) / d.inspection_times_min,
-                         2)) end as inspection_times_min_mom
-FROM (SELECT a.item_id, a.t_year, min(a.inspection_times) as inspection_times_min
-      FROM (SELECT item_id,
-                   year(date_time)                 as t_year,
-                   DATE_FORMAT(date_time, '%Y-%m') as t_time,
-                   sum(inspection_times)           as inspection_times
+SELECT c.PRColumn,
+  c.inspection_times_min,
+  case c.inspection_times_min - d.inspection_times_min
+  when 0 then 0
+  else if(round((c.inspection_times_min - d.inspection_times_min) / d.inspection_times_min, 2) is null, 1,
+          round((c.inspection_times_min - d.inspection_times_min) / d.inspection_times_min,
+                2)) end as inspection_times_min_mom
+FROM (SELECT a.PRColumn, a.t_year, min(a.inspection_times) as inspection_times_min
+      FROM (SELECT PRColumn,
+              year(date_time)                 as t_year,
+              DATE_FORMAT(date_time, '%Y-%m') as t_time,
+              sum(inspection_times)           as inspection_times
             FROM `item_info_data`
             where year(date_time) = year(NOW()) - 1
             GROUP BY item_id, year(date_time), DATE_FORMAT(date_time, '%Y-%m')) as a
-      GROUP BY a.item_id, a.t_year) as c
-         left join (SELECT b.item_id, b.t_year, min(b.inspection_times) as inspection_times_min
-                    FROM (SELECT item_id,
-                                 year(date_time)                 as t_year,
-                                 DATE_FORMAT(date_time, '%Y-%m') as t_time,
-                                 sum(inspection_times)           as inspection_times
-                          FROM `item_info_data`
-                          where year(date_time) = year(NOW()) - 2
-                          GROUP BY item_id, year(date_time), DATE_FORMAT(date_time, '%Y-%m')) as b
-                    GROUP BY b.item_id, b.t_year) as d on c.item_id = d.item_id and c.t_year - 1 = d.t_year 
-WHERE c.item_id = ?;
-
+      GROUP BY a.PRColumn, a.t_year) as c
+  left join (SELECT b.PRColumn, b.t_year, min(b.inspection_times) as inspection_times_min
+             FROM (SELECT PRColumn,
+                     year(date_time)                 as t_year,
+                     DATE_FORMAT(date_time, '%Y-%m') as t_time,
+                     sum(inspection_times)           as inspection_times
+                   FROM `item_info_data`
+                   where year(date_time) = year(NOW()) - 2
+                   GROUP BY PRColumn, year(date_time), DATE_FORMAT(date_time, '%Y-%m')) as b
+             GROUP BY b.PRColumn, b.t_year) as d on c.PRColumn = d.PRColumn and c.t_year - 1 = d.t_year
+WHERE c.PRColumn = ?;
 SQL;
 
-        $result = Db::query($sql, [$eid]);
+        $data = $this->wapQuery($eid, $did, $sql);
 
         $response = [
             'inspection_times_min' => [],
             'inspection_times_min_mom' => []
         ];
 
-        foreach ($result as $row) {
+        foreach ($data as $row) {
             $ctime = $row['inspection_times_min'];
             $times = $row['inspection_times_min_mom'];
             $response['inspection_times_min'] = $ctime;
@@ -741,43 +739,43 @@ SQL;
 
 
 
-SELECT c.item_id,
+SELECT c.PRColumn,
        c.inspection_times_min,
        case c.inspection_times_min - d.inspection_times_min
            when 0 then 0
            else if(round((c.inspection_times_min - d.inspection_times_min) / d.inspection_times_min, 2) is null, 1,
                    round((c.inspection_times_min - d.inspection_times_min) / d.inspection_times_min,
                          2)) end as inspection_times_min_mom
-FROM (SELECT a.item_id, a.t_year, min(a.inspection_times) as inspection_times_min
-      FROM (SELECT item_id,
+FROM (SELECT a.PRColumn, a.t_year, min(a.inspection_times) as inspection_times_min
+      FROM (SELECT PRColumn,
                    year(date_time)                 as t_year,
                    DATE_FORMAT(date_time, '%Y-%m') as t_time,
                    sum(inspection_times)           as inspection_times
             FROM `item_info_data`
             where year(date_time) = year(NOW())
             GROUP BY item_id, year(date_time), DATE_FORMAT(date_time, '%Y-%m')) as a
-      GROUP BY a.item_id, a.t_year) as c
-         left join (SELECT b.item_id, b.t_year, min(b.inspection_times) as inspection_times_min
-                    FROM (SELECT item_id,
+      GROUP BY a.PRColumn, a.t_year) as c
+         left join (SELECT b.PRColumn, b.t_year, min(b.inspection_times) as inspection_times_min
+                    FROM (SELECT PRColumn,
                                  year(date_time)                 as t_year,
                                  DATE_FORMAT(date_time, '%Y-%m') as t_time,
                                  sum(inspection_times)           as inspection_times
                           FROM `item_info_data`
                           where year(date_time) = year(NOW()) - 1
-                          GROUP BY item_id, year(date_time), DATE_FORMAT(date_time, '%Y-%m')) as b
-                    GROUP BY b.item_id, b.t_year) as d on c.item_id = d.item_id and c.t_year - 1 = d.t_year 
-WHERE c.item_id = ?;
+                          GROUP BY PRColumn, year(date_time), DATE_FORMAT(date_time, '%Y-%m')) as b
+                    GROUP BY b.PRColumn, b.t_year) as d on c.PRColumn = d.PRColumn and c.t_year - 1 = d.t_year 
+WHERE c.PRColumn = ?;
 
 SQL;
 
-        $result = Db::query($sql, [$eid]);
+        $data = $this->wapQuery($eid, $did, $sql);
 
         $response = [
             'inspection_times_min' => [],
             'inspection_times_min_mom' => []
         ];
 
-        foreach ($result as $row) {
+        foreach ($data as $row) {
             $ctime = $row['inspection_times_min'];
             $times = $row['inspection_times_min_mom'];
             $response['inspection_times_min'] = $ctime;
@@ -898,12 +896,38 @@ FROM (SELECT item_id, sum(total_income) - sum(total_cost) as profit_year
          AND a.item_id = ?;
 SQL;
 
+        $sqldid = <<<SQL
+
+SELECT a.department_id,
+       round(a.profit_year / c.purchase_price, 2)                                     as return_rate,
+       case a.profit_year - b.profit_year
+           when 0 then 0
+           else if(a.profit_year < 0 and b.profit_year = 0, -1,
+                   if(round((a.profit_year - b.profit_year) / b.profit_year, 2) is null, 1,
+                      round((a.profit_year - b.profit_year) / b.profit_year, 2))) end as return_rate_mom
+FROM (SELECT department_id, sum(total_income) - sum(total_cost) as profit_year
+      FROM `item_info_data`
+      WHERE year(date_time) = year(NOW()) - 1
+      GROUP BY department_id) as a
+         LEFT JOIN (SELECT department_id, sum(total_income) - sum(total_cost) as profit_year
+                    FROM `item_info_data`
+                    WHERE year(date_time) = year(NOW()) - 2
+                    GROUP BY department_id) as b on a.department_id = b.department_id
+         JOIN think_item as c on a.department_id = c.org_list and c.`status` = 1
+         AND a.department_id = ?;
+SQL;
+
+        if ($eid > 0) {
+            $data = $this->wapQuery($eid, $did, $sql);
+        } else {
+            $data = $this->wapQuery($eid, $did, $sqldid);
+        }
+
         $response = [
             'return_rate' => 0,
             'return_rate_mom' => 0
         ];
 
-        $data = Db::query($sql, [$eid]);
         $row = array_pop($data);
         if ($row) {
             $response['return_rate'] = $row['return_rate'];
@@ -942,12 +966,38 @@ FROM (SELECT item_id, sum(total_income) - sum(total_cost) as profit_year
          AND a.item_id = ?;
 SQL;
 
+        $sqldid = <<<SQL
+
+SELECT a.department_id,
+       round(a.profit_year / c.purchase_price, 2)                                     as return_rate,
+       case a.profit_year - b.profit_year
+           when 0 then 0
+           else if(a.profit_year < 0 and b.profit_year = 0, -1,
+                   if(round((a.profit_year - b.profit_year) / b.profit_year, 2) is null, 1,
+                      round((a.profit_year - b.profit_year) / b.profit_year, 2))) end as return_rate_mom
+FROM (SELECT department_id, sum(total_income) - sum(total_cost) as profit_year
+      FROM `item_info_data`
+      WHERE year(date_time) = year(NOW()) 
+      GROUP BY department_id) as a
+         LEFT JOIN (SELECT department_id, sum(total_income) - sum(total_cost) as profit_year
+                    FROM `item_info_data`
+                    WHERE year(date_time) = year(NOW()) - 1
+                    GROUP BY department_id) as b on a.department_id = b.department_id
+         JOIN think_item as c on a.department_id = c.org_list and c.`status` = 1
+         AND a.department_id = ?;
+SQL;
+
         $response = [
             'return_rate' => 0,
             'return_rate_mom' => 0
         ];
 
-        $data = Db::query($sql, [$eid]);
+        if ($eid > 0) {
+            $data = $this->wapQuery($eid, $did, $sql);
+        } else {
+            $data = $this->wapQuery($eid, $did, $sqldid);
+        }
+
         $row = array_pop($data);
         if ($row) {
             $response['return_rate'] = $row['return_rate'];
@@ -967,25 +1017,25 @@ SQL;
         $did = Request::param('depId', 0);
         $sql = <<<SQL
 
-SELECT c.item_id,
+SELECT c.PRColumn,
        c.income_per,
        case c.income_per - d.income_per
            when 0 then 0
            else if(round((c.income_per - d.income_per) / d.income_per, 2) is null, 1,
                    round((c.income_per - d.income_per) / d.income_per, 2)) end as income_per_mom
-FROM (SELECT a.item_id, round(AVG(a.total_income), 2) income_per
-      FROM (SELECT item_id, DATE_FORMAT(date_time, '%Y-%m'), sum(total_income) as total_income
+FROM (SELECT a.PRColumn, round(AVG(a.total_income), 2) income_per
+      FROM (SELECT PRColumn, DATE_FORMAT(date_time, '%Y-%m'), sum(total_income) as total_income
             FROM `item_info_data`
             WHERE year(date_time) = year(NOW()) - 1
-            GROUP BY item_id, DATE_FORMAT(date_time, '%Y-%m')) as a
-      GROUP BY a.item_id) as c
-         LEFT JOIN (SELECT b.item_id, round(AVG(b.total_income), 2) income_per
-                    FROM (SELECT item_id, DATE_FORMAT(date_time, '%Y-%m'), sum(total_income) as total_income
+            GROUP BY PRColumn, DATE_FORMAT(date_time, '%Y-%m')) as a
+      GROUP BY a.PRColumn) as c
+         LEFT JOIN (SELECT b.PRColumn, round(AVG(b.total_income), 2) income_per
+                    FROM (SELECT PRColumn, DATE_FORMAT(date_time, '%Y-%m'), sum(total_income) as total_income
                           FROM `item_info_data`
                           WHERE year(date_time) = year(NOW()) - 2
-                          GROUP BY item_id, DATE_FORMAT(date_time, '%Y-%m')) as b
-                    GROUP BY b.item_id) as d 
-                    on c.item_id = d.item_id AND c.item_id = ?; 
+                          GROUP BY PRColumn, DATE_FORMAT(date_time, '%Y-%m')) as b
+                    GROUP BY b.PRColumn) as d 
+                    on c.PRColumn = d.PRColumn AND c.PRColumn = ?; 
 SQL;
 
         $response = [
@@ -993,7 +1043,7 @@ SQL;
             'income_per_mom' => 0
         ];
 
-        $data = Db::query($sql, [$eid]);
+        $data = $this->wapQuery($eid, $did, $sql);
         $row = array_pop($data);
         if ($row) {
             $response['income_per'] = $row['income_per'];
@@ -1015,24 +1065,24 @@ SQL;
         $sql = <<<SQL
 
 
-SELECT c.item_id,
+SELECT c.PRColumn,
        c.income_per,
        case c.income_per - d.income_per
            when 0 then 0
            else if(round((c.income_per - d.income_per) / d.income_per, 2) is null, 1,
                    round((c.income_per - d.income_per) / d.income_per, 2)) end as income_per_mom
-FROM (SELECT a.item_id, round(AVG(a.total_income), 2) income_per
-      FROM (SELECT item_id, DATE_FORMAT(date_time, '%Y-%m'), sum(total_income) as total_income
+FROM (SELECT a.PRColumn, round(AVG(a.total_income), 2) income_per
+      FROM (SELECT PRColumn, DATE_FORMAT(date_time, '%Y-%m'), sum(total_income) as total_income
             FROM `item_info_data`
             WHERE year(date_time) = year(NOW())
-            GROUP BY item_id, DATE_FORMAT(date_time, '%Y-%m')) as a
-      GROUP BY a.item_id) as c
-         LEFT JOIN (SELECT b.item_id, round(AVG(b.total_income), 2) income_per
-                    FROM (SELECT item_id, DATE_FORMAT(date_time, '%Y-%m'), sum(total_income) as total_income
+            GROUP BY PRColumn, DATE_FORMAT(date_time, '%Y-%m')) as a
+      GROUP BY a.PRColumn) as c
+         LEFT JOIN (SELECT b.PRColumn, round(AVG(b.total_income), 2) income_per
+                    FROM (SELECT PRColumn, DATE_FORMAT(date_time, '%Y-%m'), sum(total_income) as total_income
                           FROM `item_info_data`
                           WHERE year(date_time) = year(NOW()) - 1
-                          GROUP BY item_id, DATE_FORMAT(date_time, '%Y-%m')) as b
-                    GROUP BY b.item_id) as d on c.item_id = d.item_id AND c.item_id = ?; 
+                          GROUP BY PRColumn, DATE_FORMAT(date_time, '%Y-%m')) as b
+                    GROUP BY b.PRColumn) as d on c.PRColumn = d.PRColumn AND c.PRColumn = ?; 
 SQL;
 
         $response = [
@@ -1040,7 +1090,7 @@ SQL;
             'income_per_mom' => 0
         ];
 
-        $data = Db::query($sql, [$eid]);
+        $data = $this->wapQuery($eid, $did, $sql);
         $row = array_pop($data);
         if ($row) {
             $response['income_per'] = $row['income_per'];
@@ -1060,24 +1110,24 @@ SQL;
         $did = Request::param('depId', 0);
         $sql = <<<SQL
 
-SELECT c.item_id,
+SELECT c.PRColumn,
        c.cost_per,
        case c.cost_per - d.cost_per
            when 0 then 0
            else if(round((c.cost_per - d.cost_per) / d.cost_per, 2) is null, 1,
                    round((c.cost_per - d.cost_per) / d.cost_per, 2)) end as cost_per_mom
-FROM (SELECT a.item_id, round(AVG(a.total_cost), 2) cost_per
-      FROM (SELECT item_id, DATE_FORMAT(date_time, '%Y-%m'), sum(total_cost) as total_cost
+FROM (SELECT a.PRColumn, round(AVG(a.total_cost), 2) cost_per
+      FROM (SELECT PRColumn, DATE_FORMAT(date_time, '%Y-%m'), sum(total_cost) as total_cost
             FROM `item_info_data`
             WHERE year(date_time) = year(NOW()) - 1
-            GROUP BY item_id, DATE_FORMAT(date_time, '%Y-%m')) as a
-      GROUP BY a.item_id) as c
-         LEFT JOIN (SELECT b.item_id, round(AVG(b.total_cost), 2) cost_per
-                    FROM (SELECT item_id, DATE_FORMAT(date_time, '%Y-%m'), sum(total_cost) as total_cost
+            GROUP BY PRColumn, DATE_FORMAT(date_time, '%Y-%m')) as a
+      GROUP BY a.PRColumn) as c
+         LEFT JOIN (SELECT b.PRColumn, round(AVG(b.total_cost), 2) cost_per
+                    FROM (SELECT PRColumn, DATE_FORMAT(date_time, '%Y-%m'), sum(total_cost) as total_cost
                           FROM `item_info_data`
                           WHERE year(date_time) = year(NOW()) - 2
-                          GROUP BY item_id, DATE_FORMAT(date_time, '%Y-%m')) as b
-                    GROUP BY b.item_id) as d on c.item_id = d.item_id AND c.item_id = ?; 
+                          GROUP BY PRColumn, DATE_FORMAT(date_time, '%Y-%m')) as b
+                    GROUP BY b.PRColumn) as d on c.PRColumn = d.PRColumn AND c.PRColumn = ?; 
 SQL;
 
         $response = [
@@ -1085,7 +1135,7 @@ SQL;
             'cost_per_mom' => 0
         ];
 
-        $data = Db::query($sql, [$eid]);
+        $data = $this->wapQuery($eid, $did, $sql);
         $row = array_pop($data);
         if ($row) {
             $response['cost_per'] = $row['cost_per'];
@@ -1106,24 +1156,24 @@ SQL;
         $sql = <<<SQL
 
 
-SELECT c.item_id,
+SELECT c.PRColumn,
        c.cost_per,
        case c.cost_per - d.cost_per
            when 0 then 0
            else if(round((c.cost_per - d.cost_per) / d.cost_per, 2) is null, 1,
                    round((c.cost_per - d.cost_per) / d.cost_per, 2)) end as cost_per_mom
-FROM (SELECT a.item_id, round(AVG(a.total_cost), 2) cost_per
-      FROM (SELECT item_id, DATE_FORMAT(date_time, '%Y-%m'), sum(total_cost) as total_cost
+FROM (SELECT a.PRColumn, round(AVG(a.total_cost), 2) cost_per
+      FROM (SELECT PRColumn, DATE_FORMAT(date_time, '%Y-%m'), sum(total_cost) as total_cost
             FROM `item_info_data`
             WHERE year(date_time) = year(NOW())
-            GROUP BY item_id, DATE_FORMAT(date_time, '%Y-%m')) as a
-      GROUP BY a.item_id) as c
-         LEFT JOIN (SELECT b.item_id, round(AVG(b.total_cost), 2) cost_per
-                    FROM (SELECT item_id, DATE_FORMAT(date_time, '%Y-%m'), sum(total_cost) as total_cost
+            GROUP BY PRColumn, DATE_FORMAT(date_time, '%Y-%m')) as a
+      GROUP BY a.PRColumn) as c
+         LEFT JOIN (SELECT b.PRColumn, round(AVG(b.total_cost), 2) cost_per
+                    FROM (SELECT PRColumn, DATE_FORMAT(date_time, '%Y-%m'), sum(total_cost) as total_cost
                           FROM `item_info_data`
                           WHERE year(date_time) = year(NOW()) - 1
-                          GROUP BY item_id, DATE_FORMAT(date_time, '%Y-%m')) as b
-                    GROUP BY b.item_id) as d on c.item_id = d.item_id AND c.item_id = ?;
+                          GROUP BY PRColumn, DATE_FORMAT(date_time, '%Y-%m')) as b
+                    GROUP BY b.PRColumn) as d on c.PRColumn = d.PRColumn AND c.PRColumn = ?;
 
 SQL;
 
@@ -1132,7 +1182,7 @@ SQL;
             'cost_per_mom' => 0
         ];
 
-        $data = Db::query($sql, [$eid]);
+        $data = $this->wapQuery($eid, $did, $sql);
         $row = array_pop($data);
         if ($row) {
             $response['cost_per'] = $row['cost_per'];
