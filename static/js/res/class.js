@@ -27,7 +27,7 @@ layui.define
                 layui.element.render("progress")
 
                 layui.jquery.ajax({
-                    url: '/api/echarts/equips',
+                    url: '/api/echarts/equipsbyid',
                     dataType: 'json'
                 }).done(function (res) {
                     $('#equips').empty();

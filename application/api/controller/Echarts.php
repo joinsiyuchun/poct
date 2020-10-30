@@ -40,7 +40,8 @@ class Echarts extends API
         'varcost',
         'source',
         'equips',
-        'deps'
+        'equipsbyid',
+        'deps',
     ];
 
     protected $tempItemMap = [
@@ -115,6 +116,35 @@ and ti.org_list= ?
 ORDER BY tc.sort,tc.name,ti.sort
 SQL;
         $result = Db::query($sql, [$eid]);
+
+        $response = [];
+        foreach ($result as $row) {
+            $cid = $row['category_id'];
+            $category = $row['category'];
+            $eid = $row['id'];
+            $code = $row['code'];
+            $response["$category-$cid"][] = [
+                'id' => $eid,
+                'code' => $code
+            ];
+        }
+
+        return $response;
+    }
+
+    public function equipsbyid()
+    {
+        $eid = Request::param('id', self::DEFAULT_EID);
+        $sql = <<<SQL
+SELECT  tc.id as category_id,tc.name as category,ti.id,ti.code 
+FROM think_catagory tc 
+INNER JOIN think_item ti
+ON tc.id = ti.catagoryid
+WHERE tc.status=1 AND ti.status = 1
+ORDER BY tc.sort,tc.name,ti.sort
+
+SQL;
+        $result = Db::query($sql);
 
         $response = [];
         foreach ($result as $row) {
