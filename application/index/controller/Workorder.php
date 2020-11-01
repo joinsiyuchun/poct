@@ -68,7 +68,7 @@ class Workorder extends Base
 
     // 添加接修单
     public function add(){
-         $orglist = OrgModel::where(['status'=>1,'pid'=>0])
+         $orglist = OrgModel::where('status',1)->where('pid','<>',0)
             -> order('id', 'desc')
             -> field('id, name')
             -> select();
@@ -85,15 +85,15 @@ class Workorder extends Base
     // 二级联动-获取组织下的设备
     public function getItem(){
         $org_id = Request::param('org_id');
-        $itemlist = ItemModel::where('status',1)
+        $itemlist = ItemModel::where('status',1)->where('org_list',$org_id)
             -> order('id', 'desc')
             -> select();
         $k=0;
         foreach($itemlist as $v) {
-            $orglist = explode('|', $v['org_list']);
-            if(!in_array($org_id,$orglist)){
-                continue;
-            }
+//            $orglist = explode('|', $v['org_list']);
+//            if(!in_array($org_id,$orglist)){
+//                continue;
+//            }
             $wolist[$k]["id"] = $v["id"];
             $wolist[$k]["name"] = $v["catagory"]["name"];
             $wolist[$k]["code"] = $v["code"];

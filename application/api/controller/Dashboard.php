@@ -741,23 +741,24 @@ SQL;
     {
         $eid = Request::param('id', self::DEFAULT_EID);
         $sql = <<<SQL
-      
+select d.*,c.user_name from(
 SELECT 
     b.code,
     a.report_time,
     case a.status when 0 then '待接修' when 1 then '维修中' when 2 then '已完修' when 3 then '已结算' end as status,
     case a.is_halt when 1 then '故障停机' else '未停机' end as is_halt,
     a.halt_time,
-    c.user_name,
+   a.receptor_id,
     a.complete_time
 FROM
     think_workorder a,
-    think_notification b,
-    think_user c
+    think_notification b
+  
 WHERE
     a.notification_id = b.id
-	and a.receptor_id=c.id
-    and a.item_id = ?
+    and a.item_id = ?) d
+left join think_user c
+on d.receptor_id=c.id
 SQL;
 
         $data = Db::query($sql, [$eid]);
