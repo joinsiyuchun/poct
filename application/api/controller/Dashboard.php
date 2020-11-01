@@ -87,7 +87,7 @@ SQL;
 SELECT 
     SUM(cost) as total_cost
 FROM
-    operator.item_cost_detail
+    item_cost_detail
 WHERE
     cost_item = '设备折旧'
         AND YEAR(date_time) = YEAR(NOW())

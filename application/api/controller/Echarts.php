@@ -123,7 +123,7 @@ SQL;
             $category = $row['category'];
             $eid = $row['id'];
             $code = $row['code'];
-            $response["$category-$cid"][] = [
+            $response["$category"][] = [
                 'id' => $eid,
                 'code' => $code
             ];
@@ -152,7 +152,7 @@ SQL;
             $category = $row['category'];
             $eid = $row['id'];
             $code = $row['code'];
-            $response["$category-$cid"][] = [
+            $response["$category"][] = [
                 'id' => $eid,
                 'code' => $code
             ];
