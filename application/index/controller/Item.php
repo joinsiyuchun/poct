@@ -402,7 +402,7 @@ class Item extends Base
                     continue;
                 }
                 if (isset($orglist)) {
-                    $datas = join($orglist, "|");
+                    $datas = join("|", $orglist);
                     $res = ItemModel::where('id', $id)->update(['org_list' => $datas]);
                 }
             }
