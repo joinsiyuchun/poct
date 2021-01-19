@@ -7,6 +7,7 @@ namespace app\index\controller;
 use app\admin\common\controller\Base;
 use app\index\common\model\Monthreport as MonthreportModel;
 use app\index\common\model\Costreport as CostreportModel;
+use app\index\common\model\DepartmentAnalysis as DepartmentAnalysisModel;
 use app\index\common\model\Org as OrgModel;
 use app\index\common\model\Item_cost as ItemCostModel;
 
@@ -78,6 +79,59 @@ class Bireport extends Base
         return $this -> view -> fetch('costreport');
 
     }
+
+    //  部门分析报表
+    public function departmentreport()
+    {
+        // 设置模板变量
+        $this -> view -> assign([
+            'title' => '部门绩效分析报表'
+        ]);
+
+        // 渲染模板
+        return $this -> view -> fetch('departmentreport');
+
+    }
+
+    public function departmentprofitreport()
+    {
+        $map = [];
+        // 搜索功能
+        $keywords = Request::param('keywords');
+        if ( !empty($keywords) ) {
+            $map[] = ['department', 'like', '%'.$keywords.'%'];
+        }
+
+        // 定义分页参数
+        $limit = isset($_GET['limit']) ? $_GET['limit'] : 10;
+        $page = isset($_GET['page']) ? $_GET['page'] : 1;
+
+        // 获取产品目录信息
+        $itemList = DepartmentAnalysisModel::where($map)
+            -> page($page, $limit)
+            -> order('department', 'desc')
+            -> select();
+//        $monthlist=[];
+//        foreach($itemList as $k=>$v){
+//            $monthlist[$k]["item_id"]=$v["item_id"];
+//            $monthlist[$k]["item_code"]=$v->item["code"];
+//            if(isset($v->item->catagory)){
+//                $monthlist[$k]["catagory"]=$v->item->catagory["name"];
+//            }else{
+//                $monthlist[$k]["catagory"]='无效设备';
+//            }
+//
+//            $monthlist[$k]["date_time"]=$v["date_time"];
+//            $monthlist[$k]["cost_type"]=$v["cost_type"];
+//            $monthlist[$k]["cost_item"]=$v["cost_item"];
+//            $monthlist[$k]["cost"]=$v["cost"];
+//        }
+        $total = count(DepartmentAnalysisModel::where($map)->select());
+        $result = array("code" => 0, "msg" => "查询成功", "count" => $total, "data" => $itemList);
+        return json($result);
+
+    }
+
 
     public function costmonthreport()
     {

@@ -1,0 +1,79 @@
+{extend name="public:layout"/}
+
+{block name="main"}
+{// 数据表格}
+<table class="layui-hide" id="dataTable" lay-filter="dataTable"></table>
+{// 顶部工具栏}
+<script type="text/html" id="toolbar">
+    <div class="dataToolbar">
+        <div class="layui-inline">
+            <input class="layui-input" name="keywords" id="keywords" value="{:input('keywords')}" autocomplete="on" placeholder="请输入部门名称">
+        </div>
+        <button class="layui-btn search-btn" data-type="reload"><i class="iconfont">&#xe679;</i> 查询</button>
+    </div>
+</script>
+{/block}
+
+{block name="javascript"}
+<script>
+    layui.use(['jquery', 'layer', 'form', 'table'], function () {
+        var $ = layui.$,
+            layer = layui.layer,
+            form = layui.form,
+            table = layui.table;
+
+        // 渲染数据表格
+        table.render({
+            elem : '#dataTable'
+            ,url : '{:url("departmentprofitreport")}'
+            ,cellMinWidth: 80
+            ,height: 'full-100'
+            ,page: {
+                prev: '上一页',
+                next: '下一页',
+                layout: ['prev', 'page', 'next', 'skip', 'count', 'limit']
+            }
+            // ,toolbar: 'default'  // 开启顶部工具栏（默认模板）
+            ,toolbar: '#toolbar' // 指定顶部工具栏模板
+            // ,even: true  // 隔行背景
+            ,title: '部门绩效报表'  // 表格标题，用户导出数据文件名
+            ,text: {  // 指定无数据或数据异常时的提示文本
+                none: '暂无相关数据' //默认：无数据。注：该属性为 layui 2.2.5 开始新增
+            }
+            ,id: 'dataTable'
+            ,cols: [[  // 表格列标题及数据
+                {title: '#', type: 'numbers'}
+                ,{checkbox: true}
+                ,{field: 'level', width: 200, title: '性质', sort: true, align: 'center'}
+                ,{field: 'department', width: 200, title: '科室名称', sort: true, align: 'center'}
+                ,{field: 'account_department', width: 200, title: '记账科室', sort: true, align: 'center'}
+                ,{field: 'category', width: 200, title: '醒目', sort: true, align: 'center'}
+                ,{field: 'item_code', width: 200, title: '成本项目', align: 'center'}
+                ,{field: 'item_name', width: 200, title: '成本类型',align: 'center'}
+                ,{field: 'quantity', width: 200, title: '数量', sort: true,  align: 'center'}
+
+            ]], done() {
+                // 搜索功能
+                var $ = layui.$, active = {
+                    reload: function(){
+                        var keywords = $('#keywords');
+                        //执行重载
+                        table.reload('dataTable', {
+                            page: {
+                                curr: 1 //重新从第 1 页开始
+                            }
+                            ,where: {
+                                keywords: keywords.val()
+                            }
+                        }, 'data');
+                    }
+                };
+                $('.search-btn').on('click', function(){
+                    var type = $(this).data('type');
+                    active[type] ? active[type].call(this) : '';
+                });
+            }
+        });
+    });
+</script>
+{/block}
