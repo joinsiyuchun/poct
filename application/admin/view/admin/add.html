@@ -19,12 +19,25 @@
             <label class="layui-form-label">角色：</label>
             <div class="layui-input-block">
                 <select name="role_id" lay-verify="required">
-                    <option value="">请选择管理员角色</option>
+                    <option value="">请选择用户角色</option>
                     {if !empty($roleList)}
                     {foreach name="roleList" item="vo"}
                     {if $vo['id'] neq 1}
                     <option value="{$vo['id']}">{$vo['name']}</option>
                     {/if}
+                    {/foreach}
+                    {/if}
+                </select>
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">管理组：</label>
+            <div class="layui-input-block">
+                <select name="group_id" lay-verify="required">
+                    <option value="">请选择管理组</option>
+                    {if !empty($groupList)}
+                    {foreach name="groupList" item="vo"}
+                        <option value="{$vo['id']}">{$vo['name']}</option>
                     {/foreach}
                     {/if}
                 </select>
