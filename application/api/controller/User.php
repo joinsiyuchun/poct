@@ -30,26 +30,27 @@ class User extends Api {
             if (!$user) {
                 $user = UserModel::create(['openid' => $openid]);
             }
-            $org=UserOrgModel::get(['user_id'=>(int) $user->id,'status'=>1]);
+//            $org=UserOrgModel::get(['user_id'=>(int) $user->id,'status'=>1]);
 //            $realname=$user["user_name"];
 //            if($realname==null){
 //                $realname=$user->id;
 //            }
        //     Session::set('user', ['id' => (int) $user->id, 'openid' => $openid, 'realname' => $realname]);
             Session::set('user', ['id' => (int) $user->id, 'openid' => $openid]);
-            if($org!=null){
-                $orgid=$org->org_id;
-                Session::set('org', ['id' => $orgid]);
-            }else{
-//                $data1 = [
-//                    'user_id' => (int)$user->id,
-//                    'org_id' => 2,
-//                    'status' => 1,
-//                    'expire_time' => strtotime('+1 year')
-//                ];
-//                UserOrgModel::create($data1);
-                Session::set('org', ['id' =>1]);
-            }
+            Session::set('org', ['id' =>1]);
+//            if(!$org){
+//                $orgid=$org->org_id;
+//                Session::set('org', ['id' => $orgid]);
+//            }else{
+////                $data1 = [
+////                    'user_id' => (int)$user->id,
+////                    'org_id' => 2,
+////                    'status' => 1,
+////                    'expire_time' => strtotime('+1 year')
+////                ];
+////                UserOrgModel::create($data1);
+//                Session::set('org', ['id' =>1]);
+//            }
             return json(['isLogin' => true]);
         }
         return json(['isLogin' => false]);

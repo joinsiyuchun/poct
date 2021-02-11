@@ -315,8 +315,9 @@ class Item extends Base
     //批量分配组织
     public function assignorg()
     {
-        // 获取节点id
+        // 1. 获取用户提交的数据
         $ids = Request::param('id');
+
 
 
         //设置组织下拉框

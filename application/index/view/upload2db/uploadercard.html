@@ -4,8 +4,12 @@
 
 
 {// 行内工具栏}
-<form action="{:url('/index/Upload2db/imports')}" method="post" enctype="multipart/form-data">
-    <label>忽略首行:&nbsp;&nbsp;&nbsp; <input type="checkbox" name="ignoreHeader"/></label><br/>
+<form action="{:url('/index/Upload2db/importcard')}" method="post" enctype="multipart/form-data">
+    <label>文档类型
+        <select  name="cardtype">
+            <option>医疗器械注册证</option>
+            <option>营业执照（副本）</option>
+        </select></label><br/>
     <input type="hidden" value="{$type}" name="type"/>
     <input type="file" name="myfile">
     <input type="submit" class="layui-btn" id="submit" lay-submit lay-filter="submit" value="导入数据">

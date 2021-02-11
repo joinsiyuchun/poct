@@ -63,6 +63,7 @@ class Item extends API
         $department_id = $this->request->get('department_id/d', 0);
         $itemlist=ItemModel::where(["status"=>1,"catagoryid"=>$category_id])->select();
         $url = $this->request->domain() . '/static/uploads/';
+        $data=[];
         foreach($itemlist as $i=>$v){
            if(in_array($department_id,$v->orgs())){
                $data[$i]["type"]=$v["catagory"]["name"];

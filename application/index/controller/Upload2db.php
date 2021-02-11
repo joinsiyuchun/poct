@@ -36,7 +36,7 @@ class Upload2db extends Controller
         ]
     ];
 
-    // 接修单管理首页
+    // 上传EXCEL
     public function index()
     {
         $type = Request::param('type');
@@ -51,6 +51,23 @@ class Upload2db extends Controller
             $this->view->assign('msg', '');
         }
         return $this->view->fetch('uploader');
+    }
+
+    // 上传证照
+    public function uploadcard()
+    {
+        $type = Request::param('type');
+        if (!$this->excelConfig[$type]) {
+            $this->view->assign('title', '上传');
+            $this->view->assign('type', $type);
+            $this->view->assign('msg', "上传数据模板没有配置");
+        } else {
+            $config = $this->excelConfig[$type];
+            $this->view->assign('title', $config['title']);
+            $this->view->assign('type', $type);
+            $this->view->assign('msg', '');
+        }
+        return $this->view->fetch('uploadercard');
     }
 
     /**
@@ -180,6 +197,33 @@ class Upload2db extends Controller
             $this->view->assign('type', $type);
             $this->view->assign('msg', "导入成功");
             return $this->view->fetch('uploader');
+        }
+    }
+
+    public function importcard()
+    {
+
+        //上传excel文件
+
+        $file = Request::file('myfile');
+
+        //移到/uploads/excel/下
+        $info = $file->move(ROOT_PATH . '/uploads/card');
+        //上传文件成功
+        if ($info) {
+            //引入PHPExcel类
+            // \vendor('PHPExcel.PHPExcel.Reader.Excel5');
+            //获取上传后的文件名
+            $fileName = $info->getSaveName();
+            //文件路径
+            $filePath = 'uploads/card/' . $fileName;
+            $extension = strtolower(pathinfo($filePath, PATHINFO_EXTENSION));
+
+
+            $this->view->assign('title', '上传测试');
+            $this->view->assign('type', '成功');
+            $this->view->assign('msg', "导入成功");
+            return $this->view->fetch('uploadercard');
         }
     }
 }

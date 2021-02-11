@@ -12,16 +12,17 @@
             <input class="layui-input" name="keywords" id="keywords" value="{:input('keywords')}" autocomplete="on" placeholder="请输入设备编码">
         </div>
         <button class="layui-btn search-btn" data-type="reload"><i class="iconfont">&#xe679;</i> 查询</button>
-        <button class="layui-btn" id="import" data-type="import"><i class="iconfont">&#xe692;</i> 导入设备档案
-        </button>
+
+        <button class="layui-btn" id="uploadcard" data-type="import"><i class="iconfont">&#xe692;</i> 上传证照</button>
         <div class="layui-inline">
             {if (buttonCheck('index/item/add')) }
             <button class="layui-btn" id="add" data-pid="0"><i class="iconfont">&#xe692;</i> 添加顶层设备</button>
+            <button class="layui-btn" id="import" data-type="import"><i class="iconfont">&#xe692;</i> 导入设备档案 </button>
             {/if}
             {if (buttonCheck('index/item/asign')) }
-            <button class="layui-btn"  id="assign" data-pid="0"><i class="iconfont">&#xe692;</i> 分配组织</button>
+            <button class="layui-btn"  id="assign" ><i class="iconfont">&#xe692;</i> 分配组织</button>
             {/if}
-            <button class="layui-btn layui-btn-primary open-all" id="openAll"><i class="iconfont">&#xe9d6;</i> 全部关闭</button>
+            <!--<button class="layui-btn layui-btn-primary open-all" id="openAll"><i class="iconfont">&#xe9d6;</i> 全部关闭</button>-->
         </div>
     </div>
 </script>
@@ -119,6 +120,7 @@
             ,id: 'dataTable'
             ,cols: [
                 [
+                    {title: '#', type: 'numbers'},
                     { checkbox: true},
                     { field: 'id', align: 'center', width: 60, title: 'ID' },
                     { field: 'title', width: 150, title: '设备分类',align: 'center'},
@@ -156,15 +158,42 @@
             }
         });
 
+        //batch assign org
 
+        $('#assign').on('click', function () {
+            var checkStatus = table.checkStatus('dataTable'); //idTest 即为基础参数 id 对应的值
+            var checkeddata=checkStatus.data;
+            var arr = new Array();
+            for(i=0;i<checkeddata.length;i++){
+                arr[i]=checkeddata[i]["id"];
+            }
+            var str = arr.join("|");
+            var index = layer.open({
+                type: 2,
+                title: '<i class=iconfont>&#xe7c7;</i> 分配组织',
+                area: ['600px', '475px'],
+                content: ['{:url("item/assignorg")}?id=' + str, 'yes'],
+                skin: 'layui-layer-molv',
+                btn: ['保存', '取消'],
+                btnAlign: 'c',
+                yes: function(index, layero){
+                    var submit = layero.find('iframe').contents().find("#submit");// #subBtn为页面层提交按钮ID
+                    submit.click();// 触发提交监听
+                    return false;
+                },
+                btn2:function (index,layero) {
+                    layer.close(index);
+                }
+            });
+        });
 
         // 展开关闭节点
-        $('#openAll').click(function(e) {
-            var treedata = treeGrid.getDataTreeList(tableId);
-            treeGrid.treeOpenAll(tableId, !treedata[0][treeGrid.config.cols.isOpen]);
-            mark = !mark;
-            mark ? $(this).html('<i class="iconfont">&#xe9d6;</i> 全部关闭') : $(this).html('<i class="iconfont">&#xe9d7;</i> 全部展开');
-        });
+//        $('#openAll').click(function(e) {
+//            var treedata = treeGrid.getDataTreeList(tableId);
+//            treeGrid.treeOpenAll(tableId, !treedata[0][treeGrid.config.cols.isOpen]);
+//            mark = !mark;
+//            mark ? $(this).html('<i class="iconfont">&#xe9d6;</i> 全部关闭') : $(this).html('<i class="iconfont">&#xe9d7;</i> 全部展开');
+//        });
 
         // 添加顶级节点
         $('#add').on('click', function () {
@@ -189,33 +218,33 @@
                 }
             });
         });
-        // 分配机构
-        $('#assign').on('click', function () {
-            var checkStatus = treeGrid.checkStatus(tableId); //idTest 即为基础参数 id 对应的值
-            var checkeddata=checkStatus.data;
-            var arr = new Array();
-            for(i=0;i<checkeddata.length;i++){
-                arr[i]=checkeddata[i]["id"];
-            }
-            var str = arr.join("|");
-            var index = layer.open({
-                type: 2,
-                title: '<i class=iconfont>&#xe7c7;</i> 编辑节点',
-                area: ['600px', '475px'],
-                content: ['{:url("item/assignorg")}?id=' + str, 'yes'],
-                skin: 'layui-layer-molv',
-                btn: ['保存', '取消'],
-                btnAlign: 'c',
-                yes: function(index, layero){
-                    var submit = layero.find('iframe').contents().find("#submit");// #subBtn为页面层提交按钮ID
-                    submit.click();// 触发提交监听
-                    return false;
-                },
-                btn2:function (index,layero) {
-                    layer.close(index);
-                }
-            });
-        });
+//        // 分配机构
+//        $('#assign').on('click', function () {
+//            var checkStatus = table.checkStatus(dataTable); //idTest 即为基础参数 id 对应的值
+//            var checkeddata=checkStatus.data;
+//            var arr = new Array();
+//            for(i=0;i<checkeddata.length;i++){
+//                arr[i]=checkeddata[i]["id"];
+//            }
+//            var str = arr.join("|");
+//            var index = layer.open({
+//                type: 2,
+//                title: '<i class=iconfont>&#xe7e0;</i> 分配组织',
+//                area: ['400px', '625px'],
+//                content: ['{:url("item/assignorg")}?id=' + str, 'yes'],
+//                skin: 'layui-layer-molv',
+//                btn: ['保存', '取消'],
+//                btnAlign: 'c',
+//                yes: function(index, layero){
+//                    var submit = layero.find('iframe').contents().find("#submit");// #subBtn为页面层提交按钮ID
+//                    submit.click();// 触发提交监听
+//                    return false;
+//                },
+//                btn2:function (index,layero) {
+//                    layer.close(index);
+//                }
+//            });
+//        });
 
         // import excel
         $('#import').on('click', function () {
@@ -224,6 +253,22 @@
                 title: '<i class=iconfont>&#xe7e0;</i> 导入设备档案',
                 area: ['800px', '560px'],
                 content: ['{:url("upload2db/index")}?type=' + 'bireport', 'yes'],
+                skin: 'layui-layer-molv',
+                btn: ['取消'],
+                btnAlign: 'c',
+                yes: function (index, layero) {
+                    layer.close(index);
+                }
+            });
+        });
+
+        // upload img
+        $('#uploadcard').on('click', function () {
+            var index = layer.open({
+                type: 2,
+                title: '<i class=iconfont>&#xe7e0;</i> 上传证照',
+                area: ['800px', '560px'],
+                content: ['{:url("upload2db/uploadcard")}?type=' + 'bireport', 'yes'],
                 skin: 'layui-layer-molv',
                 btn: ['取消'],
                 btnAlign: 'c',

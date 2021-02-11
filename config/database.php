@@ -13,14 +13,13 @@ return [
     // 数据库类型
     'type'            => 'mysql',
     // 服务器地址
-    'hostname'        => '47.108.200.114',
+    'hostname'        => 'qdm688349364.my3w.com',
     // 数据库名
-    'database'        => 'operator',
+    'database'        => 'qdm688349364_db',
     // 用户名
-    // 用户名
-    'username'        => 'poli',
+    'username'        => 'qdm688349364',
     // 密码
-    'password'        => 'T1oe40YU9rRiGRce5G1rtHy4mqa84xLC@@',
+    'password'        => 'Join379610',
     // 端口
     'hostport'        => '3306',
     // 连接dsn
