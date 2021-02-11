@@ -46,6 +46,21 @@
             </div>
         </div>
         <div class="layui-form-item">
+            <label class="layui-form-label">微信小程序用户：</label>
+            <div class="layui-input-block">
+                <select name="wx_id" >
+                    <option value="">请选择openid</option>
+                    {if !empty($wxList)}
+                    {foreach name="wxList" item="vo"}
+                    {if $vo['id'] neq 1}
+                    <option value="{$vo['id']}" {eq name="$adminInfo.wx_id" value="$vo['id']"}selected{/eq}>{$vo['openid']}</option>
+                    {/if}
+                    {/foreach}
+                    {/if}
+                </select>
+            </div>
+        </div>
+        <div class="layui-form-item">
             <label class="layui-form-label">是否启用：</label>
             <div class="layui-input-block">
                 <input type="radio" name="status" value="1" title="启用" lay-verify="required" {eq name="$adminInfo.status" value="1"}checked{/eq} lay-reqText="请选择启用状态">

@@ -7,6 +7,7 @@ namespace app\admin\controller;
 use app\admin\common\controller\Base;
 use app\admin\common\model\Role;
 use app\admin\common\model\Group;
+use app\admin\common\model\User;
 use think\db;
 use think\facade\Request;
 use app\admin\common\model\Admin as AdminModel;
@@ -42,7 +43,7 @@ class Admin extends Base
             -> join(['think_role' => 'r'], 'a.role_id = r.id')
             -> join(['think_group' => 'f'], 'a.group_id = f.id')
             -> order('a.id', 'desc')
-            -> field('a.id, a.username, a.role_id, a.group_id,a.status, a.create_time, a.update_time, a.last_login_time, r.name,f.name gname')
+            -> field('a.id, a.username, a.role_id, a.group_id,a.wx_id,a.status, a.create_time, a.update_time, a.last_login_time, r.name,f.name gname')
             -> select();
 
         $total = count(AdminModel::where($map)->select());
@@ -63,11 +64,14 @@ class Admin extends Base
         $roleList = Role::where('id', '>', 1) -> select();
         // 获取所有维修组
         $groupList = Group::where('status', 1) -> select();
+        // 获取所有openid
+        $wxList = User::all();
 
         // 设置模板变量
         $this -> view -> assign('title', '添加用户');
         $this -> view -> assign('roleList', $roleList);
         $this -> view -> assign('groupList', $groupList);
+        $this -> view -> assign('wxList', $wxList);
 
         // 渲染模板
         return $this -> view -> fetch('add');
@@ -100,18 +104,21 @@ class Admin extends Base
         $adminId = Request::param('id');
 
         // 根据节点id查询要更新的节点信息
-        $adminInfo = AdminModel::where('id', $adminId) -> field('id, username, role_id, group_id,status') -> find();
+        $adminInfo = AdminModel::where('id', $adminId) -> field('id, username, role_id, group_id,wx_id,status') -> find();
 
         // 获取所有非超级用户角色
         $roleList = Role::where('id', '>', 1) -> select();
         // 获取所有维修组
         $groupList = Group::where('status', 1) -> select();
+        // 获取所有openid
+        $wxList = User::all();
 
         // 设置模板变量
         $this -> view -> assign('title', '编辑用户');
         $this -> view -> assign('adminInfo', $adminInfo);
         $this -> view -> assign('roleList', $roleList);
         $this -> view -> assign('groupList', $groupList);
+        $this -> view -> assign('wxList', $wxList);
 
         // 渲染模板
         return $this -> view -> fetch('edit');
