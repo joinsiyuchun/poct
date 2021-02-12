@@ -47,10 +47,10 @@
             <label class="layui-form-label">微信小程序用户：</label>
             <div class="layui-input-block">
                 <select name="wx_id" >
-                    <option value="">请选择open id</option>
+                    <option value="">请选择微信用户</option>
                     {if !empty($wxList)}
                     {foreach name="wxList" item="vo"}
-                    <option value="{$vo['id']}">{$vo['openid']}</option>
+                    <option value="{$vo['id']}">{$vo['user_name']}-{$vo['openid']}</option>
                     {/foreach}
                     {/if}
                 </select>

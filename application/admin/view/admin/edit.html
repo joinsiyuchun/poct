@@ -53,7 +53,7 @@
                     {if !empty($wxList)}
                     {foreach name="wxList" item="vo"}
                     {if $vo['id'] neq 1}
-                    <option value="{$vo['id']}" {eq name="$adminInfo.wx_id" value="$vo['id']"}selected{/eq}>{$vo['openid']}</option>
+                    <option value="{$vo['id']}" {eq name="$adminInfo.wx_id" value="$vo['id']"}selected{/eq}>{$vo['user_name']}-{$vo['openid']}</option>
                     {/if}
                     {/foreach}
                     {/if}

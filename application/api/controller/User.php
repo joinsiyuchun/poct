@@ -5,6 +5,7 @@ namespace app\api\controller;
 use app\common\controller\Api;
 use app\common\library\facade\Setting as Setting;
 use app\api\common\model\User as UserModel;
+use app\api\common\model\Admin as AdminModel;
 use app\api\common\model\Org as OrgModel;
 use app\api\common\model\UserOrg as UserOrgModel;
 use think\facade\Session;
@@ -14,6 +15,15 @@ class User extends Api {
     protected $checkLoginExclude = ['setting', 'login'];
 
     public function setting() {
+        return json(['isLogin' => Session::has('user')]);
+    }
+
+    public function nickname() {
+        $nickname = $this->request->get('nickname/s', '');
+        $userid=$this->user['id'];
+        $user=UserModel::get($userid);
+        $user["user_name"]=$nickname;
+        $user->save();
         return json(['isLogin' => Session::has('user')]);
     }
 
@@ -37,7 +47,7 @@ class User extends Api {
 //            }
        //     Session::set('user', ['id' => (int) $user->id, 'openid' => $openid, 'realname' => $realname]);
             Session::set('user', ['id' => (int) $user->id, 'openid' => $openid]);
-            Session::set('org', ['id' =>1]);
+//            Session::set('org', ['id' =>1]);
 //            if(!$org){
 //                $orgid=$org->org_id;
 //                Session::set('org', ['id' => $orgid]);
@@ -76,23 +86,46 @@ class User extends Api {
             return json($user);
     }
 
-    public function company()
-    {
+//    public function company()
+//    {
+//        $companylist = [];
+//        Session::set('org', ['id' =>1]);
+//        $user = UserModel::get($this->user['id'], 'UserOrg');
+//        $orglist = $user["user_org"];
+//        if (!isset($orglist)) {
+//            $company = OrgModel::get(1);
+//            $companylist[0]['id'] = $company['id'];
+//            $companylist[0]['name'] = $company['name'];
+//        } else {
+//            foreach ($orglist as $k => $v) {
+//                $company = OrgModel::get($v['org_id']);
+//                $companylist[$k]['id'] = $company['id'];
+//                $companylist[$k]['name'] = $company['name'];
+//            }
+//        }
+//        return json($companylist);
+//    }
+
+    public function company(){
         $companylist = [];
-        $user = UserModel::get($this->user['id'], 'UserOrg');
-        $orglist = $user["user_org"];
-        if (!isset($orglist)) {
-            $company = OrgModel::get(1);
-            $companylist[0]['id'] = $company['id'];
-            $companylist[0]['name'] = $company['name'];
-        } else {
-            foreach ($orglist as $k => $v) {
-                $company = OrgModel::get($v['org_id']);
-                $companylist[$k]['id'] = $company['id'];
-                $companylist[$k]['name'] = $company['name'];
-            }
+        // 获取到当前用户对应的管理组
+        $userList = AdminModel::where('wx_id',$this->user['id'])
+            -> alias('a')
+            -> join(['think_group' => 'f'], 'a.group_id = f.id')
+            -> field('a.group_id,f.name')
+            -> select();
+        Session::set('org', ['id' =>1]);
+
+        foreach ($userList as $k => $v) {
+            $companylist[$k]['id'] = $v['group_id'];
+            $companylist[$k]['name'] = $v['name'];
+        }
+        if (!isset($companylist)) {
+            $companylist[0]['id'] = 0;
+            $companylist[0]['name'] = '演示组';
         }
         return json($companylist);
+
     }
 
     public function companylist()

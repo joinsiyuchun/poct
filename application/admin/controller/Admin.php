@@ -42,8 +42,9 @@ class Admin extends Base
             -> alias('a')
             -> join(['think_role' => 'r'], 'a.role_id = r.id')
             -> join(['think_group' => 'f'], 'a.group_id = f.id')
+            -> leftjoin(['think_user' => 'u'], 'a.wx_id = u.id')
             -> order('a.id', 'desc')
-            -> field('a.id, a.username, a.role_id, a.group_id,a.wx_id,a.status, a.create_time, a.update_time, a.last_login_time, r.name,f.name gname')
+            -> field('a.id, a.username, a.role_id, a.group_id,a.wx_id,a.status, a.create_time, a.update_time, a.last_login_time, r.name,f.name gname,u.user_name nickname')
             -> select();
 
         $total = count(AdminModel::where($map)->select());
