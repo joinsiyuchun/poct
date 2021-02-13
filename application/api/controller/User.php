@@ -114,7 +114,7 @@ class User extends Api {
             -> join(['think_group' => 'f'], 'a.group_id = f.id')
             -> field('a.group_id,f.name')
             -> select();
-        Session::set('org', ['id' =>1]);
+
 
         foreach ($userList as $k => $v) {
             $companylist[$k]['id'] = $v['group_id'];
@@ -124,6 +124,7 @@ class User extends Api {
             $companylist[0]['id'] = 0;
             $companylist[0]['name'] = '演示组';
         }
+        Session::set('org', ['id' =>$companylist[0]['id']]);
         return json($companylist);
 
     }

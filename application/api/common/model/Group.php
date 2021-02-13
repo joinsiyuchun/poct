@@ -1,6 +1,6 @@
 <?php
 /**
- * 机构表模型
+ * 维修组表模型
  */
 
 namespace app\api\common\model;
@@ -9,12 +9,11 @@ namespace app\api\common\model;
 use think\Model;
 
 
-
-class Org extends Model
+class Group extends Model
 {
     // 定义主键和数据表
     protected $pk = 'id';
-    protected $table = 'think_org';
+    protected $table = 'think_group';
 
     // 定义自动时间戳和数据格式
     protected $autoWriteTimestamp = true;
@@ -22,8 +21,5 @@ class Org extends Model
     protected $updateTime = 'update_time';
     protected $dateFormat = 'Y-m-d H:i:s';
 
-//    public function Catagory()
-//    {
-//        return $this->belongsToMany('Catagory','OrgCatagory');
-//    }
+
 }
