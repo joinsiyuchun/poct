@@ -54,16 +54,18 @@ class Workorder extends Api
         if (empty($notification)) {
             $this->error('订单不存在');
         }
-        $url = $this->request->domain() . '/static/uploads/';
+        $url = $this->request->domain() . '/static/images/';
         $order["memo"]=$notification["memo"];
         $order["code"]=$notification["code"];
         $order["report_time"]=$notification["create_time"];
         $workorderlist = $notification->workorder;
         foreach ($workorderlist as $k => $w) {
             $order["location"]=$w["location"];
-            $order["items"][$k]["image_url"] = $url . $w["items"]["image_url"];
+            $order["items"][$k]["image_url"] = $url . "logo-icon.png";
             $order["items"][$k]["name"] = $w["items"]["catagory"]["name"];
-            $order["items"][$k]["sn"] = $w["items"]["sn"];
+            $order["items"][$k]["code"] = $w["items"]["code"];
+            $order["items"][$k]["brand"] = $w["items"]["brand"];
+            $order["items"][$k]["model"] = $w["items"]["model"];
             $order["items"][$k]["status"] = $w["status"];
             $order["items"][$k]["orderno"] = $w["id"];
             $order["items"][$k]["accept_time"] = $w["accept_time"];
@@ -82,31 +84,37 @@ class Workorder extends Api
         $begindate = $this->request->get('begindate', '2010-01-01 00:00:00');
 
         $enddate = $this->request->get('enddate', '2050-01-01 00:00:00');
-        $enddatetime=$enddate.'23:59:59';
+        $begindatetime=date('Y-m-d H:i:s',strtotime("$begindate+0day"));
+        $enddatetime=date('Y-m-d H:i:s',strtotime("$enddate+1day"));
         switch($status){
             case 0:
-                $workorderlist = OrderModel::where("status",$status)->whereBetweenTime("report_time",$begindate,$enddatetime)->order("create_time","desc")->select();
+                $workorderlist = OrderModel::where("status",$status)->whereBetweenTime("report_time",$begindatetime,$enddatetime)->order("create_time","desc")->select();
                 break;
             case 1:
-                $workorderlist = OrderModel::where("status",$status)->whereBetweenTime("accept_time",$begindate,$enddatetime)->order("create_time","desc")->select();
+                $workorderlist = OrderModel::where("status",$status)->whereBetweenTime("accept_time",$begindatetime,$enddatetime)->order("create_time","desc")->select();
                 break;
             case 2:
-                $workorderlist = OrderModel::where("status",$status)->whereBetweenTime("complete_time",$begindate,$enddatetime)->order("create_time","desc")->select();
+                $workorderlist = OrderModel::where("status",$status)->whereBetweenTime("complete_time",$begindatetime,$enddatetime)->order("create_time","desc")->select();
                 break;
             default:
-                $workorderlist = OrderModel::where("status",$status)->whereBetweenTime("report_time",$begindate,$enddatetime)->order("create_time","desc")->select();
+                $workorderlist = OrderModel::where("status",$status)->whereBetweenTime("report_time",$begindatetime,$enddatetime)->order("create_time","desc")->select();
                 break;
         }
          if (empty($workorderlist->toArray())) {
             return null;
         }
-        $url = $this->request->domain() . '/static/uploads/';
+        $url = $this->request->domain() . '/static/images/';
         foreach ($workorderlist as $k => $w) {
             $order["items"][$k]["id"] = $w["id"];
-            $order["items"][$k]["image_url"] = $url . $w["items"]["image_url"];
+            $order["items"][$k]["image_url"] = $url . "logo-icon.png";
             $order["items"][$k]["name"] = $w["items"]["catagory"]["name"];//设备名称
+            $order["items"][$k]["id"] = $w["items"]["code"];//code
             $order["items"][$k]["sn"] = $w["items"]["sn"];//sn
             $order["items"][$k]["pn"] = $w["items"]["pn"];//pn
+            $order["items"][$k]["brand"] = $w["items"]["brand"];
+            $order["items"][$k]["model"] = $w["items"]["model"];
+            $order["items"][$k]["creator"] = $w["notification"]["user"]["user_name"];//creator
+            $order["items"][$k]["memo"] = $w["notification"]["memo"];//故障描述
             $order["items"][$k]["org"] = $w["notification"]["org"]["name"];//org
             $order["items"][$k]["dept"] = $w["notification"]["dept"]["name"];//org
             $order["items"][$k]["code"] = $w["notification"]["code"];//报修单号

@@ -62,7 +62,7 @@ class Item extends API
         $category_id = $this->request->get('category_id/d', 0);
         $department_id = $this->request->get('department_id/d', 0);
         $itemlist=ItemModel::where(["status"=>1,"catagoryid"=>$category_id])->select();
-        $url = $this->request->domain() . '/static/uploads/';
+        $url = $this->request->domain() . '/static/images/';
         $data=[];
         foreach($itemlist as $i=>$v){
            if(in_array($department_id,$v->orgs())){
@@ -71,7 +71,9 @@ class Item extends API
                $data[$i]["code"]=$v["code"];
                $data[$i]["sn"]=$v["sn"];
                $data[$i]["pn"]=$v["pn"];
-               $data[$i]["img_url"]=$url.$v["image_url"];
+               $data[$i]["brand"]=$v["brand"];
+               $data[$i]["model"]=$v["model"];
+               $data[$i]["img_url"]=$url."logo-icon.png";
            }
         }
         return json([

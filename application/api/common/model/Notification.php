@@ -23,7 +23,7 @@ class Notification extends Model
     protected $dateFormat = 'Y-m-d H:i:s';
 
     function org(){
-        return $this->belongsTo('Org','org_id');
+        return $this->belongsTo('Group','org_id');
     }
 
     function dept(){
