@@ -1,0 +1,38 @@
+{extend name="public:layer_layout"/}
+
+{block name="main"}
+<form class="layui-form" id="form1" lay-filter="component-form-element">
+    <div class="layui-row layui-col-space10 layui-form-item">
+        <div class="layui-form-item">
+            <label class="layui-form-label">检验设备编码：</label>
+            <div class="layui-input-block">
+                <input type="text" name="item_id" lay-verify="required" lay-reqText="设备编码" placeholder="设备编码" autocomplete="off" class="layui-input" value="{$equipment.code}">
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">通用名：</label>
+            <div class="layui-input-block">
+                <input type="text" name="execute_date" lay-verify="required" lay-reqText="通用名" placeholder="通用名" autocomplete="off" class="layui-input" value="{$equipment.catagory.name}">
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">品牌</label>
+            <div class="layui-input-block">
+                <input type="text" name="pid" lay-verify="required" lay-reqText="品牌" placeholder="品牌" autocomplete="off" class="layui-input" value="{$equipment.brand}">
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">型号</label>
+            <div class="layui-input-block">
+                <input type="text" name="diagnosis_id" lay-verify="required" lay-reqText="型号" placeholder="型号" autocomplete="off" class="layui-input" value="{$equipment.model}">
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">启用日期：</label>
+            <div class="layui-input-block">
+                <input type="text" name="prescription_id" lay-verify="required" lay-reqText="启用日期" placeholder="启用日期" autocomplete="off" class="layui-input" value="{$equipment.start_date}">
+            </div>
+        </div>
+
+</form>
+{/block}

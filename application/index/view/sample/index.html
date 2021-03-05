@@ -1,0 +1,172 @@
+{extend name="public:layout"/}
+
+{block name="main"}
+{// 数据表格}
+<table class="layui-hide" id="dataTable" lay-filter="dataTable"></table>
+{// 顶部工具栏}
+<script type="text/html" id="toolbar">
+    <div class="dataToolbar">
+        <div class="layui-inline">
+            <input class="layui-input" name="keywords" id="keywords" value="{:input('keywords')}" autocomplete="on" placeholder="请输入条形码">
+        </div>
+        <button class="layui-btn search-btn" data-type="reload"><i class="iconfont">&#xe679;</i> 查询</button>
+
+    </div>
+</script>
+
+{// 行内工具栏}
+<script type="text/html" id="barTool">
+    <a href="javascript:;" lay-event="patient" class="layui-btn layui-btn-xs"><i class="iconfont">&#xe7e0;</i>病患信息</a>
+    <a href="javascript:;" lay-event="equipment" class="layui-btn layui-btn-xs"><i class="iconfont">&#xe7e0;</i>设备信息</a>
+    <a href="javascript:;" lay-event="request" class="layui-btn layui-btn-xs"><i class="iconfont">&#xe7e0;</i>申请单</a>
+    <a href="javascript:;" lay-event="edit" class="layui-btn layui-btn-xs"><i class="iconfont">&#xe7e0;</i>签收</a>
+
+</script>
+{// 状态}
+<script type="text/html" id="status">
+
+    {{# if(d.status == 1){ }}
+    <button class="layui-btn layui-btn-xs">已签收</button>
+    {{# } else if(d.status == 0){ }}
+    <button class="layui-btn layui-btn-xs layui-btn-warm">未签收</button>
+    {{# } else if(d.status == 2){ }}
+    <button class="layui-btn layui-btn-xs layui-btn-danger">拒收</button>
+    {{# } }}
+
+</script>
+
+{/block}
+
+{block name="layui"}{/block}
+{block name="javascript"}
+<script>
+    layui.use(['jquery', 'layer', 'form', 'table'], function () {
+        var $ = layui.$,
+            layer = layui.layer,
+            form = layui.form,
+            table = layui.table;
+
+        // 渲染数据表格
+        table.render({
+            elem : '#dataTable'
+            ,url : '{:url("sampleList")}'
+            ,cellMinWidth: 80
+            ,height: 'full-100'
+            ,page: {
+                prev: '上一页',
+                next: '下一页',
+                layout: ['prev', 'page', 'next', 'skip', 'count', 'limit']
+            }
+            // ,toolbar: 'default'  // 开启顶部工具栏（默认模板）
+            ,toolbar: '#toolbar' // 指定顶部工具栏模板
+            // ,even: true  // 隔行背景
+            ,title: '检查单信息表'  // 表格标题，用户导出数据文件名
+            ,text: {  // 指定无数据或数据异常时的提示文本
+                none: '暂无相关数据' //默认：无数据。注：该属性为 layui 2.2.5 开始新增
+            }
+            ,id: 'dataTable'
+            ,cols: [[  // 表格列标题及数据
+                {field: 'id', width: 20, title: 'ID', sort: true, align: 'center'}
+                ,{field: 'code', width: 100, title: '条形码', align: 'center'}
+                ,{field: 'item_name', width: 200, title: '设备名称', sort: true,  align: 'center'}
+                ,{field: 'type', width: 200, title: '样本类型', sort: true,  align: 'center'}
+                ,{field: 'status', width: 200, title: '状态', sort: true,  align: 'center', templet: '#status'}
+                ,{field: 'create_time', width: 200, title: '送检时间', align: 'center'}
+                ,{field: 'org', width: 200, title: '申请科室', align: 'center'}
+                ,{field: 'patient_name', width: 200, title: '患者姓名', align: 'center'}
+
+                ,{field: 'reason', width: 200, title: '拒收原因', sort: true,  align: 'center'}
+                ,{fixed: 'right', width: 400, title: '操作', align:'center', toolbar: '#barTool'}
+            ]], done() {
+                // 搜索功能
+                var $ = layui.$, active = {
+                    reload: function(){
+                        var keywords = $('#keywords');
+                        //执行重载
+                        table.reload('dataTable', {
+                            page: {
+                                curr: 1 //重新从第 1 页开始
+                            }
+                            ,where: {
+                                keywords: keywords.val()
+                            }
+                        }, 'data');
+                    }
+                };
+                $('.search-btn').on('click', function(){
+                    var type = $(this).data('type');
+                    active[type] ? active[type].call(this) : '';
+                });
+            }
+        });
+
+        // 监听行内工具栏
+        table.on('tool(dataTable)', function (obj) {
+            var e = obj.event;
+            var data = obj.data;
+
+            if ( e === 'patient') {
+                var index = layer.open({
+                    type: 2,
+                    title: '<i class=iconfont>&#xe7e0;</i> 病患信息',
+                    area: ['500px', '400px'],
+                    content: ['{:url("sample/patient")}?id=' + data.patient_id, 'yes'],
+                    skin: 'layui-layer-molv',
+                    btn: [ '关闭'],
+                    btnAlign: 'c',
+                    yes:function (index,layero) {
+                        layer.close(index);
+                    }
+                });
+
+            }else if ( e === 'equipment' ) {
+                var index = layer.open({
+                    type: 2,
+                    title: '<i class=iconfont>&#xe7e0;</i> 检验设备信息',
+                    area: ['500px', '400px'],
+                    content: ['{:url("sample/equipment")}?id=' + data.item_id, 'yes'],
+                    skin: 'layui-layer-molv',
+                    btn: [ '关闭'],
+                    btnAlign: 'c',
+                    yes:function (index,layero) {
+                        layer.close(index);
+                    }
+                });
+            }else if ( e === 'request' ) {
+                var index = layer.open({
+                    type: 2,
+                    title: '<i class=iconfont>&#xe7e0;</i> 检验设备信息',
+                    area: ['500px', '400px'],
+                    content: ['{:url("sample/itemrequest")}?id=' + data.request_id, 'yes'],
+                    skin: 'layui-layer-molv',
+                    btn: [ '关闭'],
+                    btnAlign: 'c',
+                    yes:function (index,layero) {
+                        layer.close(index);
+                    }
+                });
+            }else if( e === 'edit' ) {
+                var index = layer.open({
+                    type: 2,
+                    title: '<i class=iconfont>&#xe7e0;</i> 检验设备信息',
+                    area: ['500px', '400px'],
+                    content: ['{:url("sample/edit")}?id=' + data.id, 'yes'],
+                    skin: 'layui-layer-molv',
+                    btn: [ '提交','关闭'],
+                    btnAlign: 'c',
+                    yes: function(index, layero){
+                        var submit = layero.find('iframe').contents().find("#submit");// #subBtn为页面层提交按钮ID
+                        submit.click();// 触发提交监听
+                        return false;
+                    },
+                    btn2:function (index,layero) {
+                        layer.close(index);
+                    }
+                });
+            }
+        });
+    });
+
+
+</script>
+{/block}

@@ -1,0 +1,44 @@
+{extend name="public:layer_layout"/}
+
+{block name="main"}
+<form class="layui-form" id="form1" lay-filter="component-form-element">
+    <div class="layui-row layui-col-space10 layui-form-item">
+        <div class="layui-form-item">
+            <label class="layui-form-label">申请单号：</label>
+            <div class="layui-input-block">
+                <input type="text" name="item_id" lay-verify="required" lay-reqText="上机号" placeholder="上机号" autocomplete="off" class="layui-input" value="{$request.operation_code}">
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">申请科室：</label>
+            <div class="layui-input-block">
+                <input type="text" name="execute_date" lay-verify="required" lay-reqText="申请科室" placeholder="申请科室" autocomplete="off" class="layui-input" value="{$request.org.name}">
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">申请医生</label>
+            <div class="layui-input-block">
+                <input type="text" name="pid" lay-verify="required" lay-reqText="开单医生" placeholder="开单医生" autocomplete="off" class="layui-input" value="{$request.doctor}">
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">开单时间</label>
+            <div class="layui-input-block">
+                <input type="text" name="pid" lay-verify="required" lay-reqText="开单时间" placeholder="开单时间" autocomplete="off" class="layui-input" value="{$request.create_time}">
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">检查项目代码</label>
+            <div class="layui-input-block">
+                <input type="text" name="diagnosis_id" lay-verify="required" lay-reqText="检查代码" placeholder="检查代码" autocomplete="off" class="layui-input" value="{$request.item_code}">
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">检查项目：</label>
+            <div class="layui-input-block">
+                <input type="text" name="prescription_id" lay-verify="required" lay-reqText="检查项目" placeholder="检查项目" autocomplete="off" class="layui-input" value="{$request.item_name}">
+            </div>
+        </div>
+
+</form>
+{/block}

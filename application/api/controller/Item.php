@@ -21,8 +21,9 @@ class Item extends API
         $result["id"]=$item["id"];
         $result["code"]=$item["code"];
         $result["name"]=$item["catagory"]["name"];
-        $result["sn"]=$item["sn"];
-        $result["pn"]=$item["pn"];
+        $result["code"]=$item["code"];
+        $result["brand"]=$item["brand"];
+        $result["model"]=$item["model"];
         $result["lbs"]["name"]=$item["location"];
         $result["lbs"]["latitude"]=$item["latitude"];
         $result["lbs"]["longitude"]=$item["longitude"];
@@ -75,6 +76,27 @@ class Item extends API
                $data[$i]["model"]=$v["model"];
                $data[$i]["img_url"]=$url."logo-icon.png";
            }
+        }
+        return json([
+            'data' => $data
+        ]);
+    }
+
+    public function listbyitemid()
+    {
+        $item_id = $this->request->get('item_id/d', 0);
+        $itemlist=ItemModel::where("id",$item_id)->select();
+        $url = $this->request->domain() . '/static/images/';
+        $data=[];
+        foreach($itemlist as $i=>$v){
+                $data[$i]["type"]=$v["catagory"]["name"];
+                $data[$i]["id"]=$v["id"];
+                $data[$i]["code"]=$v["code"];
+                $data[$i]["sn"]=$v["sn"];
+                $data[$i]["pn"]=$v["pn"];
+                $data[$i]["brand"]=$v["brand"];
+                $data[$i]["model"]=$v["model"];
+                $data[$i]["img_url"]=$url."logo-icon.png";
         }
         return json([
             'data' => $data
@@ -307,7 +329,14 @@ class Item extends API
             default :
                 $type='全部';
         }
-        $item = ItemModel::get($id);
+        $data = ItemModel::get($id);
+        $item["name"] = $data->catagory["name"];
+        $item["id"] = $data["id"];
+        $item["sn"] = $data["sn"];
+        $item["pn"] = $data["pn"];
+        $item["brand"] = $data["brand"];
+        $item["model"] = $data["model"];
+        $item["code"] = $data["code"];
         if($type=='全部'){
             $itemlist = QualitylogModel::where(['item_id'=>$id])->order('qc_time desc')->select();
         }else{

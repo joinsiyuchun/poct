@@ -1,15 +1,16 @@
 <?php
 
+
 namespace app\index\common\model;
 
 
 use think\Model;
 
-class Item extends Model
+class Patient extends Model
 {
     // 定义主键和数据表
     protected $pk = 'id';
-    protected $table = 'think_item';
+    protected $table = 'think_poct_patient';
 
     // 定义自动时间戳和数据格式
     protected $autoWriteTimestamp = true;
@@ -17,7 +18,4 @@ class Item extends Model
     protected $updateTime = 'update_time';
     protected $dateFormat = 'Y-m-d H:i:s';
 
-    function catagory(){
-        return $this->belongsTo('Catagory','catagoryid');
-    }
 }

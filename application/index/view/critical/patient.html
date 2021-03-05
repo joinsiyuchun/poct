@@ -1,0 +1,33 @@
+{extend name="public:layer_layout"/}
+
+{block name="main"}
+<form class="layui-form" id="form1" lay-filter="component-form-element">
+    <div class="layui-row layui-col-space10 layui-form-item">
+        <div class="layui-form-item">
+            <label class="layui-form-label">门诊号/住院号：</label>
+            <div class="layui-input-block">
+                <input type="text" name="item_id" lay-verify="required" lay-reqText="门诊号/住院号" placeholder="门诊号/住院号" autocomplete="off" class="layui-input" value="{$patient.his_pid}">
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">姓名：</label>
+            <div class="layui-input-block">
+                <input type="text" name="execute_date" lay-verify="required" lay-reqText="姓名" placeholder="姓名" autocomplete="off" class="layui-input" value="{$patient.name}">
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">年龄</label>
+            <div class="layui-input-block">
+                <input type="text" name="pid" lay-verify="required" lay-reqText="年龄" placeholder="年龄" autocomplete="off" class="layui-input" value="{$patient.age}">
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">性别</label>
+            <div class="layui-input-block">
+                <input type="text" name="diagnosis_id" lay-verify="required" lay-reqText="性别" placeholder="性别" autocomplete="off" class="layui-input" value="{$patient.sexy}">
+            </div>
+        </div>
+
+
+</form>
+{/block}
